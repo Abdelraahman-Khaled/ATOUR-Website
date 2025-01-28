@@ -1,0 +1,40 @@
+.card-customer-review {
+    border: var(--border-02);
+    background: var(--white-01-color);
+    padding: 24px 16px;
+    border-radius: 12px;
+    transition: all 0.5s;
+}
+
+.card-customer-review:hover {
+    border-color: var(--green-01-color);
+}
+
+.card-customer-review .rates-star .star-one {
+    font-size: 15px;
+    color: var(--warning-01-color);
+}
+
+.card-customer-review .info-customer {
+    padding-top: 5px;
+}
+
+.card-customer-review .info-customer :is(.name-customer, .time-add-review),
+.card-customer-review .text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.card-customer-review .text {
+    line-height: 1.8;
+    padding-top: 12px;
+}
+
+@media screen and (max-width:650px) {
+
+    .card-customer-review .info-customer :is(.name-customer, .time-add-review),
+    .card-customer-review .text {
+        font-size: 12px;
+    }
+}

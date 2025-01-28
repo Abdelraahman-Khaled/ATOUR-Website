@@ -1,0 +1,17 @@
+.login-modal {
+    --bs-modal-width: 1000px !important;
+    padding: 0;
+}
+
+.image-login::after {
+    border-radius: 1rem;
+}
+
+.modal .modal-content {
+    padding-bottom: 0;
+}
+
+.modal .modal-body {
+    padding: 1.3rem 1rem !important;
+
+}

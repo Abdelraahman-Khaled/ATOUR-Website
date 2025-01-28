@@ -1,0 +1,35 @@
+.user-comment-rate {
+    border: var(--border-02);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.user-comment-rate .img-user-rate {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-comment-rate .main-user-info {
+    padding-top: 5px;
+}
+
+.user-comment-rate :is(.name-user, .time-add) {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.user-comment-rate .content-info {
+    padding-top: 8px;
+}
+
+@media screen and (max-width:550px) {
+
+    .user-comment-rate :is(.name-user, .time-add, .text-read-more) {
+        font-size: 13px;
+    }
+
+
+}

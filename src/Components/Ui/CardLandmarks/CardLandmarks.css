@@ -1,0 +1,23 @@
+.card-landmarks-one .image-collection::after,
+.card-landmarks-one .image-collection img {
+    border-radius: 12px;
+
+}
+
+.card-landmarks-one .image-collection img {
+    height: 239px;
+}
+
+.card-landmarks-one .icon-heart {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.card-landmarks-one .content-info-card .title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}

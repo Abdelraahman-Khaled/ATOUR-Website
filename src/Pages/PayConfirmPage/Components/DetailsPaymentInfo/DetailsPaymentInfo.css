@@ -1,0 +1,140 @@
+.details-payment-information {
+    border: var(--border-02);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.details-payment-information .title-top {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+    padding-bottom: 25px;
+}
+
+.card-details-pay-one .edit-product {
+    border-radius: 50px;
+    padding: 11px 17px;
+}
+
+/* ===============================
+START PRODUCT DETAILS PAY
+=================================*/
+.card-details-pay-one .content-info-card {
+    width: 100%;
+}
+
+.card-details-pay-one .image-details img {
+    width: 77px;
+    height: 135px;
+    border-radius: 12px;
+}
+
+.card-details-pay-one .content-info-card :is(.title, .price-num, .info-one-content),
+.discount-code-pay :is(.title, .text) {
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.card-details-pay-one .content-info-card :is(.title, .price-num) {
+    font-size: 15px;
+
+}
+
+.card-details-pay-one .content-info-card .info-one-content {
+    font-size: 14px;
+}
+
+.card-details-pay-one .content-info-card .btn-main {
+    background: transparent;
+    border: var(--border-02);
+    box-shadow: none;
+    color: var(--dark-01-color);
+}
+
+.card-details-pay-one .content-info-card .btn-main svg path {
+    stroke: var(--dark-01-color);
+}
+
+
+@media screen and (max-width:420px) {
+
+    .card-details-pay-one .content-info-card :is(.title, .price-num) {
+        font-size: 13px;
+
+    }
+
+    .card-details-pay-one .content-info-card .info-one-content {
+        font-size: 12px;
+    }
+
+    .card-details-pay-one .content-info-card .btn-main {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===============================
+END PRODUCT DETAILS PAY
+=================================*/
+/* ===============================
+START DISOCUNT CODE
+===============================*/
+.discount-code-pay {
+    border: var(--border-02);
+    padding: 12px;
+    border-radius: 12px;
+    margin: 25px 0 15px 0;
+}
+
+.discount-code-pay .title {
+    font-size: 17px;
+
+}
+
+.discount-code-pay .text {
+    font-size: 14px;
+    padding-top: 5px;
+
+}
+
+@media screen and (max-width:420px) {
+    .discount-code-pay .title {
+        font-size: 14px;
+    }
+
+    .discount-code-pay .text {
+        font-size: 12px;
+
+    }
+}
+
+/* ===============================
+END DISOCUNT CODE
+===============================*/
+/* ===========================
+START DETAILS PAY
+================================*/
+.details-pay-02 .list-pay-info :is(.text, .num-pay) {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.details-pay-02 .list-pay-info .details-one-1:last-child {
+    border-top: var(--border-02);
+    padding-top: 15px;
+}
+
+@media screen and (max-width:420px) {
+    .details-pay-02 .list-pay-info :is(.text, .num-pay) {
+        font-size: 14px;
+    }
+}
+
+.details-payment-information .btn-payment-send {
+    font-size: 14px;
+}
+
+/* ===========================
+END DETAILS PAY
+================================*/

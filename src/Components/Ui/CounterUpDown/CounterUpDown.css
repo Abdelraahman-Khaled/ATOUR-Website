@@ -1,0 +1,28 @@
+.counter-product .num-counter {
+    width: 100%;
+    padding: 0 !important;
+    max-width: 20px;
+    border: none;
+    text-align: center !important;
+    font-weight: 600;
+    background: transparent;
+}
+
+.counter-product .btn-main {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 12px;
+    background: transparent;
+    transition: all 0.5s;
+    color: var(--dark-01-color);
+    border: var(--border-02);
+    box-shadow: none;
+}
+
+.counter-product .btn-main:hover {
+    background: var(--green-01-color);
+    color: var(--white-01-color);
+    border-color: var(--green-01-color);
+}

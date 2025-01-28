@@ -1,0 +1,50 @@
+.title-section-info--1 {
+    padding-bottom: 25px;
+}
+
+.title-section-info--1 .title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+
+}
+
+@media screen and (max-width:485px) {
+
+    .title-section-info--1 .title {
+        font-size: 16px;
+
+    }
+}
+
+
+@media screen and (min-width: 1400px) {
+    .all-tabs-bio .nav {
+        max-width: 1320px;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 1399px) {
+    .all-tabs-bio .nav {
+        max-width: 1140px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .all-tabs-bio .nav {
+        max-width: 960px;
+        margin: auto;
+
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .all-tabs-bio .nav {
+        width: 100%;
+        padding: 0 .5rem;
+
+    }
+}

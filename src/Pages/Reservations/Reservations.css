@@ -1,0 +1,52 @@
+.tabs-reservations-content .nav-link {
+    min-width: fit-content;
+    padding: 10px 25px;
+    border: var(--border-02);
+    border-radius: 50px;
+    background: var(--white-01-color);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--dark-01-color);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.tabs-reservations-content.active,
+.tabs-reservations-content:hover {
+    background: var(--green-02-color);
+    border-color: var(--green-01-color);
+    color: var(--green-01-color);
+}
+
+
+.main-btn-filter--1 {
+    min-width: fit-content !important;
+    padding: 10px 25px !important;
+    border: var(--border-02) !important;
+    border-radius: 50px !important;
+    background: var(--white-01-color) !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    color: var(--dark-01-color) !important;
+    cursor: pointer !important;
+    transition: all 0.5s !important;
+}
+
+
+.main-btn-filter--1.active,
+.main-btn-filter--1:hover {
+    background: var(--green-02-color) !important;
+    border-color: var(--green-01-color) !important;
+    color: var(--green-01-color) !important;
+}
+
+.all-tabs-reservation-info .nav-content--2 {
+    border: none !important;
+    padding: 0;
+
+}
+
+.all-tabs-reservation-info .tab-content {
+    border: none;
+    padding: 25px 0;
+}

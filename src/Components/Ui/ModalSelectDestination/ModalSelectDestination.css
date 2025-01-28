@@ -1,0 +1,33 @@
+.modal-select-destination :is(.title, .text) {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.modal-select-destination .text {
+    font-size: 15px;
+}
+
+@media screen and (max-width:390px) {
+    .modal-select-destination :is(.title, .text) {
+        font-size: 15px;
+
+    }
+
+    .modal-select-destination .text {
+        font-size: 13px;
+    }
+}
+
+
+
+.input-search-head .all-input-search-city .all-city-search{
+    width: calc(100% - 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0;
+    top: 50px;
+  }
+  .input-search-head .all-input-search-city .input-search-content{
+    margin: 0 !important;
+  }

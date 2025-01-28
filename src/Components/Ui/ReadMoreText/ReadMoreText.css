@@ -1,0 +1,28 @@
+.text-read-more {
+    line-height: 2;
+}
+
+.text-read-more,
+.text-read-more .link-more-read {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.text-read-more .link-more-read {
+    text-decoration: underline !important;
+    cursor: pointer;
+    color: var(--green-01-color);
+}
+
+@media screen and (max-width:450px) {
+
+    .text-read-more,
+    .text-read-more .link-more-read {
+        font-size: 13px;
+    }
+
+    .text-read-more .link-more-read {
+        font-size: 14px;
+    }
+}

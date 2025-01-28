@@ -1,0 +1,111 @@
+/* =========================
+START HEADER FILTER CARDS
+============================*/
+.border-bottom-card {
+    border-bottom: var(--border-02);
+
+}
+
+.all-filter-cards-content .header-filter-cards {
+    padding-bottom: 10px;
+}
+
+.all-filter-cards-content .header-filter-cards :is(.title, .reset-filter) {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+    transition: all 0.5s;
+}
+
+.all-filter-cards-content .header-filter-cards .reset-filter {
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.all-filter-cards-content .header-filter-cards .reset-filter:hover {
+    color: var(--green-01-color);
+}
+
+
+/* =========================
+END HEADER FILTER CARDS
+============================*/
+/* ===============================
+START ALL FILTER BUTTONS CONTENT
+================================= */
+.all-filter-cards-content .title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+    padding-bottom: 15px;
+}
+
+
+.all-buttons-filter-content .main-btn-filter {
+    padding: 9px 25px;
+    font-size: 15px;
+}
+
+:is(.all-buttons-filter-content, .filter-by-category, .filter-rate) {
+    padding: 22px 0 30px 0;
+
+}
+
+/* ===============================
+END ALL FILTER BUTTONS CONTENT
+================================= */
+/* =================================
+START FILTER BY CATEGORY 
+===================================*/
+.filter-by-category .filter-categorey-one-button:not(:last-child),
+.filter-rate .rate-filter-one:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.filter-by-category .filter-categorey-one-button,
+.filter-rate .rate-filter-one {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-rate {
+    padding-bottom: 15px;
+}
+
+/* =================================
+END FILTER BY CATEGORY 
+===================================*/
+
+/* =================================
+START RAANGE PRICE FILTER
+===================================*/
+.price-filter-content {
+    padding: 20px 0;
+    border-bottom: var(--border-02);
+}
+
+.price-filter-content .title {
+    padding-bottom: 0;
+}
+
+
+.price-filter-content :is(.MuiSlider-thumb, .MuiSlider-track, .MuiSlider-rail) {
+    background: var(--dark-01-color);
+
+}
+
+
+.price-filter-content .MuiSlider-root {
+    color: var(--dark-01-color);
+}
+
+.price-filter-content .MuiSlider-thumb:hover,
+.price-filter-content .MuiSlider-thumb:focus,
+.price-filter-content .MuiSlider-thumb:active {
+    box-shadow: 0px 0px 0px 8px rgb(16 17 18 / 16%);
+}
+
+/* =================================
+END RAANGE PRICE FILTER
+===================================*/

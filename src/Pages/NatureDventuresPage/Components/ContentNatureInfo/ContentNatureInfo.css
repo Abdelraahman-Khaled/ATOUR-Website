@@ -1,0 +1,25 @@
+.all-content-nature-info .top-header-nature-info :is(.title, .text) {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.all-content-nature-info .top-header-nature-info .text {
+    font-size: 15px;
+    padding-top: 15px;
+    line-height: 2;
+}
+
+.all-content-nature-info .all-fanous-landmsrks {
+    padding: 40px 0 0 0 !important;
+}
+
+@media screen and (max-width:475px) {
+    .all-content-nature-info .top-header-nature-info :is(.title, .text) {
+        font-size: 16px;
+    }
+
+    .all-content-nature-info .top-header-nature-info .text {
+        font-size: 13px;
+    }
+}

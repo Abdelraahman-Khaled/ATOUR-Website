@@ -1,0 +1,76 @@
+/* ======================
+START SECTION SLIDER BANNER
+============================*/
+.banner-main-area {
+    position: relative;
+}
+
+.banner-main-area .bg-image {
+    opacity: 0.8;
+    transition: opacity 1s ease-in-out;
+}
+
+.banner-main-area .swiper-slide-active .bg-image {
+    opacity: 1;
+}
+
+.banner-main-area .swiper-pagination {
+    bottom: 70px;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.21);
+    width: fit-content !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 2px 10px 5px 10px;
+    border-radius: 50px;
+}
+
+.banner-main-area .swiper-pagination .swiper-pagination-bullet {
+    width: 40px !important;
+    height: 7px !important;
+    background: #ffffff78 !important;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.banner-main-area .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: var(--white-01-color) !important;
+}
+
+.banner-main-area .banner-one {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding: 50px 0!important;
+    height: 700px;
+}
+
+.banner-main-area .banner-one::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 /60%);
+}
+
+.banner-main-area .bg-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+
+@media screen and (max-width:450px) {
+    .banner-main-area .swiper-pagination .swiper-pagination-bullet {
+        width: 28px !important;
+    }
+}
+
+/* =================================
+      END BANNER IMAGE
+      =================================*/

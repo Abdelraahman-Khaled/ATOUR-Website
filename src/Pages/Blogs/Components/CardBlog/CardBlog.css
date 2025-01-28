@@ -1,0 +1,40 @@
+.card-blog-one .image-card-blog:after {
+    border-radius: 12px;
+}
+
+.card-blog-one .image-card-blog .image-blog-src {
+    height: 225px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+
+.card-blog-one .content-info-card-blog {
+    padding-right: 5px;
+}
+
+.card-blog-one .content-info-card-blog :is(.title, .name, .time-add) {
+    font-weight: 500;
+    color: var(--dark-01-color);
+    font-size: 17px;
+}
+
+.card-blog-one .content-info-card-blog .title {
+
+    padding: 15px 0;
+
+}
+
+.card-blog-one .content-info-card-blog .time-add {
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 3px;
+}
+
+@media screen and (max-width:450px) {
+   
+.card-blog-one .content-info-card-blog .title {
+font-size: 14px;
+
+} 
+}

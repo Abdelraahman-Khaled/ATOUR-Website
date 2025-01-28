@@ -1,0 +1,10 @@
+.slider-height .banner-one {
+  height: 400px;
+}
+
+@media screen and (max-width: 485px) {
+  .content-slider-info .title-silde {
+    font-size: 21px;
+    line-height: 1.8;
+  }
+}

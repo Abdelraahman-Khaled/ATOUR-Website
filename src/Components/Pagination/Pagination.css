@@ -1,0 +1,32 @@
+.all-pagination .page-item .page-link,
+.all-pagination .break .page-link {
+  color: var(--dark-01-color);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px !important;
+  transition: all 0.5s;
+  background: transparent;
+  border-color: var(--green-01-color);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+
+
+}
+.all-pagination .page-item .page-link:focus{
+  box-shadow: 0 0 0 0.25rem rgb(20 128 53 / 23%) !important;
+}
+.all-pagination .page-item.active-1 .page-link,
+.all-pagination .page-item:hover .page-link {
+  background: var(--green-01-color) !important;
+  border-color: var(--green-01-color) !important;
+  color: var(--white-01-color) !important;
+}
+
+.all-pagination .pagination {
+  flex-wrap: wrap;
+  justify-content: center;
+}

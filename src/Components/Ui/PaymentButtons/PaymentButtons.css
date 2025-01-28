@@ -1,0 +1,65 @@
+.all-pay-bookings .card-pay-one {
+    border: var(--border-02);
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.all-pay-bookings .card-pay-one::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 5px solid var(--green-01-color);
+    background: var(--white-01-color);
+    border-radius: 50%;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+
+html[dir="ltr"] .all-pay-bookings .card-pay-one::after {
+    right: 15px;
+    left: initial;
+}
+
+.all-pay-bookings .card-pay-one.active::after {
+    display: flex;
+}
+
+.all-pay-bookings .card-pay-one input[type="radio"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    z-index: 2;
+
+}
+
+.all-pay-bookings .card-pay-one.active {
+    border-color: var(--green-01-color);
+}
+
+.all-pay-bookings .card-pay-one .label-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.all-pay-bookings .card-pay-one.active .label-text {
+    color: var(--green-01-color);
+}
+
+.all-pay-bookings .button-add-new-pay {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-01-color);
+    text-align: center;
+    cursor: pointer;
+}

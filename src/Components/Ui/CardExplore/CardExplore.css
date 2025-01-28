@@ -1,0 +1,45 @@
+.card-explore :is(.image-explore),
+.image-card-explore.overlay-bg::after {
+    border-radius: 12px;
+
+}
+
+.card-explore .image-explore {
+    height: 267px !important;
+}
+
+
+
+.card-explore .info-content-explore {
+    padding-top: 12px;
+
+}
+
+
+.card-explore .info-content-explore .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+
+}
+
+.card-explore .info-content-explore .icon-explore {
+    cursor: pointer;
+}
+html[dir="ltr"] .card-explore .info-content-explore .icon-explore {
+    transform: rotate(180deg);
+}
+
+.card-explore .info-content-explore .icon-explore :is(svg, i, img) {
+    width: 24px;
+    height: 24px;
+}
+
+@media screen and (max-width:420px) {
+
+    .card-explore .info-content-explore .title {
+        font-size: 14px;
+        font-weight: 600;
+
+    }
+}

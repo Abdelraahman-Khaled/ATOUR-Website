@@ -1,0 +1,58 @@
+.otp-form-modal .icon-email {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--green-02-color);
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+
+}
+
+.otp-form-modal .info-header-otp :is(.title, .text, .timer-down-otp) {
+    font-weight: 500;
+    color: var(--dark-01-color);
+    text-align: center;
+}
+
+.otp-form-modal .info-header-otp :is(.title, .timer-down-otp) {
+    font-size: 17px;
+
+}
+
+.otp-form-modal .info-header-otp .text {
+    font-size: 14px;
+    line-height: 2;
+    padding: 15px 0;
+
+}
+
+.otp-form-modal .timer-otp {
+    color: #b70707;
+}
+
+.otp-form-modal .all-input-otp {
+    margin: 20px 0;
+}
+
+.otp-form-modal .otp-form .all-input-otp .form-control {
+
+    width: 100%;
+    max-width: 80px;
+    text-align: center !important;
+    padding: 15px 8px !important;
+
+}
+
+@media screen and (max-width:425px) {
+    .otp-form-modal .info-header-otp :is(.title, .timer-down-otp) {
+        font-size: 14px;
+
+    }
+
+    .otp-form-modal .info-header-otp .text {
+        font-size: 12px;
+
+    }
+}

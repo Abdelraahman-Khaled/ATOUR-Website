@@ -1,0 +1,69 @@
+/* START SPINNER LOADER */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--white-01-color);
+    background: #0b160a;
+    bottom: 0;
+    z-index: 1000;
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+}
+
+.loader-wrapper.hidden {
+    animation: hidden 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hidden {
+    100% {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+
+
+
+.svg-calLoader {
+    width: 230px;
+    height: 230px;
+    transform-origin: 115px 115px;
+    animation: 2.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+    fill: var(--warning-01-color);
+}
+
+.cal-loader__path {
+    stroke: var(--green-01-color);
+    animation: 2.4s ease-in-out infinite loader-path;
+}
+
+@keyframes loader-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-path {
+    0% {
+        stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+    }
+
+    50% {
+        stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+    }
+
+    100% {
+        stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+    }
+}
+
+/* END SPINNER LOADER */

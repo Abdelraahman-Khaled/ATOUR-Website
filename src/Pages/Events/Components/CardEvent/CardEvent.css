@@ -1,0 +1,76 @@
+.card-event-one {
+  background: var(--white-01-color);
+}
+
+.card-event-one .image-collection img {
+  height: 140px !important;
+  width: 230px !important;
+}
+
+.card-event-one .right-card-event {
+  border: var(--border-02);
+  border-width: 2px;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 102px;
+}
+
+.card-event-one .right-card-event .title-month {
+  padding: 6px 10px;
+  background: #dcdcdc8a;
+  border-radius: 8px;
+}
+
+.card-event-one .right-card-event :is(.title-month, .num-month, .title-day) {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.card-event-one .right-card-event .num-month {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 1199px) {
+  .all-cards-events .card-event-one {
+    flex-direction: row;
+  }
+  .all-cards-events .card-event-one .image-collection img,
+  .all-cards-events .card-event-one .image-collection {
+    width: 230px !important;
+  }
+}
+@media screen and (max-width: 991px) {
+  .all-cards-events .card-event-one {
+    flex-direction: column;
+  }
+  .all-cards-events .card-event-one .image-collection img {
+    height: 250px !important;
+    width: 100% !important;
+  }
+  .all-cards-events .card-event-one .image-collection {
+    width: 100% !important;
+  }
+
+  .card-event-one .content-bottom-event {
+    flex-wrap: wrap;
+  }
+
+  .card-event-one .content-bottom-event .booking-event-button {
+    width: 100%;
+  }
+
+  .card-event-one .right-card-event {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+

@@ -1,0 +1,12 @@
+.all-modal-form-discount .title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+    text-align: center;
+}
+
+@media screen and (max-width:450px) {
+    .all-modal-form-discount .title {
+        font-size: 14px;
+    }
+}

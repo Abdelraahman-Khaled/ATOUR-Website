@@ -1,0 +1,105 @@
+.card-new-rate {
+    position: relative;
+    height: 100%;
+}
+
+.card-new-rate .video-play-bg video {
+    width: 100%;
+    object-fit: cover;
+    height: 273px;
+    border-radius: 12px;
+}
+
+.card-new-rate .content-info-rate {
+    padding: 12px;
+    background: var(--white-01-color);
+    border-radius: 12px;
+    position: absolute;
+    bottom: 15px;
+    width: calc(100% - 15px);
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.card-new-rate .image-content-bg::after {
+    border-radius: 12px;
+}
+
+.card-new-rate .image-content-bg img {
+    height: 273px;
+    border-radius: 12px;
+}
+
+
+.card-new-rate .content-info-rate .content-left :is(.title, .name-brand, .num-rate) {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.card-new-rate .content-info-rate .content-left :is(.name-brand, .num-rate) {
+    font-size: 14px;
+}
+
+.card-new-rate .content-info-rate .image-right img {
+    width: 80px;
+    height: 130px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.card-new-rate .content-info-rate .img-brand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.card-new-rate .content-info-rate .content-left {
+    width: 100%;
+
+}
+
+.card-new-rate .content-info-rate .content-left .bottom-info-card-rate {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-01-color);
+}
+
+@media screen and (max-width:1199px) {
+    .card-new-rate .content-info-rate {
+        flex-wrap: wrap;
+    }
+
+    .card-new-rate .content-info-rate .image-right img,
+    .card-new-rate .content-info-rate .image-right {
+        width: 100%;
+    }
+
+    .all-cards-new-rates {
+        padding-bottom: 140px;
+    }
+
+    .card-new-rate .content-info-rate {
+        bottom: initial;
+        top: 100%;
+        padding: 12px 12px 15px 12px !important;
+        padding: 15px;
+        transform: translate(-50%, -50%);
+        box-shadow: var(--box-shadow);
+    }
+}
+
+@media screen and (max-width:991px) {
+    .card-new-rate {
+        height: auto;
+    }
+
+    .card-new-rate {
+        margin-bottom: 160px;
+    }
+
+    .all-cards-new-rates {
+        padding-bottom: 0;
+    }
+}

@@ -1,0 +1,58 @@
+.tabs-content-info .nav-link {
+    background: transparent !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: none;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+
+    margin-bottom: calc(-2 * var(--bs-nav-tabs-border-width)) !important;
+
+}
+
+.tabs-content-info .nav-item .nav-link svg path,
+.tabs-content-info .nav-item .nav-link {
+    transition: all 0.4s;
+
+
+}
+
+.tabs-content-info .nav-item.show .nav-link,
+.tabs-content-info .nav-link.active {
+    border-color: var(--green-01-color) !important;
+    color: var(--green-01-color) !important;
+}
+
+.tabs-content-info .nav-item .nav-link:hover,
+.tabs-content-info .nav-item:hover .nav-link svg path {
+    color: var(--green-01-color);
+    stroke: var(--green-01-color);
+}
+
+.tabs-content-info .nav-item.show .nav-link svg path,
+.tabs-content-info .nav-link.active svg path {
+    stroke: var(--green-01-color);
+
+}
+
+.tabs-content-info .tab-content {
+    padding-top: 25px;
+}
+
+@media screen and (max-width:360px) {
+    .tabs-content-info .nav-link {
+        font-size: 13px;
+    }
+}
+
+.tabs-content-info .nav {
+    column-gap: 30px;
+}
+
+.tabs-content-info .nav-link {
+    padding: 0.5rem 0 !important;
+}

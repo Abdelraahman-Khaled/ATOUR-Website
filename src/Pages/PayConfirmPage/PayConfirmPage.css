@@ -1,0 +1,18 @@
+.bottom-info-pay-content .text-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+
+.all-content-right-info .tourist-information-form--1 .input-field-info {
+  margin: 0 0 15px 0 !important;
+}
+
+.all-content-right-info .accordion-header .accordion-button {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}

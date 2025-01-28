@@ -1,0 +1,112 @@
+.modal-details-trip {
+    --bs-modal-width: 800px !important;
+
+}
+
+.modal-details-trip .image-reservation img {
+    width: 240px !important;
+}
+
+.border-card-details {
+    border: var(--border-02);
+    padding: 15px;
+    border-radius: 12px;
+
+}
+
+.details-info-pay .title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.details-info-pay .card-pay-details-one .list-pay-info :is(.text, .num-pay),
+.info-pay-details-left .text--1,
+.bottom-content-details :is(.text-content--1, .link-detials) {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.details-info-pay .card-pay-details-one .list-pay-info .details-one-1:last-child {
+    border-top: var(--border-02);
+    padding-top: 12px;
+}
+
+.bottom-content-details .icon-check-1 {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-01-color);
+    color: var(--white-01-color);
+    border-radius: 50%;
+
+}
+
+.bottom-content-details :is(.link-detials) {
+    text-decoration: underline !important;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.bottom-content-details .link-detials:hover {
+    color: var(--green-01-color);
+
+}
+
+.services-provider .title {
+    font-size: 15px;
+}
+
+.services-provider .image-serv {
+    border: var(--border-02);
+    padding: 10px 15px;
+    border-radius: 12px;
+}
+
+@media screen and (max-width:991px) {
+
+    .all-details-trip .image-reservation,
+    .all-details-trip .image-reservation img {
+        width: 100% !important;
+    }
+}
+
+/* MODAL SEND PROBLEM */
+.all-info-ticket-submit .title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+    padding-bottom: 15px;
+}
+
+.all-info-ticket-submit .text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-01-color);
+}
+.all-info-ticket-submit .btn-submit{
+    border-radius: 50px;
+    padding: 11px 25px;
+}
+@media screen and (max-width:450px) {
+
+    .details-info-pay .title,
+    .all-info-ticket-submit .title {
+        font-size: 15px;
+
+    }
+
+    .all-info-ticket-submit .text,
+    .details-info-pay .card-pay-details-one .list-pay-info :is(.text, .num-pay),
+    .info-pay-details-left .text--1,
+    .bottom-content-details :is(.text-content--1, .link-detials) {
+        font-size: 13px;
+    }
+    .all-info-ticket-submit .btn-submit{
+        width: 100%;
+    }
+
+}

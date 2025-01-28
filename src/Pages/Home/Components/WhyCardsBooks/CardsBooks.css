@@ -1,0 +1,45 @@
+.cards-books .card-book-one {
+    border: var(--border-02);
+    padding: 24px 17px;
+    background: var(--white-01-color);
+    border-radius: 16px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.cards-books .card-book-one:hover {
+    border-color: var(--green-01-color);
+}
+
+.cards-books .card-book-one .icon-card-book :is(svg, i, img) {
+    width: 32px;
+    height: 32px;
+}
+
+.cards-books .card-book-one .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark-01-color);
+    padding: 12px 0;
+}
+
+.cards-books .card-book-one .text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gray-01-color);
+    line-height: 1.8;
+}
+
+/* SCREEN 390PX */
+@media screen and (max-width:420px) {
+
+    .cards-books .card-book-one .title {
+        font-size: 13px;
+
+    }
+
+    .cards-books .card-book-one .text {
+        font-size: 12px;
+    }
+
+}

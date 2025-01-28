@@ -1,0 +1,95 @@
+.content-info-details-left-trip,
+.content-info-details-left-trip .box-one-content,
+.all-box-content-left .main-add-place-date--1 .input-date-content {
+  border: var(--border-02);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.content-info-details-left-trip {
+  padding: 25px 12px;
+}
+
+.content-info-details-left-trip .title {
+  font-size: 17px;
+  padding-bottom: 22px;
+}
+
+.content-info-details-left-trip :is(.title, .text, .title-text) {
+  color: var(--dark-01-color);
+  font-weight: 500;
+}
+
+.content-info-details-left-trip .box-one-content .title {
+  font-size: 16px;
+  padding: 0;
+}
+
+.content-info-details-left-trip .box-one-content .text {
+  font-size: 14px;
+  padding-top: 7px;
+}
+
+.content-info-details-left-trip .end-info-detials {
+  background: var(--green-02-color);
+  padding: 20px 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.content-info-details-left-trip .detials-info-one .title-text {
+  font-size: 14px;
+}
+
+/* .content-info-details-left-trip .detials-info-one .icon-times {
+  background: #55545444;
+} */
+
+@media screen and (max-width: 550px) {
+  .content-info-details-left-trip .title {
+    font-size: 14px;
+  }
+
+  .content-info-details-left-trip .box-one-content .title {
+    font-size: 13px;
+  }
+
+  .content-info-details-left-trip .box-one-content .text {
+    font-size: 12px;
+  }
+}
+
+/* DATE PICKER */
+.all-box-content-left .main-add-place-date--1 {
+  padding: 0;
+}
+.all-box-content-left .main-add-place-date--1 .input-date-content {
+  padding: 5px;
+  margin-bottom: 17px;
+}
+.all-box-content-left .main-add-place-date--1 .input-date-content::after {
+  display: none;
+}
+.all-box-content-left .input-date-content .CalendarContainer-sc-1gorc7r-0 {
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.all-box-content-left
+  .main-add-place-date--1
+  .input-date-content
+  .icon-date-add {
+  right: 4%;
+}
+
+@media screen and (max-width: 450px) {
+  .all-box-content-left .input-date-content .CalendarContainer-sc-1gorc7r-0 {
+    left: initial;
+    transform: translateX(0%);
+  }
+}

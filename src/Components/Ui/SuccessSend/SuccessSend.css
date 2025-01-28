@@ -1,0 +1,26 @@
+.success-modal-send .icon-success {
+    height: 150px;
+}
+
+.success-modal-send .content-info-success .title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.success-modal-send .content-info-success .text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+@media screen and (max-width:450px) {
+    .success-modal-send .content-info-success .title {
+        font-size: 17px;
+    }
+
+    .success-modal-send .content-info-success .text {
+        font-size: 13px;
+    }
+
+}

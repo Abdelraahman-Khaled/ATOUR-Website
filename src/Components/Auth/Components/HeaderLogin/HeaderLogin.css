@@ -1,0 +1,30 @@
+.login-modal :is(.bottom-info-not-accout) {
+  padding: 18px 0;
+}
+
+.login-modal :is(.bottom-info-not-accout, .bottom-info-not-accout .link-a),
+.header-login-content :is(.title, .text) {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.login-modal :is(.bottom-info-not-accout .link-a) {
+  padding-right: 5px;
+}
+
+.header-login-content .info-header-login {
+  padding-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SCREEN 450PX */
+@media screen and (max-width: 450px) {
+  .login-modal :is(.bottom-info-not-accout, .bottom-info-not-accout .link-a),
+  .header-login-content :is(.title, .text) {
+    font-size: 12px;
+  }
+}

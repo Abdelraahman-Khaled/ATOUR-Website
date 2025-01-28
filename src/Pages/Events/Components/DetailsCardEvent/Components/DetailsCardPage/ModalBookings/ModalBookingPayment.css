@@ -1,0 +1,21 @@
+.add-new-payment {
+    --bs-modal-width: 730px !important;
+}
+
+.bottom-pay-content .info-right-content {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.bottom-pay-content .btn-main {
+    padding: 13px 14px !important;
+    font-size: 12px;
+
+}
+
+@media screen and (max-width:420px) {
+    .bottom-pay-content .btn-main {
+        width: 100%;
+    }
+}

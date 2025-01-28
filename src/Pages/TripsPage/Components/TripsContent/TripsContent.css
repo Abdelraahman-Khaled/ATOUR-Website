@@ -1,0 +1,163 @@
+.trips-content--info {
+  display: grid;
+  grid-template-columns: 1.5fr 2.8fr;
+  gap: 15px;
+}
+
+.trips-content--info .header-filter-cards .title {
+  padding: 0;
+}
+
+.main-right-trips-content .google-map {
+  margin: 13px 0 0 0 !important;
+}
+
+.main-right-trips-content .google-map .iframe-map {
+  height: 650px !important;
+}
+
+@media screen and (max-width: 1199px) {
+  .trips-content--info {
+    grid-template-columns: 1.4fr 3.6fr;
+  }
+
+  .trips-content--info .card-favorite-one {
+    flex-direction: column;
+  }
+
+  .trips-content--info
+    .card-favorite-one
+    :is(.image-collection, .image-collection img) {
+    width: 100% !important;
+  }
+
+  .trips-content--info
+    .card-favorite-one
+    .bottom-content-card
+    .text-one-card:nth-child(2) {
+    border: none;
+    padding-right: 0;
+  }
+
+  .trips-content--info .header-filter-cards .title,
+  .trips-content--info
+    .all-filter-cards-content
+    .header-filter-cards
+    .reset-filter {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .trips-content--info {
+    grid-template-columns: 1fr;
+  }
+
+  
+
+  .trips-content--info
+    .card-favorite-one
+    .bottom-content-card
+    .text-one-card:nth-child(2) {
+    border-right: var(--border-02);
+    padding-right: 10px;
+  }
+
+  .main-right-trips-content .google-map {
+    margin: 0px 0 0 0 !important;
+  }
+
+  .main-right-trips-content .google-map .iframe-map {
+    height: 400px !important;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .main-right-trips-content .google-map .iframe-map {
+    height: 330px !important;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .trips-content--info
+    .card-favorite-one
+    .bottom-content-card
+    .text-one-card:nth-child(2) {
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+.header-top-trip-cards .title {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.header-top-trip-cards .btn-new--1 {
+  background: var(--blue-01-color);
+  border-color: var(--blue-01-color);
+  padding: 9px 16px;
+  border-radius: 50px;
+}
+
+.all-filter-info
+  .main-add-place-date
+  :is(.input-date-content, .input-date-content, .react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.all-filter-info .main-add-place-date .input-date-content {
+  border-top: none;
+}
+.all-filter-info .main-add-place-date .input-date-content input {
+  border: var(--border-02) !important;
+  padding: 15px 10px 15px 60px !important;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.all-filter-info .main-add-place-date {
+  padding: 10px 0;
+}
+
+.all-filter-info .main-add-place-date .input-date-content .icon-date-add {
+  right: initial;
+  left: 4%;
+}
+
+.all-filter-info .main-add-place-date .input-date-content::after {
+  display: none;
+}
+
+.all-filter-info .react-datepicker-popper {
+  transform: translate(0, 58px) !important;
+  right: 0;
+  width: 100%;
+}
+
+.all-filter-info :is(.react-datepicker__month-container, .react-datepicker) {
+  width: 100%;
+}
+
+@media screen and (max-width: 450px) {
+  .main-right-trips-content {
+    overflow: hidden;
+  }
+
+  .all-filter-info .main-buttons-filter-content {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    padding-bottom: 15px;
+  }
+}
+
+/* DATE PICKER CONTENT */
+.all-filter-info
+  .main-add-place-date--1
+  .input-date-content
+  .CalendarContainer-sc-1gorc7r-0 {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 105%;
+}

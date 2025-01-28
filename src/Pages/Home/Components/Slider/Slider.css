@@ -1,0 +1,275 @@
+/* ==============================
+    START SLIDER CONTENT
+    =================================*/
+.content-slider-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 10px 15px;
+}
+
+.content-slider-info .all-main-content-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-slider-info .title-silde {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--white-01-color);
+}
+
+.content-slider-info .text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white-01-color);
+  line-height: 2;
+  padding: 10px 0;
+}
+
+.main-info-avatar .text-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--white-01-color);
+}
+
+.all-avatar {
+  justify-content: center;
+  align-items: center;
+}
+
+.all-avatar > .MuiAvatar-colorDefault {
+  background: var(--white-01-color);
+  color: var(--dark-01-color);
+  z-index: 10;
+  font-size: 16px;
+}
+
+.all-avatar .avatar-1 {
+  margin-left: -16px !important;
+}
+
+.all-avatar .avatar-1:nth-child(2) {
+  z-index: 1;
+}
+
+.all-avatar .avatar-1:nth-child(3) {
+  z-index: -1;
+}
+
+.all-avatar .avatar-1:nth-child(4) {
+  z-index: -2;
+}
+
+.all-avatar .avatar-1:nth-child(5) {
+  z-index: -3;
+}
+
+/* SCREEN 1199PX */
+@media screen and (max-width: 1199px) {
+  .content-slider-info {
+    width: 100%;
+  }
+}
+
+/* SCREEN 485PX */
+@media screen and (max-width: 485px) {
+  .content-slider-info .title-silde {
+    font-size: 25px;
+  }
+
+  .content-slider-info .text {
+    font-size: 12px;
+  }
+
+  .main-info-avatar .text-title {
+    font-size: 18px;
+  }
+
+  .main-info-avatar {
+    justify-content: center;
+  }
+}
+
+/* ==============================
+    END SLIDER CONTENT
+=================================*/
+/* ===============================
+    START DATE INPUT
+================================*/
+.main-add-place-date {
+  background: var(--white-01-color);
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 50px;
+  margin-top: 15px;
+}
+
+.main-add-place-date .input-search-content {
+  margin: 0;
+}
+
+.main-add-place-date .input-search-content .icon-location {
+  right: 0;
+}
+
+.main-add-place-date .input-search-content .input-search-location {
+  padding-right: 20px !important;
+}
+
+.main-add-place-date--1 .input-date-content {
+  position: relative;
+  width: 100%;
+}
+
+.main-add-place-date--1 .input-date-content::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: var(--gray-02-color);
+  top: 0;
+  right: -6px;
+}
+
+.main-add-place-date--1 .input-date-content input {
+  padding-right: 45px !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.main-add-place-date--1 .input-date-content input::placeholder {
+  color: var(--dark-01-color) !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.main-add-place-date--1 .input-date-content .react-datepicker__calendar-icon {
+  display: none;
+}
+
+.main-add-place-date--1 .input-date-content .icon-date-add {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 4%;
+}
+
+.main-add-place-date--1 .react-datepicker__header {
+  border-color: var(--gray-02-color);
+}
+
+.main-add-place-date--1 .react-datepicker__current-month {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.main-add-place-date--1 .react-datepicker__day-names {
+  color: var(--dark-01-color);
+  font-weight: 500;
+  padding: 10px 0 0 0;
+}
+
+.main-add-place-date--1 .react-datepicker__day--keyboard-selected {
+  transition: all 0.5s;
+}
+
+.main-add-place-date--1 .react-datepicker__day--selected:hover,
+.main-add-place-date--1.react-datepicker__day--selected,
+.main-add-place-date--1 .react-datepicker__day--keyboard-selected:hover,
+.main-add-place-date--1 .react-datepicker__day--keyboard-selected {
+  background: var(--green-01-color);
+  color: var(--white-01-color);
+}
+
+.main-add-place-date .input-search-content {
+  background: var(--white-01-color);
+  border: none;
+}
+
+.main-add-place-date .btn-search-submit {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+/* SCREEN 570PX */
+@media screen and (max-width: 570px) {
+  .main-add-place-date {
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .main-add-place-date--1
+    :is(
+      .input-search-content,
+      .input-date-content,
+      .input-date-content input,
+      .react-datepicker-wrapper
+    ) {
+    width: 100%;
+  }
+
+  .main-add-place-date--1.input-date-content input {
+    padding-right: 32px !important;
+  }
+
+  .main-add-place-date--1 .input-date-content {
+    border-top: var(--border-02);
+  }
+
+  .main-add-place-date--1 .input-date-content .icon-date-add {
+    right: 0;
+  }
+
+  .main-add-place-date--1 .input-date-content::after {
+    display: none;
+  }
+
+  .main-add-place-date .btn-search-submit {
+    width: 100%;
+    border-radius: 50px;
+    margin-top: 12px;
+  }
+}
+
+/* ===============================
+    END DATE INPUT
+================================*/
+
+/* LTR DIRECTION */
+
+html[dir="ltr"] .all-avatar > .MuiAvatar-colorDefault {
+  margin-left: -20px;
+}
+
+html[dir="ltr"] .page-item:first-child .page-link,
+html[dir="ltr"] .page-item:last-child .page-link {
+  transform: rotate(180deg);
+}
+
+html[dir="ltr"] .main-add-place-date--1 .input-date-content::after {
+  right: initial;
+  left: -6px;
+}
+
+html[dir="ltr"] .main-add-place-date--1 .input-date-content input {
+  padding-right: initial !important;
+  padding-left: 45px !important;
+}
+
+html[dir="ltr"] .main-add-place-date--1 .input-date-content .icon-date-add {
+  right: initial;
+  left: 4%;
+}
+
+

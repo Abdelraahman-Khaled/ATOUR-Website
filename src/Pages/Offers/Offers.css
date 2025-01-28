@@ -1,0 +1,12 @@
+.offers-page .card-offer-one {
+  align-items: flex-start !important;
+}
+
+
+/* START ALL fILTER INFO */
+.all-filter-info {
+  border: var(--border-02);
+  border-radius: 12px;
+  padding: 15px;
+}
+/* END ALL fILTER INFO */

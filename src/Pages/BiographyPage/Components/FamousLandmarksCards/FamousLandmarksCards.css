@@ -1,0 +1,27 @@
+.card-landmarks-one .image-collection .icon-heart.activeHeart svg path {
+    fill: var(--white-01-color);
+    fill-opacity: 1;
+}
+
+
+
+
+
+@media screen and (max-width:650px) {
+    .card-landmarks-one .image-collection img {
+
+        height: 300px;
+    }
+}
+
+
+@media screen and (max-width:485px) {
+
+
+
+    .card-landmarks-one .image-collection img {
+
+        height: 250px;
+    }
+
+}

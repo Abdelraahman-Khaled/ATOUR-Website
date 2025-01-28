@@ -1,0 +1,105 @@
+ .card-reservation-one {
+     border: var(--border-02);
+     padding: 12px;
+     width: 100%;
+     border-radius: 12px;
+     transition: all 0.5s;
+ }
+
+ .card-reservation-one:hover {
+     border-color: var(--green-01-color);
+ }
+
+ .card-reservation-one .image-reservation::after {
+     border-radius: 12px;
+ }
+
+ .card-reservation-one .image-reservation img {
+     height: 139px !important;
+     width: 282px !important;
+     border-radius: 12px;
+ }
+
+ .card-reservation-one :is(.badge-info, .info-text) {
+     position: absolute;
+
+     z-index: 1;
+
+ }
+
+ .card-reservation-one .badge-info {
+     top: 10px;
+     left: 10px;
+     width: fit-content;
+     box-shadow: none;
+     padding: 10px 17px;
+     font-size: 13px;
+     background: var(--green-03-color);
+     border-color: var(--green-03-color);
+ }
+
+ .card-reservation-one .content-info-card {
+     width: 100%;
+ }
+
+ .card-reservation-one .content-info-card :is(.title, .info-one-content) {
+     font-size: 18px;
+     font-weight: 500;
+     color: var(--dark-01-color);
+ }
+
+ .card-reservation-one .content-info-card .price-num {
+     font-size: 16px;
+     font-weight: 500;
+     color: var(--danger-01-color);
+ }
+
+ .card-reservation-one .content-info-card .info-one-content {
+     font-size: 15px;
+     margin-top: 10px;
+ }
+
+ .card-reservation-one .all-ino-content-botom .info-one-content svg {
+     width: 22px;
+     height: 22px;
+ }
+
+ .card-reservation-one .content-info-card .bottom-content .info-one-content {
+     margin: 0;
+ }
+
+ .card-reservation-one .bottom-content .btn-details-main {
+     padding: 10px 20px;
+ }
+
+ /* SCREEN 991px */
+ @media screen and (max-width:991px) {
+
+     .card-reservation-one .image-reservation img {
+         height: 220px !important;
+         width: 100% !important;
+
+     }
+
+ }
+
+ /* SCREEN 767px */
+ @media screen and (max-width:767px) {
+     .card-reservation-one .image-reservation {
+         width: 100%;
+     }
+
+
+     .card-reservation-one .image-reservation img {
+         height: 250px !important;
+
+     }
+ }
+
+ /* SCREEN 450px */
+ @media screen and (max-width:450px) {
+     .card-reservation-one .image-reservation img {
+         height: 180px !important;
+
+     }
+ }

@@ -1,0 +1,212 @@
+.modal-width-content {
+  --bs-modal-width: 730px !important;
+}
+
+.modal-available .card-content-available {
+  border: var(--border-02);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.modal-available .card-content-available.active {
+  border-color: var(--green-01-color);
+}
+
+.modal-available .card-content-available .icon-check-link {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.modal-available .card-content-available .icon-check-link.active {
+  opacity: 1;
+}
+
+.modal-available .card-content-available .btn-main.active {
+  background: #ab2121;
+  border-color: #ab2121;
+}
+
+.modal-available .card-content-available :is(.title, .text-card, .text) {
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.modal-available .card-content-available .title {
+  font-size: 17px;
+}
+
+.modal-available .card-content-available :is(.text-card, .text) {
+  font-size: 15px;
+}
+
+.modal-available .times-trips .main-btn-filter {
+  width: fit-content;
+
+  padding: 9px 20px;
+  font-size: 15px;
+}
+
+.modal-available .card-content-available .bottom-content-card {
+  border-top: var(--border-02);
+  padding-top: 22px;
+  margin-top: 15px;
+}
+
+.modal-available .all-content-available {
+  height: 600px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.modal-available .all-content-available::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .modal-available .times-trips {
+    flex-wrap: nowrap !important;
+    overflow: auto;
+    padding-bottom: 15px;
+  }
+
+  .modal-available .card-content-available :is(.text-card) {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .modal-available .card-content-available .title {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 309px) {
+  .modal-available .times-trips .main-btn-filter {
+    width: 100%;
+  }
+}
+
+/* =============================================
+START ALL CONTENT NUMBER INDIVIDUALS
+==============================================*/
+.all-content-number-individuals .content-number-one .title {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--gray-01-color);
+}
+
+/* =============================================
+END ALL CONTENT NUMBER INDIVIDUALS
+==============================================*/
+
+/* ===========================================
+START MODAL PROVIDER INFORMATION
+========================================== */
+/* START HEADER PROVIDER INFORMATION */
+.header-proviver-content,
+.header-proviver-content .information-contact-head {
+  border: var(--border-02);
+  padding: 15px;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.header-proviver-content .header-top-content-box-1 {
+  width: fit-content;
+  text-align: center;
+  width: 100%;
+}
+
+.header-proviver-content .img-company {
+  border: var(--border-02);
+  padding: 10px;
+  width: fit-content;
+  border-radius: 8px;
+  width: 100px;
+  height: 80px;
+  margin: auto;
+}
+
+.header-proviver-content :is(.title, .rate-info) {
+  font-weight: 500;
+  color: var(--dark-01-color);
+  text-align: center;
+}
+
+.header-proviver-content .title {
+  font-size: 17px;
+}
+
+.header-proviver-content .rate-info {
+  font-size: 15px;
+}
+
+.header-proviver-content .cards-information-content .card-info-one {
+  border: var(--border-02);
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.header-proviver-content
+  .cards-information-content
+  .card-info-one
+  :is(.title, .num),
+.header-proviver-content .information-contact-head :is(.title, .link-contact),
+.all-tab-one-content :is(.title, .text--1) {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+
+.header-proviver-content .information-contact-head .title {
+  text-align: right;
+}
+
+.header-proviver-content .information-contact-head .contact-btn {
+  padding: 10px 14px;
+}
+
+@media screen and (max-width: 450px) {
+  .header-proviver-content .title {
+    font-size: 15px;
+  }
+
+  .header-proviver-content
+    .cards-information-content
+    .card-info-one
+    :is(.title, .num) {
+    font-size: 13px;
+  }
+}
+/* END HEADER PROVIDER INFORMATION */
+/* START TABS CONTENT INFORMATION */
+.all-tab-one-content .map-content-box--info {
+  padding: 12px 0;
+  margin: 0;
+}
+.all-tab-one-content .map-content-box--info .box-border-circle {
+  margin-top: 15px;
+}
+.all-tab-one-content .map-content-box--info .text {
+  font-size: 13px;
+}
+.all-tab-one-content .left-tab-content {
+  border: var(--border-02);
+  padding: 15px;
+  border-radius: 12px;
+}
+.all-tab-one-content .title {
+  padding-bottom: 15px;
+}
+/* END TABS CONTENT INFORMATION */
+
+/* ===========================================
+END MODAL PROVIDER INFORMATION
+========================================== */

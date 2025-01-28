@@ -1,0 +1,37 @@
+.all-content-rate-progress {
+    margin-top: 20px;
+}
+
+.all-content-rate-progress .progressbar-rate-content {
+    background: var(--green-02-color);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.all-content-rate-progress .progressbar-rate-one .num-rate {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.all-content-rate-progress .progressbar-rate-one .progress {
+    width: 100%;
+    height: 9px;
+    background: var(--white-01-color);
+
+}
+
+.all-content-rate-progress .progressbar-rate-one .progress .progress-bar {
+    background: var(--green-01-color);
+}
+
+.all-content-rate-progress .all-num-rates-info {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.all-content-rate-progress .all-num-rates-info .text-num-rate {
+    font-size: 17px;
+    color: var(--gray-01-color);
+}

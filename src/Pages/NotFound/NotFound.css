@@ -1,0 +1,27 @@
+.not-found-page {
+  padding-bottom: 50px;
+}
+
+.not-found-page .animtion-lottie {
+  width: 600px;
+}
+
+.content-info-error .title {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+  padding: 15px 0 25px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .not-found-page .animtion-lottie {
+    width: 95%;
+  }
+}
+
+
+@media screen and (max-width: 450px) {
+  .content-info-error .title {
+    font-size: 25px;
+  }
+}

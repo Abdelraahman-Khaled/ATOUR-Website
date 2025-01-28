@@ -1,0 +1,31 @@
+.details-card-page :is(.title, .num-price-info, .date-one, .title-text) {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-01-color);
+}
+
+.details-card-page :is(.text) {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--dark-01-color);
+    line-height: 2;
+}
+
+
+@media screen and (max-width:450px) {
+    .details-card-page :is(.title, .num-price-info, .date-one, .title-text) {
+        font-size: 14px;
+    }
+
+    .details-card-page :is(.text) {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+    .location-content-info .google-map .iframe-map {
+        height: 330px !important;
+    }
+}
