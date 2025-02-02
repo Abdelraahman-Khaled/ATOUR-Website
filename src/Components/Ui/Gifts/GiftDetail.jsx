@@ -7,6 +7,7 @@ import LoaderSvg from "assets/Icons/LoaderSvg";
 import ContentAPI from "api/contentApi";
 import SliderEventCardDetails from "Pages/Events/Components/DetailsCardEvent/Components/SliderEventCardDetails/SliderEventCardDetails";
 import DetailsCardPage from "Pages/Events/Components/DetailsCardEvent/Components/DetailsCardPage/DetailsCardPage";
+import GiftCardDetails from "./GiftCardDetails/GiftCardDetails";
 
 const GiftDetail = () => {
     // Extract the `id` from the URL
@@ -14,30 +15,30 @@ const GiftDetail = () => {
     // language
     const { currentLanguage } = useLanguage(); // Get the current language
     // states
-    const [effective, setEffective] = useState(null); // State to store home data
+    const [gift, setGift] = useState(null); // State to store home data
     const [loading, setLoading] = useState(true); // State to manage loading
     const [error, setError] = useState(null); // State to handle errors
 
     // fetching Data
     useEffect(() => {
-        const fetchEffective = async () => {
+        const fetchgift = async () => {
             try {
                 const response = await ContentAPI.getGiftById(id); // Fetch data from the API
                 const data = response.data; // Extract the data from the response
                 if (data) {
-                    setEffective(data); // Set the fetched data to state
+                    setGift(data); // Set the fetched data to state
                 } else {
-                    setError("Effective not found."); // Handle case where the ID doesn't match any item
+                    setError("gift not found."); // Handle case where the ID doesn't match any item
                 }
             } catch (err) {
-                console.error("Error fetching effective data:", err);
-                setError("Failed to load effective data. Please try again later.");
+                console.error("Error fetching gift data:", err);
+                setError("Failed to load gift data. Please try again later.");
             } finally {
                 setLoading(false); // Stop the loading spinner
             }
         };
 
-        fetchEffective(); // Call the API on component mount
+        fetchgift(); // Call the API on component mount
     }, [id]); // Re-run the effect if the `id` changes
 
     if (loading) {
@@ -59,11 +60,11 @@ const GiftDetail = () => {
 
             <div className="details-card-event-page">
                 {/* =========== START DETAILS CARD EVENT DETAILS ============= */}
-                <SliderEventCardDetails image={effective} />
+                <SliderEventCardDetails image={gift} />
                 {/* =========== END DETAILS CARD EVENT DETAILS ============= */}
                 {/* =========== START CONTAINER ============ */}
                 <ContainerMedia>
-                    <DetailsCardPage effective={effective} />
+                    <GiftCardDetails gift={gift} />
                 </ContainerMedia>
                 {/* =========== END CONTAINER ============ */}
             </div>

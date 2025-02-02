@@ -1,6 +1,9 @@
+import { useLanguage } from "Components/Languages/LanguageContext";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
 import imageBanner1 from "../../../../../assets/images/slider/01.png";
 const BannerDetails = () => {
+  const { currentLanguage } = useLanguage(); // Get the current language
+
   return (
     <div className="banner-details-blog-info">
       {/* =========== START BANNER MAIN AREA ========== */}
@@ -13,8 +16,8 @@ const BannerDetails = () => {
           <BreadcrumbsPage
             newClassBreadHeader={false}
             routeTitleTwoBread={"/blogsPage"}
-            titleTwoBread={"المدونة"}
-            textBreadActive={"تفاصيل"}
+            titleTwoBread={currentLanguage === "ar" ? "المدونة" : "Blog"}
+            textBreadActive={currentLanguage === "ar" ? "تفاصيل" : "Details"}
           />
         </div>
         {/* ======== END BANNER ONE ========= */}

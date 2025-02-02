@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import "./ImagesCard.css";
 import { Link } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { isAuthenticated } from "api/axiosInstance";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 
 const ImagesCard = ({ mostVisited }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  // Auth
+  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
+  const handleShowLogin = () => {
+    setShowLogin(true);
+  };
+  const hideLogin = () => {
+    setShowLogin(false);
+  };
+  const handleLinkClick = (e) => {
+    if (!isAuthenticated()) {
+      e.preventDefault();
+      handleShowLogin(); // Open login form if not authenticated
+    }
+  };
 
   // Localization for section title and description
   const localization = {
@@ -25,6 +41,8 @@ const ImagesCard = ({ mostVisited }) => {
 
   return (
     <div className="images-card-content padding-top">
+      {/* Auth login */}
+      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
       {/* =========== START SECTION TITLE ========== */}
       <TitleSection title={sectionTitle} text={sectionText} />
       {/* =========== END SECTION TITLE ============ */}
@@ -36,7 +54,7 @@ const ImagesCard = ({ mostVisited }) => {
           {mostVisited.map((item) => {
             return (
               <div key={item.id} className="col-6 col-md-4 col-lg-3">
-                <Link to={`/biographyPage/${item.id}`}>
+                <Link to={`/biographyPage/${item.id}`} onClick={handleLinkClick}>
                   {/* ============ START CARD IMAGE ONE =========== */}
                   <div className="card-image-one">
                     <div className="image-card position-relative overlay-bg">

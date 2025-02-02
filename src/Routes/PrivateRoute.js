@@ -1,36 +1,19 @@
-import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { isAuthenticated } from "api/axiosInstance";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const PrivateRoute = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
-    const [showLoginModal, setShowLoginModal] = useState(!isAuthenticated);
+  const { currentLanguage } = useLanguage(); // Get the current language
+  if (!isAuthenticated()) {
+    toast.warning(currentLanguage === "ar" ? "تحتاج إلي تسجيل الدخول أولا" : "You need to log in first!");
+    return <Navigate to="/" />;
+  }
 
-    const handleLoginSuccess = () => {
-        setIsAuthenticated(true); // Mark the user as authenticated
-        setShowLoginModal(false); // Close the login modal
-    };
-
-    const hideLoginModal = () => {
-        setShowLoginModal(false); // Allow manual closing of the modal
-    };
-
-    return (
-        <>
-            {isAuthenticated ? (
-                children
-            ) : (
-                <>
-                    <FormAuth
-                        showModalForm={showLoginModal}
-                        hideModalForm={hideLoginModal}
-                    />
-                    {/* Keep the user on the home page */}
-                    {<Navigate to="/" replace /> && !showLoginModal}
-                </>
-            )}
-        </>
-    );
+  return children;
 };
 
 export default PrivateRoute;
+
+

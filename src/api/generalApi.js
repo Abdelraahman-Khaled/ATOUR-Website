@@ -64,6 +64,11 @@ const GeneralAPI = {
     return response.data;
   },
 
+  getBlogDetails: async (id) => {
+    const response = await axiosInstance.get(`/blogs/${id}`);
+    return response.data;
+  },
+
   // Footer Social
   getFooterSocial: async () => {
     const response = await axiosInstance.get("/footer");

@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import BookingAPI from "api/bookingApi";
 import LoaderSvg from "assets/Icons/LoaderSvg";
+import Ticket from "assets/images/IconsHeader/Ticket";
+import Gift from "assets/images/IconsHeader/Gift";
 
 const TabsReservations = () => {
   // State for buttons
@@ -49,6 +51,7 @@ const TabsReservations = () => {
 
     fetchReservations(); // Call the API on component mount
   }, []);
+// console.log("curre trip",curren.trips[0].trip.title_ar);
 
   if (loading) {
     return (
@@ -64,7 +67,6 @@ const TabsReservations = () => {
     return <div>{error}</div>; // Display error message if fetching fails
   }
 
-  console.log(curren.trips.length);
   // Dynamically update tabsData based on the active tab
   const tabsData = [
     {
@@ -84,7 +86,7 @@ const TabsReservations = () => {
       eventKey: "tab2",
       title: (
         <>
-          <Hotel /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
+          <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
         </>
       ),
       content: <AllCardsReservations
@@ -96,7 +98,7 @@ const TabsReservations = () => {
       eventKey: "tab3",
       title: (
         <>
-          <Fork /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
+          <Gift /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
         </>
       ),
       content: <AllCardsReservations

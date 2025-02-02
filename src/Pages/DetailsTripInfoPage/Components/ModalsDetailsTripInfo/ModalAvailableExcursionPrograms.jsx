@@ -9,19 +9,23 @@ import LoaderSvg from "assets/Icons/LoaderSvg";
 import BookingAPI from "api/bookingApi";
 import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { Form } from "react-bootstrap";
 
 const ModalAvailableExcursionPrograms = ({
   tripData,
   showModalAvailable,
   hideModalAvailable,
+  initialAdults,
+  initialChildren,
 }) => {
   const iframeRef = useRef(null);
-  const [activeIndices, setActiveIndices] = useState({});
-  const [activeCards, setActiveCards] = useState({});
+  const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
+  const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState(null);
-
-  const { currentLanguage } = useLanguage(); // Language Context
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [paymentWay, setPaymentWay] = useState("online");
+  const { currentLanguage } = useLanguage();
 
   const content = {
     paymentInitiated: {
@@ -39,10 +43,6 @@ const ModalAvailableExcursionPrograms = ({
     paymentSuccess: {
       ar: "تم عملية الدفع بنجاح.",
       en: "Payment completed successfully.",
-    },
-    paymentFailure: {
-      ar: "فشلت عملية الدفع.",
-      en: "Payment failed.",
     },
     availablePrograms: {
       ar: "البرامج المتاحة",
@@ -68,35 +68,62 @@ const ModalAvailableExcursionPrograms = ({
       ar: "حجز",
       en: "Reserve",
     },
+    paymentWay: {
+      ar: "طريقة الدفع",
+      en: "Payment Way",
+    },
+    cash: {
+      ar: "نقدي",
+      en: "Cash",
+    },
+    online: {
+      ar: "البطاقة البنكية",
+      en: "Online",
+    },
+  };
+  console.log(tripData.available_days[selectedDayIndex]);
+
+
+  const handleTimeClick = (index) => {
+    setSelectedTimeIndex(index);
+    setSelectedTime(tripData.available_times[index].from_time);
   };
 
-  const handleClick = (index) => {
-    setActiveIndices(index);
+  const handleDayClick = (index) => {
+    setSelectedDayIndex(index);
   };
 
   const buttonActiveBook = async (tripId) => {
+    if (selectedTime === null || selectedDayIndex === null) {
+      toast.error("Please select both a time and a day before booking.");
+      return;
+    }
+
     setIsLoading(true);
     try {
-      const bookingDate = new Date().toISOString().split("T")[0]; // Current date in YYYY-MM-DD
-      const peopleNumber = 2; // Replace with actual number of people
-      const childrenNumber = 1; // Replace with actual number of children
-      const paymentWay = "online"; // Replace with "online" or another value based on your logic
+      const bookingDay = tripData.available_days[selectedDayIndex]; // Selected date
+      const currentDate = new Date().toLocaleDateString("en-CA"); // "YYYY-MM-DD"
 
       const response = await BookingAPI.bookTrip({
         tripId,
-        bookingDate,
-        peopleNumber,
-        childrenNumber,
+        bookingDay,
+        peopleNumber: initialAdults,
+        childrenNumber: initialChildren,
         paymentWay,
+        time: selectedTime,
+        bookingDate: currentDate
       });
 
-      if (response.success && response.data?.data?.transaction?.url) {
-        setPaymentUrl(response.data.data.transaction.url);
-        toast.success(content.paymentInitiated[currentLanguage]);
+      if (response.success) {
+        if (paymentWay === "cash") {
+          toast.success(content.paymentSuccess[currentLanguage]);
+          hideModalAvailable();
+        } else if (response.data?.data?.transaction?.url) {
+          setPaymentUrl(response.data.data.transaction.url);
+          toast.success(content.paymentInitiated[currentLanguage]);
+        }
       } else {
-        toast.error(
-          response.data?.response?.message || content.paymentFailed[currentLanguage]
-        );
+        toast.error(response.data?.response?.message || content.paymentFailed[currentLanguage]);
       }
     } catch (error) {
       console.error("Error during booking:", error);
@@ -108,47 +135,25 @@ const ModalAvailableExcursionPrograms = ({
 
   useEffect(() => {
     const handlePaymentMessage = (event) => {
+      const allowedOrigins = ["https://checkout.tap.company", "http://localhost:3000"];
+      if (!allowedOrigins.includes(event.origin)) return;
+
       try {
-        const allowedOrigins = [
-          "https://checkout.tap.company",
-          "https://authentication.staging.tap.company",
-          "http://localhost:3000",
-        ];
-
-        if (!allowedOrigins.includes(event.origin)) {
-          console.warn("Blocked message from unknown origin:", event.origin);
-          return;
-        }
-
-        const data = event.data;
-
-        console.log("Message received from iframe:", data);
-
-        if (typeof data === "string") {
-          try {
-            const parsedData = JSON.parse(data);
-
-            if (parsedData?.result === "SUCCESS") {
-              toast.success(content.paymentSuccess[currentLanguage]);
-              setPaymentUrl(null);
-            } else if (parsedData?.result === "FAILED") {
-              toast.error(content.paymentFailure[currentLanguage]);
-              setPaymentUrl(null);
-            }
-          } catch (error) {
-            console.error("Failed to parse iframe message:", error);
-          }
+        const parsedData = JSON.parse(event.data);
+        if (parsedData?.result === "SUCCESS") {
+          toast.success(content.paymentSuccess[currentLanguage]);
+          setPaymentUrl(null);
+        } else if (parsedData?.result === "FAILED") {
+          toast.error(content.paymentFailed[currentLanguage]);
+          setPaymentUrl(null);
         }
       } catch (error) {
-        console.error("Error handling message from iframe:", error);
+        console.error("Failed to parse iframe message:", error);
       }
     };
 
     window.addEventListener("message", handlePaymentMessage);
-
-    return () => {
-      window.removeEventListener("message", handlePaymentMessage);
-    };
+    return () => window.removeEventListener("message", handlePaymentMessage);
   }, [currentLanguage]);
 
   return (
@@ -158,12 +163,11 @@ const ModalAvailableExcursionPrograms = ({
           show={!!paymentUrl}
           onHide={() => setPaymentUrl(null)}
           title={content.paymentInitiated[currentLanguage]}
-          newClass={"modal-payment"}
+          newClass="modal-payment"
         >
           <iframe
             src={paymentUrl}
             ref={iframeRef}
-            id="paymentIframe"
             style={{ width: "100%", height: "500px", border: "none" }}
             title="Payment Gateway"
             allow="payment"
@@ -175,7 +179,7 @@ const ModalAvailableExcursionPrograms = ({
         show={showModalAvailable}
         onHide={hideModalAvailable}
         title={content.availablePrograms[currentLanguage]}
-        newClass={"modal-available modal-width-content"}
+        newClass="modal-available modal-width-content"
       >
         <div className="all-content-available">
           <div className="details-header">
@@ -183,68 +187,60 @@ const ModalAvailableExcursionPrograms = ({
             <p>{tripData.description || content.noDescription[currentLanguage]}</p>
           </div>
 
-          <div className="row g-3">
+          {/* Select Time */}
+          <div className="times-trips d-flex align-items-center gap-2 py-3 flex-wrap">
             {tripData.available_times.map((time, index) => (
-              <div key={index} className="col-12">
-                <div
-                  className={`card-content-available ${
-                    activeCards[index] ? "active" : ""
-                  }`}
-                >
-                  <div className="header-card-available d-flex align-items-center justify-content-between gap-2 flex-wrap">
-                    <h2 className="title">{tripData.title}</h2>
-                    <div
-                      className={`icon-check-link ${
-                        activeCards[index] ? "active" : ""
-                      }`}
-                    >
-                      <FontAwesomeIcon icon={faCheck} />
-                    </div>
-                  </div>
-
-                  <div className="content-card-details py-2">
-                    <ReadMoreText
-                      text={tripData.description || content.noDescription[currentLanguage]}
-                      maxLength={100}
-                      newClass={"text-card pt-3"}
-                    />
-                    <div className="times-trips change-scroll d-flex align-items-center gap-2 py-3 flex-wrap">
-                      <div
-                        className={`main-btn-filter ${
-                          activeIndices === index ? "active" : ""
-                        }`}
-                        onClick={() => handleClick(index)}
-                      >
-                        <ClockIcon /> {time.from_time} - {time.to_time}
-                      </div>
-                    </div>
-
-                    <div className="bottom-content-card">
-                      <div className="row g-3 align-items-center">
-                        <div className="col-12 col-sm-6">
-                          <div className="content-right-card">
-                            <p className="text">Code: {tripData.id}</p>
-                            <div className="total-price">
-                              {content.totalPrice[currentLanguage]} {tripData.price || "0"} {content.currency[currentLanguage]}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12 col-sm-6">
-                          <button
-                            onClick={() => buttonActiveBook(tripData.id)}
-                            className={`btn-main w-100 m-0 btn-height`}
-                            disabled={isLoading}
-                          >
-                            {isLoading ? <LoaderSvg /> : content.reserve[currentLanguage]}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div
+                key={index}
+                className={`main-btn-filter ${selectedTimeIndex === index ? "active" : ""}`}
+                onClick={() => handleTimeClick(index)}
+              >
+                <ClockIcon /> {time.from_time} - {time.to_time}
               </div>
             ))}
           </div>
+
+          {/* Select Day */}
+          <div className="times-trips d-flex align-items-center gap-2 py-3 mb-3 flex-wrap">
+            {tripData.available_days.map((day, index) => (
+              <div
+                key={index}
+                className={`main-btn-filter ${selectedDayIndex === index ? "active" : ""}`}
+                onClick={() => handleDayClick(index)}
+              >
+                <ClockIcon /> {day}
+              </div>
+            ))}
+          </div>
+
+          {/* Payment Method */}
+          {tripData.pay_later == true && (
+            <Form.Group controlId="paymentWay" className="gap-3 my-3">
+              <Form.Check
+                className="d-flex gap-2"
+                type="radio"
+                label={content.cash[currentLanguage]}
+                name="paymentWay"
+                value="cash"
+                checked={paymentWay === "cash"}
+                onChange={(e) => setPaymentWay(e.target.value)}
+              />
+              <Form.Check
+                className="d-flex gap-2 my-2"
+                type="radio"
+                label={content.online[currentLanguage]}
+                name="paymentWay"
+                value="online"
+                checked={paymentWay === "online"}
+                onChange={(e) => setPaymentWay(e.target.value)}
+              />
+            </Form.Group>
+          )}
+
+          {/* Reserve Button */}
+          <button onClick={() => buttonActiveBook(tripData.id)} className="btn-main w-100" disabled={isLoading}>
+            {isLoading ? <LoaderSvg /> : content.reserve[currentLanguage]}
+          </button>
         </div>
       </CustomModal>
     </>

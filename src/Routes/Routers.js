@@ -16,8 +16,8 @@ import TripsPage from "Pages/TripsPage/TripsPage";
 import NatureDventuresPage from "Pages/NatureDventuresPage/NatureDventuresPage";
 import PayConfirmPage from "../Pages/PayConfirmPage/PayConfirmPage";
 import DetailsTripInfoPage from "Pages/DetailsTripInfoPage/DetailsTripInfoPage";
-import PrivateRoute from "./PrivateRoute";
 import GiftDetail from "Components/Ui/Gifts/GiftDetail";
+import PrivateRoute from "./PrivateRoute";
 
 let routers = createBrowserRouter([
   {
@@ -35,57 +35,63 @@ let routers = createBrowserRouter([
           { index: true, element: <Home /> },
           {
             path: "detailsTripInfoId/:detailsTripInfo",
-            element: <DetailsTripInfoPage />
-          }
-        ]
+            element: <DetailsTripInfoPage />,
+          },
+        ],
       },
       { path: "favoritePage", element: <FavoritePage /> },
       {
         path: "blogsPage",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
         children: [
           { path: "", element: <Blogs /> },
-          { path: ":idCardDetailsBlog", element: <DetailsBlogCard /> }
-        ]
+          { path: ":idCardDetailsBlog", element: <DetailsBlogCard /> },
+        ],
       },
       {
         path: "eventsPage",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
         children: [
           { path: "", element: <Events /> },
-          { path: ":id", element: <DetailsCardEvent /> }
-        ]
+          { path: ":id", element: <DetailsCardEvent /> },
+        ],
       },
       {
         path: "offers",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
         children: [
           { path: "", element: <Offers /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
-        ]
+          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+        ],
       },
       {
         path: "gifts/:id",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
-        children: [
-          { path: "", element: <GiftDetail /> },
-        ]
+        children: [{ path: "", element: <GiftDetail /> }],
       },
       { path: "accountUser", element: <AccountUser /> },
       { path: "reservations", element: <Reservations /> },
@@ -93,13 +99,15 @@ let routers = createBrowserRouter([
         path: "biographyPage/:id",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
         children: [
           { path: "", element: <BiographyPage /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
-        ]
+          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+        ],
       },
       {
         path: "tripsPage",
@@ -112,26 +120,28 @@ let routers = createBrowserRouter([
         ),
         children: [
           { path: "", element: <TripsPage /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
-        ]
+          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+        ],
       },
       {
         path: "tripsPage/:id",
         element: (
           <>
-            <Outlet />
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
           </>
         ),
         children: [
           { path: "", element: <DetailsTripInfoPage /> },
           // { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
-        ]
+        ],
       },
       { path: "natureDventuresPage", element: <NatureDventuresPage /> },
       { path: "payConfirmPage", element: <PayConfirmPage /> },
-      { path: "*", element: <NotFound /> }
-    ]
-  }
+      { path: "*", element: <NotFound /> },
+    ],
+  },
 ]);
 
 export default routers;

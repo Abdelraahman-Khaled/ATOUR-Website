@@ -65,9 +65,11 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
             className="box-one-content cursor-pointer-event mb-3 d-flex justify-content-between align-items-center gap-2 flex-wrap"
           >
             <div className="info-box-right">
-              <h2 className="title">عدد الأفراد</h2>
+              <h2 className="title">
+                {currentLanguage === "ar" ? "عدد الأفراد" : "Number of people"}
+              </h2>
               <p className="text">
-                {adultsCount} بالغ , {childrenCount} أطفال
+                {adultsCount} {currentLanguage === "ar" ? "بالغ" : "adult"} , {childrenCount} {currentLanguage === "ar" ? "أطفال" : "children"}
               </p>
             </div>
             <div className="icon-box">
@@ -77,7 +79,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
 
           {/* Show Available Programs Button */}
           <button className="btn-main w-100" onClick={buttonShowModal}>
-            إظهر البرامج المتاحة
+            {currentLanguage === "ar" ? "إظهر البرامج المتاحة" : "Show available programs"}
           </button>
 
           {/* Additional Info */}

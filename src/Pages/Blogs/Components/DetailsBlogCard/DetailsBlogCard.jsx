@@ -3,11 +3,14 @@ import BannerDetails from "./BannerDetails/BannerDetails";
 import InfoBlogDetails from "./BannerDetails/InfoBlogDetails";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const DetailsBlogCard = () => {
+  const { currentLanguage } = useLanguage(); // Get the current language
+
   return (
     <>
-      <HelmetInfo titlePage={"تفاصيل المدونة"} />
+      <HelmetInfo titlePage={currentLanguage === "ar" ? "تفاصيل المدونة" : "Blog Details"} />
 
       <div className="details-blog-card">
         {/* ========== START SLIDER DETIALS BLOG ============ */}

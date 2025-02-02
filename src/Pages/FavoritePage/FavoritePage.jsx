@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import FavouritesAPI from "api/favouritesApi";
 import LoaderSvg from "assets/Icons/LoaderSvg";
+import Ticket from "assets/images/IconsHeader/Ticket";
 
 const FavoritePage = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -51,8 +52,8 @@ const FavoritePage = () => {
       eventKey: "tab1",
       title: (
         <>
-          <Tree /> رحلات
-        </>
+          <Tree /> {currentLanguage === "ar" ? "رحلات" : "Trips"}
+          </>
       ),
       content: <CardsFavorite data={favData.trips} />
     },
@@ -60,8 +61,8 @@ const FavoritePage = () => {
       eventKey: "tab2",
       title: (
         <>
-          <Hotel /> فعاليات
-        </>
+          <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
+          </>
       ),
       content: <CardsFavorite data={favData.effectivenes} />
     },
@@ -69,15 +70,15 @@ const FavoritePage = () => {
       eventKey: "tab3",
       title: (
         <>
-          <Gift /> هدايا تذكارية
-        </>
+          <Gift /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
+          </>
       ),
       content: <CardsFavorite data={favData.gifts} />
     }
   ];
   return (
     <>
-      <HelmetInfo titlePage={"المفضلة"} />
+      <HelmetInfo titlePage={currentLanguage==="ar"?"المفضلة":"Favorite"} />
 
       <div className="favorite-page">
         <header>

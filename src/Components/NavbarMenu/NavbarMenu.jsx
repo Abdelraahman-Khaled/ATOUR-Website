@@ -1,6 +1,6 @@
 import { Nav, Navbar } from "react-bootstrap";
 import logo from "../../assets/images/logo/logo.svg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import "./NavbarMenu.css";
 import { useEffect, useState } from "react";
@@ -23,6 +23,9 @@ const NavbarMenu = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [selectedCity, setSelectedCity] = useState(null);
+  // open form when it route
+  const location = useLocation();
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +35,6 @@ const NavbarMenu = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [showLogin, setShowLogin] = useState(false);
   const buttonShowLogin = () => setShowLogin(true);
   const hideLogin = () => setShowLogin(false);
 
@@ -58,6 +60,12 @@ const NavbarMenu = () => {
     }
   }, [selectedCity, navigate]);
 
+  useEffect(() => {
+    if (location.state?.showLogin) {
+      setShowLogin(true);
+    }
+  }, [location.state]);
+
   if (loading) {
     return (
       <div className="flex-center-center h-50vh">
@@ -71,6 +79,7 @@ const NavbarMenu = () => {
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
+ 
 
   return (
     <>
@@ -97,24 +106,24 @@ const NavbarMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             {isAuthenticated() ? (
               <Nav className="me-auto" data-aos="fade-right">
-                <NavLink className="nav-link" to="/eventsPage">
+                {/* <NavLink className="nav-link" to="/eventsPage">
                   {currentLanguage === "en" ? "Events" : "الفعاليات"}
                 </NavLink>
                 <NavLink className="nav-link" to="/offers">
                   <Gift />
                   {currentLanguage === "en" ? " gifts " : "الهدايا "}
-                </NavLink>
+                </NavLink> */}
                 <SearchInputLocation cities={cities} setSelectedCity={setSelectedCity} />
               </Nav>
             ) : (
               <Nav className="me-auto" data-aos="fade-right">
-                <span className="nav-link pointer" onClick={buttonShowLogin}>
+                {/* <span className="nav-link pointer" onClick={buttonShowLogin}>
                   {currentLanguage === "en" ? "Events" : "الفعاليات"}
                 </span>
                 <span className="nav-link pointer" onClick={buttonShowLogin}>
                   <Gift />
                   {currentLanguage === "en" ? " gifts " : "الهدايا "}
-                </span>
+                </span> */}
                 <SearchInputLocation cities={cities} setSelectedCity={buttonShowLogin} />
               </Nav>
             )}

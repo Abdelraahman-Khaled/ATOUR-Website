@@ -40,7 +40,7 @@ const CardReservation = ({
       <div className="content-info-card">
         <div className="info-top-card pb-2 d-flex justify-content-between align-items-center gap-2 flex-wrap">
           <h2 className="title">{titleCard}</h2>
-          <p className="price-num">{priceNum}</p>
+          <p className="price-num">{priceNum} {currentLanguage === "ar" ? "ريال" : "SAR"} </p>
         </div>
         <div className="all-ino-content-botom">
           <div className="info-one-content d-flex align-items-center gap-2">

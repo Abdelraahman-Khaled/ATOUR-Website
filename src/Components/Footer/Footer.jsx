@@ -81,7 +81,7 @@ const Footer = () => {
       location: "الموقع",
       rightsReserved: "جميع الحقوق محفوظة",
       home: "الرئيسية",
-      offers: "عروض 🔥",
+      offers: "الهدايا",
       events: "الفعاليات",
       blog: "المدونة",
       address: "الرياض , طريق المذنب , السعودية"
@@ -95,7 +95,7 @@ const Footer = () => {
       location: "Location",
       rightsReserved: "All rights reserved",
       home: "Home",
-      offers: "Offers 🔥",
+      offers: "Gifts",
       events: "Events",
       blog: "Blog",
       address: "Riyadh, Al-Mathnib Road, Saudi Arabia"
@@ -271,7 +271,7 @@ const Footer = () => {
                       <p className="link-contact">atour@gmail.com</p>
                     </div>
                   </a>
-                  <a href="##" className="info-contact-one d-flex gap-3">
+                  {/* <a href="##" className="info-contact-one d-flex gap-3">
                     <div className="icon-foot-contact">
                       <EmailIcon />
                     </div>
@@ -279,7 +279,7 @@ const Footer = () => {
                       <h2 className="title-foot">{text.location}</h2>
                       <p className="link-contact">{text.address}</p>
                     </div>
-                  </a>
+                  </a> */}
                 </div>
                 {/* =========== END INFO FOOTER CONTENT ========== */}
               </div>

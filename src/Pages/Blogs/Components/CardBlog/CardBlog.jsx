@@ -1,3 +1,4 @@
+import DateDisplay from "Components/DateDisplay/DateDisplay";
 import { Link } from "react-router-dom";
 import "./CardBlog.css";
 const CardBlog = ({
@@ -32,7 +33,7 @@ const CardBlog = ({
           />
           <div className="content-info">
             <h2 className="name">{nameUserBlog}</h2>
-            <div className="time-add">{timeAddedBlog}</div>
+            <div className="time-add">{<DateDisplay from_date={timeAddedBlog} />}</div>
           </div>
         </div>
       </div>

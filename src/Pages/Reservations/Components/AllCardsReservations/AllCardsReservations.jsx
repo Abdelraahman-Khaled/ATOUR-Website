@@ -12,11 +12,16 @@ const AllCardsReservations = ({ reservation }) => {
 
   // SHOW MODAL DETAILS TRIP
   const [showDetailsTrip, setDetailsTrip] = useState(false);
-  const buttonShowDetails = () => {
-    setDetailsTrip(true);
+  const [selectedReservation, setSelectedReservation] = useState(null); // Store selected reservation
+
+  const buttonShowDetails = (reservationItem) => {
+    setSelectedReservation(reservationItem); // Set selected reservation
+    setDetailsTrip(true); // Open modal
   };
+
   const hideDetailsModal = () => {
     setDetailsTrip(false);
+    setSelectedReservation(null); // Clear selected reservation when closing
   };
 
   // Text based on language
@@ -40,27 +45,27 @@ const AllCardsReservations = ({ reservation }) => {
       <ModalDetailsTrip
         showDetailsModal={showDetailsTrip}
         hideDetailsModal={hideDetailsModal}
-        reservation={reservation} // Pass the selected reservation
+        reservation={selectedReservation} // Pass the selected reservation
         currentLanguage={currentLanguage} // Pass the current language
       />
       <div className="all-cards-reservations">
         {/* =============== START ROW ============== */}
         <div className="row g-3">
           {reservation !== undefined && reservation.length > 0 ? (
-            reservation.map((item) => {
+            [...reservation].reverse().map((item) => {
               return (
                 <div key={item.id} className="col-12 col-md-6 col-lg-12">
                   <CardReservation
                     image={item.photo || backUP}
                     typeReservation={item.payment_status}
                     countryName={item.countryName}
-                    titleCard={item.titleCard}
-                    priceNum={`${item.total}$`}
+                    titleCard={(item.trip || item.effectivene || item.gift)?.[currentLanguage === "ar" ? "title_ar" : "title_en"] || "Ended"}
+                    priceNum={`${item.total}`}
                     textUserInfo={`${text[currentLanguage].children} ${item.children_number}, ${text[currentLanguage].adults} ${item.people_number}`}
                     dateTime={item.booking_date + " " + item.booking_day}
                     timeAdd={item.booking_time}
                     isTrueButtonDetails={true}
-                    buttonDetailsFunction={buttonShowDetails}
+                    buttonDetailsFunction={() => buttonShowDetails(item)} // Pass the selected item
                     isTrueButtonCancel={false}
                     buttonCancelReservationFunction={false}
                   />

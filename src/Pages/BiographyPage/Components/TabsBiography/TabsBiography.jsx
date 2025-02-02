@@ -42,12 +42,12 @@ const TabsBiography = ({ biography }) => {
         <>
 
           <SliderHeader biography={biography} />
-          <ContainerMedia>
-            {/* <FamousLandmarksCards /> */}
-            {/* <CardsCollectionBio /> */}
-            {/* <ExploreBiographyCards /> */}
-            {/* <NewRates /> */}
-          </ContainerMedia>
+          {/* <ContainerMedia>
+            <FamousLandmarksCards />
+            <CardsCollectionBio />
+            <ExploreBiographyCards />
+            <NewRates />
+          </ContainerMedia> */}
         </>
       )
     },

@@ -92,8 +92,8 @@ const CardFavorite = ({
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
             {currentLanguage === "ar" ? "تبدأ من" : "Starting from"}{" "}
-            <span className="price-num">{NumPriceNew}</span>{" "}
-            {currentLanguage === "ar" ? "/ للفرد" : "/ per person"}{" "}
+            <span className="price-num">{NumPriceNew} {currentLanguage === "ar" ? "ريال" : "SAR"}</span>{" "}
+            {currentLanguage === "ar" ? "/ للفرد" : "/ per person"}{" "}?
             {isTrueNumTwo && (
               <p className="text-2">
                 {currentLanguage === "ar" ? "بدلا من" : "Instead of"}{" "}

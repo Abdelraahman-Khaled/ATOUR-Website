@@ -9,21 +9,21 @@ import { useLanguage } from "Components/Languages/LanguageContext"; // Import th
 
 const UserDropMenu = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
-
+  
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("user");
     window.location.reload(); // Redirect to the login page
   };
 
-  // Translations for the dropdown items
-  const translations = {
-    accountInfo: { ar: "معلومات الحساب", en: "Account Information" },
-    myReservations: { ar: "حجوزاتي", en: "My Reservations" },
-    currency: { ar: "ريال سعودي", en: "Saudi Riyal" },
-    logout: { ar: "تسجيل الخروج", en: "Log Out" },
-  };
 
+// Translations for the dropdown items
+const translations = {
+  accountInfo: { ar: "معلومات الحساب", en: "Account Information" },
+  myReservations: { ar: "حجوزاتي", en: "My Reservations" },
+  currency: { ar: "ريال سعودي", en: "Saudi Riyal" },
+  logout: { ar: "تسجيل الخروج", en: "Log Out" },
+};
   return (
     <div className="dropmenu-user">
       <Dropdown>

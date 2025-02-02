@@ -1,3 +1,5 @@
+import { isAuthenticated } from "api/axiosInstance";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import TitleSection from "Components/TitleSection/TitleSection";
 import { cardsFavoriteData } from "Pages/FavoritePage/Components/CardsFavorite/Data/DataCardFavorite";
@@ -23,6 +25,20 @@ const content = {
 const OneOffer = (offer) => {
     const offerDetails = offer.offer
     const { currentLanguage } = useLanguage(); // Get the selected language from context
+    // Auth
+    const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
+    const handleShowLogin = () => {
+        setShowLogin(true);
+    };
+    const hideLogin = () => {
+        setShowLogin(false);
+    };
+    const handleLinkClick = (e) => {
+        if (!isAuthenticated()) {
+            e.preventDefault();
+            handleShowLogin(); // Open login form if not authenticated
+        }
+    };
 
     // ADD TO WISHLIST
     const [wishList_2, setWishList_2] = useState([]);
@@ -54,6 +70,8 @@ const OneOffer = (offer) => {
     };
     return (
         <div className="all-offers-content padding-80">
+            {/* Auth login */}
+            <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
             <TitleSection title={title} text={text} />
             <div className="main-cards-offers" data-aos="fade-right">
                 {/* ============= START ROW =========== */}
@@ -62,7 +80,7 @@ const OneOffer = (offer) => {
                         <>
                             {/* ========== START COL =========== */}
                             <div className="col-12 col-sm-6 col-xl-12" key={offerDetails.id}>
-                                <Link to={routeMap[offerDetails.type] || routeMap.default}>
+                                <Link to={routeMap[offerDetails.type] || routeMap.default} onClick={handleLinkClick}>
                                     <OneOfferCard
                                         newClassCard={"card-offer-one"}
                                         idCard={offerDetails.id}

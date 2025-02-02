@@ -44,9 +44,7 @@ const OneOfferCard = ({
     };
 
     return (
-        <div
-            className={`card-collection-one card-favorite-one  d-flex  h-100 gap-3 ${newClassCard}`}
-        >
+        <div className={`card-collection-one card-favorite-one  d-flex  h-100 gap-3 ${newClassCard}`}>
             {/* =========== START IMAGE CARD FAVORITE =========== */}
             <div className="image-collection overlay-bg">
                 <img
@@ -85,7 +83,7 @@ const OneOfferCard = ({
                     <h2 className="title">{titleCard}</h2>
                 </div>
                 {/* ========== END HEADER TOP CARD ========== */}
-                
+
                 <p className="text">{sliceWords(textContent)}</p>
                 <div className="bottom-content-card mt-auto d-flex gap-3 flex-wrap align-items-center">
                     {isTrueTextOneCard_1 && (

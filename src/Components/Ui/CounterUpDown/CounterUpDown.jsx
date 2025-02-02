@@ -6,13 +6,14 @@ import "./CounterUpDown.css";
 function CounterUpDown({
   initialValue = 1,
   minValue = 1,
-  maxValue = Infinity,
-  onChange
+  maxValue,
+  onChange,
+  disablePlus = false,
 }) {
   const [count, setCount] = useState(initialValue);
 
   const handleIncrease = () => {
-    if (count < maxValue) {
+    if (count < maxValue && !disablePlus) {
       setCount(count + 1);
       onChange && onChange(count + 1);
     }
@@ -34,22 +35,20 @@ function CounterUpDown({
   };
 
   return (
-    <>
-      <div className="counter-product d-flex align-items-center gap-2">
-        <button className="btn-main" onClick={handleDecrease}>
-          <FontAwesomeIcon icon={faMinus} />
-        </button>
-        <input
-          type="text"
-          className="num-counter"
-          value={count}
-          onChange={handleChange}
-        />
-        <button className="btn-main" onClick={handleIncrease}>
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-      </div>
-    </>
+    <div className="counter-product d-flex align-items-center gap-2">
+      <button className="btn-main" onClick={handleDecrease}>
+        <FontAwesomeIcon icon={faMinus} />
+      </button>
+      <input
+        type="text"
+        className="num-counter"
+        value={count}
+        onChange={handleChange}
+      />
+      <button className="btn-main" onClick={handleIncrease} disabled={disablePlus}>
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
+    </div>
   );
 }
 

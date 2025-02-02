@@ -2,7 +2,10 @@ import CustomModal from "Components/CustomModal/CustomModal";
 import { toast } from "react-toastify";
 import "./ModalRemove.css";
 import TrashIcon from "assets/Icons/TrashIcon";
+import BookingAPI from "api/bookingApi";
+
 const ModalRemove = ({
+  id,
   showModalPayRemove,
   hideModalPayRemove,
   titleModal,
@@ -13,9 +16,18 @@ const ModalRemove = ({
     hideModalPayRemove();
     toast.success("تم الالغاء  بنجاح");
   };
-  const removeButton = () => {
-    hideModalPayRemove();
-    toast.success("تم الحذف بنجاح");
+
+  const removeButton = async () => {
+    try {
+      // Call the API to cancel the booking
+      await BookingAPI.cancelBooking(id);
+      hideModalPayRemove();
+      toast.success("تم الحذف بنجاح");
+    } catch (error) {
+      // Handle any error that occurs during the API call
+      hideModalPayRemove();
+      toast.error("فشل في الحذف، حاول مرة اخرى");
+    }
   };
 
   return (

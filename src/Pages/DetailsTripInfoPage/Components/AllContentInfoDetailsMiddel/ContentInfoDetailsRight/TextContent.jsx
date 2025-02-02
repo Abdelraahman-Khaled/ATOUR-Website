@@ -16,7 +16,7 @@ const TextContent = () => {
       en: "Flexible Cancellation Policy",
     },
     companyRequests: {
-      ar: "للحجوزات الجماعية وطلبات الشركات",
+      ar: "لحجوزات الشركات و الجهات الحكومية و الطلبات الخاصة",
       en: "For Group Bookings and Corporate Inquiries",
     },
     text: {

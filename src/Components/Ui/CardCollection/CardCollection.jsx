@@ -5,6 +5,9 @@ import HeartIconCollection from "assets/images/collection/HeartIconCollection";
 import { Link } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Favicon from "Components/FavIcon/Favicon ";
+import { useState } from "react";
+import { isAuthenticated } from "api/axiosInstance";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 
 const CardCollection = ({
   itemId,
@@ -14,10 +17,24 @@ const CardCollection = ({
   titleCard,
   numPriceCard,
   wishList,
-  addToWishList, isFav
+  addToWishList,
+  isFav
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-
+  // Auth
+  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
+  const handleShowLogin = () => {
+    setShowLogin(true);
+  };
+  const hideLogin = () => {
+    setShowLogin(false);
+  };
+  const handleLinkClick = (e) => {
+    if (!isAuthenticated()) {
+      e.preventDefault();
+      handleShowLogin(); // Open login form if not authenticated
+    }
+  };
   // Localization object
   const localization = {
     ar: {
@@ -37,8 +54,10 @@ const CardCollection = ({
   const isWishListed = wishList.includes(itemId); // Check if the current item is in the wishlist
   return (
     <>
+      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
+
       {/* ============ START CARD COLLECTION ONE =========== */}
-      <Link to={`tripsPage/${itemId}`} className="card-collection-one">
+      <Link to={`tripsPage/${itemId}`} className="card-collection-one" onClick={handleLinkClick}>
         {/* =========== START IMAGE COLLECTION =========== */}
         <div className="image-collection overlay-bg">
           <img

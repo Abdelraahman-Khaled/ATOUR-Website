@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 import ContentAPI from "api/contentApi";
 import { useParams } from "react-router-dom";
 import LoaderSvg from "assets/Icons/LoaderSvg";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const DetailsTripInfoPage = () => {
   const [tripData, setTripData] = useState(null); // State to store fetched data
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
+  const { currentLanguage } = useLanguage(); // Get the current language
   const { id } = useParams();
-  const testid = useParams();
   // Fetch data on component mount
   useEffect(() => {
     const fetchTripData = async () => {
@@ -50,21 +51,21 @@ const DetailsTripInfoPage = () => {
 
   // Display if no data is available
   if (!tripData) {
-    return <div>No trip data available.</div>;
+    return <p className="text-section-api fs-6 fw-medium text-center pt-5">
+      {currentLanguage === "ar" ? "لا يوجد رحلات متاحة" : "No trip data available."}
+    </p>;
   }
-
-  console.log("tripid:", testid);
   return (
     <>
-      <HelmetInfo titlePage={"تفاصيل"} />
+      <HelmetInfo titlePage={currentLanguage === "ar" ? "تفاصيل" : "Details"} />
 
       <div className="details-trip-info-page padding-60">
         <header>
           <BreadcrumbsPage
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
-            titleTwoBread={"رحلات"}
-            textBreadActive={"تفاصيل الرحلة"}
+            titleTwoBread={currentLanguage === "ar" ? "رحلات" : "Trips"}
+            textBreadActive={currentLanguage === "ar" ? "تفاصيل الرحلة" : "Trip details"}
           />
         </header>
         <main>

@@ -19,7 +19,7 @@ const CardsFavorite = ({ data }) => {
         {/* ============= START ROW =========== */}
         <div className="row g-3">
           {data.length > 0 ? (
-            data.map((item) => {
+            [...data].reverse().map((item) => {
               return (
                 <>
                   {/* ========== START COL =========== */}
@@ -30,7 +30,7 @@ const CardsFavorite = ({ data }) => {
                       image={item.cover}
                       textLocation={item.city.title + " .  " + item.city.country_name}
                       titleCard={item.title}
-                      NumPriceNew={`${item.price}$`}
+                      NumPriceNew={`${item.price}`}
                       isTrueNumTwo={false}
                       numInfoDangerOld={false}
                       rateNum={item.total_rates}

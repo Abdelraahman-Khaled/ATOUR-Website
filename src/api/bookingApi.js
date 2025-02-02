@@ -15,7 +15,9 @@ const BookingAPI = {
 
   // Trigger payment for a specific effectiveness booking
   effectivenePay: async (effectiveneId) => {
-    const response = await axiosInstance.get(`/effectivene-pay/${effectiveneId}`);
+    const response = await axiosInstance.get(
+      `/effectivene-pay/${effectiveneId}`
+    );
     return response.data;
   },
 
@@ -32,25 +34,45 @@ const BookingAPI = {
   },
 
   // Book a trip
-  bookTrip: async ({ tripId, bookingDate, peopleNumber, childrenNumber, paymentWay }) => {
+  bookTrip: async ({
+    tripId,
+    bookingDate,
+    peopleNumber,
+    childrenNumber,
+    paymentWay,
+    time,
+    bookingDay
+  }) => {
     const response = await axiosInstance.post("/booking-trip", {
       trip_id: tripId,
       booking_date: bookingDate,
       people_number: peopleNumber,
       children_number: childrenNumber,
       payment_way: paymentWay,
+      booking_time: time,
+      booking_day:bookingDay
     });
     return response.data;
   },
 
   // Book a gift
-  bookGift: async ({ giftId, paymentWay, quantity, deliveryWay, deliveryAddress }) => {
+  bookGift: async ({
+    giftId,
+    paymentWay,
+    quantity,
+    deliveryWay,
+    deliveryAddress,
+    number,
+    location
+  }) => {
     const response = await axiosInstance.post("/booking-gift", {
       gift_id: giftId,
       payment_way: paymentWay,
       quantity,
       delivery_way: deliveryWay,
       delivery_address: deliveryAddress,
+      delivery_number:number,
+      location
     });
     return response.data;
   },
@@ -72,5 +94,3 @@ const BookingAPI = {
 };
 
 export default BookingAPI;
-
-
