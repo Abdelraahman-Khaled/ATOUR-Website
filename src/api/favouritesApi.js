@@ -1,8 +1,12 @@
 import axiosInstance from "./axiosInstance";
 
 const FavouritesAPI = {
-  getFavourites: async () => {
-    const response = await axiosInstance.get("/favourite");
+  getFavourites: async (language) => {
+    const response = await axiosInstance.get("/favourite", {
+      headers: {
+        language: language, // Pass the language in the header
+      }
+    });
     return response.data;
   },
   toggleFavourite: async (modelType, modelId) => {

@@ -5,7 +5,6 @@ import EditIconUser from "assets/images/AccountUser/EditIconUser";
 import InputField from "Components/Forms/InputField";
 import FormField from "Components/Forms/FormFiled";
 import * as Yup from "yup";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import { toast } from "react-toastify";
 
 const ModalEditPersonalInformation = ({

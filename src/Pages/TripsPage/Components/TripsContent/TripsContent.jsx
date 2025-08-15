@@ -3,7 +3,7 @@ import CardsContentTrips from "./CardsContentTrips";
 import FilterTripsContent from "./FilterTripsContent";
 import "./TripsContent.css";
 
-const TripsContent = ({tripsData}) => {
+const TripsContent = ({ tripsData }) => {
   // SHOW MAP LOCTION
   const [activeMap, setActiveMap] = useState(true);
   const buttonActiveMap = () => {
@@ -11,7 +11,7 @@ const TripsContent = ({tripsData}) => {
   };
   return (
     <div className="trips-content--info">
-      <FilterTripsContent activeMap={activeMap} />
+      <FilterTripsContent activeMap={activeMap}  />
       <CardsContentTrips tripsData={tripsData} buttonActiveMap={buttonActiveMap} activeMap={activeMap} />
     </div>
   );

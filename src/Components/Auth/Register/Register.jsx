@@ -16,12 +16,12 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
       ar: "تسجيل حساب جديد",
       en: "Create a New Account",
     },
-    emailOrPhoneLabel: {
-      ar: "البريد الإلكتروني أو رقم الهاتف",
+    email: {
+      ar: "البريد الإلكتروني ",
       en: "Email or Phone Number",
     },
     emailOrPhonePlaceholder: {
-      ar: "أدخل البريد الإلكتروني أو رقم الهاتف",
+      ar: "أدخل البريد الإلكتروني ",
       en: "Enter your email or phone number",
     },
     submitButton: {
@@ -38,7 +38,7 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
     },
     validation: {
       emailOrPhoneRequired: {
-        ar: "ادخل البريد الإلكتروني أو رقم الهاتف",
+        ar: "ادخل البريد الإلكتروني ",
         en: "Enter your email or phone number",
       },
       emailOrPhoneInvalid: {
@@ -98,10 +98,10 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
             onSubmit={handleRegisterSubmit}
           >
             <InputFiled
-              label={content.emailOrPhoneLabel[currentLanguage]}
+              label={content.email[currentLanguage]}
               name="emailRegOrPhoneNumber"
               type="text"
-              placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
+              placeholder={content.email[currentLanguage]}
               success
             />
             <button type="submit" className="btn-main btn-submit w-100 mt-3">

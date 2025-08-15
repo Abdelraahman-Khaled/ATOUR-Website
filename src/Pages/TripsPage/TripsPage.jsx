@@ -5,14 +5,26 @@ import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import ModalSelectDestination from "Components/Ui/ModalSelectDestination/ModalSelectDestination";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { Link } from "react-router-dom";
+import Loader from "Components/Auth/Components/Loader/Loader";
+
+
+const text = {
+  ar: {
+    noData: "لا يوجد بيانات متاحة.",
+    home: "الصفحة الرئيسية",
+  },
+  en: {
+    noData: "No data available.",
+    home: "Home",
+  },
+};
 
 const TripsPage = () => {
   const { currentLanguage } = useLanguage(); // Access current language
   const [tripsData, setTripsData] = useState([]); // State to store home data
   const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
 
   // SHOW MODAL SELECT DESTINATION
   const [showModalSelectDestination, setShowModalSelectDestination] =
@@ -35,19 +47,17 @@ const TripsPage = () => {
   useEffect(() => {
     const fetchTripsData = async () => {
       try {
-        const data = await ContentAPI.getTrips(); // Fetch data from the API
+        const data = await ContentAPI.getTrips(currentLanguage); // Fetch data from the API
         const normalizedData = normalizeData(data.data); // Normalize the data
 
         setTripsData(normalizedData); // Set the fetched data to state
       } catch (err) {
-        console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
     };
     fetchTripsData(); // Call the API on component mount
-  }, []);
+  }, [currentLanguage]);
 
   return (
     <>
@@ -70,18 +80,25 @@ const TripsPage = () => {
           <ContainerMedia>
             <div className="mt-5">
               {loading ? (
-                <div className="loading-text">
-                  {currentLanguage === "ar"
-                    ? "جارٍ تحميل الرحلات..."
-                    : "Loading trips..."}
+                <div style={{ margin: "200px 0px" }}>
+                  <Loader />
                 </div>
               ) : tripsData.length > 0 ? (
                 <TripsContent tripsData={tripsData} />
               ) : (
-                <div className="no-data-text">
-                  {currentLanguage === "ar"
-                    ? "لا توجد رحلات متاحة."
-                    : "No trips available."}
+                <div className="d-flex justify-content-center ">
+                  <div className="no-data-text">
+                    {currentLanguage === "ar"
+                      ? "لا توجد رحلات متاحة"
+                      : "No trips available"}
+                    <Link
+                      to="/"
+                      className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+                    >
+                      {text[currentLanguage].home}
+                    </Link>
+                  </div>
+
                 </div>
               )}
             </div>

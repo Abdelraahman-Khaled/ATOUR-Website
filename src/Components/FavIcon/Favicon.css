@@ -1,0 +1,7 @@
+.icon-heart  svg path{
+    fill: var(--white-01-color);
+}
+.icon-heart.activeHeart  svg path{
+    fill: var(--white-01-color);
+    fill-opacity: 1;
+}

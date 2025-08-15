@@ -38,7 +38,6 @@ const AddNewPayment = ({ showModalAddNewPayment, hideModalAddNewPayment }) => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     resetForm();
     if (values) {
       setShowModalConfirmSucces(true);

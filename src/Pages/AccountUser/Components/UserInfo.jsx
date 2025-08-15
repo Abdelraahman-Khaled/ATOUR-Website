@@ -34,7 +34,6 @@ const UserInfo = () => {
   if (loading) {
     return <div className="loading-text">{currentLanguage === "ar" ? "جارٍ التحميل..." : "Loading..."}</div>;
   }
-  console.log(profile);
   return (
     <div className="header-user-info-profile">
       <div className="image-user">

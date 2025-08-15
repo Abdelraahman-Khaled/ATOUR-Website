@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 import "./ModalRemove.css";
 import TrashIcon from "assets/Icons/TrashIcon";
 import BookingAPI from "api/bookingApi";
+import { useEffect, useState } from "react";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const ModalRemove = ({
   id,
@@ -10,26 +12,50 @@ const ModalRemove = ({
   hideModalPayRemove,
   titleModal,
   title,
-  text
+  text,
+  reservation,
+  refresh
 }) => {
+  const [savedReservation, setSavedReservation] = useState(null);
+  const { currentLanguage } = useLanguage();
+  // When reservation changes, update state only if it's valid
+  useEffect(() => {
+    if (reservation) {
+      setSavedReservation(reservation);
+    }
+  }, [reservation]);
+
   const cancelButton = () => {
     hideModalPayRemove();
-    toast.success("تم الالغاء  بنجاح");
   };
 
   const removeButton = async () => {
     try {
+      let endpoint = "";
+      if (savedReservation.trip_id) {
+        endpoint = `trip/${savedReservation.id}`;
+      } else if (savedReservation.effectivene_id) {
+        endpoint = `effectivene/${savedReservation.id}`;
+      } else if (savedReservation.gift_id) {
+        endpoint = `gift/${savedReservation.id}`;
+      } else {
+        toast.error("لا يوجد حجز صالح للحذف");
+        return;
+      }
+
       // Call the API to cancel the booking
-      await BookingAPI.cancelBooking(id);
+      await BookingAPI.cancelBooking(endpoint);
       hideModalPayRemove();
       toast.success("تم الحذف بنجاح");
+      if (refresh) {
+        refresh((prev) => !prev); // Call refresh to trigger re-fetch in parent
+      }
     } catch (error) {
       // Handle any error that occurs during the API call
       hideModalPayRemove();
       toast.error("فشل في الحذف، حاول مرة اخرى");
     }
   };
-
   return (
     <CustomModal
       show={showModalPayRemove}
@@ -45,10 +71,10 @@ const ModalRemove = ({
         <p className="text">{text}</p>
         <div className="buttons-modal-bottom d-flex align-items-center gap-3">
           <button onClick={removeButton} className="btn-main btn-remove">
-            حذف
+            {currentLanguage === "ar" ? "نعم" : "Yes"}
           </button>
           <button onClick={cancelButton} className="btn-main btn-cancel">
-            لا
+            {currentLanguage === "ar" ? "لا" : "No"}
           </button>
         </div>
       </div>

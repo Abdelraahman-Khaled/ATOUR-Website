@@ -39,7 +39,12 @@ let routers = createBrowserRouter([
           },
         ],
       },
-      { path: "favoritePage", element: <FavoritePage /> },
+      {
+        path: "favoritePage", element:
+          <PrivateRoute>
+            <FavoritePage />
+          </PrivateRoute>
+      },
       {
         path: "blogsPage",
         element: (
@@ -142,6 +147,12 @@ let routers = createBrowserRouter([
       { path: "*", element: <NotFound /> },
     ],
   },
-]);
+],
+  {
+    future: {
+      v7_skipActionErrorRevalidation: true, // Opt into future behavior
+    },
+  }
+);
 
 export default routers;

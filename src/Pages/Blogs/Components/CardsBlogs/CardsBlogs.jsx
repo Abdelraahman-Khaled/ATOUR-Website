@@ -29,7 +29,7 @@ const CardsBlogs = () => {
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const data = await GeneralAPI.getBlogs(); // Fetch data from the API
+        const data = await GeneralAPI.getBlogs(currentLanguage); // Fetch data from the API
         setBlogData(data.data); // Set the fetched data to state
       } catch (err) {
         console.error("Error fetching home data:", err);
@@ -40,7 +40,7 @@ const CardsBlogs = () => {
     };
 
     fetchBlogData(); // Call the API on component mount
-  }, []);
+  }, [currentLanguage]);
 
 
   if (loading) {
@@ -53,7 +53,6 @@ const CardsBlogs = () => {
     return <div>{error}</div>; // Display error message if fetching fails
   }
 
-  console.log(blogData.length > 0 && blogData[0].title_en);
 
 
   return (
@@ -68,10 +67,11 @@ const CardsBlogs = () => {
                 <CardBlog
                   routeBlogCard={`/blogsPage/${item.id}`}
                   imageBlog={item.photo}
-                  titleBlog={currentLanguage === "ar" ? item.title_ar.slice(1, -1) : item.title_en.slice(1, -1)}
+                  titleBlog={item.title}
                   imageUserBlog={item.publisherphoto}
                   nameUserBlog={item.publisher_name}
                   timeAddedBlog={item.created_at}
+                  description={item.content}
                 />
               </div>
               {/* ========== END COL ========== */}

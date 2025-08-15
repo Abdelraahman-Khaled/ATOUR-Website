@@ -164,9 +164,11 @@
   .navbar-menu .navbar-brand {
     margin: 0;
   }
-
-  .navbar-menu .left-nav-menu .icon-lang {
-    display: none;
+  [dir="rtl"] .dropdown-menu[data-bs-popper]{
+    right: 26px !important;
+  }
+  .dropdown-menu[data-bs-popper]{
+    right: -17px !important;
   }
 }
 
@@ -185,6 +187,9 @@
   .navbar-menu .navbar-toggler {
     padding: 5px 8px;
   }
+  .dropdown-menu[data-bs-popper]{
+    right: 0 !important;
+  }
 }
 
 /* SCREEN 480PX */
@@ -194,7 +199,7 @@
   }
 
   .left-nav-menu {
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: initial !important;
   }
 

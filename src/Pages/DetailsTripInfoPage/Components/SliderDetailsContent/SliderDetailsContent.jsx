@@ -10,7 +10,6 @@ const SliderDetailsContent = ({ tripData }) => {
   const backupImgs = [src]
   const [thumbs, setThumbs] = useState(null);
   const mapImages = tripData.attachments
-  console.log("mapimages:", mapImages);
   return (
     <div className="slider-details-info mt-4" data-aos="fade-up">
       {/* ================ START ALL SLIDER ==================== */}

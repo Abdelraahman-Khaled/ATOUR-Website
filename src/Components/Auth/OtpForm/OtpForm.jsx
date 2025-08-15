@@ -4,6 +4,7 @@ import "./OtpForm.css";
 import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import AuthAPI from "api/authApi";
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import { toast } from "react-toastify";
 
 const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) => {
   const [otpTimer, setOTPTimer] = useState(60);
@@ -12,6 +13,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   const [timerRunning, setTimerRunning] = useState(false);
 
   const { currentLanguage } = useLanguage(); // Get current language
+
 
   const content = {
     title: {
@@ -38,6 +40,14 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
       ar: "تأكيد رمز الأمان",
       en: "Confirm OTP",
     },
+    fullOtp: {
+      ar: "الرجاء إدخال جميع أرقام رمز التحقق.",
+      en: "Please enter all OTP digits."
+    },
+    wrongOtp: {
+      ar: "رمز الأمان غير صالح. يرجى المحاولة مرة أخرى.",
+      en: "Invalid OTP. Please try again."
+    }
   };
 
   useEffect(() => {
@@ -82,6 +92,22 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
     }
   };
 
+  // handle copied otp 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text');
+    const otpArray = pastedData.split('').slice(0, 6); // Ensure only 6 characters are taken
+
+    otpArray.forEach((char, index) => {
+      if (inputRefs.current[index]) {
+        inputRefs.current[index].value = char;
+      }
+    });
+
+    setOtp(otpArray.join(''));
+    focusInput(otpArray.length - 1);
+  };
+
   const focusInput = (index) => {
     if (inputRefs.current[index]) {
       inputRefs.current[index].focus();
@@ -89,11 +115,20 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   };
 
   const handleVerifyOtp = async () => {
+    // Ensure OTP is fully entered
+    if (!otp || otp.length !== 6 || otp.includes(" ")) {
+      toast.error(content.fullOtp[currentLanguage]);
+      return;
+    }
     try {
-      await AuthAPI.verifyOtp(emailOrPhone, otp);
-      successSendButton();
+      const response = await AuthAPI.verifyOtp(emailOrPhone, otp);
+      if (response.success === true) { // Ensure API response indicates success
+        successSendButton(); // Only proceed if OTP is correct
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
-      console.error("OTP verification failed:", error);
+      toast.error(content.wrongOtp[currentLanguage]);
       // Optionally, show an error message
     }
   };
@@ -156,6 +191,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
                   className="form-control"
                   onChange={(e) => handleInputChange(index, e)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
+                  onPaste={handlePaste}
                   ref={(el) => (inputRefs.current[index] = el)} // Assign ref to input
                 />
               ))}

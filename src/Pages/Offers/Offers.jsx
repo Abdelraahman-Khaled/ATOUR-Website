@@ -5,8 +5,8 @@ import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import "./Offers.css"
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import Loader from "Components/Auth/Components/Loader/Loader";
 const Offers = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
@@ -33,17 +33,15 @@ const Offers = () => {
 
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
       </div>
     );
   }
+
   if (error) {
     return <div>{error}</div>; // Display error message if fetching fails
   }
-  console.log("gifts:", gifts);
   return (
     <>
       <HelmetInfo titlePage={currentLanguage === "ar" ? "الهدايا" : "Gifts"} />

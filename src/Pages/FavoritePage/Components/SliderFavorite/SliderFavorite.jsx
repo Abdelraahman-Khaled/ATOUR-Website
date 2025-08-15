@@ -1,9 +1,12 @@
+import { useLanguage } from "Components/Languages/LanguageContext";
 import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
 import imageBanner1 from "../../../../assets/images/slider/01.png";
 import imageBanner2 from "../../../../assets/images/slider/02.png";
 import imageBanner3 from "../../../../assets/images/slider/03.png";
 import "./SliderFavorite.css";
 const SliderFavorite = () => {
+  const { currentLanguage } = useLanguage(); // Get the current language
+
   const itemsSlider = [
     { id: 1, image: imageBanner1 },
     { id: 2, image: imageBanner2 },
@@ -21,7 +24,7 @@ const SliderFavorite = () => {
         <>
           {/* ========== START ALL MAIN CONTENT SLIDER =========== */}
           <div className="all-main-content-slider" data-aos="fade-down">
-            <h2 className="title-silde">المفضلة</h2>
+            <h2 className="title-silde"> {currentLanguage === "ar" ? "المفضلة" : "Favorite"}</h2>
           </div>
           {/* ========== END ALL MAIN CONTENT SLIDER =========== */}
         </>

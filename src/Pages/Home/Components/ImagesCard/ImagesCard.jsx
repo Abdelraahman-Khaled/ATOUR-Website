@@ -67,7 +67,7 @@ const ImagesCard = ({ mostVisited }) => {
                     </div>
                     <div className="content-info">
                       <h2 className="title">
-                        {currentLanguage === "ar" ? item.title_ar : item.title_en}
+                        {item.title}
                       </h2>
                     </div>
                   </div>

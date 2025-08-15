@@ -7,3 +7,10 @@
   padding-right: 42px !important;
   font-size: 15px;
 }
+
+.not-available-date .day {
+  color: gray !important;
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}

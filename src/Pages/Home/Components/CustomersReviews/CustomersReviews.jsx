@@ -7,7 +7,7 @@ import PaginationPage from "Components/Pagination/Pagination";
 const CustomersReviews = () => {
   // PAGINATION ITEMS
   const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
-  const perPage = 3; // NUMBER OF PAGE ITEMS
+  const perPage = 5; // NUMBER OF PAGE ITEMS
   const pageCount = Math.ceil(dataCustomerReview.length / perPage); // NUMBER ITEMS COUNT
   const handlePageChange = ({ selected }) => {
     // ONCLIK PAGINATION NUMBER

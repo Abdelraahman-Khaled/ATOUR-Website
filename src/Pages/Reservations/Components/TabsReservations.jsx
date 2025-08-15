@@ -1,17 +1,18 @@
 import TabsContent from "Components/Ui/TabsContent/TabsContent";
-import Fork from "assets/images/IconsHeader/Fork";
-import Hotel from "assets/images/IconsHeader/Hotel";
 import Tree from "assets/images/IconsHeader/Tree";
 import AllCardsReservations from "./AllCardsReservations/AllCardsReservations";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import { useEffect, useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import BookingAPI from "api/bookingApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import Ticket from "assets/images/IconsHeader/Ticket";
 import Gift from "assets/images/IconsHeader/Gift";
+import Loader from "Components/Auth/Components/Loader/Loader";
+import AllCardsResrvationsEffective from "./AllCardsReservations/Effectivenes/AllCardsResrvationsEffective";
+import AllCardsResrvationsGift from "./AllCardsReservations/Gifts/AllCardsResrvationsGift";
 
 const TabsReservations = () => {
+
   // State for buttons
   const [tabs_1, setTabs_1] = useState([
     { id: 1, title: { ar: "الحالية", en: "Current" }, icon: "", active: true },
@@ -30,35 +31,37 @@ const TabsReservations = () => {
   // State for fetching
   const { currentLanguage } = useLanguage(); // Get the current language
   const [curren, setCurrent] = useState(null);
-  const [compleated, setCompleated] = useState(null);
+  const [compleated, setCompleted] = useState(null);
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
+  const [refresh, setRefresh] = useState(false)
 
+  // refresh on deleting reservation
+  const handleRefresh = () => {
+    setRefresh((prev) => !prev); // Toggle refresh state
+  };
   // Fetching All reservations
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const data = await BookingAPI.getBookings(); // Fetch data from the API
+        const data = await BookingAPI.getBookings(currentLanguage); // Fetch data from the API
         setCurrent(data.data.curren);
-        setCompleated(data.data.compleated);
+        setCompleted(data.data.compleated);
       } catch (err) {
-        console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
+        console.error("Error fetching reservation data:", err);
+        setError("Failed to load reservation data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
     };
 
     fetchReservations(); // Call the API on component mount
-  }, []);
-// console.log("curre trip",curren.trips[0].trip.title_ar);
+  }, [currentLanguage, refresh]);
 
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
       </div>
     );
   }
@@ -73,12 +76,13 @@ const TabsReservations = () => {
       eventKey: "tab1",
       title: (
         <>
-          <Tree /> {currentLanguage === "ar" ? "رحلات" : "Trips"}
+          <Tree /> {currentLanguage === "ar" ? "جَوْلات " : "Experiences"}
         </>
       ),
       content: (
         <AllCardsReservations
           reservation={tabs_1[0].active ? curren.trips : compleated.trips}
+          refresh={handleRefresh}
         />
       ),
     },
@@ -89,8 +93,9 @@ const TabsReservations = () => {
           <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
         </>
       ),
-      content: <AllCardsReservations
+      content: <AllCardsResrvationsEffective
         reservation={tabs_1[0].active ? curren.effectivenes : compleated.effectivenes}
+        refresh={handleRefresh}
 
       />,
     },
@@ -101,8 +106,9 @@ const TabsReservations = () => {
           <Gift /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
         </>
       ),
-      content: <AllCardsReservations
+      content: <AllCardsResrvationsGift
         reservation={tabs_1[0].active ? curren.gifts : compleated.gifts}
+        refresh={handleRefresh}
 
       />,
     },

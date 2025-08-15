@@ -1,6 +1,7 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const API_BASE_URL ="https://backend.atour.sa/api/v1";
+const API_BASE_URL = "https://backend.atour.sa/api/v1";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -9,10 +10,12 @@ const axiosInstance = axios.create({
   },
 });
 
+// Check if user is authenticated
 export const isAuthenticated = () => {
   return !!localStorage.getItem("access_token");
 };
 
+// Attach token to requests
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
   if (token) {
@@ -21,10 +24,34 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
+// Global error handling
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     console.error("API Error:", error.response || error.message);
+
+    if (error.response) {
+      const { status, data } = error.response;
+
+      if (status === 401) {
+        const currentLanguage = localStorage.getItem("language") || "en";
+        let message = currentLanguage === "ar" ? "حدث خطأ في المصادقة" : "Authentication Error";
+
+        if (data.message === "unauthorized") {
+          message = currentLanguage === "ar" ? "تسجيل الدخول غير صالح" : "Unauthorized";
+        }
+
+        // Show toast first
+        toast.error(message);
+
+        // Clear token and redirect after a delay
+        localStorage.removeItem("access_token");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000); // Wait 2 seconds before redirecting
+      }
+    }
+
     return Promise.reject(error);
   }
 );

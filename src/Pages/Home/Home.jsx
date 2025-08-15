@@ -9,9 +9,7 @@ import { useEffect, useState } from "react";
 import HomeAPI from "api/homeApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import OneOffer from "./Components/OneOffer/OneOffer";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 const Home = () => {
-  const [homeData, setHomeData] = useState(null); // State to store home data
   const [offerData, setOfferData] = useState(null); // State to store home data
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
@@ -20,32 +18,70 @@ const Home = () => {
   const [effectivenes, setEffectivenes] = useState(null)
   const { currentLanguage } = useLanguage(); // Get the current language
 
+
   useEffect(() => {
+    const cacheKey = `homeData_${currentLanguage}`;
+    const cachedData = sessionStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      const parsed = JSON.parse(cachedData);
+      setMostVisited(parsed.mostVisited);
+      setExperince(parsed.experince);
+      setEffectivenes(parsed.effectivenes);
+      setOfferData(parsed.offerData);
+      setLoading(false);
+      return;
+    }
+
     const fetchHomeData = async () => {
       try {
-        const data = await HomeAPI.getHomeData(currentLanguage); // Fetch data from the API
-        setHomeData(data); // Set the fetched data to state
-        setMostVisited(data.data.most_visited)
-        setExperince(data.data.old_experiences)
-        setEffectivenes(data.data.effectivenes)
-        setOfferData(data.data.offer)
+        const data = await HomeAPI.getHomeData(currentLanguage);
+
+        const toCache = {
+          mostVisited: data.data.most_visited,
+          experince: data.data.old_experiences,
+          effectivenes: data.data.effectivenes,
+          offerData: data.data.offers,
+        };
+
+        sessionStorage.setItem(cacheKey, JSON.stringify(toCache));
+        setMostVisited(toCache.mostVisited);
+        setExperince(toCache.experince);
+        setEffectivenes(toCache.effectivenes);
+        setOfferData(toCache.offerData);
       } catch (err) {
-        console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
+        setError("Failed to load home data.");
       } finally {
-        setLoading(false); // Stop the loading spinner
+        setLoading(false);
       }
     };
 
-    fetchHomeData(); // Call the API on component mount
+    fetchHomeData();
   }, [currentLanguage]);
+
+
+  // useEffect(() => {
+  //   const fetchHomeData = async () => {
+  //     try {
+  //       const data = await HomeAPI.getHomeData(currentLanguage); // Fetch data from the API
+  //       setMostVisited(data.data.most_visited)
+  //       setExperince(data.data.old_experiences)
+  //       setEffectivenes(data.data.effectivenes)
+  //       setOfferData(data.data.offers)
+  //     } catch (err) {
+  //       console.error("Error fetching home data:", err);
+  //       setError("Failed to load home data. Please try again later.");
+  //     } finally {
+  //       setLoading(false); // Stop the loading spinner
+  //     }
+  //   };
+
+  //   fetchHomeData(); // Call the API on component mount
+  // }, [currentLanguage]);
 
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
       </div>
     );
   }
@@ -55,17 +91,17 @@ const Home = () => {
   }
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}/>
+      <HelmetInfo titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"} />
       <header>
         <Slider />
       </header>
       <main>
         <ContainerMedia>
           <HeaderCard />
-          {mostVisited && <ImagesCard mostVisited={mostVisited} />}
-          {experince && <CardsCollections data={experince} />}
-          {offerData.active && <OneOffer offer={offerData} />}
-          {effectivenes.length > 0 && <CardsCollections data={effectivenes} />}
+          {mostVisited.length > 0 && <ImagesCard mostVisited={mostVisited} />}
+          {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
+          {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
+          {offerData && <OneOffer offer={offerData} />}
           <BannerHome />
         </ContainerMedia>
       </main>

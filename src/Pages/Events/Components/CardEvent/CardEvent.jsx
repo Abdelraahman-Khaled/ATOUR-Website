@@ -1,11 +1,9 @@
-import HeartIconCollection from "assets/images/collection/HeartIconCollection";
 import IconLocation from "assets/images/collection/IconLocation";
 import "./CardEvent.css";
-import { useState } from "react";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import packupImg from "../../../../assets/images/blogs/01.png"
+import Favicon from "Components/FavIcon/Favicon ";
 const CardEvent = ({
   id,
   routeCardLink,
@@ -17,18 +15,11 @@ const CardEvent = ({
   titleCard,
   numPrice,
   textContent,
-  functionBookingButton
+  functionBookingButton,
+  isFavoritePage,
+  type
 }) => {
-  const [isWishListed, setIsWishListed] = useState(false);
-  const buttonWishlist = (e) => {
-    e.preventDefault();
-    setIsWishListed(!isWishListed);
-    if (isWishListed !== true) {
-      toast.success("تم الاضافة الى المفضلة");
-    } else {
-      toast.error("تم الحذف من المفضلة");
-    }
-  };
+
   const { currentLanguage } = useLanguage(); // Get the current language
 
   return (
@@ -52,12 +43,11 @@ const CardEvent = ({
           loading="lazy"
           className="w-100 h-100 object-fit-cover"
         />
-        <div
-          onClick={buttonWishlist}
-          className={`icon-heart  ${isWishListed ? "activeHeart" : ""}`}
-        >
-          <HeartIconCollection />
-        </div>
+        <Favicon
+          modelType={type}
+          modelId={id}
+          initialIsFavorite={isFavoritePage}
+        />
         <div className="info-text">
           <IconLocation /> {nameCountry}
         </div>
@@ -77,7 +67,7 @@ const CardEvent = ({
         <div className="content-bottom-event d-flex align-items-center gap-3 justify-content-between">
           <p className="text">{textContent}</p>
           <Link to={`/eventsPage/${routeCardLink}`} className="booking-event-button btn-main -z-10">
-            حجز
+            {currentLanguage === "ar" ? "حجز" : "Reserve"}
           </Link>
         </div>
       </div>

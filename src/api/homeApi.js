@@ -10,7 +10,6 @@ const HomeAPI = {
     });
     return response.data;
   },
- 
 };
 
 export default HomeAPI;

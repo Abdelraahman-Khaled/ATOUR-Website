@@ -1,13 +1,13 @@
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import TabsContent from "Components/Ui/TabsContent/TabsContent";
-import Fork from "assets/images/IconsHeader/Fork";
-import Hotel from "assets/images/IconsHeader/Hotel";
+// import Fork from "assets/images/IconsHeader/Fork";
+// import Hotel from "assets/images/IconsHeader/Hotel";
 import Tree from "assets/images/IconsHeader/Tree";
 import SliderHeader from "../SliderHeader/SliderHeader";
-import FamousLandmarksCards from "../FamousLandmarksCards/FamousLandmarksCards";
-import CardsCollectionBio from "../CardsCollectionBio/CardsCollectionBio";
-import ExploreBiographyCards from "../ExploreBiography/ExploreBiographyCards";
-import NewRates from "../NewRates/NewRates";
+// import FamousLandmarksCards from "../FamousLandmarksCards/FamousLandmarksCards";
+// import CardsCollectionBio from "../CardsCollectionBio/CardsCollectionBio";
+// import ExploreBiographyCards from "../ExploreBiography/ExploreBiographyCards";
+// import NewRates from "../NewRates/NewRates";
 import IconBio from "assets/images/IconsBooks/IconBio";
 import TripsContent from "Pages/TripsPage/Components/TripsContent/TripsContent";
 import Ticket from "assets/images/IconsHeader/Ticket";
@@ -29,49 +29,48 @@ const TabsBiography = ({ biography }) => {
   const normalizedData = normalizeData(biography.trips); // Normalize the data
   const normalizedDataEff = normalizeData(biography.effectivenes); // Normalize the data
   const normalizedDataGift = normalizeData(biography.gifts); // Normalize the data
-
   const tabsDataBio = [
+    // {
+    //   eventKey: "tab1",
+    //   title: (
+    //     <>
+    //       <IconBio /> {currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"}
+    //     </>
+    //   ),
+    //   content: (
+    //     <>
+
+    //       <SliderHeader biography={biography} />
+    //       {/* <ContainerMedia>
+    //         <FamousLandmarksCards />
+    //         <CardsCollectionBio />
+    //         <ExploreBiographyCards />
+    //         <NewRates />
+    //       </ContainerMedia> */}
+    //     </>
+    //   )
+    // },
+
+
     {
       eventKey: "tab1",
       title: (
         <>
-          <IconBio /> {currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"}
+          <Tree /> {currentLanguage === "ar" ? "جَوْلات" : "Experiences"}
         </>
       ),
       content: (
         <>
-
-          <SliderHeader biography={biography} />
-          {/* <ContainerMedia>
-            <FamousLandmarksCards />
-            <CardsCollectionBio />
-            <ExploreBiographyCards />
-            <NewRates />
-          </ContainerMedia> */}
+          <ContainerMedia>
+            <TripsContent tripsData={normalizedData} />
+          </ContainerMedia>
         </>
-      )
+      ),
     },
-    ...(normalizedData && normalizedData.length > 0
-      ? [
-        {
-          eventKey: "tab2",
-          title: (
-            <>
-              <Tree /> {currentLanguage === "ar" ? "رحلات" : "Trips"}
-            </>
-          ),
-          content: (
-            <>
-              <ContainerMedia>
-                <TripsContent tripsData={normalizedData} />
-              </ContainerMedia>
-            </>
-          ),
-        },
-      ]
-      : []),
+
+    ,
     {
-      eventKey: "tab3",
+      eventKey: "tab2",
       title: (
         <>
           <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "events"}
@@ -80,13 +79,13 @@ const TabsBiography = ({ biography }) => {
       content: (
         <>
           <ContainerMedia>
-            <AllCardsEvents currentLanguage={currentLanguage} eventsData={normalizedDataEff} />
+            <AllCardsEvents currentLanguage={currentLanguage} eventsData={normalizedDataEff} className={"p-0"} />
           </ContainerMedia>
         </>
       )
     },
     {
-      eventKey: "tab4",
+      eventKey: "tab3",
       title: (
         <>
           <Gift /> {currentLanguage === "ar" ? "هدايا تذكارية" : "Souvenirs"}
@@ -103,10 +102,20 @@ const TabsBiography = ({ biography }) => {
   ];
   return (
     <div className="all-tabs-bio">
-      <TabsContent
-        tabsData={tabsDataBio}
-        newClassTabsContent={"tabs-biography"}
-      />
+
+
+      <SliderHeader biography={biography} />
+
+      <ContainerMedia>
+        <div className="padding-60">
+          <TabsContent
+            tabsData={tabsDataBio}
+            newClassTabsContent={"tabs-biography"}
+          />
+
+        </div>
+      </ContainerMedia>
+
     </div>
   );
 };

@@ -1,17 +1,12 @@
 import CardFavorite from "Components/Ui/CardFavorite/CardFavorite";
-import { cardsFavoriteData } from "./Data/DataCardFavorite";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-const CardsFavorite = ({ data }) => {
+const CardsFavorite = ({ data, refresh }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-
-  const [cards, setCards] = useState(cardsFavoriteData);
-
-  const removeFromFavorites = (idToRemove) => {
-    const updatedCards = cards.filter((card) => card.id !== idToRemove);
-    setCards(updatedCards);
-  };
+  const navigate = useNavigate()
+  const navFunction = (id) => {
+    navigate(`/tripsPage/${id}`)
+  }
   return (
     <div className="cards-favorite-content">
       {/* ========= START ALL CARDS FAVORITE CONTENT =========== */}
@@ -23,7 +18,7 @@ const CardsFavorite = ({ data }) => {
               return (
                 <>
                   {/* ========== START COL =========== */}
-                  <div className="col-12 col-sm-6 col-xl-12" key={item.id}>
+                  <div className="col-12 col-sm-6 col-xl-12" key={item.id} onClick={() => navFunction(item.id)}>
                     <CardFavorite
                       newClassCard={"card-favorite-fav"}
                       idCard={item.id}
@@ -35,15 +30,17 @@ const CardsFavorite = ({ data }) => {
                       numInfoDangerOld={false}
                       rateNum={item.total_rates}
                       textContent={item.city.description}
-                      isTrueTextOneCard_1={true}
+                      isTrueTextOneCard_1={item.free_cancelation ? item.free_cancelation : null}
                       textCardOne_1={item.free_cancelation ? item.free_cancelation : null}
-                      isTrueTextOneCard_2={true}
+                      isTrueTextOneCard_2={item.pay_later ? item.pay_later : null}
                       textCardOne_2={item.pay_later ? item.free_cancelation : null}
-                      removeFromFavorites={removeFromFavorites}
-                      isFavoritePage={true}
+                      // removeFromFavorites={removeFromFavorites}
+                      isFavoritePage={item.is_favourit}
                       isNewPage={false}
                       wishListCard={false}
                       addToWishList={false}
+                      type={"trip"}
+                      refresh={refresh} // Pass refresh function to CardFavorite
                     />
                   </div>
                   {/* ========== END COL =========== */}

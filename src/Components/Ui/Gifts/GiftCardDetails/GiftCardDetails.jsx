@@ -1,10 +1,5 @@
 import "./GiftCardDetais.css";
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
-import { toast } from "react-toastify";
-import BookingAPI from "api/bookingApi";
+import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import CustomModal from "Components/CustomModal/CustomModal";
 import DateIcon2 from "assets/Icons/DateIcon2";
@@ -12,11 +7,24 @@ import DateDisplay from "Components/DateDisplay/DateDisplay";
 import ClockIcon2 from "assets/Icons/ClockIcon2";
 import MapLocationInfo from "Components/Ui/MapLocationInfo/MapLocationInfo";
 import GiftModel from "../GiftModel/GiftModel";
+import { Link } from "react-router-dom";
 const GiftCardDetails = ({ gift }) => {
-    const { id } = useParams();
     const { currentLanguage } = useLanguage(); // Get the current language
     const [paymentUrl, setPaymentUrl] = useState(null);
 
+    if (!gift) {
+        return <>
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+                {currentLanguage === "ar" ? " تفاصيل الهدية غير متوافرة" : "Gift details not available"}
+                <Link
+                    to="/"
+                    className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+                >
+                    {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+                </Link>
+            </p>
+        </>;
+    }
     return (
         <>
             {/* Payment Modal */}
@@ -41,16 +49,16 @@ const GiftCardDetails = ({ gift }) => {
                 {/* Header */}
                 <div className="header-details-card-page d-flex justify-content-between align-items-center flex-wrap gap-3">
                     <h2 className="title">
-                        {currentLanguage === "ar" ? gift?.title : gift?.title_en}
+                        {gift?.title}
                     </h2>
                     <div className="info-right-details d-flex align-items-center gap-3">
                         <div className="num-price-info">
                             <span className="price-num fw-bold">
-                                {gift?.price?.slice(0, -3)} {currentLanguage === "ar" ? "ريال" : "SAR"}
+                                {gift?.price} {currentLanguage === "ar" ? "ريال" : "SAR"}
                             </span>{" "}
                             / {currentLanguage === "ar" ? "للفرد" : "per person"}
                         </div>
-                        <GiftModel giftId={id} />
+                        <GiftModel gift={gift} />
                     </div>
                 </div>
 

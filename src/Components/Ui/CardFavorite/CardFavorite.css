@@ -95,3 +95,9 @@ html[dir="ltr"] .card-favorite-one .bottom-content-card .text-one-card:nth-child
         padding-right: 0;
     }
 }
+.text span {
+    color: black !important;
+}
+.favDev div {
+    height: auto !important;
+}

@@ -7,7 +7,7 @@ import CardCollection from "Components/Ui/CardCollection/CardCollection";
 
 const CardsCollectionBio = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 4; // NUMBER OF PAGE ITEMS
+  const perPage = 5; // NUMBER OF PAGE ITEMS
   const pageCount = Math.ceil(cardCollection.length / perPage);
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);

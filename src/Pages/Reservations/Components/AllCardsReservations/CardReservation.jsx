@@ -4,6 +4,7 @@ import { ClockIcon } from "@mui/x-date-pickers";
 import "./AllCardsReservation.css";
 import UserIcon2 from "assets/Icons/UserIcon2";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { useNavigate } from "react-router-dom";
 const CardReservation = ({
   image,
   typeReservation,
@@ -16,14 +17,19 @@ const CardReservation = ({
   isTrueButtonDetails,
   buttonDetailsFunction,
   isTrueButtonCancel,
-  buttonCancelReservationFunction
+  buttonCancelReservationFunction,
+  id,
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-
+  // Navigate
+  const navigate = useNavigate()
+  const navFunction = (id) => {
+    navigate(`/tripsPage/${id}`)
+  }
   return (
     <div className="card-reservation-one d-flex align-items-center gap-3 flex-wrap flex-lg-nowrap">
       {/* ============ START IMAGE RESERVATION =============== */}
-      <div className="image-reservation position-relative overlay-bg">
+      <div className="image-reservation position-relative overlay-bg" onClick={() => navFunction(id)}>
         <img
           src={image}
           alt="imageReservation"
@@ -31,9 +37,9 @@ const CardReservation = ({
           className="w-100 h-100 object-fit-cover"
         />
         <div className={`badge-info btn-main`}>{typeReservation}</div>
-        {/* <div className="info-text title-country-bg">
+        <div className="info-text title-country-bg">
           <IconLocation /> {countryName}
-        </div> */}
+        </div>
       </div>
       {/* ============ END IMAGE RESERVATION =============== */}
       {/* ============ START CONTENT INFO CARD =============== */}
@@ -58,7 +64,7 @@ const CardReservation = ({
             )}
             {isTrueButtonCancel && (
               <button onClick={buttonCancelReservationFunction} className="btn-main btn-details-main btn-cancel-bg">
-                إلغاء الحجز
+                {currentLanguage === "ar" ? "إلغاء الحجز" : "Cancel Reservation"}
               </button>
             )}
           </div>

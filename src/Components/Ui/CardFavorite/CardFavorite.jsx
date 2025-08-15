@@ -1,10 +1,9 @@
-import HeartIconCollection from "assets/images/collection/HeartIconCollection";
 import IconLocation from "assets/images/collection/IconLocation";
 import IconStarRate from "assets/images/collection/IconStarRate";
 import CheckIcon from "assets/Icons/CheckIcon";
 import "./CardFavorite.css";
-import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import Favicon from "Components/FavIcon/Favicon ";
 
 const CardFavorite = ({
   newClassCard,
@@ -21,21 +20,15 @@ const CardFavorite = ({
   textCardOne_1,
   isTrueTextOneCard_2,
   textCardOne_2,
-  removeFromFavorites,
+  // removeFromFavorites,
   isFavoritePage,
   isNewPage,
   wishListCard,
   addToWishList,
+  type,
+  refresh
 }) => {
-  const [isWishListed, setIsWishListed] = useState(false);
   const { currentLanguage } = useLanguage(); // Get the current language
-
-  const wishlistToggle = () => {
-    setIsWishListed(!isWishListed);
-    if (!isWishListed) {
-      removeFromFavorites(idCard);
-    }
-  };
 
   // CHECK IF WISHLISTCARD IS AN ARRAY AND IF IT INCLUDES THE CURRENT ITEM'S ID
   const isWishListed_2 =
@@ -48,7 +41,6 @@ const CardFavorite = ({
     const words = text.split(" ");
     return words.slice(0, 25).join(" ") + (words.length > 25 ? "..." : "");
   };
-
   return (
     <div
       className={`card-collection-one card-favorite-one d-flex h-100 gap-3 ${newClassCard}`}
@@ -61,15 +53,13 @@ const CardFavorite = ({
           loading="lazy"
           className="w-100 h-100 object-fit-cover"
         />
-        {isFavoritePage && (
-          <div
-            className={`icon-heart ${isWishListed ? "" : "activeHeart"}`}
-            onClick={wishlistToggle}
-          >
-            <HeartIconCollection />
-          </div>
-        )}
-        {isNewPage && (
+        <Favicon
+          modelType={type}
+          modelId={idCard}
+          initialIsFavorite={isFavoritePage}
+          refresh={refresh}
+        />
+        {/* {isNewPage && (
           <div
             className={`icon-heart ${isWishListed_2 ? "activeHeart" : ""}`}
             onClick={(e) => {
@@ -79,7 +69,7 @@ const CardFavorite = ({
           >
             <HeartIconCollection />
           </div>
-        )}
+        )} */}
         <div className="info-text">
           <IconLocation /> {textLocation}
         </div>
@@ -92,8 +82,8 @@ const CardFavorite = ({
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
             {currentLanguage === "ar" ? "تبدأ من" : "Starting from"}{" "}
-            <span className="price-num">{NumPriceNew} {currentLanguage === "ar" ? "ريال" : "SAR"}</span>{" "}
-            {currentLanguage === "ar" ? "/ للفرد" : "/ per person"}{" "}?
+            <span className="price-num">{NumPriceNew} {currentLanguage === "ar" ? "ريال" : "SAR"} </span>
+            {currentLanguage === "ar" ? "/ للفرد" : "/ per person"}{" "}
             {isTrueNumTwo && (
               <p className="text-2">
                 {currentLanguage === "ar" ? "بدلا من" : "Instead of"}{" "}
@@ -106,19 +96,21 @@ const CardFavorite = ({
         </div>
         {/* ========== END HEADER TOP CARD ========== */}
         {/* ========== START RATE CARD ============= */}
-        {rateNum !== null ? (
+        {rateNum > 0 ? (
           <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
             <IconStarRate /> {rateNum}{" "}
             {currentLanguage === "ar" ? "تقييم" : "Rating"}
           </div>
         ) : (
-          <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
-            {currentLanguage === "ar" ? "لا يوجد تقييم حاليا" : "No ratings yet"}
-          </div>
+          // <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
+          //   {currentLanguage === "ar" ? "لا يوجد تقييم حاليا" : "No ratings yet"}
+          // </div>
+          <>
+          </>
         )}
         {/* ========== END RATE CARD ============= */}
-        <p className="text">{sliceWords(textContent)}</p>
-        <div className="bottom-content-card mt-auto d-flex gap-3 flex-wrap align-items-center">
+        <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p>
+        <div className="bottom-content-card mt-auto d-flex gap-3 flex-wrap align-items-center ">
           {isTrueTextOneCard_1 && (
             <div className="text-one-card d-flex align-items-center gap-2">
               <CheckIcon />{" "}
@@ -138,7 +130,7 @@ const CardFavorite = ({
         </div>
       </div>
       {/* =========== END INFO CONTENT CARD =========== */}
-    </div>
+    </div >
   );
 };
 

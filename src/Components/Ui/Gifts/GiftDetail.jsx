@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import ContentAPI from "api/contentApi";
 import SliderEventCardDetails from "Pages/Events/Components/DetailsCardEvent/Components/SliderEventCardDetails/SliderEventCardDetails";
-import DetailsCardPage from "Pages/Events/Components/DetailsCardEvent/Components/DetailsCardPage/DetailsCardPage";
 import GiftCardDetails from "./GiftCardDetails/GiftCardDetails";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const GiftDetail = () => {
     // Extract the `id` from the URL
@@ -23,7 +22,7 @@ const GiftDetail = () => {
     useEffect(() => {
         const fetchgift = async () => {
             try {
-                const response = await ContentAPI.getGiftById(id); // Fetch data from the API
+                const response = await ContentAPI.getGiftById(id, currentLanguage); // Fetch data from the API
                 const data = response.data; // Extract the data from the response
                 if (data) {
                     setGift(data); // Set the fetched data to state
@@ -39,20 +38,30 @@ const GiftDetail = () => {
         };
 
         fetchgift(); // Call the API on component mount
-    }, [id]); // Re-run the effect if the `id` changes
+    }, [id, currentLanguage]); // Re-run the effect if the `id` changes
 
     if (loading) {
         return (
-            <div className="text-center m-4">
-                <span style={{ scale: "2" }}>
-                    <LoaderSvg />
-                </span>
+            <div style={{ margin: "200px 0px" }}>
+                <Loader />
             </div>
         );
     }
 
+
     if (error) {
-        return <div>{error}</div>; // Display error message if fetching fails
+        return <>
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+                {currentLanguage === "ar" ? " هذه الهدية غير متوافرة" : "This gift not available"}
+                <Link
+                    to="/"
+                    className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+                >
+                    {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+                </Link>
+            </p>
+        </>;
+        ; // Display error message if fetching fails
     }
     return (
         <>

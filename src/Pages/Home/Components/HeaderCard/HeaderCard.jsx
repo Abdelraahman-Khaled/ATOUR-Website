@@ -1,7 +1,5 @@
 import Car from "assets/images/IconsHeader/Car";
 import "./HeaderCard.css";
-import Hotel from "assets/images/IconsHeader/Hotel";
-import Fork from "assets/images/IconsHeader/Fork";
 import Tree from "assets/images/IconsHeader/Tree";
 import Ticket from "assets/images/IconsHeader/Ticket";
 import Gift from "assets/images/IconsHeader/Gift";
@@ -33,7 +31,7 @@ const HeaderCard = () => {
 
   const allButtons = [
     {
-      text: { en: "Trips", ar: "رحلات" },
+      text: { en: "Experiences", ar: "جَوْلات " },
       icon: <Tree />,
       link: "/tripsPage",
     },
@@ -51,9 +49,9 @@ const HeaderCard = () => {
   return (
     <div data-aos="fade-up" className="all-info-card padding-60 d-flex justify-content-center align-items-center gap-3 flex-wrap">
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
-      {allButtons.map((item) => {
+      {allButtons.map((item, index) => {
         return (
-          <button className="btn-card-one">
+          <button key={index} className="btn-card-one">
             <Link className="text-black" to={item.link} onClick={handleLinkClick}>
               {item.icon} {item.text[currentLanguage]}
             </Link>

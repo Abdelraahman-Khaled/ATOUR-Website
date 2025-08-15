@@ -10,10 +10,9 @@ import UserDropMenu from "Components/Ui/UserDropMenu/UserDropMenu";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import SearchInputLocation from "Components/Ui/SearchInputLocation/SearchInputLocation";
 import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import { isAuthenticated } from "api/axiosInstance";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import Gift from "assets/images/IconsHeader/Gift";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const NavbarMenu = () => {
   const { currentLanguage } = useLanguage(); // Get the current language from the context
@@ -66,20 +65,19 @@ const NavbarMenu = () => {
     }
   }, [location.state]);
 
-  if (loading) {
-    return (
-      <div className="flex-center-center h-50vh">
-        <span style={{ scale: "1" }}>
-          <LoaderSvg />
-        </span>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div style={{ margin: "200px 0px" }}>
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
+
 
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
- 
+
 
   return (
     <>
@@ -106,13 +104,6 @@ const NavbarMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             {isAuthenticated() ? (
               <Nav className="me-auto" data-aos="fade-right">
-                {/* <NavLink className="nav-link" to="/eventsPage">
-                  {currentLanguage === "en" ? "Events" : "الفعاليات"}
-                </NavLink>
-                <NavLink className="nav-link" to="/offers">
-                  <Gift />
-                  {currentLanguage === "en" ? " gifts " : "الهدايا "}
-                </NavLink> */}
                 <SearchInputLocation cities={cities} setSelectedCity={setSelectedCity} />
               </Nav>
             ) : (
@@ -128,7 +119,7 @@ const NavbarMenu = () => {
               </Nav>
             )}
 
-            <div className="left-nav-menu d-flex align-items-center gap-3">
+            <div className="left-nav-menu d-flex align-items-center gap-3 ">
               <div className="icon-lang icon-border">
                 <LanguageSwitcher />
               </div>
@@ -140,9 +131,15 @@ const NavbarMenu = () => {
                   <UserDropMenu />
                 </>
               ) : (
-                <button className="btn-main" onClick={buttonShowLogin}>
-                  {currentLanguage === "en" ? "Login" : "تسجيل الدخول"}
-                </button>
+                <>
+                  <Link to="#" className="icon-heart-fav icon-border" onClick={buttonShowLogin}>
+                    <HeartIcon />
+                  </Link>
+                  <button className="btn-main" onClick={buttonShowLogin}>
+                    {currentLanguage === "en" ? "Login" : "تسجيل الدخول"}
+                  </button>
+
+                </>
               )}
             </div>
           </Navbar.Collapse>

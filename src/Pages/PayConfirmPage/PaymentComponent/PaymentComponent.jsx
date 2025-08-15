@@ -75,7 +75,6 @@ const TripBookingFlow = ({ tripId, currentLanguage }) => {
 
         const data = event.data;
 
-        console.log("Message received from iframe:", data);
 
         if (typeof data === "string") {
           try {

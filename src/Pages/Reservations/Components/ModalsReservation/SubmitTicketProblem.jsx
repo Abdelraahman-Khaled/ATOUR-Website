@@ -28,7 +28,6 @@ const SubmitTicketProblem = ({ showSubmitTicket, hideSubmitTicket }) => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     resetForm();
     if (values) {
       hideSubmitTicket();

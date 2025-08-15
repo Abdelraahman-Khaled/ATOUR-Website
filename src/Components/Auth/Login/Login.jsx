@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageLogin from "../Components/ImageLogin/ImageLogin";
 import HeaderLogin from "../Components/HeaderLogin/HeaderLogin";
 import FormField from "Components/Forms/FormFiled";
@@ -8,9 +8,11 @@ import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi"; // Import your API file
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
 import "./Login.css";
+import ForgotPasswordForm from "../Components/ResetPassword/ForgotPasswordForm ";
 
 const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 
   const content = {
     title: {
@@ -44,6 +46,10 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
     registerLink: {
       ar: "تسجيل حساب جديد",
       en: "Register Here",
+    },
+    forgetPassword: {
+      ar: "نسيت كلمة المرور",
+      en: "Forget Password",
     },
     validation: {
       emailOrPhoneRequired: {
@@ -100,11 +106,9 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const response = await AuthAPI.login(values.emailOrPhoneNumber, values.password);
-      console.log("Login successful:", response);
 
       // Store token in localStorage
       localStorage.setItem("access_token", response.access_token);
-
       // Store user details if needed
       localStorage.setItem("user", JSON.stringify(response.user));
       // Notify other components of the change
@@ -123,29 +127,33 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
         <div className="row g-4 g-md-3">
           <div className="col-12 col-md-6">
             <HeaderLogin titleTop={content.title[currentLanguage]} />
-            <FormField
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              <InputFiled
-                label={content.emailOrPhoneLabel[currentLanguage]}
-                name="emailOrPhoneNumber"
-                type="text"
-                placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
-                success
-              />
-              <InputFiled
-                label={content.passwordLabel[currentLanguage]}
-                name="password"
-                type="password"
-                placeholder={content.passwordPlaceholder[currentLanguage]}
-                success
-              />
-              <button type="submit" className="btn-main btn-submit w-100 mt-3">
-                {content.submitButton[currentLanguage]}
-              </button>
-            </FormField>
+            {forgotPasswordOpen ? (
+              <ForgotPasswordForm onClose={() => setForgotPasswordOpen(false)} />
+            ) : (
+              <FormField
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                <InputFiled
+                  label={content.emailOrPhoneLabel[currentLanguage]}
+                  name="emailOrPhoneNumber"
+                  type="text"
+                  placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
+                  success
+                />
+                <InputFiled
+                  label={content.passwordLabel[currentLanguage]}
+                  name="password"
+                  type="password"
+                  placeholder={content.passwordPlaceholder[currentLanguage]}
+                  success
+                />
+                <button type="submit" className="btn-main btn-submit w-100 mt-3">
+                  {content.submitButton[currentLanguage]}
+                </button>
+              </FormField>
+            )}
             <div className="bottom-info-not-accout gap-2 d-flex justify-content-center align-items-center">
               {content.noAccount[currentLanguage]}{" "}
               <div
@@ -155,6 +163,14 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 {content.registerLink[currentLanguage]}
               </div>
             </div>
+            {!forgotPasswordOpen && (
+              <div
+                onClick={() => setForgotPasswordOpen(true)}
+                className="cursor-pointer-event text-decoration-underline link-a text-center mt-2"
+              >
+                {content.forgetPassword[currentLanguage]}
+              </div>
+            )}
             <EndLoginInfo />
           </div>
           <div className="col-12 col-md-6">

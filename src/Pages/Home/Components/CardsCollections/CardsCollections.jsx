@@ -2,15 +2,13 @@ import { useState } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import CardCollection from "Components/Ui/CardCollection/CardCollection";
 import PaginationPage from "Components/Pagination/Pagination";
-import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import './CardCollection.css'
-import Favicon from "Components/FavIcon/Favicon ";
-const CardsCollections = ({ data }) => {
 
+const CardsCollections = ({ data, type }) => {
   const { currentLanguage } = useLanguage(); // Get the selected language from context
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 4; // NUMBER OF PAGE ITEMS
+  const perPage = 5; // NUMBER OF PAGE ITEMS
   const pageCount = Math.ceil(data.length / perPage);
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
@@ -18,7 +16,6 @@ const CardsCollections = ({ data }) => {
 
   const offset = currentPage * perPage;
   const currentPageData = data.slice(offset, offset + perPage);
-  const [wishList, setWishList] = useState([]);
   const content = {
     ar: {
       title: "احداث ممتعة",
@@ -37,20 +34,6 @@ const CardsCollections = ({ data }) => {
   const { title, text, addToFavorites, removeFromFavorites } =
     content[currentLanguage];
 
-  const addToWishList = (id) => {
-    setWishList((prevList) => {
-      if (prevList.includes(id)) {
-        return prevList.filter((item) => item !== id);
-      } else {
-        return [...prevList, id];
-      }
-    });
-    if (!wishList.includes(id)) {
-      // toast.success(addToFavorites); // Toast for success
-    } else {
-      // toast.error(removeFromFavorites); // Toast for removal
-    }
-  };
   return (
     <div className="cards-collections padding-top">
       {/* ============== START TITLE SECTION ============ */}
@@ -59,7 +42,7 @@ const CardsCollections = ({ data }) => {
 
       {/* ============ START ALL CARDS COLLECTION ============ */}
       <div className="all-cards-collection" data-aos="fade-up">
-        <div className="row g-3">
+        <div className="row g-3 justify-content-center">
           {currentPageData.map((item) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 most-visited" key={item.id}>
               <CardCollection
@@ -71,16 +54,15 @@ const CardsCollections = ({ data }) => {
                     : `${item.city.title}, ${item.city.country_name}`
                 }
                 numRate={item.total_rates}
-                titleCard={currentLanguage === "ar" ? item.title_ar : item.title_en}
-                numPriceCard={`${item.price}$`}
-                wishList={wishList}
-                addToWishList={addToWishList}
+                titleCard={item.title}
+                numPriceCard={`${item.price} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
                 isFav={item.is_favourit}
+                type={type}
               />
             </div>
           ))}
         </div>
-        <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />
+        {pageCount > 1 && <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />}
       </div>
     </div>
   );

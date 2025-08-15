@@ -30,10 +30,10 @@ const SliderHeader = ({ biography }) => {
               <div className="col-12">
                 <div className="content-slide">
                   <h1 className="title" data-aos="fade-down">
-                    {currentLanguage === "ar" ? "مرحبا بكم في " + biography.title_ar : "Welcome to " + biography.title_en}
+                    {currentLanguage === "ar" ? "مرحبا بكم في " + biography.title : "Welcome to " + biography.title}
                   </h1>
                   <p
-                    className="text text-font-400-white font-18"
+                    className="text text-font-400-white font-18 favDev"
                     data-aos="fade-up"
                     dangerouslySetInnerHTML={{ __html: description }}
                   >

@@ -22,7 +22,6 @@ const TouristInformationForm = () => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     resetForm();
   };
 

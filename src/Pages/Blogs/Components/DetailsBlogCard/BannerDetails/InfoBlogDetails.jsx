@@ -28,9 +28,8 @@ const InfoBlogDetails = () => {
   useEffect(() => {
     const fetchTripData = async () => {
       try {
-        const response = await GeneralAPI.getBlogDetails(idCardDetailsBlog); // Replace with your API call
+        const response = await GeneralAPI.getBlogDetails(idCardDetailsBlog, currentLanguage); // Replace with your API call
         setBlogDetailsCard(response.data); // Store fetched data in state
-        console.log(response.data);
       } catch (err) {
         console.error("Error fetching trip data:", err);
         setError("Failed to load trip data. Please try again later.");
@@ -40,7 +39,7 @@ const InfoBlogDetails = () => {
     };
 
     fetchTripData();
-  }, [idCardDetailsBlog]);
+  }, [idCardDetailsBlog, currentLanguage]);
 
   // Display loading state
   if (loading) {
@@ -53,7 +52,6 @@ const InfoBlogDetails = () => {
   if (error) {
     return <div>{error}</div>;
   }
-  console.log(blogDetailsCard);
   return (
 
     blogDetailsCard ? (
@@ -71,7 +69,7 @@ const InfoBlogDetails = () => {
         {/* ================== START CONTENT BLOG DETAILS ============= */}
         <div className="content-blog-details">
           <h2 className="title">
-            {currentLanguage === "ar" ? blogDetailsCard.title_ar.slice(1, -1) : blogDetailsCard.title_en.slice(1, -1)}
+            {blogDetailsCard.title}
           </h2>
           {/* ============ START INFO BLOG ADDED =========== */}
           <div className="info-blog-added d-flex align-items-center gap-3">
@@ -91,9 +89,11 @@ const InfoBlogDetails = () => {
           {/* ============ END INFO BLOG ADDED =========== */}
           {/* ============ START CONTENT TEXT ============ */}
           <div className="content-text">
-            <p className="text" 
-            dangerouslySetInnerHTML={{ __html: currentLanguage === "ar" ? 
-            blogDetailsCard.content_ar : blogDetailsCard.content_en }}>
+            <p className="text"
+              dangerouslySetInnerHTML={{
+                __html: currentLanguage === "ar" ?
+                  blogDetailsCard.content_ar : blogDetailsCard.content_en
+              }}>
             </p>
           </div>
           {/* ============ END CONTENT TEXT ============ */}

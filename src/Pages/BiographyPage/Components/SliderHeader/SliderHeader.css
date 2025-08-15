@@ -45,7 +45,10 @@
   color: var(--gray-02-color);
   line-height: 2;
 }
+.banner-main-area--1 .info-banner .content-slide .text span {
+  color: var(--gray-02-color) !important;
 
+}
 .banner-main-area--1 .banner-one .overlay-bg::after {
   background: #00000075;
 }

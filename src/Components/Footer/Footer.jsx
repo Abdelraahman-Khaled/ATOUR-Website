@@ -7,23 +7,24 @@ import {
   faInstagram,
   faLinkedinIn,
   faSnapchat,
-  faTwitter
+  faTwitter,
+  faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
 import appStore from "../../assets/images/apps/appStorFooter.svg";
 import appGoogle from "../../assets/images/apps/googlePlayFooter.svg";
 import PhoneIcon from "assets/images/footerIcons/PhoneIcon";
 import EmailIcon from "assets/images/footerIcons/EmailIcon";
-import LoaderSvg from "assets/Icons/LoaderSvg";
+import WhatsIcon from "assets/images/footerIcons/Whatsapp.Icon";
 import { useEffect, useState } from "react";
 import GeneralAPI from "api/generalApi";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import { isAuthenticated } from "api/axiosInstance"; // Function to check auth status
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import language context
-
+// import Loader from "Components/Auth/Components/Loader/Loader";
 const Footer = () => {
   const { currentLanguage } = useLanguage(); // Access the current language from context
   const [footerData, setFooterData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
 
@@ -40,25 +41,27 @@ const Footer = () => {
       try {
         const response = await GeneralAPI.getFooterSocial();
         setFooterData(response.data);
+
       } catch (err) {
         console.error("Failed to fetch footer data:", err);
         setError("Unable to fetch footer data. Please try again later.");
-      } finally {
-        setLoading(false);
       }
+      // finally {
+      //   setLoading(false);
+      // }
     };
     fetchFooterData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex-center-center h-50vh">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     // <div style={{ margin: "200px 0px" }}>
+  //     //   <Loader />
+  //     // </div>
+  //     <>
+  //     </>);
+  // }
+
 
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
@@ -84,7 +87,8 @@ const Footer = () => {
       offers: "الهدايا",
       events: "الفعاليات",
       blog: "المدونة",
-      address: "الرياض , طريق المذنب , السعودية"
+      address: "الرياض , طريق المذنب , السعودية",
+      whatsapp: "تواصل معنا"
     },
     en: {
       downloadApp: "Download the App",
@@ -98,7 +102,8 @@ const Footer = () => {
       offers: "Gifts",
       events: "Events",
       blog: "Blog",
-      address: "Riyadh, Al-Mathnib Road, Saudi Arabia"
+      address: "Riyadh, Al-Mathnib Road, Saudi Arabia",
+      whatsapp: "Contact Us"
     }
   };
 
@@ -176,29 +181,52 @@ const Footer = () => {
                         </a>
                       </li>
                     )}
+                    {footerData?.footer_tiktok && (
+                      <li>
+                        <a
+                          href={footerData.footer_tiktok}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="link-social-one"
+                        >
+                          <FontAwesomeIcon icon={faTiktok} />
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </div>
                 {/* ============= START APPS CONTENT INFO ============ */}
                 <div className="apps-content-info">
-                  <h2 className="title-apps">{text.downloadApp}</h2>
+                  {
+                    footerData?.footer_app_store || footerData?.footer_google_play
+                      ?
+                      <h2 className="title-apps">{text.downloadApp}</h2>
+                      : <></>
+                  }
                   {/* ============== START APPS LINKS ============= */}
                   <div className="apps-links d-flex align-items-center  gap-3 mt-3">
-                    <a
-                      href="https://www.apple.com/eg-ar/app-store/"
-                      target="_blank"
-                      className="link-app-one"
-                      rel="noreferrer"
-                    >
-                      <img src={appStore} alt="app store" />
-                    </a>
-                    <a
-                      href="https://www.apple.com/eg-ar/app-store/"
-                      target="_blank"
-                      className="link-app-one"
-                      rel="noreferrer"
-                    >
-                      <img src={appGoogle} alt="app google" />
-                    </a>
+                    {
+                      footerData?.footer_app_store &&
+                      <a
+                        href={footerData?.footer_app_store}
+                        target="_blank"
+                        className="link-app-one"
+                        rel="noreferrer"
+                      >
+                        <img src={appStore} alt="app store" />
+                      </a>
+                    }
+                    {
+                      footerData?.footer_google_play &&
+                      <a
+                        href={footerData?.footer_google_play}
+                        target="_blank"
+                        className="link-app-one"
+                        rel="noreferrer"
+                      >
+                        <img src={appGoogle} alt="app google" />
+                      </a>
+                    }
                   </div>
                   {/* ============== END APPS LINKS ============= */}
                 </div>
@@ -247,28 +275,43 @@ const Footer = () => {
                 <div className="info-footer-content">
                   {/* ========= START INFO CONTACT ONE ========= */}
                   <a
-                    href="tel:+1234567890"
+                    href={`tel:${footerData?.phone}`}
                     className="info-contact-one d-flex gap-3"
+                    target="_blank"
                   >
                     <div className="icon-foot-contact">
                       <PhoneIcon />
                     </div>
                     <div className="contact-info">
                       <h2 className="title-foot">{text.callUs}</h2>
-                      <p className="link-contact">09 66 5489 634 48+</p>
+                      <p className="link-contact">{footerData?.phone}</p>
+                    </div>
+                  </a>
+                  <a
+                    href={`https://wa.me/${footerData?.whatsapp}`}
+                    className="info-contact-one d-flex gap-3"
+                    target="_blank"
+                  >
+                    <div className="icon-foot-contact">
+                      <WhatsIcon />
+                    </div>
+                    <div className="contact-info">
+                      <h2 className="title-foot">{text.whatsapp}</h2>
+                      <p className="link-contact">{footerData?.phone}</p>
                     </div>
                   </a>
                   {/* ========= END INFO CONTACT ONE ========= */}
                   <a
-                    href="mailto:atour@gmail.com"
+                    href={`mailto:${footerData?.email}?subject=Hello`}
                     className="info-contact-one d-flex gap-3"
+                    target="_blank"
                   >
                     <div className="icon-foot-contact">
                       <EmailIcon />
                     </div>
                     <div className="contact-info">
                       <h2 className="title-foot">{text.email}</h2>
-                      <p className="link-contact">atour@gmail.com</p>
+                      <p className="link-contact">{footerData?.email}</p>
                     </div>
                   </a>
                   {/* <a href="##" className="info-contact-one d-flex gap-3">

@@ -9,7 +9,7 @@ const AllRatesComments = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 4; // NUMBER OF PAGE ITEMS
+  const perPage = 5; // NUMBER OF PAGE ITEMS
   const pageCount = Math.ceil(dataUser.length / perPage);
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);

@@ -18,6 +18,11 @@ import { useLanguage } from "Components/Languages/LanguageContext"; // Import La
 const AccountUser = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
+  };
+
   const translations = {
     accountTitle: {
       ar: "حسابى",
@@ -81,9 +86,8 @@ const AccountUser = () => {
                         role="presentation"
                       >
                         <button
-                          className={`nav-link ${
-                            tab.active ? "active" : ""
-                          } position-relative`}
+                          className={`nav-link ${tab.active ? "active" : ""
+                            } position-relative`}
                           id={`pills-${tab.id}-tab`}
                           data-bs-toggle="pill"
                           data-bs-target={`#pills-${tab.id}`}
@@ -99,6 +103,7 @@ const AccountUser = () => {
                     ))}
                     <li className="nav-item" role="presentation">
                       <Link
+                        onClick={handleLogout}
                         to="/"
                         className="logout-button d-flex align-items-center gap-2"
                       >
@@ -116,9 +121,8 @@ const AccountUser = () => {
                     {tabs.map((tab) => (
                       <div
                         key={tab.id}
-                        className={`tab-pane fade ${
-                          tab.active ? "show active" : ""
-                        }`}
+                        className={`tab-pane fade ${tab.active ? "show active" : ""
+                          }`}
                         id={`pills-${tab.id}`}
                         role="tabpanel"
                         aria-labelledby={`pills-${tab.id}-tab`}

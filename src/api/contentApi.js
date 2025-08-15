@@ -2,39 +2,65 @@ import axiosInstance from "./axiosInstance";
 
 const ContentAPI = {
   // Trips
-  getTrips: async () => {
-    const response = await axiosInstance.get("/trips");
-    return response.data;
-  },
-  getTripById: async (tripId) => {
-    const response = await axiosInstance.get(`/trips/${tripId}`);
-    return response.data;
-  },
-  getSimilarTrips: async (tripId) => {
-    const response = await axiosInstance.get(`/similar_trips/${tripId}`);
-    return response.data;
-  },
-  // Gifts
-  getGifts: async (language) => { // Default language is 'en' (English)
-    const response = await axiosInstance.get("/gifts", {
+  getTrips: async (language) => {
+    const response = await axiosInstance.get("/trips", {
       headers: {
-        'language': language // Pass the language in the header
-      }
+        language: language, // Pass the language in the header
+      },
     });
     return response.data;
   },
-  getGiftById: async (giftId) => {
-    const response = await axiosInstance.get(`/gifts/${giftId}`);
+  getTripById: async (tripId, language) => {
+    const response = await axiosInstance.get(`/trips/${tripId}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
+    return response.data;
+  },
+  getSimilarTrips: async (tripId, language) => {
+    const response = await axiosInstance.get(`/similar_trips/${tripId}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
+    return response.data;
+  },
+  // Gifts
+  getGifts: async (language) => {
+    // Default language is 'en' (English)
+    const response = await axiosInstance.get("/gifts", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
+    return response.data;
+  },
+  getGiftById: async (giftId, language) => {
+    const response = await axiosInstance.get(`/gifts/${giftId}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
   // Effectiveness
-  getEffectiveness: async () => {
-    const response = await axiosInstance.get("/effectivenes");
+  getEffectiveness: async (language) => {
+    const response = await axiosInstance.get("/effectivenes", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
-  getEffectivenessById: async (effectiveneId) => {
-    const response = await axiosInstance.get(`/effectivenes/${effectiveneId}`);
+
+  getEffectivenessById: async (effectiveneId, language) => {
+    const response = await axiosInstance.get(`/effectivenes/${effectiveneId}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
@@ -45,13 +71,22 @@ const ContentAPI = {
   },
 
   // Cities
-  getCities: async () => {
-    const response = await axiosInstance.get("/cities");
+  getCities: async (language) => {
+    const response = await axiosInstance.get("/cities",
+      {
+        headers: {
+          language: language, // Pass the language in the header
+        },
+      });
     return response.data;
   },
 
-  getCitiesId: async (cityId) => {
-    const response = await axiosInstance.get(`/search_by_city/${cityId}`);
+  getCitiesId: async (cityId, language) => {
+    const response = await axiosInstance.get(`/search_by_city/${cityId}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 };

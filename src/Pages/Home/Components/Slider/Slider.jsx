@@ -7,16 +7,19 @@ import SearchInputLocation from "Components/Ui/SearchInputLocation/SearchInputLo
 import { useLanguage } from "Components/Languages/LanguageContext";
 import GeneralAPI from "api/generalApi";
 import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import { useNavigate } from "react-router-dom";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
+// import Loader from "Components/Auth/Components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const Slider = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const [sliders, setSliders] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const navigate = useNavigate();
+
+  // const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const [activeSlideIndex, setActiveSlideIndex] = useState(0); // State to track active slide index
   const router = useNavigate(); // Initialize router for navigation
@@ -26,57 +29,68 @@ const Slider = () => {
   const hideLogin = () => setShowLogin(false);
 
   useEffect(() => {
-    const fetchSliders = async () => {
+    const fetchSliderData = async () => {
+      const cachedSliders = sessionStorage.getItem("sliders");
+      const cachedCities = sessionStorage.getItem(`cities-${currentLanguage}`);
+
+      if (cachedSliders && cachedCities) {
+        setSliders(JSON.parse(cachedSliders));
+        setCities(JSON.parse(cachedCities));
+        return;
+      }
+
       try {
-        const response = await GeneralAPI.getSliders();
-        const responseCities = await ContentAPI.getCities();
-        setCities(responseCities.data || []);
-        setSliders(response.data || []);
+        const sliderRes = await GeneralAPI.getSliders(currentLanguage);
+        const citiesRes = await ContentAPI.getCities(currentLanguage);
+
+        setSliders(sliderRes.data || []);
+        setCities(citiesRes.data || []);
+
+        sessionStorage.setItem("sliders", JSON.stringify(sliderRes.data || []));
+        sessionStorage.setItem(`cities-${currentLanguage}`, JSON.stringify(citiesRes.data || []));
       } catch (err) {
+        console.error("Error fetching sliders or cities:", err);
         setError("Failed to fetch slider data. Please try again later.");
-        console.error("Error fetching sliders:", err);
-      } finally {
-        setLoading(false);
       }
     };
-    fetchSliders(); // Call the API on component mount
-  }, []);
+
+    fetchSliderData();
+  }, [currentLanguage]);
+
+
+  useEffect(() => {
+    if (selectedCity) {
+      navigate(`/biographyPage/${selectedCity}`);
+      setSelectedCity(null);
+    }
+  }, [selectedCity, navigate]);
 
   // Function to handle slide change
   const handleSlideChange = (swiper) => {
     setActiveSlideIndex(swiper.activeIndex); // Update the active slide index
   };
 
-  if (loading) {
-    return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
-      </div>
-    );
-  }
-
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
   // Function to check if the user is authenticated
   const isAuthenticated = () => {
-    const user = localStorage.getItem('user'); // Assuming the user data is stored in 'user'
+    const user = localStorage.getItem("user"); // Assuming the user data is stored in 'user'
     return user ? true : false;
   };
 
   // Function to get the user data from localStorage
   const getUser = () => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : null;
   };
-  const user = getUser()
+  const user = getUser();
 
   const capitalizeFirstLetter = (name) => {
-    if (!name) return '';
+    if (!name) return "";
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
+
   return (
     <>
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
@@ -90,33 +104,15 @@ const Slider = () => {
             {/* Display the title of the active slide */}
             {sliders.length > 0 && (
               <h2 className="title-silde">
-                {
-                  isAuthenticated()
-                    ? (user && currentLanguage === "ar"
-                      ? `مرحبًا ${capitalizeFirstLetter(user.name)}`
-                      : `Hi ${capitalizeFirstLetter(user?.name)}!`)
-                    : (currentLanguage === "ar"
-                      ? sliders[activeSlideIndex].title_ar
-                      : sliders[activeSlideIndex].title_en)
-                }
+                {isAuthenticated()
+                  ? user && currentLanguage === "ar"
+                    ? `مرحبًا ${capitalizeFirstLetter(user?.name)}`
+                    : `Hi ${capitalizeFirstLetter(user?.name)}!`
+                  : currentLanguage === "ar"
+                    ? sliders[activeSlideIndex]?.title_ar
+                    : sliders[activeSlideIndex]?.title_en}
               </h2>
             )}
-            {/* <div className="main-info-avatar d-flex align-items-center gap-4 flex-wrap">
-              <AvatarGroup
-                renderSurplus={(surplus) => (
-                  <span>{surplus.toString()[0]}K+</span>
-                )}
-                total={8000}
-                className="all-avatar"
-              >
-                <Avatar alt="Remy Sharp" src={image1} className="avatar-1" />
-                <Avatar alt="Remy Sharp" src={image2} className="avatar-1" />
-                <Avatar alt="Remy Sharp" src={image3} className="avatar-1" />
-                <Avatar alt="Remy Sharp" src={image4} className="avatar-1" />
-              </AvatarGroup>
-              <h2 className="text-title">{trustText}</h2>
-            </div> */}
-            {/* Search Input and Button */}
             <div className="main-add-place-date main-add-place-date--1">
               <SearchInputLocation
                 setSelectedCity={setSelectedCity}
@@ -124,11 +120,18 @@ const Slider = () => {
               />
               <button
                 onClick={() => {
-                  if (selectedCity && isAuthenticated()) {
-                    router(`/biographyPage/${selectedCity}`); // Navigate to the selected city route
-                  }
-                  else {
-                    setShowLogin(true)
+                  if (isAuthenticated()) {
+                    if (!selectedCity) {
+                      toast.warning(
+                        currentLanguage === "ar"
+                          ? "هذه المدينة غير متاحة لدينا حاليا"
+                          : "This city is not supported yet."
+                      );
+                    } else if (selectedCity) {
+                      router(`/biographyPage/${selectedCity}`); // Navigate to the selected city route
+                    }
+                  } else {
+                    setShowLogin(true);
                   }
                 }}
                 className="btn-main btn-search-submit"
@@ -145,6 +148,3 @@ const Slider = () => {
 };
 
 export default Slider;
-
-
-

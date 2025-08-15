@@ -28,11 +28,22 @@ const BookingAPI = {
   },
 
   // Get a list of all bookings
-  getBookings: async () => {
-    const response = await axiosInstance.get("/bookings");
+  getBookings: async (language) => {
+    const response = await axiosInstance.get("/bookings", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
+  // tripe dates
+  bookCalender: async (id) => {
+    const response = await axiosInstance.get(
+      `/trip-calendar/${id}`
+    );
+    return response.data;
+  },
   // Book a trip
   bookTrip: async ({
     tripId,
@@ -41,7 +52,8 @@ const BookingAPI = {
     childrenNumber,
     paymentWay,
     time,
-    bookingDay
+    bookingDay,
+    language
   }) => {
     const response = await axiosInstance.post("/booking-trip", {
       trip_id: tripId,
@@ -50,7 +62,10 @@ const BookingAPI = {
       children_number: childrenNumber,
       payment_way: paymentWay,
       booking_time: time,
-      booking_day:bookingDay
+      booking_day: bookingDay,
+      headers: {
+        language: language,
+      },
     });
     return response.data;
   },
@@ -71,7 +86,7 @@ const BookingAPI = {
       quantity,
       delivery_way: deliveryWay,
       delivery_address: deliveryAddress,
-      delivery_number:number,
+      delivery_number: number,
       location
     });
     return response.data;
@@ -88,7 +103,14 @@ const BookingAPI = {
 
   // Cancel a booking
   cancelBooking: async (orderId) => {
-    const response = await axiosInstance.get(`/cancel-order/${orderId}`);
+    const response = await axiosInstance.get(`/cancel/${orderId}`);
+    return response.data;
+  },
+
+
+  // get payment status
+  getPaymentStatus: async (url,id) => {
+    const response = await axiosInstance.get(`/${url}/${id}`);
     return response.data;
   },
 };

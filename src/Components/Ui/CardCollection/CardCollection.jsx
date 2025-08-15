@@ -1,13 +1,13 @@
 import "./CardCollection.css";
 import IconLocation from "assets/images/collection/IconLocation";
 import IconStarRate from "assets/images/collection/IconStarRate";
-import HeartIconCollection from "assets/images/collection/HeartIconCollection";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import Favicon from "Components/FavIcon/Favicon ";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
+import { toast } from "react-toastify";
+import Favicon from "Components/FavIcon/Favicon ";
 
 const CardCollection = ({
   itemId,
@@ -16,25 +16,29 @@ const CardCollection = ({
   numRate,
   titleCard,
   numPriceCard,
-  wishList,
-  addToWishList,
-  isFav
+  isFav,
+  type,
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  // Auth
+  const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
   const handleShowLogin = () => {
     setShowLogin(true);
   };
+
   const hideLogin = () => {
     setShowLogin(false);
   };
+
   const handleLinkClick = (e) => {
     if (!isAuthenticated()) {
       e.preventDefault();
       handleShowLogin(); // Open login form if not authenticated
+    } else {
+      navigate(`/tripsPage/${itemId}`);
     }
   };
+
   // Localization object
   const localization = {
     ar: {
@@ -49,15 +53,14 @@ const CardCollection = ({
     },
   };
 
-  const { ratingText, priceStartText, perPersonText } = localization[currentLanguage]; // Retrieve localized strings
+  const { ratingText, priceStartText, perPersonText } = localization[currentLanguage];
 
-  const isWishListed = wishList.includes(itemId); // Check if the current item is in the wishlist
   return (
     <>
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
 
       {/* ============ START CARD COLLECTION ONE =========== */}
-      <Link to={`tripsPage/${itemId}`} className="card-collection-one" onClick={handleLinkClick}>
+      <div className="card-collection-one">
         {/* =========== START IMAGE COLLECTION =========== */}
         <div className="image-collection overlay-bg">
           <img
@@ -65,22 +68,14 @@ const CardCollection = ({
             alt="imageCollection"
             loading="lazy"
             className="w-100 h-100 object-fit-cover"
+            onClick={handleLinkClick}
           />
-          <div
-            className={`icon-heart ${isWishListed ? "activeHeart" : ""}`}
-            onClick={(e) => {
-              e.preventDefault();
-              addToWishList(itemId);
-            }}
-          >
-            {/* <HeartIconCollection /> */}
-            <Favicon
-              key={itemId}
-              modelType={"trip"}
-              modelId={itemId}
-              initialIsFavorite={isFav}
-            />
-          </div>
+          {/* Use the Favicon component here */}
+          <Favicon
+            modelType={type}
+            modelId={itemId}
+            initialIsFavorite={isFav}
+          />
           <div className="info-text">
             <IconLocation /> {infoPlaceCard}
           </div>
@@ -88,16 +83,18 @@ const CardCollection = ({
         {/* =========== END IMAGE COLLECTION =========== */}
         {/* =========== START CONTENT INFO CARD ========== */}
         <div className="content-info-card pt-3">
-          <div className="rate-card d-flex align-items-center gap-1">
-            <IconStarRate /> {numRate} {ratingText}
-          </div>
+          {numRate > 0 && (
+            <div className="rate-card d-flex align-items-center gap-1">
+              <IconStarRate /> {numRate} {ratingText}
+            </div>
+          )}
           <h2 className="title">{titleCard}</h2>
           <div className="price-info">
             {priceStartText} <span className="price-num">{numPriceCard}</span> {perPersonText}
           </div>
         </div>
         {/* =========== END CONTENT INFO CARD ========== */}
-      </Link>
+      </div>
       {/* ============ END CARD COLLECTION ONE =========== */}
     </>
   );

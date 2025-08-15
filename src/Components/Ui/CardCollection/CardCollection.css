@@ -1,5 +1,6 @@
 .card-collection-one {
   background: var(--white-01-color);
+  cursor: pointer;
 }
 
 .card-collection-one .image-collection {
@@ -15,6 +16,7 @@
   top: 0;
   left: 0;
   border-radius: 12px;
+  pointer-events: none; /* Ensure the overlay doesn't block clicks */
 }
 
 .card-collection-one .image-collection img {

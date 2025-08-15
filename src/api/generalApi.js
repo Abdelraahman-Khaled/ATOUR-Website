@@ -59,13 +59,21 @@ const GeneralAPI = {
   },
 
   // Blogs
-  getBlogs: async () => {
-    const response = await axiosInstance.get("/blogs");
+  getBlogs: async (language) => {
+    const response = await axiosInstance.get("/blogs", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
-  getBlogDetails: async (id) => {
-    const response = await axiosInstance.get(`/blogs/${id}`);
+  getBlogDetails: async (id, language) => {
+    const response = await axiosInstance.get(`/blogs/${id}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
@@ -88,8 +96,12 @@ const GeneralAPI = {
   },
 
   // Sliders
-  getSliders: async () => {
-    const response = await axiosInstance.get("/sliders");
+  getSliders: async (language) => {
+    const response = await axiosInstance.get("/sliders", {
+      headers: {
+        language: language,
+      },
+    });
     return response.data;
   },
 

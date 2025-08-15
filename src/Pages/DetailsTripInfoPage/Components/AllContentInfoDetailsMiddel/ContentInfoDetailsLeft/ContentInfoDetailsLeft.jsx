@@ -19,6 +19,8 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
   const [adultsCount, setAdultsCount] = useState(1);
   const [childrenCount, setChildrenCount] = useState(0);
 
+  // select the day 
+  const [selectedDay, setSelectedDay] = useState(null);
   // Show/hide modals
   const buttonShowModal = () => setShowModalAvailable(true);
   const hideModalAvailable = () => setShowModalAvailable(false);
@@ -41,6 +43,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
         tripData={tripData}
         initialAdults={adultsCount} // Pass initial values
         initialChildren={childrenCount}
+        selectedDay={selectedDay}
       />
       <ModalNumberIndividuals
         showModalNumberIndividuals={showModalNumberIndividuals}
@@ -55,11 +58,15 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
         {/* <h2 className="title">حدد التاريخ المناسب لك</h2> */}
         <div className="all-box-content-left">
           {/* Date Picker */}
-          {/* <div className="main-add-place-date main-add-place-date--1">
-            <DatePickerComponent addTextPlaceHolder={"حدد تاريخ الرحلة "} />
-          </div> */}
+          <div className="main-add-place-date main-add-place-date--1">
+            <DatePickerComponent
+              selectedDay={selectedDay}
+              setSelectedDay={setSelectedDay}
+              addTextPlaceHolder={currentLanguage === "ar" ? "حدد تاريخ الرحلة " : "Select a trip date"} />
+          </div>
 
           {/* Number of Individuals Box */}
+
           <div
             onClick={showModalNumberIndividualsButton}
             className="box-one-content cursor-pointer-event mb-3 d-flex justify-content-between align-items-center gap-2 flex-wrap"
@@ -96,7 +103,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
                   </div>
                 )}
               </div>
-              <span className="text-decoration-underline title-text cursor-pointer-event">
+              <span className="title-text">
                 {currentLanguage === "ar"
                   ? "متاح إلغاء الحجز مجانا"
                   : "Free cancellation is available."}

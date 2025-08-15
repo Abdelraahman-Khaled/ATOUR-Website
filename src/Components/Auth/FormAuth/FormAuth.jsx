@@ -82,6 +82,8 @@ const FormAuth = ({ showModalForm, hideModalForm }) => {
           setIsLogin(true);
         }} // Transition to Login on successful submission
         goToLogin={() => setIsLogin(true)} // Directly navigate to Login
+        emailOrPhone={emailOrPhone}
+
       />
 
       {/* Login/Register Modal */}
@@ -94,8 +96,8 @@ const FormAuth = ({ showModalForm, hideModalForm }) => {
               ? "تسجيل الدخول"
               : "Login"
             : currentLanguage === "ar"
-            ? "تسجيل حساب جديد"
-            : "Register a New Account"
+              ? "تسجيل حساب جديد"
+              : "Register a New Account"
         }
         newClass={"login-modal"}
       >

@@ -1,11 +1,8 @@
-import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import PaginationPage from "Components/Pagination/Pagination";
 import CardFavorite from "Components/Ui/CardFavorite/CardFavorite";
-import { cardsFavoriteData } from "Pages/FavoritePage/Components/CardsFavorite/Data/DataCardFavorite";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const OffersCards = ({ gifts }) => {
   // image
@@ -28,25 +25,23 @@ const OffersCards = ({ gifts }) => {
   const currentPageData = normalizedData.slice(offset, offset + perPage);
 
   // ADD TO WISHLIST
-  const [wishList_2, setWishList_2] = useState([]);
-
-  const addToWishList = (id) => {
-    setWishList_2((prevList) => {
-      if (prevList.includes(id)) {
-        // CHECK IF CARD ITEM IS INCLUDE SAME ID
-        return prevList.filter((item) => item !== id);
-      } else {
-        return [...prevList, id];
-      }
-    });
-    // ADD TOAST SUCCESS IF TRUE AND ADD ERROR IF NOT TRUE
-    if (!wishList_2.includes(id)) {
-      toast.success("تم الاضافة الى المفضلة.");
-    } else {
-      toast.error("تم الأزالة من المفضلة.");
-    }
-  };
-
+  // const [wishList_2, setWishList_2] = useState([]);
+  // const addToWishList = (id) => {
+  //   setWishList_2((prevList) => {
+  //     if (prevList.includes(id)) {
+  //       // CHECK IF CARD ITEM IS INCLUDE SAME ID
+  //       return prevList.filter((item) => item !== id);
+  //     } else {
+  //       return [...prevList, id];
+  //     }
+  //   });
+  //   // ADD TOAST SUCCESS IF TRUE AND ADD ERROR IF NOT TRUE
+  //   if (!wishList_2.includes(id)) {
+  //     toast.success("تم الاضافة الى المفضلة.");
+  //   } else {
+  //     toast.error("تم الأزالة من المفضلة.");
+  //   }
+  // };
   return (
     <div className="main-cards-offers" data-aos="fade-right">
       {/* ============= START ROW =========== */}
@@ -64,7 +59,7 @@ const OffersCards = ({ gifts }) => {
                       image={item.image}
                       textLocation={item.location || " السعودية"}
                       titleCard={item.title}
-                      NumPriceNew={`${item.price} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
+                      NumPriceNew={`${item.price}`}
                       isTrueNumTwo={false}
                       numInfoDangerOld={"70 SAR"}
                       rateNum={item.rate}
@@ -73,11 +68,12 @@ const OffersCards = ({ gifts }) => {
                       textCardOne_1={item.textCardOne_1}
                       isTrueTextOneCard_2={item.pay_later ? item.free_cancelation : null}
                       textCardOne_2={item.textCardOne_2}
-                      removeFromFavorites={false}
-                      isFavoritePage={false}
+                      // removeFromFavorites={false}
+                      isFavoritePage={item.is_favourit}
                       isNewPage={true}
-                      wishListCard={wishList_2}
-                      addToWishList={addToWishList}
+                      // wishListCard={wishList_2}
+                      // addToWishList={addToWishList}
+                      type={"gift"}
                     />
                   </Link>
                 </div>

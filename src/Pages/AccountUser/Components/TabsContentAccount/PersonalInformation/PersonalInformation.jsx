@@ -39,7 +39,7 @@ const PersonalInformation = () => {
             nationality:
               profileData.nationality || translations.notAvailable[currentLanguage],
             dateOfBirth:
-              profileData.date_of_birth || translations.notAvailable[currentLanguage],
+              profileData.birthdate || translations.notAvailable[currentLanguage],
             userType: profileData.gender || translations.notAvailable[currentLanguage],
             image: profileData.photo,
           });
@@ -71,6 +71,14 @@ const PersonalInformation = () => {
           name: updatedProfile.name,
           image: updatedProfile.image,
         }));
+        // update localstorage data
+        const userData = JSON.parse(localStorage.getItem("user"));
+        // Update the user object with the new name and image
+        const updatedUser = {
+          ...userData,
+          name: updatedProfile.name,
+        };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         toast.success(
           currentLanguage === "ar"
             ? "تم تحديث البيانات الشخصية بنجاح."

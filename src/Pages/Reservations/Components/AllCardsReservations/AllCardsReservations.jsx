@@ -1,15 +1,24 @@
 import "./AllCardsReservation.css";
 import CardReservation from "./CardReservation";
-import { dataReservation } from "../Data/DataReservation";
 import { Link } from "react-router-dom";
 import ModalDetailsTrip from "../ModalsReservation/ModalDetailsTrip";
 import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import backUP from "../../../../assets/images/slider/01.png";
+import PaginationPage from "Components/Pagination/Pagination";
 
-const AllCardsReservations = ({ reservation }) => {
+const AllCardsReservations = ({ reservation, refresh }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  // Pagenation
+  const [currentPage, setCurrentPage] = useState(0);
+  const perPage = 5; // NUMBER OF PAGE ITEMS
+  const pageCount = Math.ceil(reservation.length / perPage);
+  const offset = currentPage * perPage;
+  const currentPageData = reservation.reverse().slice(offset, offset + perPage);
 
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
   // SHOW MODAL DETAILS TRIP
   const [showDetailsTrip, setDetailsTrip] = useState(false);
   const [selectedReservation, setSelectedReservation] = useState(null); // Store selected reservation
@@ -39,7 +48,6 @@ const AllCardsReservations = ({ reservation }) => {
       adults: "Adults",
     },
   };
-
   return (
     <>
       <ModalDetailsTrip
@@ -47,31 +55,34 @@ const AllCardsReservations = ({ reservation }) => {
         hideDetailsModal={hideDetailsModal}
         reservation={selectedReservation} // Pass the selected reservation
         currentLanguage={currentLanguage} // Pass the current language
+        refresh={refresh}
       />
       <div className="all-cards-reservations">
         {/* =============== START ROW ============== */}
         <div className="row g-3">
           {reservation !== undefined && reservation.length > 0 ? (
-            [...reservation].reverse().map((item) => {
+            [...currentPageData].map((item) => {
               return (
                 <div key={item.id} className="col-12 col-md-6 col-lg-12">
                   <CardReservation
-                    image={item.photo || backUP}
+                    image={item.trip?.photo || backUP}
                     typeReservation={item.payment_status}
-                    countryName={item.countryName}
-                    titleCard={(item.trip || item.effectivene || item.gift)?.[currentLanguage === "ar" ? "title_ar" : "title_en"] || "Ended"}
+                    countryName={item.trip?.city.title}
+                    titleCard={(item.trip || item.effectivene || item.gift)?.title || "Ended"}
                     priceNum={`${item.total}`}
-                    textUserInfo={`${text[currentLanguage].children} ${item.children_number}, ${text[currentLanguage].adults} ${item.people_number}`}
-                    dateTime={item.booking_date + " " + item.booking_day}
+                    textUserInfo={`${text[currentLanguage].children} ${item.children_number || 0}, ${text[currentLanguage].adults} ${item.people_number || 1}`}
+                    dateTime={item.booking_day}
                     timeAdd={item.booking_time}
                     isTrueButtonDetails={true}
                     buttonDetailsFunction={() => buttonShowDetails(item)} // Pass the selected item
                     isTrueButtonCancel={false}
                     buttonCancelReservationFunction={false}
+                    id={item.trip_id}
                   />
                 </div>
               );
             })
+
           ) : (
             <p className="text-section-api fs-6 fw-medium text-center pt-5">
               {text[currentLanguage].noData}{" "}
@@ -84,6 +95,7 @@ const AllCardsReservations = ({ reservation }) => {
             </p>
           )}
         </div>
+        {pageCount > 1 && <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />}
         {/* =============== END ROW ============== */}
       </div>
     </>

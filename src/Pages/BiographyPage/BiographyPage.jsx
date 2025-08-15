@@ -5,8 +5,8 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useEffect, useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import ContentAPI from "api/contentApi";
-import { useParams } from "react-router-dom";
-import LoaderSvg from "assets/Icons/LoaderSvg";
+import { Link, useParams } from "react-router-dom";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const BiographyPage = () => {
   const { id } = useParams(); // Extract the `id` from the URL
@@ -19,7 +19,7 @@ const BiographyPage = () => {
   useEffect(() => {
     const fetchBiography = async () => {
       try {
-        const response = await ContentAPI.getCitiesId(id); // Fetch data from the API
+        const response = await ContentAPI.getCitiesId(id, currentLanguage); // Fetch data from the API
         const data = response.data; // Extract the data from the response
 
         if (data) {
@@ -36,27 +36,43 @@ const BiographyPage = () => {
     };
 
     fetchBiography(); // Call the API on component mount
-  }, [id]); // Re-run the effect if the `id` changes
+  }, [id, currentLanguage]); // Re-run the effect if the `id` changes
 
   // Display loading state
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
       </div>
     );
   }
 
+
   // Display error state
   if (error) {
-    return <div>{error}</div>;
+    return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+      {currentLanguage === "ar" ? "هذه المدينة غير متاحة" : "This city not available"}
+      <Link
+        to="/"
+        className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+      >
+        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+      </Link>
+    </p>;
   }
 
   // Display if no data is available
   if (!biography) {
-    return <div>No data found.</div>;
+    return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+      {currentLanguage === "ar" ? "تفاصيل المدينة غير متاحة" : "City details not available"}
+      <Link
+        to="/"
+        className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+      >
+        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+      </Link>
+    </p>;
+    ;
   }
   return (
     <>
@@ -67,7 +83,7 @@ const BiographyPage = () => {
           <BreadcrumbsPage
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
-            titleTwoBread={currentLanguage === "ar" ? biography.title_ar : biography.title_en}
+            titleTwoBread={biography?.title}
             textBreadActive={currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"}
           />
         </header>

@@ -44,7 +44,7 @@ const AccountInformationContent = () => {
           setProfileData({
             email: response.data.email || "name@example.com",
             phone: response.data.phone || "+966 555 555 555",
-            image: response.data.image || "",
+            image: response.data.photo || "",
           });
         } else {
           toast.error(translations.fetchError[currentLanguage]);
@@ -102,7 +102,8 @@ const AccountInformationContent = () => {
                 value={profileData.email}
                 readOnly
               />
-              <div className="icon-edit-input" onClick={buttonShowEditModal}>
+              {/* <div className="icon-edit-input" onClick={buttonShowEditModal}> */}
+              <div className="icon-edit-input">
                 <EditIconUser />
               </div>
             </div>

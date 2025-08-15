@@ -19,7 +19,6 @@ const ModalDiscountForm = ({
     discountCode: ""
   };
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     resetForm();
     if (values) {
       hideModalDiscountForm();

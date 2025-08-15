@@ -6,7 +6,7 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useEffect, useState } from "react";
 import ContentAPI from "api/contentApi";
-import LoaderSvg from "assets/Icons/LoaderSvg";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const Events = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -18,7 +18,7 @@ const Events = () => {
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const data = await ContentAPI.getEffectiveness(); // Fetch data from the API
+        const data = await ContentAPI.getEffectiveness(currentLanguage); // Fetch data from the API
         const enrichedData = data.data.map((item) => {
           // Assign categories dynamically based on date or logic
           const now = new Date();
@@ -38,7 +38,6 @@ const Events = () => {
           return { ...item, category, from_date: eventDate.toISOString().split("T")[0] }; // Ensure from_date is updated if it was null
         });
         setEventsData(enrichedData)
-        console.log(enrichedData);
       } catch (err) {
         console.error("Error fetching home data:", err);
         setError("Failed to load home data. Please try again later.");
@@ -48,7 +47,7 @@ const Events = () => {
     };
 
     fetchEventsData(); // Call the API on component mount
-  }, []);
+  }, [currentLanguage]);
 
   // normalize images
   const normalizeData = (data) => {
@@ -61,13 +60,12 @@ const Events = () => {
 
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
       </div>
     );
   }
+
   return (
     <>
       <HelmetInfo titlePage={"الفعاليات"} />

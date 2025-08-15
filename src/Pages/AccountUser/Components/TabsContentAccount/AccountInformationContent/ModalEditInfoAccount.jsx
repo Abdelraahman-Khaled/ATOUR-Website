@@ -43,7 +43,6 @@ const ModalEditInfoAccount = ({
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     resetForm();
     if (values) {
       setShowOtp(true);

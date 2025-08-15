@@ -44,7 +44,7 @@ const BannerHome = () => {
                 {/* ============== START APPS LINKS ============= */}
                 <div className="apps-links d-flex align-items-center  gap-3 mt-3">
                   <a
-                    href="https://www.apple.com/app-store/"
+                    href="https://apps.apple.com/us/app/atour/id6743371891"
                     target="_blank"
                     className="link-app-one"
                     rel="noreferrer"
@@ -52,7 +52,7 @@ const BannerHome = () => {
                     <img src={appStore} alt="app store" />
                   </a>
                   <a
-                    href="https://play.google.com/store"
+                    href="https://play.google.com/store/apps/details?id=com.app.atour"
                     target="_blank"
                     className="link-app-one"
                     rel="noreferrer"

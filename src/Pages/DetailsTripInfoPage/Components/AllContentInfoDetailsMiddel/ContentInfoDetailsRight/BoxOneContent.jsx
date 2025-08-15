@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ClockIcon } from "@mui/x-date-pickers";
 import UserIcon2 from "assets/Icons/UserIcon2";
+import './BoxOneContent.css'
 import { Avatar, AvatarGroup } from "@mui/material";
 // import image1 from "../../../../../assets/images/users/01.png";
 // import image2 from "../../../../../assets/images/users/02.png";
@@ -21,6 +22,7 @@ const BoxOneContent = ({ tripData }) => {
   const buttonHide = () => {
     setShowModalProviderInformation(false);
   };
+
   return (
     <>
       <ModalProviderInformation
@@ -43,7 +45,7 @@ const BoxOneContent = ({ tripData }) => {
                 <div className="icon-star rate-star-icon">
                   <FontAwesomeIcon icon={faStar} />
                 </div>
-                4.5 تقييم
+                4.5 {currentLanguage === "ar" ? "تقييم" : "Rate"}
               </div>
             </div>
           </div>
@@ -61,9 +63,8 @@ const BoxOneContent = ({ tripData }) => {
         {/* ============= END HEADER TOP CONTENT ============= */}
         {/* ============= START BOX MIDDEL CONTENT =========== */}
         <div className="box-middel-content mt-3">
-          <h2 className="title">{tripData.description}</h2>
-          <p className="text">
-            {tripData.city.description}
+          <h2 className="title mb-4">{tripData.description}</h2>
+          <p className="text favDev" dangerouslySetInnerHTML={{ __html: tripData.city.description }}>
           </p>
           {/* <div className="main-info-avatar mt-2 d-flex align-items-center gap-4 flex-wrap">
             <AvatarGroup

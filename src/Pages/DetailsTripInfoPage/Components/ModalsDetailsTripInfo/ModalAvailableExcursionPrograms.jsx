@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import CustomModal from "Components/CustomModal/CustomModal";
 import "./ModalsDetailsTripInfo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,23 +10,25 @@ import BookingAPI from "api/bookingApi";
 import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Form } from "react-bootstrap";
-
+import { useNavigate, useParams } from "react-router-dom";
 const ModalAvailableExcursionPrograms = ({
   tripData,
   showModalAvailable,
   hideModalAvailable,
   initialAdults,
   initialChildren,
+  selectedDay
 }) => {
   const iframeRef = useRef(null);
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
-  const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [paymentWay, setPaymentWay] = useState("online");
   const { currentLanguage } = useLanguage();
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
+  const navigate = useNavigate();
   const content = {
     paymentInitiated: {
       ar: "تم بدء عملية الدفع. يرجى إتمام الدفع.",
@@ -35,6 +37,10 @@ const ModalAvailableExcursionPrograms = ({
     paymentFailed: {
       ar: "فشلت عملية الدفع. يرجى المحاولة مرة أخرى.",
       en: "Payment failed. Please try again.",
+    },
+    paymentCancelled: {
+      ar: "تم الغاء عملية الدفع. يرجى المحاولة مرة أخرى.",
+      en: "Payment cancelled. Please try again.",
     },
     paymentError: {
       ar: "حدث خطأ أثناء عملية الدفع. يرجى المحاولة لاحقًا.",
@@ -68,8 +74,8 @@ const ModalAvailableExcursionPrograms = ({
       ar: "حجز",
       en: "Reserve",
     },
-    paymentWay: {
-      ar: "طريقة الدفع",
+    choosePaymentWay: {
+      ar: " أختر طريقة الدفع ",
       en: "Payment Way",
     },
     cash: {
@@ -81,29 +87,25 @@ const ModalAvailableExcursionPrograms = ({
       en: "Online",
     },
   };
-  console.log(tripData.available_days[selectedDayIndex]);
 
+  const { id } = useParams();
 
   const handleTimeClick = (index) => {
     setSelectedTimeIndex(index);
     setSelectedTime(tripData.available_times[index].from_time);
   };
 
-  const handleDayClick = (index) => {
-    setSelectedDayIndex(index);
-  };
 
   const buttonActiveBook = async (tripId) => {
-    if (selectedTime === null || selectedDayIndex === null) {
-      toast.error("Please select both a time and a day before booking.");
+    if (!selectedTime || !selectedDay) {
+      toast.error(currentLanguage === "en" ? "Please select both a time and a day before booking." : "يرجى تحديد الوقت واليوم قبل الحجز.");
       return;
     }
 
     setIsLoading(true);
     try {
-      const bookingDay = tripData.available_days[selectedDayIndex]; // Selected date
+      const bookingDay = `${selectedDay.year}-${selectedDay.month}-${selectedDay.day}`; // Format date string
       const currentDate = new Date().toLocaleDateString("en-CA"); // "YYYY-MM-DD"
-
       const response = await BookingAPI.bookTrip({
         tripId,
         bookingDay,
@@ -111,50 +113,82 @@ const ModalAvailableExcursionPrograms = ({
         childrenNumber: initialChildren,
         paymentWay,
         time: selectedTime,
-        bookingDate: currentDate
+        bookingDate: currentDate,
+        language: currentLanguage
       });
-
       if (response.success) {
         if (paymentWay === "cash") {
           toast.success(content.paymentSuccess[currentLanguage]);
           hideModalAvailable();
+          navigate("/reservations")
         } else if (response.data?.data?.transaction?.url) {
           setPaymentUrl(response.data.data.transaction.url);
           toast.success(content.paymentInitiated[currentLanguage]);
         }
       } else {
         toast.error(response.data?.response?.message || content.paymentFailed[currentLanguage]);
+        hideModalAvailable();
       }
     } catch (error) {
       console.error("Error during booking:", error);
-      toast.error(content.paymentError[currentLanguage]);
+      toast.error(error?.response?.data?.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    const handlePaymentMessage = (event) => {
-      const allowedOrigins = ["https://checkout.tap.company", "http://localhost:3000"];
-      if (!allowedOrigins.includes(event.origin)) return;
+  const handlePaymentMessage = useCallback(async (event) => {
+    const allowedOrigins = [
+      "https://checkout.tap.company",
+      "https://authentication.staging.tap.company",
+      "http://localhost:3000",
+    ];
 
-      try {
-        const parsedData = JSON.parse(event.data);
-        if (parsedData?.result === "SUCCESS") {
+    if (!allowedOrigins.includes(event.origin)) {
+      console.warn("Blocked unknown message origin:", event.origin);
+      return;
+    }
+
+    const { event: eventName, data } = event.data;
+
+    // Prevent duplicate processing
+    if (isProcessingPayment) return;
+    setIsProcessingPayment(true);
+
+    try {
+      if (eventName === "checkout:onSuccess") {
+        setPaymentUrl(null);
+        hideModalAvailable();
+        const response = await BookingAPI.getPaymentStatus("trip-payment", data.chargeId);
+
+        if (response.data?.status === "CAPTURED") {
           toast.success(content.paymentSuccess[currentLanguage]);
-          setPaymentUrl(null);
-        } else if (parsedData?.result === "FAILED") {
+          navigate("/reservations");
+        } else if (response.data?.status === "DECLINED") {
           toast.error(content.paymentFailed[currentLanguage]);
-          setPaymentUrl(null);
+        } else if (response.data?.status === "CANCELLED") {
+          toast.error(content.paymentCancelled[currentLanguage]);
         }
-      } catch (error) {
-        console.error("Failed to parse iframe message:", error);
+      } else if (
+        eventName === "checkout:onFailure" ||
+        eventName === "checkout:onClose" ||
+        eventName === "checkout:onError"
+      ) {
+        setPaymentUrl(null);
+        toast.warn(content.paymentCancelled[currentLanguage]);
       }
-    };
+    } finally {
+      setIsProcessingPayment(false);
+    }
+  }, [currentLanguage, isProcessingPayment]);
 
+  useEffect(() => {
     window.addEventListener("message", handlePaymentMessage);
-    return () => window.removeEventListener("message", handlePaymentMessage);
-  }, [currentLanguage]);
+    return () => {
+      window.removeEventListener("message", handlePaymentMessage);
+    };
+  }, [handlePaymentMessage]);
+
 
   return (
     <>
@@ -201,7 +235,7 @@ const ModalAvailableExcursionPrograms = ({
           </div>
 
           {/* Select Day */}
-          <div className="times-trips d-flex align-items-center gap-2 py-3 mb-3 flex-wrap">
+          {/* <div className="times-trips d-flex align-items-center gap-2 py-3 mb-3 flex-wrap">
             {tripData.available_days.map((day, index) => (
               <div
                 key={index}
@@ -211,11 +245,12 @@ const ModalAvailableExcursionPrograms = ({
                 <ClockIcon /> {day}
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Payment Method */}
           {tripData.pay_later == true && (
-            <Form.Group controlId="paymentWay" className="gap-3 my-3">
+            <Form.Group controlId="paymentWay" className="gap-3 mx-1 my-3">
+              <Form.Label className="text-black my-2">{content.choosePaymentWay[currentLanguage]}</Form.Label>
               <Form.Check
                 className="d-flex gap-2"
                 type="radio"

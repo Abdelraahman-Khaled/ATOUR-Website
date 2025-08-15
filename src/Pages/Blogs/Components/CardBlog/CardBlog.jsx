@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./CardBlog.css";
 const CardBlog = ({
   routeBlogCard,
+  description,
   imageBlog,
   titleBlog,
   imageUserBlog,
@@ -23,6 +24,12 @@ const CardBlog = ({
       {/* ============= START CONTENT INFO CARD BLOG ========== */}
       <div className="content-info-card-blog">
         <h2 className="title">{titleBlog}</h2>
+        <p
+          className="title"
+          data-aos="fade-up"
+          dangerouslySetInnerHTML={{ __html: description }}
+        >
+        </p>
         <div className="info-blog-added d-flex align-items-center gap-3">
           <img
             src={imageUserBlog}

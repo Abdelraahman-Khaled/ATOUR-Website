@@ -12,23 +12,51 @@ import "swiper/swiper-bundle.css";
 import "./App.css";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 import { LanguageProvider } from "Components/Languages/LanguageContext";
-import air from "./assets/images/airplan/02.png";
+// import air from "./assets/images/airplan/02.png";
+import { useEffect, useState } from "react";
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 4000); // 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
   // SHOW LOCATION PAGE TO SHOW ONLY IN HOME PAGE
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
   const location = window.location.pathname;
   const isHomePage = location === "/";
+
   return (
     <AosAnimation>
       <LanguageProvider>
         <div className={`App`}>
-          <WindowLoader />
+          {/* <WindowLoader /> */}
           <ToastContainerApp />
-          <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
+          {/* <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
             <div className="airPlan-dot" />
-            {/* <img src={air} className="object-fit-cover" alt="airplan" /> */}
-          </div>
+              <img src={air} className="object-fit-cover" alt="airplan" /> 
+          </div> */}
+
           <HelmetProvider>
             <RouterProvider router={routers} />
+
+            {showSplash && (
+              <div className="splash-overlay">
+                <img
+                  src="/icon/ico.svg" // Replace with your actual logo path
+                  alt="Logo"
+                  className="splash-logo"
+                />
+
+              </div>
+            )}
+
           </HelmetProvider>
           <ScrollToTopButton />
         </div>

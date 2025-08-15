@@ -3,10 +3,10 @@ import SliderEventCardDetails from "./Components/SliderEventCardDetails/SliderEv
 import DetailsCardPage from "./Components/DetailsCardPage/DetailsCardPage";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import LoaderSvg from "assets/Icons/LoaderSvg";
 import ContentAPI from "api/contentApi";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const DetailsCardEvent = () => {
   // Extract the `id` from the URL
@@ -22,7 +22,7 @@ const DetailsCardEvent = () => {
   useEffect(() => {
     const fetchEffective = async () => {
       try {
-        const response = await ContentAPI.getEffectivenessById(id); // Fetch data from the API
+        const response = await ContentAPI.getEffectivenessById(id, currentLanguage); // Fetch data from the API
         const data = response.data; // Extract the data from the response
         if (data) {
           setEffective(data); // Set the fetched data to state
@@ -38,28 +38,52 @@ const DetailsCardEvent = () => {
     };
 
     fetchEffective(); // Call the API on component mount
-  }, [id]); // Re-run the effect if the `id` changes
+  }, [id, currentLanguage]); // Re-run the effect if the `id` changes
 
   if (loading) {
     return (
-      <div className="text-center m-4">
-        <span style={{ scale: "2" }}>
-          <LoaderSvg />
-        </span>
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
       </div>
     );
   }
 
-  if (error) {
-    return <div>{error}</div>; // Display error message if fetching fails
+
+  if (!effective) {
+    return <>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+        {currentLanguage === "ar" ? " هذه الفعالية غير متوافرة" : "This effective not available"}
+        <Link
+          to="/"
+          className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+        >
+          {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+        </Link>
+      </p>
+    </>;
   }
+
+  if (error) {
+    return <>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+        {currentLanguage === "ar" ? " تفاصيل الفعالية غير متوافرة" : "Effective details not available"}
+        <Link
+          to="/"
+          className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+        >
+          {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+        </Link>
+      </p>
+    </>;
+  }
+
   return (
     <>
       <HelmetInfo titlePage={"تفاصيل الفعاليات"} />
 
       <div className="details-card-event-page">
         {/* =========== START DETAILS CARD EVENT DETAILS ============= */}
-        <SliderEventCardDetails image={effective}/>
+        <SliderEventCardDetails image={effective} />
         {/* =========== END DETAILS CARD EVENT DETAILS ============= */}
         {/* =========== START CONTAINER ============ */}
         <ContainerMedia>

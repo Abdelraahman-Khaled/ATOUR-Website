@@ -46,3 +46,9 @@
         font-size: 13px;
     }
 }
+.favicon-cover{
+    background-color: var(--warning-01-color);
+    height: fit-content;
+    padding: 0.3rem;
+    border-radius: 100%;
+}
