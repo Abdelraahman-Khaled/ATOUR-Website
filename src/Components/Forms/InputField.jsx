@@ -1,5 +1,4 @@
 
-import React from "react";
 import { useField } from "formik";
 
 const InputFiled = ({ label, success, ...props }) => {

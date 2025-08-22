@@ -14,6 +14,7 @@ import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 import { LanguageProvider } from "Components/Languages/LanguageContext";
 // import air from "./assets/images/airplan/02.png";
 import { useEffect, useState } from "react";
+import { ProfileProvider } from "context/ProfileContext";
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   useEffect(() => {
@@ -25,8 +26,8 @@ function App() {
   }, []);
   // SHOW LOCATION PAGE TO SHOW ONLY IN HOME PAGE
   useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
     }
   }, []);
   const location = window.location.pathname;
@@ -35,31 +36,31 @@ function App() {
   return (
     <AosAnimation>
       <LanguageProvider>
-        <div className={`App`}>
-          {/* <WindowLoader /> */}
-          <ToastContainerApp />
-          {/* <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
+        <ProfileProvider>
+          <div className={`App`}>
+            {/* <WindowLoader /> */}
+            <ToastContainerApp />
+            {/* <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
             <div className="airPlan-dot" />
               <img src={air} className="object-fit-cover" alt="airplan" /> 
           </div> */}
 
-          <HelmetProvider>
-            <RouterProvider router={routers} />
+            <HelmetProvider>
+              <RouterProvider router={routers} />
 
-            {showSplash && (
-              <div className="splash-overlay">
-                <img
-                  src="/icon/ico.svg" // Replace with your actual logo path
-                  alt="Logo"
-                  className="splash-logo"
-                />
-
-              </div>
-            )}
-
-          </HelmetProvider>
-          <ScrollToTopButton />
-        </div>
+              {showSplash && (
+                <div className="splash-overlay">
+                  <img
+                    src="/icon/ico.svg" // Replace with your actual logo path
+                    alt="Logo"
+                    className="splash-logo"
+                  />
+                </div>
+              )}
+            </HelmetProvider>
+            <ScrollToTopButton />
+          </div>
+        </ProfileProvider>
       </LanguageProvider>
     </AosAnimation>
   );

@@ -104,6 +104,12 @@ const NavbarMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             {isAuthenticated() ? (
               <Nav className="me-auto" data-aos="fade-right">
+                <span className="nav-link pointer" onClick={buttonShowLogin}>
+                  {currentLanguage === "en" ? "Events" : "الفعاليات"}
+                </span>
+                <span className="nav-link pointer" onClick={buttonShowLogin}>
+                  {currentLanguage === "en" ? " gifts " : "الهدايا "}
+                </span>
                 <SearchInputLocation cities={cities} setSelectedCity={setSelectedCity} />
               </Nav>
             ) : (

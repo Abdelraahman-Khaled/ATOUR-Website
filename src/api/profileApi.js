@@ -5,10 +5,11 @@ const ProfileAPI = {
     const response = await axiosInstance.get("/profile");
     return response.data;
   },
-  updateProfile: async (firstName, image) => {
+  updateProfile: async (firstName, image,nationality) => {
     try {
       const formData = new FormData();
       formData.append("name", firstName);
+      formData.append("nationality", nationality);
       if (image) {
         formData.append("image", image); // Append image file
       }

@@ -5,10 +5,14 @@ import ProfileAPI from "api/profileApi";
 import { toast } from "react-toastify";
 import ModalEditPersonalInformation from "./ModalEditPersonalInformation";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { useProfile } from "context/ProfileContext";
 
 const PersonalInformation = () => {
+  const { setProfile } = useProfile();
+
   const { currentLanguage } = useLanguage(); // Get the current language
-  const [profile, setProfile] = useState({
+  const [refresh, setRefresh] = useState(false); // State to trigger refresh
+  const [profile, setProfiles] = useState({
     name: "",
     nationality: "",
     dateOfBirth: "",
@@ -29,12 +33,15 @@ const PersonalInformation = () => {
 
   // Fetch profile data
   useEffect(() => {
+
     const fetchProfile = async () => {
       try {
         const response = await ProfileAPI.getProfile();
+        console.log("Profile data fetched:", response);
+
         if (response.success && response.data) {
           const profileData = response.data;
-          setProfile({
+          setProfiles({
             name: profileData.name || translations.notAvailable[currentLanguage],
             nationality:
               profileData.nationality || translations.notAvailable[currentLanguage],
@@ -43,6 +50,8 @@ const PersonalInformation = () => {
             userType: profileData.gender || translations.notAvailable[currentLanguage],
             image: profileData.photo,
           });
+          setProfile(profileData); // Update the context with the fetched profile
+
         } else {
           toast.error(translations.fetchError[currentLanguage]);
         }
@@ -55,22 +64,26 @@ const PersonalInformation = () => {
     };
 
     fetchProfile();
-  }, [currentLanguage]);
+  }, [currentLanguage, refresh]);
 
   // Handle profile update
   const handleProfileUpdate = async (updatedProfile) => {
     try {
       const response = await ProfileAPI.updateProfile(
         updatedProfile.name,
-        updatedProfile.image
+        updatedProfile.image,
+        updatedProfile.nationality,
       );
+
       if (response.success) {
         // Update the profile state with the new data
-        setProfile((prev) => ({
+        setProfiles((prev) => ({
           ...prev,
           name: updatedProfile.name,
           image: updatedProfile.image,
+          nationality: updatedProfile.nationality,
         }));
+
         // update localstorage data
         const userData = JSON.parse(localStorage.getItem("user"));
         // Update the user object with the new name and image
@@ -79,6 +92,7 @@ const PersonalInformation = () => {
           name: updatedProfile.name,
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
+        setRefresh(prev => !prev);
         toast.success(
           currentLanguage === "ar"
             ? "تم تحديث البيانات الشخصية بنجاح."
@@ -127,18 +141,20 @@ const PersonalInformation = () => {
   return (
     <>
       <ModalEditPersonalInformation
+        key={profile.name + refresh}   // أو أي مفتاح unique يتغير مع البيانات
         showModalEditInformation={showEditModal}
         hideModalEditInformation={hideEditInfoButton}
         onSubmitProfileUpdate={handleProfileUpdate} // Pass the update handler
         initialProfile={profile}
         currentLanguage={currentLanguage} // Pass language
+        setRefresh={setRefresh} // Pass setRefresh to trigger refresh
       />
       <div className="personal-information-content">
         <h2 className="title title-info-top-account pb-1">
           {translations.name[currentLanguage]}
         </h2>
 
-        <FormField initialValues={profile} onSubmit={() => { }}>
+        <FormField key={refresh ? "refresh-1" : "refresh-0"} initialValues={profile} onSubmit={() => { }}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
               <InputField

@@ -1,11 +1,11 @@
 import CustomModal from "Components/CustomModal/CustomModal";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import image_1 from "../../../../../assets/images/users/user.png";
 import EditIconUser from "assets/images/AccountUser/EditIconUser";
 import InputField from "Components/Forms/InputField";
 import FormField from "Components/Forms/FormFiled";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { useProfile } from "context/ProfileContext";
 
 const ModalEditPersonalInformation = ({
   showModalEditInformation,
@@ -13,15 +13,21 @@ const ModalEditPersonalInformation = ({
   onSubmitProfileUpdate,
   initialProfile,
   currentLanguage, // Inject current language
+  setRefresh, // Function to trigger refresh
 }) => {
+
   const [image, setImage] = useState(initialProfile?.image || image_1);
   const [name, setName] = useState(initialProfile?.name || "");
+  const [nationality, setNationality] = useState(initialProfile?.nationality || "");
 
   const translations = {
     name: { ar: "الإسم", en: "Name" },
-    save: { ar: "حفظ", en: "Save" },
+    nationality: { ar: "الجنسية", en: "Nationality" },
+    save: { ar: " حفظ", en: "Save" },
+    saveData: { ar: " جاري الحفظ", en: "Saving data..." },
     editTitle: { ar: "تعديل المعلومات الشخصية", en: "Edit Personal Information" },
     enterName: { ar: "أدخل اسمك", en: "Enter your name" },
+    enterNationality: { ar: "ادخل جنسيتك", en: "Enter your Nationality" },
   };
 
   const fileInputRef = useRef(null);
@@ -39,16 +45,29 @@ const ModalEditPersonalInformation = ({
     }
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
-    onSubmitProfileUpdate({
-      name: values.name,
-      image: image !== image_1 ? fileInputRef.current.files[0] : null,
-    });
-    setSubmitting(false);
-    hideModalEditInformation();
-    toast.success(translations.save[currentLanguage]);
+    try {
+
+
+      onSubmitProfileUpdate({
+        name: values.name,
+        nationality: values.nationality,
+        image: image !== image_1 ? fileInputRef.current.files[0] : null,
+      });
+
+      toast.success(translations.saveData[currentLanguage]);
+      hideModalEditInformation();
+      setRefresh(prev => !prev); // toggle instead of just true
+    } catch (error) {
+      console.error(error);
+      toast.error("حدث خطأ أثناء التحديث");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+
 
   return (
     <CustomModal
@@ -77,11 +96,11 @@ const ModalEditPersonalInformation = ({
 
         <div className="form-edit-content">
           <FormField
-            initialValues={{ name }}
+            initialValues={{ name, nationality }}
             onSubmit={handleSubmit}
           >
             <div className="row g-3">
-              <div className="col-12">
+              <div className="col-6">
                 <InputField
                   label={translations.name[currentLanguage]}
                   name="name"
@@ -90,6 +109,17 @@ const ModalEditPersonalInformation = ({
                   value={name}
                   success
                   onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="col-6">
+                <InputField
+                  label={translations.nationality[currentLanguage]}
+                  name="nationality"
+                  type="text"
+                  placeholder={translations.enterNationality[currentLanguage]}
+                  value={nationality}
+                  success
+                  onChange={(e) => setNationality(e.target.value)}
                 />
               </div>
             </div>
