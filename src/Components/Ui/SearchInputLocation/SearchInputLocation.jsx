@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import "./SearchInputLocation.css";
 import LocationIcon from "assets/Icons/LocationIcon";
 import { useLanguage } from "Components/Languages/LanguageContext";
-
+import searchIcon from "../../../../src/assets/images/serachIcon/serachIcon.png";
 const SearchInputLocation = ({ cities, setSelectedCity }) => {
   const { currentLanguage } = useLanguage();
   const [filteredCities, setFilteredCities] = useState([]);
@@ -91,7 +91,7 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
                   onClick={() => handleCityClick(city)}
                 >
                   <div className="icon-air">
-                    <FontAwesomeIcon icon={faPlane} />
+                    <img src={searchIcon} alt="search-icon" width={20} />
                   </div>
                   {currentLanguage === "en" ? city?.title_en : city?.title_ar}
                 </div>

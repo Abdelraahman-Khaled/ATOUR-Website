@@ -95,6 +95,25 @@ const GeneralAPI = {
     return response.data;
   },
 
+  // News
+  getNews: async (language) => {
+    const response = await axiosInstance.get("/news", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
+    return response.data;
+  },
+
+  getNewsDetails: async (id, language) => {
+    const response = await axiosInstance.get(`/news/${id}`, {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
+    return response.data;
+  },
+
   // Sliders
   getSliders: async (language) => {
     const response = await axiosInstance.get("/sliders", {

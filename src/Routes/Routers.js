@@ -18,6 +18,11 @@ import PayConfirmPage from "../Pages/PayConfirmPage/PayConfirmPage";
 import DetailsTripInfoPage from "Pages/DetailsTripInfoPage/DetailsTripInfoPage";
 import GiftDetail from "Components/Ui/Gifts/GiftDetail";
 import PrivateRoute from "./PrivateRoute";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import TermsConditions from "../Pages/TermsConditions/TermsConditions";
+import Articles from "../Pages/Articles/Articles";
+import News from "../Pages/News/News";
+import NewsDetails from "../Pages/News/Components/NewsDetails/NewsDetails";
 
 let routers = createBrowserRouter([
   {
@@ -49,9 +54,7 @@ let routers = createBrowserRouter([
         path: "blogsPage",
         element: (
           <>
-            <PrivateRoute>
-              <Outlet />
-            </PrivateRoute>
+            <Outlet />
           </>
         ),
         children: [
@@ -144,6 +147,21 @@ let routers = createBrowserRouter([
       },
       { path: "natureDventuresPage", element: <NatureDventuresPage /> },
       { path: "payConfirmPage", element: <PayConfirmPage /> },
+      { path: "aboutUs", element: <AboutUs /> },
+      { path: "termsConditions", element: <TermsConditions /> },
+      { path: "articles", element: <Articles /> },
+      {
+        path: "news",
+        element: (
+          <>
+            <Outlet />
+          </>
+        ),
+        children: [
+          { path: "", element: <News /> },
+          { path: ":idCardDetailsNews", element: <NewsDetails /> },
+        ],
+      },
       { path: "*", element: <NotFound /> },
     ],
   },

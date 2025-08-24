@@ -1,7 +1,5 @@
-import GeneralAPI from "api/generalApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import img from "../../../../../assets/images/blogs/01.png";
 import imgUser from "../../../../../assets/images/users/01.png";
 import "./BannerDetails.css";
@@ -17,41 +15,9 @@ const text = {
     home: "Home",
   },
 };
-const InfoBlogDetails = () => {
-  const [blogDetailsCard, setBlogDetailsCard] = useState(null); // State to store fetched data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
+const InfoBlogDetails = ({ blogDetailsCard }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  const { idCardDetailsBlog } = useParams();
 
-  // Fetch data on component mount
-  useEffect(() => {
-    const fetchTripData = async () => {
-      try {
-        const response = await GeneralAPI.getBlogDetails(idCardDetailsBlog, currentLanguage); // Replace with your API call
-        setBlogDetailsCard(response.data); // Store fetched data in state
-      } catch (err) {
-        console.error("Error fetching trip data:", err);
-        setError("Failed to load trip data. Please try again later.");
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
-
-    fetchTripData();
-  }, [idCardDetailsBlog, currentLanguage]);
-
-  // Display loading state
-  if (loading) {
-    return (
-      <div className="airPlan-dot" />
-
-    );
-  }
-  // Display error state
-  if (error) {
-    return <div>{error}</div>;
-  }
   return (
 
     blogDetailsCard ? (

@@ -119,7 +119,7 @@ const CardFavorite = ({
                 : "Free cancellation is available"}
             </div>
           )}
-          {isTrueTextOneCard_2 && (
+          {isTrueTextOneCard_2 === 0 && (
             <div className="text-one-card d-flex align-items-center gap-2">
               <CheckIcon />{" "}
               {currentLanguage === "ar"

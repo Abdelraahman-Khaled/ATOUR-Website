@@ -41,12 +41,12 @@ const BoxOneContent = ({ tripData }) => {
             </div>
             <div className="info-details-company">
               <h2 className="title">{tripData.title}</h2>
-              <div className="rate-info d-flex align-items-center gap-2 mt-1">
+              {/* <div className="rate-info d-flex align-items-center gap-2 mt-1">
                 <div className="icon-star rate-star-icon">
                   <FontAwesomeIcon icon={faStar} />
                 </div>
                 4.5 {currentLanguage === "ar" ? "تقييم" : "Rate"}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="available-title d-flex align-items-center gap-2">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ButtonScroll.css";
-import img from "../../assets/images/buttonScroll/airplane.svg";
+import MountainnImg from "../../assets/images/buttonScroll/mountain.svg";
 
 const ButtonScroll = () => {
   const [isActive, setIsActive] = useState(false);
@@ -45,13 +45,23 @@ const ButtonScroll = () => {
         onClick={scrollToTop}
         className={`btn-scroll ${isActive ? "active" : ""}`}
       >
-        <img
-          src={img}
-          alt="airplan"
-          width={"25px"}
-          height={"25px"}
-          className="image-svg-air"
-        />
+        <div className="water-container">
+          <div 
+            className="water-fill"
+            style={{ height: `${scrollProgress}%` }}
+          >
+            <svg className="water-waves" viewBox="0 0 100 20">
+              <path d="M0,10 Q15,20 30,10 Q45,0 60,10 Q75,20 90,10 Q105,0 120,10 V30 H0 Z" fill="#00a8ff" />
+            </svg>
+          </div>
+          <img
+            src={MountainnImg}
+            alt="Mountain"
+            width={"25px"}
+            height={"25px"}
+            className="water-drop-icon"
+          />
+        </div>
         <div className="progress-container">
           <svg className="progress-circle" viewBox="0 0 100 100">
             <circle className="progress-circle-track" cx="50" cy="50" r="40" />

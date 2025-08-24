@@ -61,7 +61,7 @@ const TextContent = () => {
       <div className="contact-us-content border-top pt-4 d-flex justify-content-between align-items-center gap-2 flex-wrap">
         <h2 className="title">{content.companyRequests[currentLanguage]}</h2>
         <a
-          href="https://wa.me/01211456847"
+          href="https://wa.me/+966568015093"
           target="_blank"
           className="link-whatsapp btn-main"
           rel="noreferrer"

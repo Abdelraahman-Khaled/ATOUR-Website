@@ -19,9 +19,9 @@ const SliderDetailsContentRight = ({ tripData }) => {
   return (
     <SwiperSlider
       itemsSlider={itemsSlider}
-      sliderNewClass={"slider-height slider-details-right margin-top-1"}
+      sliderNewClass={"slider-height slider-details-right margin-top-1 "}
     >
-      <div className=""></div>
+      { }
     </SwiperSlider>
   );
 };

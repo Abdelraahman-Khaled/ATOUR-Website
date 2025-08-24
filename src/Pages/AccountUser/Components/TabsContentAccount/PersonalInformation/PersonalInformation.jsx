@@ -6,9 +6,12 @@ import { toast } from "react-toastify";
 import ModalEditPersonalInformation from "./ModalEditPersonalInformation";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useProfile } from "context/ProfileContext";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 const PersonalInformation = () => {
-  const { setProfile } = useProfile();
+  const { setProfile, isAuthenticated } = useProfile();
+  const navigate = useNavigate();
 
   const { currentLanguage } = useLanguage(); // Get the current language
   const [refresh, setRefresh] = useState(false); // State to trigger refresh
@@ -20,8 +23,22 @@ const PersonalInformation = () => {
     image: "",
   });
 
+  const validation = Yup.object().shape({
+    name: Yup.string(),
+    nationality: Yup.string(),
+    dateOfBirth: Yup.string(),
+    userType: Yup.string(),
+    image: Yup.string()
+  })
   const [loading, setLoading] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
+
+  // Check authentication on component mount
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   const showEditInfoButton = () => {
     setShowEditModal(true);
@@ -33,6 +50,11 @@ const PersonalInformation = () => {
 
   // Fetch profile data
   useEffect(() => {
+    // Don't fetch if not authenticated
+    if (!isAuthenticated()) {
+      setLoading(false);
+      return;
+    }
 
     const fetchProfile = async () => {
       try {
@@ -57,14 +79,20 @@ const PersonalInformation = () => {
         }
       } catch (error) {
         console.error("Error fetching profile data:", error);
-        toast.error(translations.fetchError[currentLanguage]);
+        // Check if this is an authentication error
+        if (error.response && error.response.status === 401) {
+          // Redirect to home page if unauthorized
+          navigate("/");
+        } else {
+          toast.error(translations.fetchError[currentLanguage]);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchProfile();
-  }, [currentLanguage, refresh]);
+  }, [currentLanguage, refresh, isAuthenticated, navigate]);
 
   // Handle profile update
   const handleProfileUpdate = async (updatedProfile) => {
@@ -154,7 +182,11 @@ const PersonalInformation = () => {
           {translations.name[currentLanguage]}
         </h2>
 
-        <FormField key={refresh ? "refresh-1" : "refresh-0"} initialValues={profile} onSubmit={() => { }}>
+        <FormField
+          key={refresh ? "refresh-1" : "refresh-0"}
+          initialValues={profile}
+          validationSchema={validation}
+          onSubmit={() => { }}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
               <InputField

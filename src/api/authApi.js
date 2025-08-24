@@ -212,7 +212,7 @@ const AuthAPI = {
     try {
       const response = await axiosInstance.post("/verify-otp", { email, code });
       if (response.data.success === true) {
-        toast.success(getToastMessages().verifyCodeSuccess[getCurrentLanguage()])
+        toast.success(getToastMessages().verifyOtpSuccess[getCurrentLanguage()])
       } return response.data;
     } catch (error) {
       handleError(error);

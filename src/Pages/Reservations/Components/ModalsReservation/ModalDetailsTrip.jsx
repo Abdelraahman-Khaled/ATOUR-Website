@@ -4,7 +4,7 @@ import CardReservation from "../AllCardsReservations/CardReservation";
 import image from "../../../../assets/images/slider/01.png";
 import image_3 from "../../../../assets/images/slider/01.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import InterrogativeIcon from "assets/Icons/InterrogativeIcon";
 import { useState } from "react";
 import ModalRemove from "Components/Ui/ModalRemove/ModalRemove";
@@ -12,9 +12,21 @@ import SubmitTicketProblem from "./SubmitTicketProblem";
 import { format, parseISO } from "date-fns";
 import EffectiveneCardReservation from "../AllCardsReservations/Effectivenes/EffectiveneCardReservation";
 import GiftCardReservation from "../AllCardsReservations/Gifts/GiftCardReservation";
+import ModalProviderInformation from "Pages/DetailsTripInfoPage/Components/ModalsDetailsTripInfo/ModalProviderInformation/ModalProviderInformation";
 
 const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, currentLanguage, refresh }) => {
   const [showModalRemove, setShowModalRemove] = useState(false);
+  const [showModalProviderInformation, setShowModalProviderInformation] =
+    useState(false);
+
+  const buttonShow = () => {
+    setShowModalProviderInformation(true);
+  };
+
+  const buttonHide = () => {
+    setShowModalProviderInformation(false);
+  };
+
 
   const buttonShowModal = () => {
     setShowModalRemove(true);
@@ -85,6 +97,10 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
 
   return (
     <>
+      <ModalProviderInformation
+        showModalProviderInformation={showModalProviderInformation}
+        hideModalProviderInformation={buttonHide}
+      />
       <ModalRemove
         showModalPayRemove={showModalRemove}
         hideModalPayRemove={hideShowModal}
@@ -184,7 +200,8 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                       </div>
                     </div>
                     {/* ============= END CARD DETAILS ONE PAY ============== */}
-                    <div className="services-provider border-card-details mt-3">
+                    <div className="services-provider border-card-details mt-3"
+                    >
                       <h2 className="title">{text[currentLanguage].serviceProvider}</h2>
                       <div className="content-serv pt-3 d-flex align-items-center  gap-3">
                         <div className="image-serv">
@@ -198,15 +215,21 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                         </div>
                         <div className="info-serv">
                           <h2 className="title">شركة سينتك للرحلات</h2>
-                          <div className="rate-serv d-flex mt-1 align-items-center  gap-2">
+                          {/* <div className="rate-serv d-flex mt-1 align-items-center  gap-2">
                             <FontAwesomeIcon
                               icon={faStar}
                               className="rate-star-icon"
                             />
                             4.5
-                          </div>
+                          </div> */}
                         </div>
                       </div>
+                      <button
+                        onClick={buttonShow}
+                        className="add-new-rate btn-main w-100 mt-3"
+                      >
+                        <FontAwesomeIcon icon={faPlus} /> إضافة تقييم
+                      </button>
                     </div>
                   </div>
                   {/* ============ END ALL INFO DETAILS PAYMENTS ============= */}

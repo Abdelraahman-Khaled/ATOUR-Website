@@ -8,9 +8,15 @@ import ModalEditInfoAccount from "./ModalEditInfoAccount";
 import ProfileAPI from "api/profileApi";
 import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { useProfile } from "context/ProfileContext";
+import { useNavigate } from "react-router-dom";
 import imgProfile from "../../../../../assets/images/defaultImg/default-profile.jpg"
+
 const AccountInformationContent = () => {
   const { currentLanguage } = useLanguage(); // Get current language
+  const { isAuthenticated } = useProfile(); // Get authentication status
+  const navigate = useNavigate();
+  
   const [profileData, setProfileData] = useState({
     email: "",
     phone: "",
@@ -19,6 +25,13 @@ const AccountInformationContent = () => {
   const [loading, setLoading] = useState(true);
   const [showModalEditAccount, setShowModalEditAccount] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("+966 555 555 555");
+  
+  // Check authentication on component mount
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   const translations = {
     accountInfo: { ar: "معلومات الحساب", en: "Account Information" },
@@ -37,6 +50,12 @@ const AccountInformationContent = () => {
 
   // Fetch account information
   useEffect(() => {
+    // Don't fetch if not authenticated
+    if (!isAuthenticated()) {
+      setLoading(false);
+      return;
+    }
+    
     const fetchAccountInfo = async () => {
       try {
         const response = await ProfileAPI.getProfile();
@@ -51,14 +70,20 @@ const AccountInformationContent = () => {
         }
       } catch (error) {
         console.error("Error fetching account info:", error);
-        toast.error(translations.fetchError[currentLanguage]);
+        // Check if this is an authentication error
+        if (error.response && error.response.status === 401) {
+          // Redirect to home page if unauthorized
+          navigate("/");
+        } else {
+          toast.error(translations.fetchError[currentLanguage]);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchAccountInfo();
-  }, [currentLanguage]);
+  }, [currentLanguage, isAuthenticated, navigate]);
 
   const handlePhoneNumberChange = (isValid, value) => {
     setPhoneNumber(String(value));

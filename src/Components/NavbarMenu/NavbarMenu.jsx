@@ -102,28 +102,24 @@ const NavbarMenu = () => {
           </div>
 
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
-            {isAuthenticated() ? (
-              <Nav className="me-auto" data-aos="fade-right">
-                <span className="nav-link pointer" onClick={buttonShowLogin}>
-                  {currentLanguage === "en" ? "Events" : "الفعاليات"}
-                </span>
-                <span className="nav-link pointer" onClick={buttonShowLogin}>
-                  {currentLanguage === "en" ? " gifts " : "الهدايا "}
-                </span>
-                <SearchInputLocation cities={cities} setSelectedCity={setSelectedCity} />
-              </Nav>
-            ) : (
-              <Nav className="me-auto" data-aos="fade-right">
-                {/* <span className="nav-link pointer" onClick={buttonShowLogin}>
-                  {currentLanguage === "en" ? "Events" : "الفعاليات"}
-                </span>
-                <span className="nav-link pointer" onClick={buttonShowLogin}>
-                  <Gift />
-                  {currentLanguage === "en" ? " gifts " : "الهدايا "}
-                </span> */}
-                <SearchInputLocation cities={cities} setSelectedCity={buttonShowLogin} />
-              </Nav>
-            )}
+            <Nav className="me-auto" data-aos="fade-right">
+              <NavLink to="/blogsPage" className="nav-link">
+                {currentLanguage === "en" ? "Blog" : "المدونة"}
+              </NavLink>
+              <NavLink to="/news" className="nav-link">
+                {currentLanguage === "en" ? "News" : "الأخبار"}
+              </NavLink>
+              <NavLink to="/articles" className="nav-link">
+                {currentLanguage === "en" ? "Articles" : "المقالات"}
+              </NavLink>
+              <NavLink to="/aboutUs" className="nav-link">
+                {currentLanguage === "en" ? "About Us" : "من نحن"}
+              </NavLink>
+              <NavLink to="/termsConditions" className="nav-link">
+                {currentLanguage === "en" ? "Terms & Conditions" : "الشروط والأحكام"}
+              </NavLink>
+              <SearchInputLocation cities={cities} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
+            </Nav>
 
             <div className="left-nav-menu d-flex align-items-center gap-3 ">
               <div className="icon-lang icon-border">

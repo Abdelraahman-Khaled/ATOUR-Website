@@ -2,10 +2,10 @@ import { useState } from "react";
 import InputFiled from "Components/Forms/InputField";
 import * as Yup from "yup";
 import AuthAPI from "api/authApi";
-import { useLanguage } from "Components/Languages/LanguageContext";
 import FormField from "Components/Forms/FormFiled";
 import EndLoginInfo from "../EndLoginInfo/EndLoginInfo";
 import OtpForm from "Components/Auth/OtpForm/OtpForm";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const ForgotPasswordForm = ({ onClose }) => {
     const { currentLanguage } = useLanguage();
@@ -81,7 +81,7 @@ const ForgotPasswordForm = ({ onClose }) => {
                         Yup.string().email().isValidSync(value) ||
                         Yup.string()
                             .matches(/^[0-9]{10,14}$/, {
-                                message: content.validation.phoneInvalid[currentLanguage],
+                                message: content.validation.emailOrPhoneInvalid[currentLanguage],
                                 excludeEmptyString: true,
                             })
                             .isValidSync(value)

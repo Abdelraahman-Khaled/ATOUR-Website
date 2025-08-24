@@ -1,69 +1,111 @@
 .btn-scroll {
-    position: fixed;
-    bottom: 30px;
-    right: -60px;
-    transition: all 0.5s;
-    z-index: 0;
-    width: 45px;
-    height: 45px;
-    background: var(--green-01-color);
-    font-size: 20px;
-    color: var(--white-01-color);
-    border: var(--border-02);
-    border-color: var(--green-01-color);
-    border-radius: 50px;
-    z-index: 90;
+  position: fixed;
+  bottom: 30px;
+  right: -60px;
+  transition: all 0.5s;
+  z-index: 0;
+  width: 45px;
+  height: 45px;
+  background: white;
+  font-size: 20px;
+  color: var(--white-01-color);
+  border: none;
+  border-radius: 50px;
+  z-index: 90;
+  overflow: hidden;
 }
 
 .btn-scroll.active {
-    right: 30px;
+  right: 30px;
 }
 
+/* Water container styles */
+.btn-scroll .water-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+}
 
+.btn-scroll .water-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #00a8ff;
+  transition: height 0.3s ease;
+}
+
+.btn-scroll .water-waves {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 200%;
+  height: 20px;
+  animation: wave 3s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.btn-scroll .water-drop-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
 
 .btn-scroll .progress-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .btn-scroll .progress-circle {
-    width: 55px;
-    height: 55px;
+  width: 55px;
+  height: 55px;
 }
 
 .btn-scroll .progress-circle-track {
-    fill: none;
-    stroke: #f0f0f0;
-    stroke-width: 8;
+  fill: none;
+  stroke: rgba(240, 240, 240, 0.3);
+  stroke-width: 8;
 }
 
 .btn-scroll .progress-circle-bar {
-    fill: none;
-    stroke: var(--warning-01-color);
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-dasharray: 0 251.2;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
+  fill: none;
+  stroke: #96c896;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 0 251.2;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
 
-
 html[dir="ltr"] .btn-scroll {
-    right: initial;
-    left: -60px;
+  right: initial;
+  left: -60px;
 }
 
 html[dir="ltr"] .btn-scroll.active {
-    left: 24px;
-    right: initial;
+  left: 24px;
+  right: initial;
 }
-
 
 /* SCREEN 991PX */
 @media screen and (max-width: 991px) {
-    .btn-scroll {
-        bottom: 82px !important;
-    }
+  .btn-scroll {
+    bottom: 82px !important;
+  }
 }

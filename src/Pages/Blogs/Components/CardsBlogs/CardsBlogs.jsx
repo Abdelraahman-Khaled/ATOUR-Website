@@ -58,26 +58,20 @@ const CardsBlogs = () => {
   return (
     <div className="cards-blog-content padding-80">
       {/* =========== START ROW =========== */}
-      <div className="row g-3 gy-4">
-        {blogData.length > 0 ? blogData.map((item) => {
-          return (
-            <>
-              {/* ========== START COL ========== */}
-              <div key={item.id} className="col-12 col-sm-6 col-md-4">
-                <CardBlog
-                  routeBlogCard={`/blogsPage/${item.id}`}
-                  imageBlog={item.photo}
-                  titleBlog={item.title}
-                  imageUserBlog={item.publisherphoto}
-                  nameUserBlog={item.publisher_name}
-                  timeAddedBlog={item.created_at}
-                  description={item.content}
-                />
-              </div>
-              {/* ========== END COL ========== */}
-            </>
-          );
-        }) : (
+      <div className="row g-4">
+        {blogData.length > 0 ? blogData.map((item) => (
+          <div key={item.id} className="col-12 col-sm-6 col-md-4 d-flex">
+            <CardBlog
+              routeBlogCard={`/blogsPage/${item.id}`}
+              imageBlog={item.photo}
+              titleBlog={item.title}
+              imageUserBlog={item.publisherphoto}
+              nameUserBlog={item.publisher_name}
+              timeAddedBlog={item.created_at}
+              description={item.content}
+            />
+          </div>
+        )) : (
           <p className="text-section-api fs-6 fw-medium text-center pt-5">
             {text[currentLanguage].noData}{" "}
             <Link

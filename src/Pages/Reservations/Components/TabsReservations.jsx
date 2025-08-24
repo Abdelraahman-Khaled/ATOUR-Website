@@ -16,7 +16,8 @@ const TabsReservations = () => {
   // State for buttons
   const [tabs_1, setTabs_1] = useState([
     { id: 1, title: { ar: "الحالية", en: "Current" }, icon: "", active: true },
-    { id: 2, title: { ar: "المنتهية", en: "Completed" }, icon: "", active: false },
+    { id: 2, title: { ar: "المكتملة", en: "Completed" }, icon: "", active: false },
+    { id: 3, title: { ar: "المنتهية", en: "Ended" }, icon: "", active: false },
   ]);
 
   const handleTabClick = (id) => {
@@ -30,8 +31,9 @@ const TabsReservations = () => {
 
   // State for fetching
   const { currentLanguage } = useLanguage(); // Get the current language
-  const [curren, setCurrent] = useState(null);
-  const [compleated, setCompleted] = useState(null);
+  const [curren, setCurrent] = useState({ gifts: [], effectivenes: [], trips: [] });
+  const [compleated, setCompleted] = useState({ gifts: [], effectivenes: [], trips: [] });
+  const [ended, setEnded] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const [refresh, setRefresh] = useState(false)
@@ -45,8 +47,14 @@ const TabsReservations = () => {
     const fetchReservations = async () => {
       try {
         const data = await BookingAPI.getBookings(currentLanguage); // Fetch data from the API
-        setCurrent(data.data.curren);
-        setCompleted(data.data.compleated);
+        console.log(data);
+
+        // Handle the new API response format
+        if (data && data.data) {
+          setCurrent(data.data.curren || { gifts: [], effectivenes: [], trips: [] });
+          setCompleted(data.data.compleated || { gifts: [], effectivenes: [], trips: [] });
+          setEnded(data.data.ended || { gifts: [], effectivenes: [], trips: [] });
+        }
       } catch (err) {
         console.error("Error fetching reservation data:", err);
         setError("Failed to load reservation data. Please try again later.");
@@ -71,6 +79,15 @@ const TabsReservations = () => {
   }
 
   // Dynamically update tabsData based on the active tab
+  const getActiveTabData = () => {
+    if (tabs_1[0].active) return curren; // Current tab
+    if (tabs_1[1].active) return compleated; // Completed tab
+    if (tabs_1[2].active) return ended; // Ended tab
+    return curren; // Default to current
+  };
+
+  const activeData = getActiveTabData();
+
   const tabsData = [
     {
       eventKey: "tab1",
@@ -81,7 +98,7 @@ const TabsReservations = () => {
       ),
       content: (
         <AllCardsReservations
-          reservation={tabs_1[0].active ? curren.trips : compleated.trips}
+          reservation={activeData.trips || []}
           refresh={handleRefresh}
         />
       ),
@@ -94,9 +111,8 @@ const TabsReservations = () => {
         </>
       ),
       content: <AllCardsResrvationsEffective
-        reservation={tabs_1[0].active ? curren.effectivenes : compleated.effectivenes}
+        reservation={activeData.effectivenes || []}
         refresh={handleRefresh}
-
       />,
     },
     {
@@ -107,9 +123,8 @@ const TabsReservations = () => {
         </>
       ),
       content: <AllCardsResrvationsGift
-        reservation={tabs_1[0].active ? curren.gifts : compleated.gifts}
+        reservation={activeData.gifts || []}
         refresh={handleRefresh}
-
       />,
     },
   ];
@@ -161,22 +176,10 @@ const TabsReservations = () => {
                 aria-labelledby={`pills-${tab.title.ar.toLowerCase()}-tab`}
               >
                 {/* Content for each tab */}
-                {tab.title.ar === "الحالية" && (
-                  <>
-                    <TabsContent
-                      tabsData={tabsData}
-                      newClassTabsContent={"tabs-reservations-content-1"}
-                    />
-                  </>
-                )}
-                {tab.title.ar === "المنتهية" && (
-                  <>
-                    <TabsContent
-                      tabsData={tabsData}
-                      newClassTabsContent={"tabs-reservations-content-1"}
-                    />
-                  </>
-                )}
+                <TabsContent
+                  tabsData={tabsData}
+                  newClassTabsContent={"tabs-reservations-content-1"}
+                />
               </div>
             ))}
           </div>

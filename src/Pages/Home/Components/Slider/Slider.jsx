@@ -115,7 +115,7 @@ const Slider = () => {
             )}
             <div className="main-add-place-date main-add-place-date--1">
               <SearchInputLocation
-                setSelectedCity={setSelectedCity}
+                setSelectedCity={isAuthenticated() ? setSelectedCity : () => setShowLogin(true)}
                 cities={cities}
               />
               <button
@@ -134,8 +134,9 @@ const Slider = () => {
                     setShowLogin(true);
                   }
                 }}
-                className="btn-main btn-search-submit"
+                className={`btn-main btn-search-submit ${!isAuthenticated() ? 'login-required' : ''}`}
                 type="submit"
+                title={!isAuthenticated() ? (currentLanguage === "ar" ? "يرجى تسجيل الدخول للبحث" : "Please login to search") : ""}
               >
                 <FontAwesomeIcon icon={faSearch} />
               </button>
