@@ -5,8 +5,7 @@ import "./Slider.css";
 import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
 import SearchInputLocation from "Components/Ui/SearchInputLocation/SearchInputLocation";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import GeneralAPI from "api/generalApi";
-import ContentAPI from "api/contentApi";
+import { useHome } from "context/HomeContext";
 import { useNavigate } from "react-router-dom";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 // import Loader from "Components/Auth/Components/Loader/Loader";
@@ -14,12 +13,10 @@ import { toast } from "react-toastify";
 
 const Slider = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  const [sliders, setSliders] = useState([]);
-  const [cities, setCities] = useState([]);
+  const { sliders, cities, error: contextError } = useHome(); // Use data from HomeContext
   const [selectedCity, setSelectedCity] = useState(null);
   const navigate = useNavigate();
 
-  // const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const [activeSlideIndex, setActiveSlideIndex] = useState(0); // State to track active slide index
   const router = useNavigate(); // Initialize router for navigation
@@ -28,22 +25,12 @@ const Slider = () => {
   const [showLogin, setShowLogin] = useState(false);
   const hideLogin = () => setShowLogin(false);
 
+  // Set error from context if available
   useEffect(() => {
-    const fetchSliderData = async () => {
-      try {
-        const sliderRes = await GeneralAPI.getSliders(currentLanguage);
-        const citiesRes = await ContentAPI.getCities(currentLanguage);
-
-        setSliders(sliderRes.data || []);
-        setCities(citiesRes.data || []);
-      } catch (err) {
-        console.error("Error fetching sliders or cities:", err);
-        setError("Failed to fetch slider data. Please try again later.");
-      }
-    };
-
-    fetchSliderData();
-  }, [currentLanguage]);
+    if (contextError) {
+      setError(contextError);
+    }
+  }, [contextError]);
 
 
   useEffect(() => {

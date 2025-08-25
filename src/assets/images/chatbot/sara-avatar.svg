@@ -1,0 +1,25 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="50" fill="#f5f5f5"/>
+  
+  <!-- Hijab -->
+  <path d="M50 85C67.6731 85 82 70.6731 82 53V47C82 29.3269 67.6731 15 50 15C32.3269 15 18 29.3269 18 47V53C18 70.6731 32.3269 85 50 85Z" fill="#148035"/>
+  
+  <!-- Face -->
+  <ellipse cx="50" cy="50" rx="25" ry="30" fill="#FFDFC4"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="40" cy="45" rx="3" ry="4" fill="#5B3B24"/>
+  <ellipse cx="60" cy="45" rx="3" ry="4" fill="#5B3B24"/>
+  
+  <!-- Eyebrows -->
+  <path d="M36 38C36 38 40 36 44 38" stroke="#5B3B24" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M56 38C56 38 60 36 64 38" stroke="#5B3B24" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Smile -->
+  <path d="M42 60C42 60 46 65 50 65C54 65 58 60 58 60" stroke="#5B3B24" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Hijab front piece -->
+  <path d="M25 47C25 47 30 30 50 30C70 30 75 47 75 47" fill="#148035"/>
+  <path d="M18 53C18 53 25 70 50 70C75 70 82 53 82 53" fill="#148035"/>
+</svg>

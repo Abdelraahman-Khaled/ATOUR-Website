@@ -5,52 +5,36 @@ import CardsCollections from "./Components/CardsCollections/CardsCollections";
 import BannerHome from "./Components/BannerHome/BannerHome";
 import Slider from "./Components/Slider/Slider";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
-import { useEffect, useState } from "react";
-import HomeAPI from "api/homeApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { useHome } from "context/HomeContext";
 import OneOffer from "./Components/OneOffer/OneOffer";
+import Loader from "Components/Auth/Components/Loader/Loader";
 const Home = () => {
-  const [offerData, setOfferData] = useState(null); // State to store home data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
-  const [mostVisited, setMostVisited] = useState(null)
-  const [experince, setExperince] = useState(null)
-  const [effectivenes, setEffectivenes] = useState(null)
   const { currentLanguage } = useLanguage(); // Get the current language
+  const { homeData, loading, error } = useHome(); // Use the HomeContext
 
-
-  useEffect(() => {
-    const fetchHomeData = async () => {
-      try {
-        const data = await HomeAPI.getHomeData(currentLanguage);
-        
-        setMostVisited(data.data.most_visited);
-        setExperince(data.data.old_experiences);
-        setEffectivenes(data.data.effectivenes);
-        setOfferData(data.data.offers);
-
-      } catch (err) {
-        setError("Failed to load home data.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHomeData();
-  }, [currentLanguage]);
+  // Extract data from homeData if it exists
+  const mostVisited = homeData?.most_visited || [];
+  const experince = homeData?.old_experiences || [];
+  const effectivenes = homeData?.effectivenes || [];
+  const offerData = homeData?.offers || null;
 
 
 
 
   if (loading) {
     return (
-      <div style={{ margin: "200px 0px" }}>
-      </div>
+      <Loader />
     );
   }
 
   if (error) {
     return <div>{error}</div>; // Display error message if fetching fails
+  }
+
+  // If no data is available yet, show a message
+  if (!homeData) {
+    return <div className="text-center">لا توجد بيانات متاحة</div>;
   }
   return (
     <>
