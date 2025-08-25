@@ -7,102 +7,25 @@ import InputFiled from "Components/Forms/InputField";
 import * as Yup from "yup";
 import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi";
-import { useLanguage } from "Components/Languages/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const Final = ({ showFinalForm, hideFinalForm, onFormSubmit, goToLogin, emailOrPhone }) => {
-  const { currentLanguage } = useLanguage(); // Get current language
-
-  const content = {
-    title: {
-      ar: "الخطوة النهائية",
-      en: "Final Step",
-    },
-    email: {
-      ar: "البريد الإلكتروني",
-      en: "Email",
-    },
-    name: {
-      ar: "الاسم",
-      en: "Name",
-    },
-    phone: {
-      ar: "رقم الهاتف",
-      en: "Phone Number",
-    },
-    password: {
-      ar: "كلمة المرور",
-      en: "Password",
-    },
-    passwordConfirm: {
-      ar: "تأكيد كلمة المرور",
-      en: "Confirm Password",
-    },
-    submit: {
-      ar: "إتمام التسجيل",
-      en: "Complete Registration",
-    },
-    alreadyHaveAccount: {
-      ar: "لديك حساب بالفعل ؟",
-      en: "Already have an account?",
-    },
-    login: {
-      ar: "تسجيل الدخول",
-      en: "Login",
-    },
-    validation: {
-      email: {
-        ar: "ادخل بريد إلكتروني صالح",
-        en: "Enter a valid email",
-      },
-      emailRequired: {
-        ar: "البريد الإلكتروني مطلوب",
-        en: "Email is required",
-      },
-      nameRequired: {
-        ar: "الاسم مطلوب",
-        en: "Name is required",
-      },
-      phoneInvalid: {
-        ar: "رقم هاتف غير صالح",
-        en: "Invalid phone number",
-      },
-      phoneRequired: {
-        ar: "رقم الهاتف مطلوب",
-        en: "Phone number is required",
-      },
-      passwordMin: {
-        ar: "كلمة المرور يجب أن تكون على الأقل 8 أحرف",
-        en: "Password must be at least 8 characters",
-      },
-      passwordRequired: {
-        ar: "كلمة المرور مطلوبة",
-        en: "Password is required",
-      },
-      passwordConfirmMatch: {
-        ar: "تأكيد كلمة المرور غير متطابق",
-        en: "Password confirmation does not match",
-      },
-      passwordConfirmRequired: {
-        ar: "تأكيد كلمة المرور مطلوب",
-        en: "Password confirmation is required",
-      },
-    }
-  };
+  const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email(content.validation.email[currentLanguage])
-      .required(content.validation.emailRequired[currentLanguage]),
-    name: Yup.string().required(content.validation.nameRequired[currentLanguage]),
+      .email(t('auth.final.validation.email'))
+      .required(t('auth.final.validation.emailRequired')),
+    name: Yup.string().required(t('auth.final.validation.nameRequired')),
     phone: Yup.string()
-      .matches(/^[0-9]{10,14}$/, content.validation.phoneInvalid[currentLanguage])
-      .required(content.validation.phoneRequired[currentLanguage]),
+      .matches(/^[0-9]{10,14}$/, t('auth.final.validation.phoneInvalid'))
+      .required(t('auth.final.validation.phoneRequired')),
     password: Yup.string()
-      .min(8, content.validation.passwordMin[currentLanguage])
-      .required(content.validation.passwordRequired[currentLanguage]),
+      .min(8, t('auth.final.validation.passwordMin'))
+      .required(t('auth.final.validation.passwordRequired')),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password"), null], content.validation.passwordConfirmMatch[currentLanguage])
-      .required(content.validation.passwordConfirmRequired[currentLanguage]),
+      .oneOf([Yup.ref("password"), null], t('auth.final.validation.passwordConfirmMatch'))
+      .required(t('auth.final.validation.passwordConfirmRequired')),
   });
 
   const initialValues = {
@@ -132,65 +55,65 @@ const Final = ({ showFinalForm, hideFinalForm, onFormSubmit, goToLogin, emailOrP
     <CustomModal
       show={showFinalForm}
       onHide={hideFinalForm}
-      title={content.title[currentLanguage]}
+      title={t('auth.final.title')}
       newClass={"login-modal"}
     >
       <div className="info-login-content">
         <div className="row g-4 g-md-3">
           <div className="col-12 col-md-6">
-            <HeaderLogin titleTop={content.title[currentLanguage]} />
+            <HeaderLogin titleTop={t('auth.final.title')} />
             <FormField
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={handleFormSubmit}
             >
               <InputFiled
-                label={content.email[currentLanguage]}
+                label={t('auth.final.email')}
                 name="email"
                 type="email"
-                placeholder={content.email[currentLanguage]}
+                placeholder={t('auth.final.email')}
                 success
                 disabled
               />
               <InputFiled
-                label={content.name[currentLanguage]}
+                label={t('auth.final.name')}
                 name="name"
                 type="text"
-                placeholder={content.name[currentLanguage]}
+                placeholder={t('auth.final.name')}
                 success
               />
               <InputFiled
-                label={content.phone[currentLanguage]}
+                label={t('auth.final.phone')}
                 name="phone"
                 type="number"
-                placeholder={content.phone[currentLanguage]}
+                placeholder={t('auth.final.phone')}
                 success
               />
               <InputFiled
-                label={content.password[currentLanguage]}
+                label={t('auth.final.password')}
                 name="password"
                 type="password"
-                placeholder={content.password[currentLanguage]}
+                placeholder={t('auth.final.password')}
                 success
               />
               <InputFiled
-                label={content.passwordConfirm[currentLanguage]}
+                label={t('auth.final.passwordConfirm')}
                 name="password_confirmation"
                 type="password"
-                placeholder={content.passwordConfirm[currentLanguage]}
+                placeholder={t('auth.final.passwordConfirm')}
                 success
               />
               <button type="submit" className="btn-main btn-submit w-100 mt-3">
-                {content.submit[currentLanguage]}
+                {t('auth.final.submit')}
               </button>
             </FormField>
             <div className="bottom-info-not-accout gap-2 d-flex justify-content-center align-items-center">
-              {content.alreadyHaveAccount[currentLanguage]}{" "}
+              {t('auth.final.alreadyHaveAccount')}{" "}
               <div
                 onClick={goToLogin}
                 className="link-a cursor-pointer-event text-decoration-underline"
               >
-                {content.login[currentLanguage]}
+                {t('auth.final.login')}
               </div>
             </div>
             <EndLoginInfo />

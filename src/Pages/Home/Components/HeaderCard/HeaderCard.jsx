@@ -31,21 +31,61 @@ const HeaderCard = () => {
 
   const allButtons = [
     {
-      text: { en: "Experiences", ar: "جَوْلات " },
+      text: {
+        en: "Experiences",
+        ar: "جَوْلات",
+        fr: "Expériences",
+        de: "Erlebnisse",
+        es: "Experiencias",
+        tr: "Deneyimler",
+        ru: "Впечатления",
+        zh: "体验",
+        ko: "경험",
+        pt: "Experiências",
+        ur: "تجربات",
+        ja: "体験",
+      },
       icon: <Tree />,
       link: "/tripsPage",
     },
     {
-      text: { en: "Events", ar: "فعاليات" },
+      text: {
+        en: "Events",
+        ar: "فعاليات",
+        fr: "Événements",
+        de: "Veranstaltungen",
+        es: "Eventos",
+        tr: "Etkinlikler",
+        ru: "События",
+        zh: "活动",
+        ko: "이벤트",
+        pt: "Eventos",
+        ur: "تقریبات",
+        ja: "イベント",
+      },
       icon: <Ticket />,
       link: "/eventsPage",
     },
     {
-      text: { en: "Souvenirs", ar: "هدايا تذكارية" },
+      text: {
+        en: "Souvenirs",
+        ar: "هدايا تذكارية",
+        fr: "Souvenirs",
+        de: "Souvenirs",
+        es: "Recuerdos",
+        tr: "Hediyelik Eşyalar",
+        ru: "Сувениры",
+        zh: "纪念品",
+        ko: "기념품",
+        pt: "Lembranças",
+        ur: "یادگاری تحائف",
+        ja: "お土産",
+      },
       icon: <Gift />,
       link: "/offers",
     },
   ];
+
   return (
     <div data-aos="fade-up" className="all-info-card padding-60 d-flex justify-content-center align-items-center gap-3 flex-wrap">
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />

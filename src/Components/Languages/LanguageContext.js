@@ -2,17 +2,25 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const LanguageContext = createContext();
 
+// Define supported languages
+const SUPPORTED_LANGUAGES = [
+  'en', 'ar', 'fr', 'de', 'es', 'tr', 'ru', 'zh', 'ko', 'pt', 'ur', 'ja'
+];
+
 export const LanguageProvider = ({ children }) => {
-  const [currentLanguage, setCurrentLanguage] = useState(
-    localStorage.getItem("language") || "ar"
-  );
+  // Get language from localStorage or use default (ar)
+  const savedLanguage = localStorage.getItem("language");
+  const defaultLanguage = SUPPORTED_LANGUAGES.includes(savedLanguage) ? savedLanguage : "ar";
+  
+  const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
 
   useEffect(() => {
     //  SAVE LANGUAGE TO LOCAL STORAGE
     localStorage.setItem("language", currentLanguage);
   }, [currentLanguage]);
 
-  const direction = currentLanguage === "ar" ? "rtl" : "ltr";
+  // Set direction based on language (RTL for Arabic and Urdu, LTR for others)
+  const direction = ["ar", "ur"].includes(currentLanguage) ? "rtl" : "ltr";
 
   useEffect(() => {
     //      //  SAVE DIRECTION LANGUAGE TO LOCAL STORAGE

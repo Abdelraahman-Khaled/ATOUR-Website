@@ -1,0 +1,31 @@
+.current-flag {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.language-dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 180px !important;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 15px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+/* RTL support */
+[dir="rtl"] .flag-icon {
+  margin-right: 0;
+  margin-left: 10px;
+}

@@ -51,7 +51,58 @@ const CardCollection = ({
       priceStartText: "Starting from",
       perPersonText: "/ per person",
     },
+    fr: {
+      ratingText: "Évaluation",
+      priceStartText: "À partir de",
+      perPersonText: "/ par personne",
+    },
+    de: {
+      ratingText: "Bewertung",
+      priceStartText: "Ab",
+      perPersonText: "/ pro Person",
+    },
+    es: {
+      ratingText: "Calificación",
+      priceStartText: "Desde",
+      perPersonText: "/ por persona",
+    },
+    tr: {
+      ratingText: "Puan",
+      priceStartText: "Başlangıç fiyatı",
+      perPersonText: "/ kişi başı",
+    },
+    ru: {
+      ratingText: "Рейтинг",
+      priceStartText: "Начиная с",
+      perPersonText: "/ за человека",
+    },
+    zh: {
+      ratingText: "评分",
+      priceStartText: "起价",
+      perPersonText: "/ 每人",
+    },
+    ko: {
+      ratingText: "평점",
+      priceStartText: "부터 시작",
+      perPersonText: "/ 1인당",
+    },
+    pt: {
+      ratingText: "Avaliação",
+      priceStartText: "A partir de",
+      perPersonText: "/ por pessoa",
+    },
+    ur: {
+      ratingText: "درجہ بندی",
+      priceStartText: "سے شروع",
+      perPersonText: "/ فی شخص",
+    },
+    ja: {
+      ratingText: "評価",
+      priceStartText: "開始価格",
+      perPersonText: "/ 1人あたり",
+    },
   };
+
 
   const { ratingText, priceStartText, perPersonText } = localization[currentLanguage];
 

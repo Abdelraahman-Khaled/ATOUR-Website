@@ -5,12 +5,17 @@ import "./SearchInputLocation.css";
 import LocationIcon from "assets/Icons/LocationIcon";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import searchIcon from "../../../../src/assets/images/serachIcon/serachIcon.png";
+import { translations } from "./translations";
+
+
 const SearchInputLocation = ({ cities, setSelectedCity }) => {
   const { currentLanguage } = useLanguage();
   const [filteredCities, setFilteredCities] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showCities, setShowCities] = useState(false);
   const containerRef = useRef(null);
+  const t = (key) =>
+    translations[key][currentLanguage] || translations[key]["en"];
 
   // Detect outside click
   useEffect(() => {
@@ -66,11 +71,7 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
         <input
           type="text"
           className="form-control input-search-location"
-          placeholder={
-            currentLanguage === "en"
-              ? "Where to? Specify your destination"
-              : "إلى أين ؟ حدد وجهتك"
-          }
+          placeholder={t("placeholderSearch")}
           value={inputValue}
           onChange={handleInputChange}
           onFocus={() => setShowCities(true)}

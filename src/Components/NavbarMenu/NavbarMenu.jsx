@@ -11,11 +11,11 @@ import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import SearchInputLocation from "Components/Ui/SearchInputLocation/SearchInputLocation";
 import ContentAPI from "api/contentApi";
 import { isAuthenticated } from "api/axiosInstance";
-import { useLanguage } from "Components/Languages/LanguageContext";
+import useTranslation from "Components/Languages/useTranslation";
 import Loader from "Components/Auth/Components/Loader/Loader";
 
 const NavbarMenu = () => {
-  const { currentLanguage } = useLanguage(); // Get the current language from the context
+  const { t } = useTranslation(); // Get the translation function
   const [isMenuFixed, setMenuFixed] = useState(false);
   const [cities, setCities] = useState([]);
   const [error, setError] = useState("");
@@ -104,19 +104,19 @@ const NavbarMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             <Nav className="me-auto" data-aos="fade-right">
               <NavLink to="/blogsPage" className="nav-link">
-                {currentLanguage === "en" ? "Blog" : "المدونة"}
+                {t('navMenu.blog')}
               </NavLink>
               <NavLink to="/news" className="nav-link">
-                {currentLanguage === "en" ? "News" : "الأخبار"}
+                {t('navMenu.news')}
               </NavLink>
               <NavLink to="/articles" className="nav-link">
-                {currentLanguage === "en" ? "Articles" : "المقالات"}
+                {t('navMenu.articles')}
               </NavLink>
               <NavLink to="/aboutUs" className="nav-link">
-                {currentLanguage === "en" ? "About Us" : "من نحن"}
+                {t('navMenu.aboutUs')}
               </NavLink>
               <NavLink to="/termsConditions" className="nav-link">
-                {currentLanguage === "en" ? "Terms & Conditions" : "الشروط والأحكام"}
+                {t('navMenu.termsConditions')}
               </NavLink>
               <SearchInputLocation cities={cities} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
             </Nav>
@@ -138,7 +138,7 @@ const NavbarMenu = () => {
                     <HeartIcon />
                   </Link>
                   <button className="btn-main" onClick={buttonShowLogin}>
-                    {currentLanguage === "en" ? "Login" : "تسجيل الدخول"}
+                    {t('navMenu.login')}
                   </button>
 
                 </>

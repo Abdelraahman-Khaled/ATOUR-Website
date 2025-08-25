@@ -30,24 +30,12 @@ const Slider = () => {
 
   useEffect(() => {
     const fetchSliderData = async () => {
-      const cachedSliders = sessionStorage.getItem("sliders");
-      const cachedCities = sessionStorage.getItem(`cities-${currentLanguage}`);
-
-      if (cachedSliders && cachedCities) {
-        setSliders(JSON.parse(cachedSliders));
-        setCities(JSON.parse(cachedCities));
-        return;
-      }
-
       try {
         const sliderRes = await GeneralAPI.getSliders(currentLanguage);
         const citiesRes = await ContentAPI.getCities(currentLanguage);
 
         setSliders(sliderRes.data || []);
         setCities(citiesRes.data || []);
-
-        sessionStorage.setItem("sliders", JSON.stringify(sliderRes.data || []));
-        sessionStorage.setItem(`cities-${currentLanguage}`, JSON.stringify(citiesRes.data || []));
       } catch (err) {
         console.error("Error fetching sliders or cities:", err);
         setError("Failed to fetch slider data. Please try again later.");

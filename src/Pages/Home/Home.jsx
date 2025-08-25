@@ -20,35 +20,15 @@ const Home = () => {
 
 
   useEffect(() => {
-    const cacheKey = `homeData_${currentLanguage}`;
-    const cachedData = sessionStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      const parsed = JSON.parse(cachedData);
-      setMostVisited(parsed.mostVisited);
-      setExperince(parsed.experince);
-      setEffectivenes(parsed.effectivenes);
-      setOfferData(parsed.offerData);
-      setLoading(false);
-      return;
-    }
-
     const fetchHomeData = async () => {
       try {
         const data = await HomeAPI.getHomeData(currentLanguage);
+        
+        setMostVisited(data.data.most_visited);
+        setExperince(data.data.old_experiences);
+        setEffectivenes(data.data.effectivenes);
+        setOfferData(data.data.offers);
 
-        const toCache = {
-          mostVisited: data.data.most_visited,
-          experince: data.data.old_experiences,
-          effectivenes: data.data.effectivenes,
-          offerData: data.data.offers,
-        };
-
-        sessionStorage.setItem(cacheKey, JSON.stringify(toCache));
-        setMostVisited(toCache.mostVisited);
-        setExperince(toCache.experince);
-        setEffectivenes(toCache.effectivenes);
-        setOfferData(toCache.offerData);
       } catch (err) {
         setError("Failed to load home data.");
       } finally {
@@ -60,24 +40,7 @@ const Home = () => {
   }, [currentLanguage]);
 
 
-  // useEffect(() => {
-  //   const fetchHomeData = async () => {
-  //     try {
-  //       const data = await HomeAPI.getHomeData(currentLanguage); // Fetch data from the API
-  //       setMostVisited(data.data.most_visited)
-  //       setExperince(data.data.old_experiences)
-  //       setEffectivenes(data.data.effectivenes)
-  //       setOfferData(data.data.offers)
-  //     } catch (err) {
-  //       console.error("Error fetching home data:", err);
-  //       setError("Failed to load home data. Please try again later.");
-  //     } finally {
-  //       setLoading(false); // Stop the loading spinner
-  //     }
-  //   };
 
-  //   fetchHomeData(); // Call the API on component mount
-  // }, [currentLanguage]);
 
   if (loading) {
     return (

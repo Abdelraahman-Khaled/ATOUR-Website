@@ -4,28 +4,10 @@ import imageBannerHome from "../../../../assets/images/bannerHome/01.png";
 import appStore from "../../../../assets/images/apps/appstore.svg";
 import appGoogle from "../../../../assets/images/apps/googleplay.svg";
 import "./BannerHome.css";
-import { useLanguage } from "Components/Languages/LanguageContext";
+import useTranslation from "Components/Languages/useTranslation";
 
 const BannerHome = () => {
-  const { currentLanguage } = useLanguage(); // Get the current language
-
-  // Localization for text content
-  const localization = {
-    ar: {
-      title: "هل لديك خدمة يمكنك عرضها ؟",
-      description:
-        "اغتنم الفرصة وكن جزءًا من عالم مليء بالإبداع والتواصل! إذا كنت تمتلك خدمة فريدة أو فكرة مبتكرة، فقد حان الوقت لتشاركها مع الآخرين. دعنا نساعدك في الوصول إلى جمهور أوسع وبناء تجربة تلبي تطلعاتك. كل ما عليك هو تحميل التطبيق، تسجيل خدمتك، والانطلاق نحو النجاح!",
-      appsTitle: "حمل التطبيق وسجل الآن",
-    },
-    en: {
-      title: "Do you have a service to offer?",
-      description:
-        "Seize the opportunity and become part of a world full of creativity and connection! If you have a unique service or an innovative idea, now is the time to share it with others. Let us help you reach a wider audience and create an experience that meets your aspirations. All you need to do is download the app, register your service, and embark on the journey to success!",
-      appsTitle: "Download the app and register now",
-    },
-  };
-
-  const { title, description, appsTitle } = localization[currentLanguage]; // Retrieve localized text
+  const { t } = useTranslation(); // Get the translation function
 
   return (
     <div className="banner-home padding-top">
@@ -37,10 +19,10 @@ const BannerHome = () => {
           <div className="col-12 col-md-7">
             {/* ============ START INFO BANNER CONTENT =========== */}
             <div className="info-banner-content" data-aos="fade-left">
-              <TitleSection title={title} text={description} />
+              <TitleSection title={t('homePage.bannerHome.title')} text={t('homePage.bannerHome.description')} />
               {/* ============= START APPS CONTENT INFO ============ */}
               <div className="apps-content-info">
-                <h2 className="title-apps">{appsTitle}</h2>
+                <h2 className="title-apps">{t('homePage.bannerHome.appsTitle')}</h2>
                 {/* ============== START APPS LINKS ============= */}
                 <div className="apps-links d-flex align-items-center  gap-3 mt-3">
                   <a

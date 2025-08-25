@@ -74,7 +74,7 @@
   color: var(--green-01-color);
 }
 
-:is(.icon-lang, .dropmenu-user) .dropdown-item:nth-child(1) {
+:is(.icon-lang, .dropmenu-user) .dropdown-item {
   border-bottom: var(--border-02);
 }
 

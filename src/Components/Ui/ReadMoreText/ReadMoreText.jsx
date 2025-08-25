@@ -1,10 +1,10 @@
-import { useLanguage } from "Components/Languages/LanguageContext";
+import useTranslation from "Components/Languages/useTranslation";
 import { useState } from "react";
 import "./ReadMoreText.css";
 
 const ReadMoreText = ({ text, maxLength, newClass }) => {
   const [showAll, setShowAll] = useState(false);
-  const { currentLanguage } = useLanguage(); // Get the current language
+  const { t } = useTranslation(); // Get the translation function
 
   return (
     <div>
@@ -12,15 +12,7 @@ const ReadMoreText = ({ text, maxLength, newClass }) => {
         {showAll ? text : `${text.slice(0, maxLength)}... `}
         {text.length > maxLength && (
           <span className="link-more-read" onClick={() => setShowAll(!showAll)}>
-            {
-              showAll
-                ? currentLanguage === "ar"
-                  ? "أقل" // "Less" in Arabic
-                  : "Less" // "Less" in English
-                : currentLanguage === "ar"
-                  ? "المزيد" // "More" in Arabic
-                  : "More" // "More" in English
-            }
+            {showAll ? t('common.less') : t('common.more')}
           </span>
         )}
       </p>

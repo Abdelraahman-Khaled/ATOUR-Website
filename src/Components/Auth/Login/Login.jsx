@@ -6,87 +6,26 @@ import InputFiled from "Components/Forms/InputField";
 import * as Yup from "yup";
 import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi"; // Import your API file
-import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import useTranslation from "Components/Languages/useTranslation"; // Import Translation Hook
 import "./Login.css";
 import ForgotPasswordForm from "../Components/ResetPassword/ForgotPasswordForm ";
 
 const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
-  const { currentLanguage } = useLanguage(); // Get the current language
+  const { t, currentLanguage } = useTranslation(); // Get translation function and current language
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
-
-  const content = {
-    title: {
-      ar: "مرحبا بك في جولة",
-      en: "Welcome to Tour",
-    },
-    emailOrPhoneLabel: {
-      ar: "البريد الإلكتروني أو رقم الهاتف",
-      en: "Email or Phone Number",
-    },
-    emailOrPhonePlaceholder: {
-      ar: "أدخل البريد الإلكتروني أو رقم الهاتف",
-      en: "Enter your email or phone",
-    },
-    passwordLabel: {
-      ar: "كلمة المرور",
-      en: "Password",
-    },
-    passwordPlaceholder: {
-      ar: "أدخل كلمة المرور",
-      en: "Enter your password",
-    },
-    submitButton: {
-      ar: "تسجيل دخول",
-      en: "Log In",
-    },
-    noAccount: {
-      ar: "ليس لديك حساب؟",
-      en: "Don't have an account?",
-    },
-    registerLink: {
-      ar: "تسجيل حساب جديد",
-      en: "Register Here",
-    },
-    forgetPassword: {
-      ar: "نسيت كلمة المرور",
-      en: "Forget Password",
-    },
-    validation: {
-      emailOrPhoneRequired: {
-        ar: "ادخل البريد الإلكتروني أو رقم الهاتف",
-        en: "Enter your email or phone number",
-      },
-      emailOrPhoneInvalid: {
-        ar: "رقم هاتف أو بريد إلكتروني غير صحيح",
-        en: "Invalid email or phone number",
-      },
-      phoneInvalid: {
-        ar: "رقم الهاتف غير صحيح",
-        en: "Invalid phone number",
-      },
-      passwordMinLength: {
-        ar: "كلمة المرور يجب أن تكون على الأقل 8 أحرف",
-        en: "Password must be at least 8 characters",
-      },
-      passwordRequired: {
-        ar: "كلمة المرور مطلوبة",
-        en: "Password is required",
-      },
-    },
-  };
 
   const validationSchema = Yup.object().shape({
     emailOrPhoneNumber: Yup.string()
-      .required(content.validation.emailOrPhoneRequired[currentLanguage])
+      .required(t('auth.login.validation.emailOrPhoneRequired'))
       .test(
         "emailOrPhoneNumber",
-        content.validation.emailOrPhoneInvalid[currentLanguage],
+        t('auth.login.validation.emailOrPhoneInvalid'),
         function (value) {
           return (
             Yup.string().email().isValidSync(value) ||
             Yup.string()
               .matches(/^[0-9]{10,14}$/, {
-                message: content.validation.phoneInvalid[currentLanguage],
+                message: t('auth.login.validation.phoneInvalid'),
                 excludeEmptyString: true,
               })
               .isValidSync(value)
@@ -94,8 +33,8 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
         }
       ),
     password: Yup.string()
-      .min(8, content.validation.passwordMinLength[currentLanguage])
-      .required(content.validation.passwordRequired[currentLanguage]),
+      .min(6, t('auth.login.validation.passwordMinLength'))
+      .required(t('auth.login.validation.passwordRequired')),
   });
 
   const initialValues = {
@@ -126,7 +65,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
       <div className="info-login-content">
         <div className="row g-4 g-md-3">
           <div className="col-12 col-md-6">
-            <HeaderLogin titleTop={content.title[currentLanguage]} />
+            <HeaderLogin titleTop={t('auth.login.title')} />
             {forgotPasswordOpen ? (
               <ForgotPasswordForm onClose={() => setForgotPasswordOpen(false)} />
             ) : (
@@ -136,31 +75,31 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 onSubmit={handleSubmit}
               >
                 <InputFiled
-                  label={content.emailOrPhoneLabel[currentLanguage]}
+                  label={t('auth.login.emailOrPhoneLabel')}
                   name="emailOrPhoneNumber"
                   type="text"
-                  placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
+                  placeholder={t('auth.login.emailOrPhonePlaceholder')}
                   success
                 />
                 <InputFiled
-                  label={content.passwordLabel[currentLanguage]}
+                  label={t('auth.login.passwordLabel')}
                   name="password"
                   type="password"
-                  placeholder={content.passwordPlaceholder[currentLanguage]}
+                  placeholder={t('auth.login.passwordPlaceholder')}
                   success
                 />
                 <button type="submit" className="btn-main btn-submit w-100 mt-3">
-                  {content.submitButton[currentLanguage]}
+                  {t('auth.login.submitButton')}
                 </button>
               </FormField>
             )}
             <div className="bottom-info-not-accout gap-2 d-flex justify-content-center align-items-center">
-              {content.noAccount[currentLanguage]}{" "}
+              {t('auth.login.noAccount')}{" "}
               <div
                 onClick={buttonLogin}
                 className="cursor-pointer-event text-decoration-underline link-a"
               >
-                {content.registerLink[currentLanguage]}
+                {t('auth.login.registerLink')}
               </div>
             </div>
             {!forgotPasswordOpen && (
@@ -168,7 +107,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 onClick={() => setForgotPasswordOpen(true)}
                 className="cursor-pointer-event text-decoration-underline link-a text-center mt-2"
               >
-                {content.forgetPassword[currentLanguage]}
+                {t('auth.login.forgetPassword')}
               </div>
             )}
             <EndLoginInfo />

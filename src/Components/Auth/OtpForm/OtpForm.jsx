@@ -3,7 +3,7 @@ import CustomModal from "Components/CustomModal/CustomModal";
 import "./OtpForm.css";
 import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import AuthAPI from "api/authApi";
-import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import { useTranslation } from "react-i18next"; // Import Translation Hook
 import { toast } from "react-toastify";
 
 const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) => {
@@ -12,43 +12,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   const inputRefs = useRef([]);
   const [timerRunning, setTimerRunning] = useState(false);
 
-  const { currentLanguage } = useLanguage(); // Get current language
-
-
-  const content = {
-    title: {
-      ar: "أدخل رمز الأمان",
-      en: "Enter OTP",
-    },
-    description: {
-      ar: "يرجى إدخال رمز الأمان المرسل إلى بريدك الإلكتروني",
-      en: "Please enter the security code sent to your email",
-    },
-    resendIn: {
-      ar: "إعادة الإرسال خلال",
-      en: "Resend in",
-    },
-    seconds: {
-      ar: "ثوانٍ",
-      en: "seconds",
-    },
-    resendOtp: {
-      ar: "إعادة إرسال رمز الأمان",
-      en: "Resend OTP",
-    },
-    confirmOtp: {
-      ar: "تأكيد رمز الأمان",
-      en: "Confirm OTP",
-    },
-    fullOtp: {
-      ar: "الرجاء إدخال جميع أرقام رمز التحقق.",
-      en: "Please enter all OTP digits."
-    },
-    wrongOtp: {
-      ar: "رمز الأمان غير صالح. يرجى المحاولة مرة أخرى.",
-      en: "Invalid OTP. Please try again."
-    }
-  };
+  const { t } = useTranslation(); // Get translation function
 
   useEffect(() => {
     if (showOtpForm) {
@@ -117,7 +81,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   const handleVerifyOtp = async () => {
     // Ensure OTP is fully entered
     if (!otp || otp.length !== 6 || otp.includes(" ")) {
-      toast.error(content.fullOtp[currentLanguage]);
+      toast.error(t('auth.otp.validation.fullOtp'));
       return;
     }
     try {
@@ -128,7 +92,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
         toast.error(response.message);
       }
     } catch (error) {
-      toast.error(content.wrongOtp[currentLanguage]);
+      toast.error(t('auth.otp.validation.wrongOtp'));
       // Optionally, show an error message
     }
   };
@@ -156,7 +120,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
     <CustomModal
       show={showOtpForm}
       onHide={hideOtpForm}
-      title={content.title[currentLanguage]}
+      title={t('auth.otp.title')}
       newClass="otp-form-modal"
     >
       <div className="info-otp-form">
@@ -164,19 +128,19 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
           <EmailIcon />
         </div>
         <div className="info-header-otp mt-3">
-          <h2 className="title">{content.title[currentLanguage]}</h2>
+          <h2 className="title">{t('auth.otp.title')}</h2>
           <p className="text">
-            {content.description[currentLanguage]} <span>{emailOrPhone}</span>
+            {t('auth.otp.description')} <span>{emailOrPhone}</span>
           </p>
           {timerRunning ? (
             <div className="timer-down-otp">
-              {content.resendIn[currentLanguage]}{" "}
+              {t('auth.otp.resendIn')}{" "}
               <span className="timer-otp">{formatTimer(otpTimer)}</span>{" "}
-              {content.seconds[currentLanguage]}
+              {t('auth.otp.seconds')}
             </div>
           ) : (
             <div className="resend-otp-link timer-down-otp" onClick={handleResendOTP}>
-              {content.resendOtp[currentLanguage]}
+              {t('auth.otp.resendOtp')}
             </div>
           )}
         </div>
@@ -201,7 +165,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
               onClick={handleVerifyOtp}
               className="btn-main btn-page-otp w-100"
             >
-              {content.confirmOtp[currentLanguage]}
+              {t('auth.otp.confirmOtp')}
             </button>
           </form>
         </div>
