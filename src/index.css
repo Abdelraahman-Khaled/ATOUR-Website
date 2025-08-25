@@ -168,7 +168,7 @@ html {
   width: 45px !important;
   height: 10px !important;
   border-radius: 8px !important;
-  background: var(--danger-01-color) !important;
+  background: var(--green-01-color) !important;
 }
 
 .card-Section .swiper-pagination-bullets {
@@ -259,7 +259,8 @@ html[dir="ltr"] .was-validated .form-control:invalid {
 
 html[dir="ltr"] .was-validated textarea.form-control:invalid,
 html[dir="ltr"] textarea.form-control.is-invalid {
-  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+  background-position: top calc(0.375em + 0.1875rem) right
+    calc(0.375em + 0.1875rem);
 }
 
 .form-style {
@@ -304,7 +305,6 @@ textarea::placeholder,
   font-size: 13px !important;
   font-weight: 500 !important;
   color: #a8b1ce !important;
-
 }
 
 .form-select option {
@@ -328,7 +328,7 @@ html[dir="ltr"] :is(input, textarea) {
 html[dir="ltr"] .form-select {
   display: flex;
   flex-direction: column-reverse;
-  background-position: right .75rem center;
+  background-position: right 0.75rem center;
   text-align: left;
 }
 
@@ -396,7 +396,7 @@ html[dir="ltr"] .form-check .form-check-input {
 
 /* END FORM INPUT */
 
-.Toastify__toast-body>div:last-child {
+.Toastify__toast-body > div:last-child {
   font-size: 15px;
   font-weight: 500;
 }
@@ -729,8 +729,6 @@ START AIRPLAN
   animation: airPlanAnim 10s linear 0s reverse;
   z-index: 1001;
 }
-
-
 
 @keyframes dotAnim {
   0% {

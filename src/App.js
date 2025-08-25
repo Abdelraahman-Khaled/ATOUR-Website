@@ -17,9 +17,11 @@ import { useEffect, useState } from "react";
 import { ProfileProvider } from "context/ProfileContext";
 import { HomeProvider, useHome } from "context/HomeContext";
 import ChatBot from "./Components/ChatBot/ChatBot";
+import AdPopup from "./Components/AdPopup/AdPopup";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
+  const { loading } = useHome(); // Use the HomeContext
   const location = window.location.pathname;
   const isHomePage = location === "/";
 
@@ -34,6 +36,7 @@ const AppContent = () => {
     <div className={`App`}>
       {/* <WindowLoader /> */}
       <ToastContainerApp />
+      {loading === false && <AdPopup />}
       {/* <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
       <div className="airPlan-dot" />
         <img src={air} className="object-fit-cover" alt="airplan" />

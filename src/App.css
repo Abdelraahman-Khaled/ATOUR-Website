@@ -2,6 +2,100 @@
   transition: all 0.3s ease;
 }
 
+/* Ad Popup */
+.ad-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Add blur effect */
+}
+
+.ad-popup-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  position: relative;
+  width: 90%;
+  max-width: 550px; /* Even wider */
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Even stronger shadow */
+  animation: fadeInScale 0.4s ease-out; /* Slightly slower animation */
+  overflow: hidden; /* Ensure content stays within rounded corners */
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ad-popup-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--green-01-color); /* Set background to green */
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Adjust font size for better fit */
+  cursor: pointer;
+  color: white; /* Change color to white for contrast */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition with transform */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+.ad-popup-close:hover {
+  color: #333;
+  transform: rotate(90deg); /* Rotate on hover */
+}
+
+.ad-popup-content h1 {
+  margin-top: 0;
+  padding-bottom: 25px;
+  color: #1a1a1a; /* Even darker heading color */
+  font-weight: bold;
+  color: var(--green-01-color);
+  letter-spacing: 1px;
+}
+
+.ad-popup-button {
+  background-color: var(--green-01-color);
+  color: white;
+  padding: 15px 30px; /* Even larger padding */
+  border: none;
+  border-radius: 30px; /* Pill-shaped button */
+  cursor: pointer;
+  font-size: 20px; /* Even larger font size */
+  margin-top: 30px;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease; /* More transitions */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to button */
+}
+
+.ad-popup-button:hover {
+  background-color: #106a2a; /* Darker green on hover */
+  transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+
+
 /* Splash screen overlay */
 .splash-overlay {
   position: fixed;

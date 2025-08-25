@@ -1,0 +1,24 @@
+.ad-popup-content .swiper {
+  width: 100%;
+  height: auto;
+}
+
+.ad-popup-content .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ad-popup-content .swiper-slide img {
+  height: 500px; /* Fixed height for images */
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.ad-popup-content .swiper-pagination-bullet {
+  background-color: #ccc;
+}
+
+.ad-popup-content .swiper-pagination-bullet-active {
+  background-color: var(--green-01-color); /* Changed color */
+}
