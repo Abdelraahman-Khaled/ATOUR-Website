@@ -20,11 +20,12 @@ export const HomeProvider = ({ children }) => {
         if (homeData && !forceRefresh) {
             return homeData;
         }
-        
+
         setLoading(true);
         try {
             const response = await HomeAPI.getHomeData(currentLanguage);
             setHomeData(response.data);
+            console.log(response.data, currentLanguage);
             return response.data.data;
         } catch (err) {
             console.error("Error fetching home data:", err);
@@ -34,23 +35,23 @@ export const HomeProvider = ({ children }) => {
             setLoading(false);
         }
     };
-    
+
     const fetchSliderData = async (forceRefresh = false) => {
         // Check if we already have data and no force refresh is requested
         if (sliders.length > 0 && cities.length > 0 && !forceRefresh) {
             return { sliders, cities };
         }
-        
+
         try {
             const sliderRes = await GeneralAPI.getSliders(currentLanguage);
             const citiesRes = await ContentAPI.getCities(currentLanguage);
-            
+
             setSliders(sliderRes.data || []);
             setCities(citiesRes.data || []);
-            
-            return { 
-                sliders: sliderRes.data || [], 
-                cities: citiesRes.data || [] 
+
+            return {
+                sliders: sliderRes.data || [],
+                cities: citiesRes.data || []
             };
         } catch (err) {
             console.error("Error fetching sliders or cities:", err);
@@ -61,18 +62,18 @@ export const HomeProvider = ({ children }) => {
 
     // Fetch data when language changes
     useEffect(() => {
-        fetchHomeData();
-        fetchSliderData();
+        fetchHomeData(true);
+        fetchSliderData(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentLanguage]);
 
     return (
-        <HomeContext.Provider value={{ 
-            homeData, 
+        <HomeContext.Provider value={{
+            homeData,
             sliders,
             cities,
-            loading, 
-            error, 
+            loading,
+            error,
             fetchHomeData,
             fetchSliderData,
             setHomeData

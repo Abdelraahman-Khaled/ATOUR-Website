@@ -9,6 +9,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import { useHome } from "context/HomeContext";
 import OneOffer from "./Components/OneOffer/OneOffer";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import SplashScreen from "Components/SplashScreen/SplashScreen";
 const Home = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { homeData, loading, error } = useHome(); // Use the HomeContext
@@ -20,11 +21,9 @@ const Home = () => {
   const offerData = homeData?.offers || null;
 
 
-
-
   if (loading) {
     return (
-      <Loader />
+      <SplashScreen />
     );
   }
 
