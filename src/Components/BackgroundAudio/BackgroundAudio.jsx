@@ -15,7 +15,7 @@ const BackgroundAudio = () => {
     // Initialize audio context on first user interaction
     const initAudio = () => {
       try {
-        // Create audio context if it doesn't exist
+        // Create audio context if it doesn't existu
         if (!audioContext.current) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
           audioContext.current = new AudioContext();

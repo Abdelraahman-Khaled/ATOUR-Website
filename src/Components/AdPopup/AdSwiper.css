@@ -10,9 +10,15 @@
 }
 
 .ad-popup-content .swiper-slide img {
-  height: 500px; /* Fixed height for images */
-  object-fit: contain;
+  max-width: 75%;
   border-radius: 8px;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .ad-popup-content .swiper-slide img {
+    max-width: 90%;
+  }
 }
 
 .ad-popup-content .swiper-pagination-bullet {

@@ -1,0 +1,37 @@
+/* Audio Protection Styles */
+
+/* Prevent selection of audio elements */
+audio {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Disable context menu on audio elements */
+.audio-protected {
+  pointer-events: none;
+}
+
+/* Only allow play/pause button to have pointer events */
+.audio-control-btn {
+  pointer-events: auto;
+}
+
+/* Style for the audio container to indicate protection */
+.protected-audio-container {
+  position: relative;
+}
+
+/* Add a protection overlay to prevent direct interaction with audio */
+.protected-audio-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  /* Transparent but blocks interactions */
+  background-color: rgba(0, 0, 0, 0.01);
+}

@@ -19,15 +19,41 @@
 
 .ad-popup-content {
   background-color: #fff;
-  padding: 40px;
+  padding: 16px 12px;
   border-radius: 20px;
   position: relative;
   width: 90%;
-  max-width: 550px; /* Even wider */
+  max-width: 550px;
   text-align: center;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Even stronger shadow */
-  animation: fadeInScale 0.4s ease-out; /* Slightly slower animation */
-  overflow: hidden; /* Ensure content stays within rounded corners */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  animation: fadeInScale 0.4s ease-out;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .ad-popup-content {
+    width: 95%;
+    padding: 12px 8px;
+  }
+  
+  .ad-popup-close {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .ad-popup-content h1 {
+    font-size: 1.5rem;
+    padding-bottom: 15px;
+  }
+
+  .ad-popup-button {
+    padding: 12px 24px;
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
 
 @keyframes fadeInScale {
@@ -81,7 +107,7 @@
   border: none;
   border-radius: 30px; /* Pill-shaped button */
   cursor: pointer;
-  font-size: 20px; /* Even larger font size */
+  font-size: 16px; /* Even larger font size */
   margin-top: 30px;
   transition: background-color 0.3s ease, transform 0.3s ease,
     box-shadow 0.3s ease; /* More transitions */
@@ -93,8 +119,6 @@
   transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
-
-
 
 /* Splash screen overlay */
 .splash-overlay {
