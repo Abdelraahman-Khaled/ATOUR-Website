@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from 'Components/Languages/LanguageContext';
+import { Link } from 'react-router-dom';
 import './ChatBot.css';
 import saraAvatar from '../../assets/images/chatbot/sara-avatar.svg';
 
@@ -7,9 +8,678 @@ const ChatBot = () => {
   const { currentLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [userMessage, setUserMessage] = useState('');
+  const [selectedCTA, setSelectedCTA] = useState(null);
   const answerRef = useRef(null);
-  const inputRef = useRef(null);
+
+  // Toggle chatbot visibility
+  const toggleChatBot = () => {
+    setIsOpen(!isOpen);
+    setSelectedQuestion(null);
+    setSelectedCTA(null);
+  };
+
+  // Handle question click
+  const handleQuestionClick = (id) => {
+    setSelectedQuestion(id);
+    setSelectedCTA(null);
+  };
+
+  // Handle CTA button click
+  const handleCTAClick = (id) => {
+    setSelectedCTA(id);
+    setSelectedQuestion(null);
+  };
+
+  // Scroll to answer when a question is selected
+  useEffect(() => {
+    if ((selectedQuestion || selectedCTA) && answerRef.current) {
+      answerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedQuestion, selectedCTA]);
+
+  // Conversation data with questions, suggested responses, and CTAs
+  const conversationData = {
+    ar: {
+      welcome: "✨ معك ليلى من جولة! 🌟 نورت جولة وأهلاً بك 🤍. هنا بتكتشف السعودية 🇸🇦 بعيون جولة ومقدمي خدماتها المميزين. راح تعيش تجربة ثقافية 🕌، تذوق أحلى الأكلات الشعبية 🍲، وتزور أجمل الأماكن الأثرية والسياحية 🏰🌄. كيف أقدر أخدمك اليوم؟",
+      questions: [
+        {
+          id: 1,
+          text: "ودك بجولة؟ 🏞️",
+          response: "عندنا جولات تراثية 🏰، ثقافية 🎨، عائلية 👨‍👩‍👧‍👦، ومغامرات 🌄.",
+          ctas: [
+            { id: "tour1", text: "شاهد الجولات المتاحة 🗺️" },
+            { id: "tour2", text: "جولات عائلية 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "جولات مغامرات 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "ودك بهدية تذكارية من وحي تراثنا وثقافتنا؟ 🎁",
+          response: "نوفر متجر للهدايا التراثية السعودية المميزة 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "تصفح متجر الهدايا 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "تبي تعرف لو فيه مهرجان أو فعالية قريبة منك؟ 🎉",
+          response: "نعطيك جدول المهرجانات والفعاليات حسب موقعك 📅📍.",
+          ctas: [
+            { id: "event1", text: "اكتشف المهرجانات 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "كيف أحجز جولة؟ 📝",
+          response: "الحجز سهل: اختر الجولة أو المنتج → حدد التاريخ وعدد الأشخاص → اختر طريقة الدفع → تأكيد → ادفع عبر التطبيق 💳.",
+          ctas: [
+            { id: "book1", text: "احجز الآن 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "أقدر أعدل أو ألغي الحجز؟ ❓",
+          response: "نعم، تقدر تلغي أو تعدل قبل الموعد 72–48 ساعة ⏰، وأحياناً حتى 24 ساعة حسب نوع الحجز.",
+          ctas: [
+            { id: "manage1", text: "إدارة حجوزاتي 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "ما وصلني تأكيد الحجز؟ 📧",
+          response: "راجع بريدك الإلكتروني 📬 أو تحقق من \"حجوزاتي\" داخل التطبيق.",
+          ctas: [
+            { id: "view1", text: "شاهد حجوزاتك 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "ما قدرت أسجل حساب جديد؟ ❌",
+          response: "تأكد من كتابة بريدك الإلكتروني ورقم جوالك ✉️📱، بعد التأكد أعد تعيين كلمة المرور 🔑 من صفحة الدخول. أو تواصل مع الدعم ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "إعادة تعيين كلمة المرور 🔑" },
+            { id: "support1", text: "تواصل مع الدعم ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "أقدر أسجل كمرشد سياحي أو مورد أو مقدم خدمات سياحية؟ 🧑‍💼",
+          response: "نعم! سواء تقدم جولة 🏞️، تجربة 🎨، هدايا 🎁، أو إدارة مهرجان موسمي 🎉، التسجيل متاح عبر التطبيق ويتم تفعيله خلال دقائق ⏳.",
+          ctas: [
+            { id: "register1", text: "سجل كمرشد 🧑‍💼" },
+            { id: "register2", text: "سجل كمورد 🏪" }
+          ]
+        }
+      ],
+      farewell: "🤍 شكراً لثقتك في جولة! تذكر: جولة ليست مجرد رحلة، بل تجربة لا تُنسى 🌍✨. نراك قريباً في جولة أخرى 🏞️ مع تجربة أجمل 🌄، ومع هدية تذكارية 🎁 تذكرك بجولاتك معنا دائم",
+      farewellCTAs: [
+        { id: "newbooking1", text: "احجز جولة جديدة 🗓️" },
+        { id: "giftshop1", text: "شاهد متجر الهدايا 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "جولة سياحية 🏞️" },
+        { id: "service2", text: "هدية تذكارية 🎁" },
+        { id: "service3", text: "مهرجان أو فعالية 🎉" },
+        { id: "service4", text: "مساعدة بالحجز أو الدفع 💳" }
+      ],
+      initialPrompt: "اختر الخدمة اللي تناسبك من الخيارات التالية:"
+    },
+    en: {
+      welcome: "✨ This is Layla from Jawla! 🌟 Welcome to Jawla 🤍. Here you'll discover Saudi Arabia 🇸🇦 through the eyes of Jawla and its distinguished service providers. You'll experience cultural journeys 🕌, taste the best traditional foods 🍲, and visit the most beautiful historical and tourist sites 🏰🌄. How can I help you today?",
+      questions: [
+        {
+          id: 1,
+          text: "Would you like a tour? 🏞️",
+          response: "We have heritage tours 🏰, cultural tours 🎨, family tours 👨‍👩‍👧‍👦, and adventure tours 🌄.",
+          ctas: [
+            { id: "tour1", text: "Browse available tours 🗺️" },
+            { id: "tour2", text: "Family tours 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Adventure tours 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "Would you like a souvenir inspired by our heritage and culture? 🎁",
+          response: "We provide a store for distinctive Saudi heritage gifts 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "Browse gift shop 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "Want to know if there's a festival or event near you? 🎉",
+          response: "We'll give you a schedule of festivals and events based on your location 📅📍.",
+          ctas: [
+            { id: "event1", text: "Discover festivals 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "How do I book a tour? 📝",
+          response: "Booking is easy: Choose the tour or product → Select date and number of people → Choose payment method → Confirm → Pay through the app 💳.",
+          ctas: [
+            { id: "book1", text: "Book now 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "Can I modify or cancel my booking? ❓",
+          response: "Yes, you can cancel or modify 72-48 hours before the appointment ⏰, and sometimes even 24 hours depending on the type of booking.",
+          ctas: [
+            { id: "manage1", text: "Manage my bookings 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "I didn't receive booking confirmation? 📧",
+          response: "Check your email 📬 or check 'My Bookings' within the app.",
+          ctas: [
+            { id: "view1", text: "View your bookings 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "I couldn't register a new account? ❌",
+          response: "Make sure you've entered your email and mobile number correctly ✉️📱, then reset your password 🔑 from the login page. Or contact support ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Reset password 🔑" },
+            { id: "support1", text: "Contact support ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "Can I register as a tour guide or service provider? 🧑‍💼",
+          response: "Yes! Whether you offer tours 🏞️, experiences 🎨, gifts 🎁, or manage a seasonal festival 🎉, registration is available through the app and is activated within minutes ⏳.",
+          ctas: [
+            { id: "register1", text: "Register as guide 🧑‍💼" },
+            { id: "register2", text: "Register as vendor 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "What payment methods are available? 💳",
+          response: "We accept all types of payment 💳, the payment gateway in the app supports most types of electronic payment ⚡."
+        },
+        {
+          id: 10,
+          text: "I tried to pay but it didn't work? ❌",
+          response: "Try another card 💳 or check your balance 💰, and if the problem persists, contact us ☎️.",
+          ctas: [
+            { id: "financial1", text: "Contact financial support 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "Do prices include tax? 💰",
+          response: "Yes, final prices include tax ✅."
+        },
+        {
+          id: 12,
+          text: "The app won't open or there's a problem ⚠️",
+          response: "Try updating the app 🔄 or restarting your device 📱💻. If it continues, let us know ☎️.",
+          ctas: [
+            { id: "tech1", text: "Contact technical support 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 Thank you for your trust in Jawla! Remember: Jawla is not just a trip, but an unforgettable experience 🌍✨. See you soon on another tour 🏞️ with an even better experience 🌄, and with a souvenir 🎁 to always remind you of your tours with us.",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Book a new tour 🗓️" },
+        { id: "giftshop1", text: "Visit gift shop 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Tourist tour 🏞️" },
+        { id: "service2", text: "Souvenir gift 🎁" },
+        { id: "service3", text: "Festival or event 🎉" },
+        { id: "service4", text: "Help with booking or payment 💳" }
+      ],
+      initialPrompt: "Choose the service that suits you from the following options:"
+    },
+    fr: {
+      welcome: "✨ C'est Layla de Jawla! 🌟 Bienvenue à Jawla 🤍. Ici, vous découvrirez l'Arabie Saoudite 🇸🇦 à travers les yeux de Jawla et de ses prestataires de services distingués. Vous vivrez des voyages culturels 🕌, goûterez aux meilleures cuisines traditionnelles 🍲, et visiterez les plus beaux sites historiques et touristiques 🏰🌄. Comment puis-je vous aider aujourd'hui?",
+      questions: [
+        {
+          id: 1,
+          text: "Souhaitez-vous faire une visite? 🏞️",
+          response: "Nous proposons des visites patrimoniales 🏰, culturelles 🎨, familiales 👨‍👩‍👧‍👦, et d'aventure 🌄.",
+          ctas: [
+            { id: "tour1", text: "Parcourir les visites disponibles 🗺️" },
+            { id: "tour2", text: "Visites familiales 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Visites d'aventure 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "Souhaitez-vous un souvenir inspiré de notre patrimoine et culture? 🎁",
+          response: "Nous proposons une boutique de cadeaux distinctifs du patrimoine saoudien 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "Parcourir la boutique de cadeaux 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "Voulez-vous savoir s'il y a un festival ou un événement près de chez vous? 🎉",
+          response: "Nous vous donnerons un calendrier des festivals et événements en fonction de votre emplacement 📅📍.",
+          ctas: [
+            { id: "event1", text: "Découvrir les festivals 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "Comment réserver une visite? 📝",
+          response: "La réservation est facile: Choisissez la visite ou le produit → Sélectionnez la date et le nombre de personnes → Choisissez le mode de paiement → Confirmez → Payez via l'application 💳.",
+          ctas: [
+            { id: "book1", text: "Réserver maintenant 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "Puis-je modifier ou annuler ma réservation? ❓",
+          response: "Oui, vous pouvez annuler ou modifier 72-48 heures avant le rendez-vous ⏰, et parfois même 24 heures selon le type de réservation.",
+          ctas: [
+            { id: "manage1", text: "Gérer mes réservations 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "Je n'ai pas reçu de confirmation de réservation? 📧",
+          response: "Vérifiez votre e-mail 📬 ou consultez 'Mes Réservations' dans l'application.",
+          ctas: [
+            { id: "view1", text: "Voir vos réservations 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "Je n'ai pas pu créer un nouveau compte? ❌",
+          response: "Assurez-vous d'avoir correctement saisi votre e-mail et numéro de mobile ✉️📱, puis réinitialisez votre mot de passe 🔑 depuis la page de connexion. Ou contactez le support ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Réinitialiser le mot de passe 🔑" },
+            { id: "support1", text: "Contacter le support ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "Puis-je m'inscrire en tant que guide touristique ou prestataire de services? 🧑‍💼",
+          response: "Oui! Que vous proposiez des visites 🏞️, des expériences 🎨, des cadeaux 🎁, ou gériez un festival saisonnier 🎉, l'inscription est disponible via l'application et est activée en quelques minutes ⏳.",
+          ctas: [
+            { id: "register1", text: "S'inscrire comme guide 🧑‍💼" },
+            { id: "register2", text: "S'inscrire comme vendeur 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "Quels modes de paiement sont disponibles? 💳",
+          response: "Nous acceptons tous types de paiement 💳, la passerelle de paiement dans l'application prend en charge la plupart des types de paiement électronique ⚡."
+        },
+        {
+          id: 10,
+          text: "J'ai essayé de payer mais ça n'a pas fonctionné? ❌",
+          response: "Essayez une autre carte 💳 ou vérifiez votre solde 💰, et si le problème persiste, contactez-nous ☎️.",
+          ctas: [
+            { id: "financial1", text: "Contacter le support financier 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "Les prix incluent-ils les taxes? 💰",
+          response: "Oui, les prix finaux incluent les taxes ✅."
+        },
+        {
+          id: 12,
+          text: "L'application ne s'ouvre pas ou il y a un problème ⚠️",
+          response: "Essayez de mettre à jour l'application 🔄 ou de redémarrer votre appareil 📱💻. Si cela continue, faites-le nous savoir ☎️.",
+          ctas: [
+            { id: "tech1", text: "Contacter le support technique 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 Merci pour votre confiance en Jawla! Souvenez-vous: Jawla n'est pas juste un voyage, mais une expérience inoubliable 🌍✨. À bientôt pour une autre visite 🏞️ avec une expérience encore meilleure 🌄, et avec un souvenir 🎁 pour vous rappeler toujours de vos visites avec nous.",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Réserver une nouvelle visite 🗓️" },
+        { id: "giftshop1", text: "Visiter la boutique de cadeaux 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Visite touristique 🏞️" },
+        { id: "service2", text: "Cadeau souvenir 🎁" },
+        { id: "service3", text: "Festival ou événement 🎉" },
+        { id: "service4", text: "Aide à la réservation ou au paiement 💳" }
+      ],
+      initialPrompt: "Choisissez le service qui vous convient parmi les options suivantes:"
+    },
+    de: {
+      welcome: "✨ Hier ist Layla von Jawla! 🌟 Willkommen bei Jawla 🤍. Hier entdecken Sie Saudi-Arabien 🇸🇦 durch die Augen von Jawla und seinen ausgezeichneten Dienstleistern. Sie erleben kulturelle Reisen 🕌, probieren die besten traditionellen Speisen 🍲 und besuchen die schönsten historischen und touristischen Stätten 🏰🌄. Wie kann ich Ihnen heute helfen?",
+      questions: [
+        {
+          id: 1,
+          text: "Möchten Sie eine Tour machen? 🏞️",
+          response: "Wir bieten Erbe-Touren 🏰, kulturelle Touren 🎨, Familientouren 👨‍👩‍👧‍👦 und Abenteuertouren 🌄 an.",
+          ctas: [
+            { id: "tour1", text: "Verfügbare Touren durchsuchen 🗺️" },
+            { id: "tour2", text: "Familientouren 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Abenteuertouren 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "Möchten Sie ein Souvenir, inspiriert von unserem Erbe und unserer Kultur? 🎁",
+          response: "Wir bieten einen Shop für besondere saudische Erbstücke 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "Geschenkeladen durchstöbern 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "Möchten Sie wissen, ob es ein Festival oder eine Veranstaltung in Ihrer Nähe gibt? 🎉",
+          response: "Wir geben Ihnen einen Zeitplan für Festivals und Veranstaltungen basierend auf Ihrem Standort 📅📍.",
+          ctas: [
+            { id: "event1", text: "Festivals entdecken 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "Wie buche ich eine Tour? 📝",
+          response: "Die Buchung ist einfach: Wählen Sie die Tour oder das Produkt → Wählen Sie Datum und Anzahl der Personen → Wählen Sie die Zahlungsmethode → Bestätigen Sie → Bezahlen Sie über die App 💳.",
+          ctas: [
+            { id: "book1", text: "Jetzt buchen 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "Kann ich meine Buchung ändern oder stornieren? ❓",
+          response: "Ja, Sie können 72-48 Stunden vor dem Termin stornieren oder ändern ⏰, und manchmal sogar 24 Stunden je nach Art der Buchung.",
+          ctas: [
+            { id: "manage1", text: "Meine Buchungen verwalten 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "Ich habe keine Buchungsbestätigung erhalten? 📧",
+          response: "Überprüfen Sie Ihre E-Mail 📬 oder überprüfen Sie 'Meine Buchungen' in der App.",
+          ctas: [
+            { id: "view1", text: "Ihre Buchungen anzeigen 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "Ich konnte kein neues Konto registrieren? ❌",
+          response: "Stellen Sie sicher, dass Sie Ihre E-Mail und Handynummer korrekt eingegeben haben ✉️📱, setzen Sie dann Ihr Passwort 🔑 von der Anmeldeseite zurück. Oder kontaktieren Sie den Support ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Passwort zurücksetzen 🔑" },
+            { id: "support1", text: "Support kontaktieren ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "Kann ich mich als Reiseführer oder Dienstleister registrieren? 🧑‍💼",
+          response: "Ja! Ob Sie Touren 🏞️, Erlebnisse 🎨, Geschenke 🎁 anbieten oder ein saisonales Festival 🎉 verwalten, die Registrierung ist über die App verfügbar und wird innerhalb von Minuten aktiviert ⏳.",
+          ctas: [
+            { id: "register1", text: "Als Reiseführer registrieren 🧑‍💼" },
+            { id: "register2", text: "Als Anbieter registrieren 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "Welche Zahlungsmethoden sind verfügbar? 💳",
+          response: "Wir akzeptieren alle Arten von Zahlungen 💳, das Zahlungsgateway in der App unterstützt die meisten Arten von elektronischen Zahlungen ⚡."
+        },
+        {
+          id: 10,
+          text: "Ich habe versucht zu bezahlen, aber es hat nicht funktioniert? ❌",
+          response: "Versuchen Sie eine andere Karte 💳 oder überprüfen Sie Ihr Guthaben 💰, und wenn das Problem weiterhin besteht, kontaktieren Sie uns ☎️.",
+          ctas: [
+            { id: "financial1", text: "Finanzsupport kontaktieren 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "Sind die Preise inklusive Steuern? 💰",
+          response: "Ja, die Endpreise beinhalten Steuern ✅."
+        },
+        {
+          id: 12,
+          text: "Die App öffnet sich nicht oder es gibt ein Problem ⚠️",
+          response: "Versuchen Sie, die App zu aktualisieren 🔄 oder Ihr Gerät neu zu starten 📱💻. Wenn es weiterhin besteht, lassen Sie es uns wissen ☎️.",
+          ctas: [
+            { id: "tech1", text: "Technischen Support kontaktieren 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 Vielen Dank für Ihr Vertrauen in Jawla! Denken Sie daran: Jawla ist nicht nur eine Reise, sondern ein unvergessliches Erlebnis 🌍✨. Bis bald auf einer anderen Tour 🏞️ mit einem noch besseren Erlebnis 🌄 und mit einem Souvenir 🎁, das Sie immer an Ihre Touren mit uns erinnert.",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Neue Tour buchen 🗓️" },
+        { id: "giftshop1", text: "Geschenkeladen besuchen 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Touristische Tour 🏞️" },
+        { id: "service2", text: "Souvenir-Geschenk 🎁" },
+        { id: "service3", text: "Festival oder Veranstaltung 🎉" },
+        { id: "service4", text: "Hilfe bei Buchung oder Zahlung 💳" }
+      ],
+      initialPrompt: "Wählen Sie den Service, der Ihnen aus den folgenden Optionen zusagt:"
+    },
+    ar: {
+      welcome: "✨ معك ليلى من جولة! 🌟 نورت جولة وأهلاً بك 🤍. هنا بتكتشف السعودية 🇸🇦 بعيون جولة ومقدمي خدماتها المميزين. راح تعيش تجربة ثقافية 🕌، تذوق أحلى الأكلات الشعبية 🍲، وتزور أجمل الأماكن الأثرية والسياحية 🏰🌄. كيف أقدر أخدمك اليوم؟",
+      questions: [
+        {
+          id: 1,
+          text: "ودك بجولة؟ 🏞️",
+          response: "عندنا جولات تراثية 🏰، ثقافية 🎨، عائلية 👨‍👩‍👧‍👦، ومغامرات 🌄.",
+          ctas: [
+            { id: "tour1", text: "شاهد الجولات المتاحة 🗺️" },
+            { id: "tour2", text: "جولات عائلية 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "جولات مغامرات 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "ودك بهدية تذكارية من وحي تراثنا وثقافتنا؟ 🎁",
+          response: "نوفر متجر للهدايا التراثية السعودية المميزة 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "تصفح متجر الهدايا 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "تبي تعرف لو فيه مهرجان أو فعالية قريبة منك؟ 🎉",
+          response: "نعطيك جدول المهرجانات والفعاليات حسب موقعك 📅📍.",
+          ctas: [
+            { id: "event1", text: "اكتشف المهرجانات 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "كيف أحجز جولة؟ 📝",
+          response: "الحجز سهل: اختر الجولة أو المنتج → حدد التاريخ وعدد الأشخاص → اختر طريقة الدفع → تأكيد → ادفع عبر التطبيق 💳.",
+          ctas: [
+            { id: "book1", text: "احجز الآن 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "أقدر أعدل أو ألغي الحجز؟ ❓",
+          response: "نعم، تقدر تلغي أو تعدل قبل الموعد 72–48 ساعة ⏰، وأحياناً حتى 24 ساعة حسب نوع الحجز.",
+          ctas: [
+            { id: "manage1", text: "إدارة حجوزاتي 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "ما وصلني تأكيد الحجز؟ 📧",
+          response: "راجع بريدك الإلكتروني 📬 أو تحقق من \"حجوزاتي\" داخل التطبيق.",
+          ctas: [
+            { id: "view1", text: "شاهد حجوزاتك 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "ما قدرت أسجل حساب جديد؟ ❌",
+          response: "تأكد من كتابة بريدك الإلكتروني ورقم جوالك ✉️📱، بعد التأكد أعد تعيين كلمة المرور 🔑 من صفحة الدخول. أو تواصل مع الدعم ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "إعادة تعيين كلمة المرور 🔑" },
+            { id: "support1", text: "تواصل مع الدعم ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "أقدر أسجل كمرشد سياحي أو مورد أو مقدم خدمات سياحية؟ 🧑‍💼",
+          response: "نعم! سواء تقدم جولة 🏞️، تجربة 🎨، هدايا 🎁، أو إدارة مهرجان موسمي 🎉، التسجيل متاح عبر التطبيق ويتم تفعيله خلال دقائق ⏳.",
+          ctas: [
+            { id: "register1", text: "سجل كمرشد 🧑‍💼" },
+            { id: "register2", text: "سجل كمورد 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "ما طرق الدفع المتاحة؟ 💳",
+          response: "نقبل جميع أنواع الدفع 💳، بوابة الدفع في التطبيق تدعم معظم أنواع الدفع الإلكتروني ⚡."
+        },
+        {
+          id: 10,
+          text: "حاولت أدفع وما ضبط؟ ❌",
+          response: "جرّب بطاقة أخرى 💳 أو تحقق من رصيدك 💰، وإذا استمرت المشكلة تواصل معنا ☎️.",
+          ctas: [
+            { id: "financial1", text: "تواصل مع الدعم المالي 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "هل الأسعار تشمل الضريبة؟ 💰",
+          response: "نعم، الأسعار النهائية تشمل الضريبة ✅."
+        },
+        {
+          id: 12,
+          text: "التطبيق ما يفتح أو فيه مشكلة ⚠️",
+          response: "جرّب تحديث التطبيق 🔄 أو إعادة تشغيل الجهاز 📱💻. إذا استمر، بلغنا ☎️.",
+          ctas: [
+            { id: "tech1", text: "اتصل بالدعم الفني 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 شكراً لثقتك في جولة! تذكر: جولة ليست مجرد رحلة، بل تجربة لا تُنسى 🌍✨. نراك قريباً في جولة أخرى 🏞️ مع تجربة أجمل 🌄، ومع هدية تذكارية 🎁 تذكرك بجولاتك معنا دائم",
+      farewellCTAs: [
+        { id: "newbooking1", text: "احجز جولة جديدة 🗓️" },
+        { id: "giftshop1", text: "شاهد متجر الهدايا 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "جولة سياحية 🏞️" },
+        { id: "service2", text: "هدية تذكارية 🎁" },
+        { id: "service3", text: "مهرجان أو فعالية 🎉" },
+        { id: "service4", text: "مساعدة بالحجز أو الدفع 💳" }
+      ],
+      initialPrompt: "اختر الخدمة اللي تناسبك من الخيارات التالية:"
+    },
+    en: {
+      welcome: "✨ This is Layla from Jawla! 🌟 Welcome to Jawla 🤍. Here you'll discover Saudi Arabia 🇸🇦 through the eyes of Jawla and its distinguished service providers. You'll experience cultural journeys 🕌, taste the best traditional foods 🍲, and visit the most beautiful historical and tourist sites 🏰🌄. How can I help you today?",
+      questions: [
+        {
+          id: 1,
+          text: "Would you like a tour? 🏞️",
+          response: "We have heritage tours 🏰, cultural tours 🎨, family tours 👨‍👩‍👧‍👦, and adventure tours 🌄.",
+          ctas: [
+            { id: "tour1", text: "Browse available tours 🗺️" },
+            { id: "tour2", text: "Family tours 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Adventure tours 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "Would you like a souvenir inspired by our heritage and culture? 🎁",
+          response: "We provide a store for distinctive Saudi heritage gifts 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "Browse gift shop 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "Want to know if there's a festival or event near you? 🎉",
+          response: "We'll give you a schedule of festivals and events based on your location 📅📍.",
+          ctas: [
+            { id: "event1", text: "Discover festivals 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "How do I book a tour? 📝",
+          response: "Booking is easy: Choose the tour or product → Set the date and number of people → Choose payment method → Confirm → Pay through the app 💳.",
+          ctas: [
+            { id: "book1", text: "Book now 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "Can I modify or cancel my booking? ❓",
+          response: "Yes, you can cancel or modify before the appointment 72-48 hours ⏰, and sometimes even 24 hours depending on the type of booking.",
+          ctas: [
+            { id: "manage1", text: "Manage my bookings 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "I didn't receive booking confirmation? 📧",
+          response: "Check your email 📬 or check 'My Bookings' within the app.",
+          ctas: [
+            { id: "view1", text: "View your bookings 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "I couldn't register a new account? ❌",
+          response: "Make sure to enter your email and mobile number ✉️📱, then reset your password 🔑 from the login page. Or contact support ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Reset password 🔑" },
+            { id: "support1", text: "Contact support ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "Can I register as a tour guide, supplier, or tourism service provider? 🧑‍💼",
+          response: "Yes! Whether you provide tours 🏞️, experiences 🎨, gifts 🎁, or manage a seasonal festival 🎉, registration is available through the app and is activated within minutes ⏳.",
+          ctas: [
+            { id: "register1", text: "Register as guide 🧑‍💼" },
+            { id: "register2", text: "Register as supplier 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "What payment methods are available? 💳",
+          response: "We accept all types of payment 💳, the payment gateway in the app supports most types of electronic payment ⚡."
+        },
+        {
+          id: 10,
+          text: "I tried to pay and it didn't work? ❌",
+          response: "Try another card 💳 or check your balance 💰, and if the problem persists, contact us ☎️.",
+          ctas: [
+            { id: "financial1", text: "Contact financial support 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "Do prices include tax? 💰",
+          response: "Yes, final prices include tax ✅."
+        },
+        {
+          id: 12,
+          text: "The app won't open or has a problem ⚠️",
+          response: "Try updating the app 🔄 or restarting your device 📱💻. If it persists, let us know ☎️.",
+          ctas: [
+            { id: "tech1", text: "Contact technical support 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 Thank you for your trust in Jawla! Remember: Jawla is not just a trip, but an unforgettable experience 🌍✨. See you soon on another tour 🏞️ with a more beautiful experience 🌄, and with a souvenir 🎁 that will always remind you of your tours with us",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Book a new tour 🗓️" },
+        { id: "giftshop1", text: "View gift shop 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Tourist tour 🏞️" },
+        { id: "service2", text: "Souvenir 🎁" },
+        { id: "service3", text: "Festival or event 🎉" },
+        { id: "service4", text: "Help with booking or payment 💳" }
+      ],
+      initialPrompt: "Choose the service that suits you from the following options:"
+    }
+  };
 
   // FAQ data with all supported languages
   const faqData = {
@@ -121,60 +791,228 @@ const ChatBot = () => {
         answer: 'Sie können unser Kundenservice-Team per E-Mail unter support@atour.com oder telefonisch unter +966 123456789 von 9 bis 21 Uhr erreichen.'
       }
     ],
-    es: [
-      {
-        id: 1,
-        question: '¿Cómo puedo reservar un viaje?',
-        answer: 'Puede reservar un viaje navegando por los viajes disponibles en nuestro sitio web, seleccionando el viaje apropiado, luego siguiendo los pasos de reserva y completando el proceso de pago.'
-      },
-      {
-        id: 2,
-        question: '¿Cuál es la política de cancelación?',
-        answer: 'Puede cancelar la reserva 48 horas antes de la fecha del viaje y obtener un reembolso completo. La cancelación 24 horas antes resultará en un reembolso del 50%. No hay reembolso disponible para cancelaciones menos de 24 horas antes.'
-      },
-      {
-        id: 3,
-        question: '¿Puedo modificar mi reserva?',
-        answer: 'Sí, puede modificar su reserva a través de su cuenta personal 48 horas antes de la fecha del viaje. Para modificaciones más cercanas a la fecha del viaje, comuníquese con el servicio al cliente.'
-      },
-      {
-        id: 4,
-        question: '¿Qué métodos de pago están disponibles?',
-        answer: 'Aceptamos pagos mediante tarjetas de crédito (Visa, Mastercard), servicios de pago electrónico como Apple Pay y STC Pay, así como transferencias bancarias.'
-      },
-      {
-        id: 5,
-        question: '¿Cómo puedo contactar al servicio al cliente?',
-        answer: 'Puede contactar a nuestro equipo de servicio al cliente por correo electrónico a support@atour.com o por teléfono al +966 123456789 de 9 AM a 9 PM.'
-      }
-    ],
-    tr: [
-      {
-        id: 1,
-        question: 'Nasıl seyahat rezervasyonu yapabilirim?',
-        answer: 'Web sitemizde mevcut seyahatleri inceleyerek, uygun seyahati seçerek, ardından rezervasyon adımlarını takip ederek ve ödeme işlemini tamamlayarak seyahat rezervasyonu yapabilirsiniz.'
-      },
-      {
-        id: 2,
-        question: 'İptal politikası nedir?',
-        answer: 'Seyahat tarihinden 48 saat önce rezervasyonu iptal edebilir ve tam geri ödeme alabilirsiniz. 24 saat öncesinde iptal, %50 geri ödeme ile sonuçlanacaktır. 24 saatten daha az bir süre içinde iptal için geri ödeme yapılmaz.'
-      },
-      {
-        id: 3,
-        question: 'Rezervasyonumu değiştirebilir miyim?',
-        answer: 'Evet, seyahat tarihinden 48 saat önce kişisel hesabınız üzerinden rezervasyonunuzu değiştirebilirsiniz. Seyahat tarihine daha yakın değişiklikler için lütfen müşteri hizmetleri ile iletişime geçin.'
-      },
-      {
-        id: 4,
-        question: 'Hangi ödeme yöntemleri mevcuttur?',
-        answer: 'Kredi kartları (Visa, Mastercard), Apple Pay ve STC Pay gibi elektronik ödeme hizmetleri ve banka havalesi ile ödemeyi kabul ediyoruz.'
-      },
-      {
-        id: 5,
-        question: 'Müşteri hizmetleriyle nasıl iletişime geçebilirim?',
-        answer: 'Müşteri hizmetleri ekibimizle support@atour.com e-posta adresinden veya +966 123456789 telefon numarasından sabah 9\'dan akşam 9\'a kadar iletişime geçebilirsiniz.'
-      }
-    ],
+    es: {
+      welcome: "✨ ¡Soy Layla de Jawla! 🌟 Bienvenido a Jawla 🤍. Aquí descubrirás Arabia Saudita 🇸🇦 a través de los ojos de Jawla y sus distinguidos proveedores de servicios. Experimentarás viajes culturales 🕌, probarás las mejores comidas tradicionales 🍲, y visitarás los sitios históricos y turísticos más hermosos 🏰🌄. ¿Cómo puedo ayudarte hoy?",
+      questions: [
+        {
+          id: 1,
+          text: "¿Te gustaría hacer un tour? 🏞️",
+          response: "Tenemos tours de patrimonio 🏰, tours culturales 🎨, tours familiares 👨‍👩‍👧‍👦, y tours de aventura 🌄.",
+          ctas: [
+            { id: "tour1", text: "Explorar tours disponibles 🗺️" },
+            { id: "tour2", text: "Tours familiares 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Tours de aventura 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "¿Te gustaría un souvenir inspirado en nuestro patrimonio y cultura? 🎁",
+          response: "Ofrecemos una tienda de regalos distintivos del patrimonio saudí 🕌🛍️.",
+          ctas: [
+            { id: "gift1", text: "Explorar tienda de regalos 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "¿Quieres saber si hay un festival o evento cerca de ti? 🎉",
+          response: "Te daremos un calendario de festivales y eventos basado en tu ubicación 📅📍.",
+          ctas: [
+            { id: "event1", text: "Descubrir festivales 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "¿Cómo reservo un tour? 📝",
+          response: "Reservar es fácil: Elige el tour o producto → Establece la fecha y número de personas → Elige método de pago → Confirma → Paga a través de la app 💳.",
+          ctas: [
+            { id: "book1", text: "Reservar ahora 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "¿Puedo modificar o cancelar mi reserva? ❓",
+          response: "Sí, puedes cancelar o modificar antes de la cita 72-48 horas ⏰, y a veces incluso 24 horas dependiendo del tipo de reserva.",
+          ctas: [
+            { id: "manage1", text: "Gestionar mis reservas 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "¿No recibí confirmación de reserva? 📧",
+          response: "Revisa tu correo electrónico 📬 o verifica 'Mis Reservas' dentro de la app.",
+          ctas: [
+            { id: "view1", text: "Ver tus reservas 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "¿No pude registrar una nueva cuenta? ❌",
+          response: "Asegúrate de ingresar tu correo electrónico y número de móvil ✉️📱, luego restablece tu contraseña 🔑 desde la página de inicio de sesión. O contacta con soporte ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Restablecer contraseña 🔑" },
+            { id: "support1", text: "Contactar soporte ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "¿Puedo registrarme como guía turístico, proveedor o prestador de servicios turísticos? 🧑‍💼",
+          response: "¡Sí! Ya sea que proporciones tours 🏞️, experiencias 🎨, regalos 🎁, o gestiones un festival de temporada 🎉, el registro está disponible a través de la app y se activa en minutos ⏳.",
+          ctas: [
+            { id: "register1", text: "Registrarse como guía 🧑‍💼" },
+            { id: "register2", text: "Registrarse como proveedor 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "¿Qué métodos de pago están disponibles? 💳",
+          response: "Aceptamos todo tipo de pagos 💳, la pasarela de pago en la app admite la mayoría de tipos de pago electrónico ⚡."
+        },
+        {
+          id: 10,
+          text: "¿Intenté pagar y no funcionó? ❌",
+          response: "Prueba con otra tarjeta 💳 o verifica tu saldo 💰, y si el problema persiste, contáctanos ☎️.",
+          ctas: [
+            { id: "financial1", text: "Contactar soporte financiero 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "¿Los precios incluyen impuestos? 💰",
+          response: "Sí, los precios finales incluyen impuestos ✅."
+        },
+        {
+          id: 12,
+          text: "¿La app no se abre o tiene un problema? ⚠️",
+          response: "Intenta actualizar la app 🔄 o reiniciar tu dispositivo 📱💻. Si persiste, háganoslo saber ☎️.",
+          ctas: [
+            { id: "tech1", text: "Contactar soporte técnico 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 ¡Gracias por tu confianza en Jawla! Recuerda: Jawla no es solo un viaje, sino una experiencia inolvidable 🌍✨. Nos vemos pronto en otro tour 🏞️ con una experiencia más hermosa 🌄, y con un souvenir 🎁 que siempre te recordará tus tours con nosotros",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Reservar un nuevo tour 🗓️" },
+        { id: "giftshop1", text: "Ver tienda de regalos 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Tour turístico 🏞️" },
+        { id: "service2", text: "Souvenir 🎁" },
+        { id: "service3", text: "Festival o evento 🎉" },
+        { id: "service4", text: "Ayuda con reserva o pago 💳" }
+      ],
+      initialPrompt: "Elige el servicio que te convenga de las siguientes opciones:"
+    },
+    tr: {
+      welcome: "✨ Ben Jawla'dan Layla! 🌟 Jawla'ya hoş geldiniz 🤍. Burada Suudi Arabistan'ı 🇸🇦 Jawla'nın ve seçkin hizmet sağlayıcılarının gözünden keşfedeceksiniz. Kültürel geziler 🕌 yaşayacak, en iyi geleneksel yemekleri 🍲 tadacak ve en güzel tarihi ve turistik yerleri 🏰🌄 ziyaret edeceksiniz. Bugün size nasıl yardımcı olabilirim?",
+      questions: [
+        {
+          id: 1,
+          text: "Bir tur yapmak ister misiniz? 🏞️",
+          response: "Miras turları 🏰, kültürel turlar 🎨, aile turları 👨‍👩‍👧‍👦 ve macera turları 🌄 sunuyoruz.",
+          ctas: [
+            { id: "tour1", text: "Mevcut turları keşfedin 🗺️" },
+            { id: "tour2", text: "Aile turları 👨‍👩‍👧‍👦" },
+            { id: "tour3", text: "Macera turları 🌄" }
+          ]
+        },
+        {
+          id: 2,
+          text: "Mirasımız ve kültürümüzden ilham alan bir hediyelik eşya ister misiniz? 🎁",
+          response: "Seçkin Suudi mirası hediyelik eşya mağazası 🕌🛍️ sunuyoruz.",
+          ctas: [
+            { id: "gift1", text: "Hediyelik eşya mağazasını keşfedin 🎁" }
+          ]
+        },
+        {
+          id: 3,
+          text: "Yakınınızda bir festival veya etkinlik olup olmadığını öğrenmek ister misiniz? 🎉",
+          response: "Size konumunuza göre festival ve etkinlik takvimi 📅📍 sunacağız.",
+          ctas: [
+            { id: "event1", text: "Festivalleri keşfedin 🎉" }
+          ]
+        },
+        {
+          id: 4,
+          text: "Nasıl tur rezervasyonu yapabilirim? 📝",
+          response: "Rezervasyon kolaydır: Turu veya ürünü seçin → Tarihi ve kişi sayısını belirleyin → Ödeme yöntemini seçin → Onaylayın → Uygulama üzerinden ödeyin 💳.",
+          ctas: [
+            { id: "book1", text: "Şimdi rezervasyon yapın 🗓️" }
+          ]
+        },
+        {
+          id: 5,
+          text: "Rezervasyonumu değiştirebilir veya iptal edebilir miyim? ❓",
+          response: "Evet, randevudan 72-48 saat önce ⏰ iptal edebilir veya değiştirebilirsiniz, bazen rezervasyon türüne bağlı olarak 24 saat öncesine kadar.",
+          ctas: [
+            { id: "manage1", text: "Rezervasyonlarımı yönet 📋" }
+          ]
+        },
+        {
+          id: 6,
+          text: "Rezervasyon onayı almadım mı? 📧",
+          response: "E-postanızı kontrol edin 📬 veya uygulama içindeki 'Rezervasyonlarım' bölümünü kontrol edin.",
+          ctas: [
+            { id: "view1", text: "Rezervasyonlarınızı görüntüleyin 📂" }
+          ]
+        },
+        {
+          id: 7,
+          text: "Yeni bir hesap kaydedemedim mi? ❌",
+          response: "E-posta adresinizi ve cep telefonu numaranızı girdiğinizden emin olun ✉️📱, ardından giriş sayfasından şifrenizi sıfırlayın 🔑. Veya destek ile iletişime geçin ☎️ 0568015093.",
+          ctas: [
+            { id: "reset1", text: "Şifreyi sıfırla 🔑" },
+            { id: "support1", text: "Destek ile iletişime geçin ☎️" }
+          ]
+        },
+        {
+          id: 8,
+          text: "Tur rehberi, sağlayıcı veya turizm hizmet sağlayıcısı olarak kaydolabilir miyim? 🧑‍💼",
+          response: "Evet! İster turlar 🏞️, deneyimler 🎨, hediyeler 🎁 sağlayın, ister mevsimlik bir festival 🎉 yönetin, kayıt uygulama üzerinden yapılabilir ve dakikalar içinde etkinleştirilir ⏳.",
+          ctas: [
+            { id: "register1", text: "Rehber olarak kaydolun 🧑‍💼" },
+            { id: "register2", text: "Sağlayıcı olarak kaydolun 🏪" }
+          ]
+        },
+        {
+          id: 9,
+          text: "Hangi ödeme yöntemleri mevcuttur? 💳",
+          response: "Her türlü ödemeyi kabul ediyoruz 💳, uygulamadaki ödeme geçidi çoğu elektronik ödeme türünü destekliyor ⚡."
+        },
+        {
+          id: 10,
+          text: "Ödeme yapmayı denedim ve çalışmadı mı? ❌",
+          response: "Başka bir kart deneyin 💳 veya bakiyenizi kontrol edin 💰, sorun devam ederse bizimle iletişime geçin ☎️.",
+          ctas: [
+            { id: "financial1", text: "Finansal destek ile iletişime geçin 💳" }
+          ]
+        },
+        {
+          id: 11,
+          text: "Fiyatlara vergiler dahil mi? 💰",
+          response: "Evet, son fiyatlara vergiler dahildir ✅."
+        },
+        {
+          id: 12,
+          text: "Uygulama açılmıyor veya bir sorunu mu var? ⚠️",
+          response: "Uygulamayı güncellemeyi 🔄 veya cihazınızı yeniden başlatmayı 📱💻 deneyin. Sorun devam ederse bize bildirin ☎️.",
+          ctas: [
+            { id: "tech1", text: "Teknik destek ile iletişime geçin 🛠️" }
+          ]
+        }
+      ],
+      farewell: "🤍 Jawla'ya güvendiğiniz için teşekkür ederiz! Unutmayın: Jawla sadece bir seyahat değil, unutulmaz bir deneyimdir 🌍✨. Yakında başka bir turda 🏞️ daha güzel bir deneyimle 🌄 ve bizimle turlarınızı her zaman hatırlatacak bir hediyelik eşya 🎁 ile görüşürüz",
+      farewellCTAs: [
+        { id: "newbooking1", text: "Yeni bir tur rezervasyonu yapın 🗓️" },
+        { id: "giftshop1", text: "Hediyelik eşya mağazasını görüntüleyin 🎁" }
+      ],
+      initialOptions: [
+        { id: "service1", text: "Turistik tur 🏞️" },
+        { id: "service2", text: "Hediyelik eşya 🎁" },
+        { id: "service3", text: "Festival veya etkinlik 🎉" },
+        { id: "service4", text: "Rezervasyon veya ödeme yardımı 💳" }
+      ],
+      initialPrompt: "Aşağıdaki seçeneklerden size uygun hizmeti seçin:"
+    },
     ru: [
       {
         id: 1,
@@ -339,50 +1177,16 @@ const ChatBot = () => {
     ]
   };
 
-  // Toggle chatbot visibility
-  const toggleChatBot = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      setSelectedQuestion(null);
-      setUserMessage('');
-    }
+  // Get the appropriate conversation data based on language
+  const getConversationData = () => {
+    return conversationData[currentLanguage] || conversationData['en'];
   };
-
-  // Handle question click
-  const handleQuestionClick = (id) => {
-    setSelectedQuestion(id);
-  };
-
-  // Handle key press in input field
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSendMessage();
-    }
-  };
-
-  // Handle send message button click
-  const handleSendMessage = () => {
-    if (userMessage.trim()) {
-      // Here you would typically handle the user message
-      // For now, we'll just clear the input
-      setUserMessage('');
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    }
-  };
-
-  // Scroll to answer when a question is selected
-  useEffect(() => {
-    if (selectedQuestion && answerRef.current) {
-      answerRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [selectedQuestion]);
 
   return (
     <div className="chatbot-container">
       {/* Chat button */}
-      <button
+      <Link
+        to="/contact"
         className="chatbot-button"
         onClick={toggleChatBot}
         aria-label={{
@@ -405,7 +1209,7 @@ const ChatBot = () => {
           <path d="M8 12H16" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
           <path d="M8 15.5H13.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
-      </button>
+      </Link>
 
       {/* Chat window */}
       {isOpen && (
@@ -457,51 +1261,30 @@ const ChatBot = () => {
 
           <div className="chatbot-body">
             <div className="chatbot-welcome">
-              <p>
-                {{
-                  ar: 'مرحبًا! أنا سارة، مساعدتك الافتراضية. كيف يمكنني مساعدتك اليوم؟',
-                  en: 'Hello! I\'m Sara, your virtual assistant. How can I help you today?',
-                  fr: 'Bonjour! Je suis Sara, votre assistante virtuelle. Comment puis-je vous aider aujourd\'hui?',
-                  de: 'Hallo! Ich bin Sara, Ihre virtuelle Assistentin. Wie kann ich Ihnen heute helfen?',
-                  es: '¡Hola! Soy Sara, tu asistente virtual. ¿Cómo puedo ayudarte hoy?',
-                  tr: 'Merhaba! Ben Sara, sanal asistanınız. Bugün size nasıl yardımcı olabilirim?',
-                  ru: 'Привет! Я Сара, ваш виртуальный помощник. Как я могу помочь вам сегодня?',
-                  zh: '你好！我是萨拉，你的虚拟助手。今天我能帮你什么？',
-                  ko: '안녕하세요! 저는 사라, 당신의 가상 비서입니다. 오늘 어떻게 도와드릴까요?',
-                  pt: 'Olá! Eu sou Sara, sua assistente virtual. Como posso ajudá-lo hoje?',
-                  ur: 'ہیلو! میں سارہ ہوں، آپ کی ورچوئل اسسٹنٹ۔ میں آج آپ کی کیسے مدد کر سکتی ہوں؟',
-                  ja: 'こんにちは！私はサラ、あなたの仮想アシスタントです。今日はどのようにお手伝いできますか？'
-                }[currentLanguage] || 'Hello! I\'m Sara, your virtual assistant. How can I help you today?'}
-              </p>
-            </div>
-            
-          
-
-            <div className="chatbot-faq">
-              <h4>
-                {{
-                  ar: 'الأسئلة الشائعة',
-                  en: 'Frequently Asked Questions',
-                  fr: 'Questions Fréquemment Posées',
-                  de: 'Häufig Gestellte Fragen',
-                  es: 'Preguntas Frecuentes',
-                  tr: 'Sık Sorulan Sorular',
-                  ru: 'Часто Задаваемые Вопросы',
-                  zh: '常见问题',
-                  ko: '자주 묻는 질문',
-                  pt: 'Perguntas Frequentes',
-                  ur: 'اکثر پوچھے گئے سوالات',
-                  ja: 'よくある質問'
-                }[currentLanguage] || 'Frequently Asked Questions'}
-              </h4>
-              <ul>
-                {(faqData[currentLanguage] || faqData['en']).map((faq) => (
-                  <li
-                    key={faq.id}
-                    className={selectedQuestion === faq.id ? 'selected' : ''}
-                    onClick={() => handleQuestionClick(faq.id)}
+              <p>{getConversationData().welcome}</p>
+              <p className="chatbot-prompt">{getConversationData().initialPrompt}</p>
+              <div className="chatbot-options">
+                {getConversationData().initialOptions.map((option) => (
+                  <button
+                    key={option.id}
+                    className="chatbot-option-btn"
+                    onClick={() => handleCTAClick(option.id)}
                   >
-                    {faq.question}
+                    {option.text}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="chatbot-questions">
+              <ul>
+                {getConversationData().questions.map((question) => (
+                  <li
+                    key={question.id}
+                    className={selectedQuestion === question.id ? 'selected' : ''}
+                    onClick={() => handleQuestionClick(question.id)}
+                  >
+                    {question.text}
                   </li>
                 ))}
               </ul>
@@ -515,8 +1298,90 @@ const ChatBot = () => {
                   </div>
                   <div className="answer-content">
                     <p>
-                      {(faqData[currentLanguage] || faqData['en']).find(faq => faq.id === selectedQuestion)?.answer}
+                      {getConversationData().questions.find(q => q.id === selectedQuestion)?.response}
                     </p>
+                    {getConversationData().questions.find(q => q.id === selectedQuestion)?.ctas && (
+                      <div className="chatbot-cta-buttons">
+                        {getConversationData().questions.find(q => q.id === selectedQuestion)?.ctas.map((cta) => {
+                          let destination = "/contact";
+                          // Set destination based on question ID
+                          if ([1, 4].includes(selectedQuestion)) {
+                            destination = "/tripsPage";
+                          } else if (selectedQuestion === 2) {
+                            destination = "/offers";
+                          } else if (selectedQuestion === 3) {
+                            destination = "/eventsPage";
+                          } else if (selectedQuestion === 5 || selectedQuestion === 6) {
+                            destination = "/reservations";
+                          }
+                          return (
+                            <Link key={cta.id} to={destination} className="chatbot-cta-btn">
+                              {cta.text}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {selectedCTA && (
+              <div className="chatbot-answer" ref={answerRef}>
+                <div className="answer-container">
+                  <div className="answer-avatar">
+                    <img src={saraAvatar} alt="Sara" />
+                  </div>
+                  <div className="answer-content">
+                    {selectedCTA === "service1" && (
+                      <>
+                        <p>{getConversationData().questions.find(q => q.id === 1)?.response}</p>
+                        <div className="chatbot-cta-buttons">
+                          {getConversationData().questions.find(q => q.id === 1)?.ctas.map((cta) => (
+                            <Link key={cta.id} to="/tripsPage" className="chatbot-cta-btn">
+                              {cta.text}
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                    {selectedCTA === "service2" && (
+                      <>
+                        <p>{getConversationData().questions.find(q => q.id === 2)?.response}</p>
+                        <div className="chatbot-cta-buttons">
+                          {getConversationData().questions.find(q => q.id === 2)?.ctas.map((cta) => (
+                            <Link key={cta.id} to="/offers" className="chatbot-cta-btn">
+                              {cta.text}
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                    {selectedCTA === "service3" && (
+                      <>
+                        <p>{getConversationData().questions.find(q => q.id === 3)?.response}</p>
+                        <div className="chatbot-cta-buttons">
+                          {getConversationData().questions.find(q => q.id === 3)?.ctas.map((cta) => (
+                            <Link key={cta.id} to="/eventsPage" className="chatbot-cta-btn">
+                              {cta.text}
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                    {selectedCTA === "service4" && (
+                      <>
+                        <p>{getConversationData().questions.find(q => q.id === 4)?.response}</p>
+                        <div className="chatbot-cta-buttons">
+                          {getConversationData().questions.find(q => q.id === 4)?.ctas.map((cta) => (
+                            <Link key={cta.id} to="/tripsPage" className="chatbot-cta-btn">
+                              {cta.text}
+                            </Link>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

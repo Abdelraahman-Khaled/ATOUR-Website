@@ -18,7 +18,6 @@ import { ProfileProvider } from "context/ProfileContext";
 import { HomeProvider, useHome } from "context/HomeContext";
 import ChatBot from "./Components/ChatBot/ChatBot";
 import AdPopup from "./Components/AdPopup/AdPopup";
-import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
@@ -42,13 +41,11 @@ const AppContent = () => {
       <div className="airPlan-dot" />
         <img src={air} className="object-fit-cover" alt="airplan" />
     </div> */}
-      <BackgroundAudio />
       <HelmetProvider>
         <RouterProvider router={routers} />
         <SplashScreen />
       </HelmetProvider>
       <ScrollToTopButton />
-      {<ChatBot />}
     </div>
   );
 };

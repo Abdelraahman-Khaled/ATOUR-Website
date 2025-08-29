@@ -125,11 +125,22 @@
   background-color: #f5f5f5;
   padding: 12px;
   border-radius: 10px;
-  max-width: 80%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 :root[dir="rtl"] .chatbot-welcome {
   align-self: flex-end;
+}
+
+:root[dir="rtl"] .chatbot-options {
+  flex-direction: row-reverse;
+}
+
+:root[dir="rtl"] .chatbot-cta-buttons {
+  flex-direction: row-reverse;
 }
 
 .chatbot-welcome p {
@@ -138,19 +149,43 @@
   line-height: 1.4;
 }
 
-.chatbot-faq {
+.chatbot-prompt {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.chatbot-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.chatbot-option-btn {
+  background-color: #148035;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.chatbot-option-btn:hover {
+  background-color: #0d6025;
+  transform: translateY(-2px);
+}
+
+.chatbot-questions {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.chatbot-faq h4 {
-  margin: 0;
-  font-size: 15px;
-  color: #333;
-}
-
-.chatbot-faq ul {
+.chatbot-questions ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -159,7 +194,7 @@
   gap: 8px;
 }
 
-.chatbot-faq li {
+.chatbot-questions li {
   padding: 10px 15px;
   background-color: #f0f0f0;
   border-radius: 18px;
@@ -169,11 +204,11 @@
   border: 1px solid transparent;
 }
 
-.chatbot-faq li:hover {
+.chatbot-questions li:hover {
   background-color: #e0e0e0;
 }
 
-.chatbot-faq li.selected {
+.chatbot-questions li.selected {
   background-color: #e8f5e9;
   border-color: #148035;
   font-weight: 500;
@@ -195,6 +230,48 @@
   border-radius: 50%;
   overflow: hidden;
   background-color: #148035;
+}
+
+.chatbot-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chatbot-cta-btn {
+  display: inline-block;
+  background-color: #148035;
+  color: white;
+  text-decoration: none;
+  border-radius: 18px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.chatbot-cta-btn:hover {
+  background-color: #0d6025;
+  transform: translateY(-2px);
+}
+
+.chatbot-farewell {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chatbot-farewell p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .answer-avatar img {
