@@ -110,6 +110,10 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 {t('auth.login.forgetPassword')}
               </div>
             )}
+            <div className="license-number">
+              <span className="license-number-text">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
+              73106456
+            </div>
             <EndLoginInfo />
           </div>
           <div className="col-12 col-md-6">

@@ -130,6 +130,17 @@
     color: var(--warning-01-color);
 }
 
+.footer .final-footer .license-number-footer {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--white-01-color);
+    margin-top: 5px;
+}
+
+.footer .final-footer .license-number-value {
+    font-weight: 500;
+}
+
 /* SCREEN 991PX */
 @media screen and (max-width:991px) {
     .footer {

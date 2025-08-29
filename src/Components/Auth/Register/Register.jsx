@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi";
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import "./Register.css"; // Import CSS for license number styling
 
 const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
   const { currentLanguage } = useLanguage(); // Get current language
@@ -118,6 +119,10 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
             </div>
           </div>
           <EndLoginInfo />
+          <div className="license-number">
+            <span className="license-number-text">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
+            73106456
+          </div>
         </div>
         <div className="col-12 col-md-6">
           <ImageLogin />

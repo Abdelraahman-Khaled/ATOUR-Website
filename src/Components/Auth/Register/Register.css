@@ -1,0 +1,10 @@
+.license-number {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+  color: var(--green-01-color)
+}
+
+.license-number-text {
+  font-weight: 500;
+}
