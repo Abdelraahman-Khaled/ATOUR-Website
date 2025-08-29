@@ -105,13 +105,13 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
             {!forgotPasswordOpen && (
               <div
                 onClick={() => setForgotPasswordOpen(true)}
-                className="cursor-pointer-event text-decoration-underline link-a text-center mt-2"
+                className="cursor-pointer-event mb-3 text-decoration-underline link-a text-center mt-2"
               >
                 {t('auth.login.forgetPassword')}
               </div>
             )}
-            <div className="license-number">
-              <span className="license-number-text">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
+            <div className="license-number text-center ">
+              <span className="license-number-text text-success">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
               73106456
             </div>
             <EndLoginInfo />

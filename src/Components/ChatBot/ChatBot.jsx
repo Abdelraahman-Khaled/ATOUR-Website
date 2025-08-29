@@ -1201,8 +1201,7 @@ const ChatBot = () => {
   return (
     <div className="chatbot-container">
       {/* Chat button */}
-      <Link
-        to="/contact"
+      <div
         className="chatbot-button"
         onClick={toggleChatBot}
         aria-label={{
@@ -1225,7 +1224,7 @@ const ChatBot = () => {
           <path d="M8 12H16" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
           <path d="M8 15.5H13.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
-      </Link>
+      </div>
 
       {/* Chat window */}
       {isOpen && (

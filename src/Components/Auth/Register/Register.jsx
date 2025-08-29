@@ -117,6 +117,10 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
               {content.loginLink[currentLanguage]}
             </div>
           </div>
+          <div className="license-number text-center ">
+            <span className="license-number-text text-success">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
+            73106456
+          </div>
           <EndLoginInfo />
         </div>
         <div className="col-12 col-md-6">

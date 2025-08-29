@@ -341,6 +341,10 @@ const Footer = () => {
             </Link>{" "}
             2024
           </p>
+          <p className="license-number-footer">
+            <span className="license-number-text">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
+            73106456
+          </p>
         </div>
       </ContainerMedia>
     </div>
