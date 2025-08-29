@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from 'Components/Languages/LanguageContext';
 import { Link } from 'react-router-dom';
 import './ChatBot.css';
-import saraAvatar from '../../assets/images/chatbot/sara-avatar.svg';
+import lailaAvatar from '../../assets/images/chatbot/sara-avatar.svg';
 
 const ChatBot = () => {
   const { currentLanguage } = useLanguage();
@@ -10,6 +10,22 @@ const ChatBot = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [selectedCTA, setSelectedCTA] = useState(null);
   const answerRef = useRef(null);
+
+  // name of bot 
+  const lilaName = {
+    "en": "Lily",
+    "ar": "ليلي",
+    "fr": "Lily",
+    "de": "Lily",
+    "es": "Lily",
+    "tr": "Lily",
+    "ru": "Лили",
+    "zh": "莉莉",
+    "ko": "릴리",
+    "pt": "Lily",
+    "ur": "لیلی",
+    "ja": "リリー"
+  }
 
   // Toggle chatbot visibility
   const toggleChatBot = () => {
@@ -1216,10 +1232,10 @@ const ChatBot = () => {
         <div className="chatbot-window">
           <div className="chatbot-header">
             <div className="chatbot-avatar">
-              <img src={saraAvatar} alt="Sara" />
+              <img src={lailaAvatar} alt="Laila" />
             </div>
             <div className="chatbot-info">
-              <h3>Sara</h3>
+              <h3>{lilaName[currentLanguage]}</h3>
               <p>
                 {{
                   ar: 'مساعد افتراضي',
@@ -1294,7 +1310,7 @@ const ChatBot = () => {
               <div className="chatbot-answer" ref={answerRef}>
                 <div className="answer-container">
                   <div className="answer-avatar">
-                    <img src={saraAvatar} alt="Sara" />
+                    <img src={lailaAvatar} alt="Laila" />
                   </div>
                   <div className="answer-content">
                     <p>
@@ -1331,7 +1347,7 @@ const ChatBot = () => {
               <div className="chatbot-answer" ref={answerRef}>
                 <div className="answer-container">
                   <div className="answer-avatar">
-                    <img src={saraAvatar} alt="Sara" />
+                    <img src={lailaAvatar} alt="Laila" />
                   </div>
                   <div className="answer-content">
                     {selectedCTA === "service1" && (
