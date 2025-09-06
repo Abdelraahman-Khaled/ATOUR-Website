@@ -29,19 +29,25 @@ const AdPopup = () => {
     require("../../assets/images/popupAds/ads(3).png"),
   ];
 
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setShowPopup(false);
+    }
+  };
+
+  const handleContentClick = (e) => {
+    e.stopPropagation();
+  };
+
   if (!showPopup) {
     return null;
   }
 
   return (
-    <div className="ad-popup-overlay">
-      <div className="ad-popup-content">
-        <button className="ad-popup-close" onClick={() => setShowPopup(false)}>
-          &times;
-        </button>
-        <h1>Atour Company</h1>
+    <div className="ad-popup-overlay" onClick={handleOverlayClick}>
+      <div className="ad-popup-content" onClick={handleContentClick}>
         <AdSwiper adImages={adImages} />
-        <button className="ad-popup-button">Learn More</button>
+        <p className="text-white py-3">Atour Company</p>
       </div>
     </div>
   );

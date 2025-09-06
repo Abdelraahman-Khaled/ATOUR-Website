@@ -23,6 +23,7 @@ import TermsConditions from "../Pages/TermsConditions/TermsConditions";
 import Articles from "../Pages/Articles/Articles";
 import News from "../Pages/News/News";
 import NewsDetails from "../Pages/News/Components/NewsDetails/NewsDetails";
+import Rewards from "../Pages/Rewards/Rewards";
 
 let routers = createBrowserRouter([
   {
@@ -150,6 +151,7 @@ let routers = createBrowserRouter([
       { path: "aboutUs", element: <AboutUs /> },
       { path: "termsConditions", element: <TermsConditions /> },
       { path: "articles", element: <Articles /> },
+      { path: "rewards", element: <Rewards /> },
       {
         path: "news",
         element: (

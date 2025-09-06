@@ -397,31 +397,11 @@ const translations = {
         },
         passwordConfirmMatch: {
           en: "Password confirmation does not match",
-          ar: "تأكيد كلمة المرور غير متطابق",
-          fr: "La confirmation du mot de passe ne correspond pas",
-          de: "Passwortbestätigung stimmt nicht überein",
-          es: "La confirmación de contraseña no coincide",
-          tr: "Şifre onayı eşleşmiyor",
-          ru: "Подтверждение пароля не совпадает",
-          zh: "密码确认不匹配",
-          ko: "비밀번호 확인이 일치하지 않습니다",
-          pt: "A confirmação de senha não corresponde",
-          ur: "پاس ورڈ کی تصدیق مطابقت نہیں رکھتی",
-          ja: "パスワードの確認が一致しません"
+          ar: "تأكيد كلمة المرور غير متطابق"
         },
         passwordConfirmRequired: {
           en: "Password confirmation is required",
-          ar: "تأكيد كلمة المرور مطلوب",
-          fr: "La confirmation du mot de passe est requise",
-          de: "Passwortbestätigung ist erforderlich",
-          es: "Se requiere confirmación de contraseña",
-          tr: "Şifre onayı gereklidir",
-          ru: "Требуется подтверждение пароля",
-          zh: "需要确认密码",
-          ko: "비밀번호 확인이 필요합니다",
-          pt: "A confirmação de senha é obrigatória",
-          ur: "پاس ورڈ کی تصدیق درکار ہے",
-          ja: "パスワードの確認が必要です"
+          ar: "تأكيد كلمة المرور مطلوب"
         }
       }
     },
@@ -770,6 +750,10 @@ const translations = {
       pt: "Minhas reservas",
       ur: "میری بکنگز",
       ja: "私の予約"
+    },
+    rewards: {
+      en: "Rewards",
+      ar: "المكافآت"
     },
     currency: {
       en: "Saudi Riyal",

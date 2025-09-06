@@ -1,6 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import UserIcon from "assets/images/AccountUser/UserIcon";
 import DateIcon from "assets/images/IconsBooks/DateIcon";
+import GiftCardIcon from "assets/images/IconsBooks/GiftCardIcon";
 import LogOutIcon from "assets/images/AccountUser/LogOutIcon";
 import { Link } from "react-router-dom";
 import useTranslation from "Components/Languages/useTranslation";
@@ -38,6 +39,13 @@ const UserDropMenu = () => {
           <Dropdown.Item>
             <Link className="link-drop-item" to="/reservations">
               <DateIcon /> {t('userDropMenu.myReservations')}
+            </Link>
+          </Dropdown.Item>
+
+          {/* Rewards */}
+          <Dropdown.Item>
+            <Link className="link-drop-item" to="/rewards">
+              <GiftCardIcon /> {t('userDropMenu.rewards')}
             </Link>
           </Dropdown.Item>
 

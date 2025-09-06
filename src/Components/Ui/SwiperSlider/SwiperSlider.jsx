@@ -31,10 +31,23 @@ const SwiperSlider = ({ sliderNewClass, itemsSlider, children, onSlideChange }) 
             return (
               <SwiperSlide key={item.id}>
                 {/* ========= START BANNER ONE ======== */}
-                <div
-                  className="banner-one section-padding bg-image"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                ></div>
+                {item.video ? (
+                  <div className="banner-one section-padding video-banner">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      className="video-background"
+                    >
+                      <source src={item.video} type="video/mp4" />
+                    </video>
+                  </div>
+                ) : (
+                  <div
+                    className="banner-one section-padding bg-image"
+                    style={{ backgroundImage: `url(${item.image})` }}
+                  ></div>
+                )}
                 {/* ======== END BANNER ONE ========= */}
               </SwiperSlide>
             );
