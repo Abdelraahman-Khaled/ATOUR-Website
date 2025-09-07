@@ -9,12 +9,12 @@
 }
 
 html[dir="ltr"] .background-audio-container {
-  right: 25px;
+  right: 20px;
   left: auto;
 }
 
 html[dir="rtl"] .background-audio-container {
-  left: 30px;
+  left: 20px;
   right: auto;
 }
 

@@ -182,6 +182,102 @@ const ChatBot = () => {
         );
         break;
       
+      case 'auth':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'اختر ما تريد القيام به:' : 'Choose what you want to do:',
+          [
+            { id: 'reset_password', text: currentLanguage === 'ar' ? 'إعادة تعيين كلمة المرور 🔑' : 'Reset Password 🔑' },
+            { id: 'contact_support', text: currentLanguage === 'ar' ? 'تواصل مع الدعم ☎️' : 'Contact Support ☎️' },
+            { id: 'register_customer', text: currentLanguage === 'ar' ? 'سجل كعميل 🧑‍💼' : 'Register as Customer 🧑‍💼' },
+            { id: 'register_provider', text: currentLanguage === 'ar' ? 'سجل كمورد 🏪' : 'Register as Provider 🏪' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
+      case 'customer_service':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك التواصل مع فريق خدمة العملاء عبر الطرق التالية:' : 'You can contact our customer service team through the following methods:',
+          [
+            { id: 'contact_info', text: currentLanguage === 'ar' ? 'معلومات التواصل 📞' : 'Contact Information 📞' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
+      case 'booking_method':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك الحجز بسهولة من خلال تصفح الخدمات المتاحة واختيار ما يناسبك، ثم اتباع خطوات الحجز البسيطة 📝' : 'You can easily book by browsing available services and choosing what suits you, then following simple booking steps 📝',
+          [
+            { id: 'bookings', text: currentLanguage === 'ar' ? 'العودة لقائمة الحجوزات' : 'Back to Bookings' }
+          ]
+        );
+        break;
+      
+      case 'manage_bookings':
+      case 'view_bookings':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك إدارة ومشاهدة جميع حجوزاتك من خلال صفحة الحجوزات 📋' : 'You can manage and view all your bookings through the bookings page 📋',
+          [
+            { id: 'go_to_bookings', text: currentLanguage === 'ar' ? 'انتقل إلى صفحة الحجوزات' : 'Go to Bookings Page', link: '/reservations' },
+            { id: 'bookings', text: currentLanguage === 'ar' ? 'العودة لقائمة الحجوزات' : 'Back to Bookings' }
+          ]
+        );
+        break;
+      
+      case 'contact_info':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك التواصل معنا عبر البريد الإلكتروني أو الهاتف. فريقنا متاح لمساعدتك في أي وقت 📞✉️' : 'You can contact us via email or phone. Our team is available to help you anytime 📞✉️',
+          [
+            { id: 'customer_service', text: currentLanguage === 'ar' ? 'العودة لخدمة العملاء' : 'Back to Customer Service' }
+          ]
+        );
+        break;
+      
+      case 'reset_password':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك إعادة تعيين كلمة المرور من خلال صفحة تسجيل الدخول 🔑' : 'You can reset your password through the login page 🔑',
+          [
+            { id: 'go_to_login', text: currentLanguage === 'ar' ? 'انتقل إلى صفحة تسجيل الدخول' : 'Go to Login Page', link: '/login' },
+            { id: 'auth', text: currentLanguage === 'ar' ? 'العودة للقائمة السابقة' : 'Back to Previous Menu' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
+      case 'contact_support':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'يمكنك التواصل مع فريق الدعم الفني لمساعدتك في أي استفسار ☎️' : 'You can contact our technical support team for any inquiries ☎️',
+          [
+            { id: 'contact_info', text: currentLanguage === 'ar' ? 'معلومات التواصل 📞' : 'Contact Information 📞' },
+            { id: 'auth', text: currentLanguage === 'ar' ? 'العودة للقائمة السابقة' : 'Back to Previous Menu' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
+      case 'register_customer':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'شاهد فيديو شرح التسجيل كعميل 🧑‍💼 من خلال الرابط التالي:' : 'Watch the customer registration tutorial video 🧑‍💼 through the following link:',
+          [
+            { id: 'customer_video', text: currentLanguage === 'ar' ? 'شاهد فيديو التسجيل 🎥' : 'Watch Registration Video 🎥', link: 'https://drive.google.com/file/d/19eV-XwU8BT82RYKAcE4kOagTr-qeanDS/view?usp=drive_link' },
+            { id: 'auth', text: currentLanguage === 'ar' ? 'العودة للقائمة السابقة' : 'Back to Previous Menu' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
+      case 'register_provider':
+        addBotMessage(
+          currentLanguage === 'ar' ? 'شاهد فيديو شرح التسجيل كمورد 🏪 من خلال الرابط التالي:' : 'Watch the provider registration tutorial video 🏪 through the following link:',
+          [
+            { id: 'provider_video', text: currentLanguage === 'ar' ? 'شاهد فيديو التسجيل 🎥' : 'Watch Registration Video 🎥', link: 'https://drive.google.com/file/d/19eV-XwU8BT82RYKAcE4kOagTr-qeanDS/view?usp=drive_link' },
+            { id: 'auth', text: currentLanguage === 'ar' ? 'العودة للقائمة السابقة' : 'Back to Previous Menu' },
+            { id: 'main_menu', text: currentLanguage === 'ar' ? 'العودة للقائمة الرئيسية' : 'Back to Main Menu' }
+          ]
+        );
+        break;
+      
       default:
         addBotMessage(
           currentLanguage === 'ar' ? 'عذراً، لم أفهم طلبك. يمكنك اختيار من الخيارات المتاحة.' : 'Sorry, I didn\'t understand your request. You can choose from the available options.',
@@ -260,7 +356,12 @@ const ChatBot = () => {
                     <div className="message-options">
                       {message.options.map((option, optIndex) => (
                         option.link ? (
-                          <Link key={optIndex} to={option.link} className="message-option">
+                          <Link 
+                            key={optIndex} 
+                            to={option.link} 
+                            className="message-option"
+                            {...(option.id === 'customer_video' || option.id === 'provider_video' ? { target: '_blank' } : {})}
+                          >
                             {option.text}
                           </Link>
                         ) : (
