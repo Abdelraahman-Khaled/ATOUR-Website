@@ -5,6 +5,7 @@ import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import "./NavbarMenu.css";
 import { useEffect, useState } from "react";
 import LanguageSwitcher from "Components/Languages/LanguageSwitcher";
+import CurrencySwitcher from "Components/Currencies/CurrencySwitcher";
 import HeartIcon from "assets/Icons/HeartIcon";
 import UserDropMenu from "Components/Ui/UserDropMenu/UserDropMenu";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
@@ -98,6 +99,9 @@ const NavbarMenu = () => {
             <div className="icon-lang icon-border">
               <LanguageSwitcher />
             </div>
+            <div className="icon-lang icon-border">
+              <CurrencySwitcher />
+            </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
           </div>
 
@@ -124,6 +128,9 @@ const NavbarMenu = () => {
             <div className="left-nav-menu d-flex align-items-center gap-3 ">
               <div className="icon-lang icon-border">
                 <LanguageSwitcher />
+              </div>
+              <div className="icon-lang icon-border">
+                <CurrencySwitcher />
               </div>
               {isAuthenticated() ? (
                 <>

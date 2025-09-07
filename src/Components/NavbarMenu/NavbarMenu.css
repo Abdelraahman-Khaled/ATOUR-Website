@@ -78,7 +78,7 @@
   border-bottom: var(--border-02);
 }
 
-:is(.icon-lang .dropdown .drop-lang, .dropmenu-user .drop-user) {
+:is(.icon-lang .dropdown .drop-lang, .icon-lang .dropdown .drop-currency, .dropmenu-user .drop-user) {
   padding: 0;
   background: transparent;
   border: none;

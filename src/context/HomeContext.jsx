@@ -5,7 +5,7 @@ import GeneralAPI from "api/generalApi";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 
-const HomeContext = createContext();
+const HomeContext = createContext(null);
 
 export const HomeProvider = ({ children }) => {
     const [homeData, setHomeData] = useState(null);

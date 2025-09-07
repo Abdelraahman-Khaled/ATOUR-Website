@@ -12,6 +12,7 @@ import "swiper/swiper-bundle.css";
 import "./App.css";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 import { LanguageProvider } from "Components/Languages/LanguageContext";
+import { CurrencyProvider } from "Components/Currencies/CurrencyContext";
 // import air from "./assets/images/airplan/02.png";
 import { useEffect, useState } from "react";
 import { ProfileProvider } from "context/ProfileContext";
@@ -47,7 +48,7 @@ const AppContent = () => {
         <SplashScreen />
       </HelmetProvider>
       <ScrollToTopButton />
-      <BackgroundAudio />
+      {/* <BackgroundAudio /> */}
     </div>
   );
 };
@@ -56,11 +57,13 @@ function App() {
   return (
     <AosAnimation>
       <LanguageProvider>
-        <ProfileProvider>
-          <HomeProvider>
-            <AppContent />
-          </HomeProvider>
-        </ProfileProvider>
+        <CurrencyProvider>
+          <ProfileProvider>
+            <HomeProvider>
+              <AppContent />
+            </HomeProvider>
+          </ProfileProvider>
+        </CurrencyProvider>
       </LanguageProvider>
     </AosAnimation>
   );

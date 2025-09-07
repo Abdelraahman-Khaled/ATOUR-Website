@@ -6,6 +6,7 @@ const HomeAPI = {
       headers: {
         ...headers,
         language: currentLanguage, // Include the language in headers
+        currency: "SAR",
       },
     });
     return response.data;

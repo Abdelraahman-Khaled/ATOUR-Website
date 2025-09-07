@@ -2,6 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const API_BASE_URL = "https://backend.atour.sa/api/v1";
+// const API_BASE_URL = "https://admin.atour.sa/api/v1";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -34,7 +35,10 @@ axiosInstance.interceptors.response.use(
 
     // Handle network errors (no response from server)
     if (!error.response) {
-      message = currentLanguage === "ar" ? "خطأ في الاتصال بالخادم" : "Network Error: Could not connect to server";
+      message =
+        currentLanguage === "ar"
+          ? "خطأ في الاتصال بالخادم"
+          : "Network Error: Could not connect to server";
       toast.error(message);
       return Promise.reject(error);
     }
@@ -42,9 +46,10 @@ axiosInstance.interceptors.response.use(
     const { status, data } = error.response;
 
     // Extract error message from different response formats
-    const errorMessage = data.message || 
-                        (data.error ? data.error.message || data.error : null) || 
-                        (typeof data === 'string' ? data : null);
+    const errorMessage =
+      data.message ||
+      (data.error ? data.error.message || data.error : null) ||
+      (typeof data === "string" ? data : null);
 
     // Handle different status codes
     switch (status) {
@@ -57,10 +62,14 @@ axiosInstance.interceptors.response.use(
         break;
 
       case 401: // Unauthorized
-        message = currentLanguage === "ar" ? "حدث خطأ في المصادقة" : "Authentication Error";
+        message =
+          currentLanguage === "ar"
+            ? "حدث خطأ في المصادقة"
+            : "Authentication Error";
 
         if (errorMessage === "unauthorized") {
-          message = currentLanguage === "ar" ? "تسجيل الدخول غير صالح" : "Unauthorized";
+          message =
+            currentLanguage === "ar" ? "تسجيل الدخول غير صالح" : "Unauthorized";
         }
 
         // Show toast first
@@ -68,16 +77,16 @@ axiosInstance.interceptors.response.use(
 
         // Check if the request URL contains authentication-related endpoints
         const url = error.config.url;
-        const isAuthRoute = url && (
-          url.includes('/login') || 
-          url.includes('/register') || 
-          url.includes('/send-otp') || 
-          url.includes('/verify-otp') || 
-          url.includes('/reset') || 
-          url.includes('/check-code') || 
-          url.includes('/confirm-reset')
-        );
-        
+        const isAuthRoute =
+          url &&
+          (url.includes("/login") ||
+            url.includes("/register") ||
+            url.includes("/send-otp") ||
+            url.includes("/verify-otp") ||
+            url.includes("/reset") ||
+            url.includes("/check-code") ||
+            url.includes("/confirm-reset"));
+
         // Only clear token and redirect for non-auth routes
         if (!isAuthRoute) {
           localStorage.removeItem("access_token");
@@ -88,20 +97,27 @@ axiosInstance.interceptors.response.use(
         break;
 
       case 403: // Forbidden
-        message = currentLanguage === "ar" ? "غير مصرح لك بالوصول" : "Access Forbidden";
+        message =
+          currentLanguage === "ar" ? "غير مصرح لك بالوصول" : "Access Forbidden";
         toast.error(message);
         break;
 
       case 404: // Not Found
-        message = currentLanguage === "ar" ? "لم يتم العثور على المورد المطلوب" : "Resource Not Found";
+        message =
+          currentLanguage === "ar"
+            ? "لم يتم العثور على المورد المطلوب"
+            : "Resource Not Found";
         toast.error(message);
         break;
 
       case 422: // Validation Error
-        message = currentLanguage === "ar" ? "خطأ في التحقق من البيانات" : "Validation Error";
-        
+        message =
+          currentLanguage === "ar"
+            ? "خطأ في التحقق من البيانات"
+            : "Validation Error";
+
         // Handle validation errors (typically array of errors)
-        if (data.errors && typeof data.errors === 'object') {
+        if (data.errors && typeof data.errors === "object") {
           const firstError = Object.values(data.errors)[0];
           if (Array.isArray(firstError) && firstError.length > 0) {
             message = firstError[0];
@@ -109,12 +125,15 @@ axiosInstance.interceptors.response.use(
         } else if (errorMessage) {
           message = errorMessage;
         }
-        
+
         toast.error(message);
         break;
 
       case 429: // Too Many Requests
-        message = currentLanguage === "ar" ? "طلبات كثيرة جدًا، يرجى المحاولة لاحقًا" : "Too Many Requests, please try again later";
+        message =
+          currentLanguage === "ar"
+            ? "طلبات كثيرة جدًا، يرجى المحاولة لاحقًا"
+            : "Too Many Requests, please try again later";
         toast.error(message);
         break;
 
@@ -124,7 +143,10 @@ axiosInstance.interceptors.response.use(
         break;
 
       case 503: // Service Unavailable
-        message = currentLanguage === "ar" ? "الخدمة غير متوفرة حاليًا" : "Service Unavailable";
+        message =
+          currentLanguage === "ar"
+            ? "الخدمة غير متوفرة حاليًا"
+            : "Service Unavailable";
         toast.error(message);
         break;
 
