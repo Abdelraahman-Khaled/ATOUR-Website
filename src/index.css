@@ -284,10 +284,10 @@ html[dir="ltr"] textarea.form-control.is-invalid {
   border: none;
 }
 
-.input-pass .form-control.is-invalid,
+/* .input-pass .form-control.is-invalid,
 .was-validated .input-pass .form-control:invalid {
   background-image: url("");
-}
+} */
 
 .error {
   font-size: 12px;
