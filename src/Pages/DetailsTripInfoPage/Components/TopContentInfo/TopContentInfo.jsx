@@ -9,7 +9,7 @@ const TopContentInfo = ({ tripData }) => {
   return (
     <div data-aos="fade-left" className="top-content-info-details d-flex justify-content-between gap-2 flex-wrap">
       <div className="right-info-details">
-        <h2 className="title">{tripData.description}</h2>
+        <h2 className="title">{tripData.title}</h2>
         <div className="d-flex flex-wrap gap-3 mt-3">
           {tripData.total_rates > 0 &&
             <div className="rate-stars-details d-flex align-items-center gap-1">

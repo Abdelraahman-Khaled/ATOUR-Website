@@ -11,7 +11,10 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import ModalProviderInformation from "../../ModalsDetailsTripInfo/ModalProviderInformation/ModalProviderInformation";
 import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
+
 const BoxOneContent = ({ tripData }) => {
+  console.log(tripData);
+
   const { currentLanguage } = useLanguage(); // Get the current language
   // SHOW MODAL DETAILS
   const [showModalProviderInformation, setShowModalProviderInformation] =
@@ -37,10 +40,10 @@ const BoxOneContent = ({ tripData }) => {
         >
           <div className="company-info d-flex align-items-center gap-2">
             <div className="img-company">
-              <img src={tripData.cover} alt="img" />
+              <img src={tripData.vendor.image} alt="img" />
             </div>
             <div className="info-details-company">
-              <h2 className="title">{tripData.title}</h2>
+              <h2 className="title">{tripData.vendor.name}</h2>
               {/* <div className="rate-info d-flex align-items-center gap-2 mt-1">
                 <div className="icon-star rate-star-icon">
                   <FontAwesomeIcon icon={faStar} />
@@ -63,8 +66,8 @@ const BoxOneContent = ({ tripData }) => {
         {/* ============= END HEADER TOP CONTENT ============= */}
         {/* ============= START BOX MIDDEL CONTENT =========== */}
         <div className="box-middel-content mt-3">
-          <h2 className="title mb-4">{tripData.description}</h2>
-          <p className="text favDev" dangerouslySetInnerHTML={{ __html: tripData.city.description }}>
+          <h2 className="title mb-4">{tripData.title}</h2>
+          <p className="text favDev" dangerouslySetInnerHTML={{ __html: tripData.description }}>
           </p>
           {/* <div className="main-info-avatar mt-2 d-flex align-items-center gap-4 flex-wrap">
             <AvatarGroup
