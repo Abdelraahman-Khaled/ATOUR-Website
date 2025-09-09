@@ -14,6 +14,7 @@ import ContentAPI from "api/contentApi";
 import { isAuthenticated } from "api/axiosInstance";
 import useTranslation from "Components/Languages/useTranslation";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import ThemeToggle from "Components/ThemeToggle/ThemeToggle";
 
 const NavbarMenu = () => {
   const { t } = useTranslation(); // Get the translation function
@@ -132,6 +133,7 @@ const NavbarMenu = () => {
               <div className="icon-lang icon-border">
                 <CurrencySwitcher />
               </div>
+              <ThemeToggle />
               {isAuthenticated() ? (
                 <>
                   <Link to="/favoritePage" className="icon-heart-fav icon-border">

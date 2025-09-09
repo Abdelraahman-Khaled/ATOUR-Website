@@ -56,7 +56,7 @@ const CardsFavGift = ({ data, refresh }) => {
                         })
                     ) : (
                         <>
-                            <p className="text-section-api fs-6 fw-medium text-center pt-5">
+                            <p className="text-section-api fs-6 fw-medium text-center pt-5 text-black">
                                 {currentLanguage === "ar" ? "لا يوجد منتجات فى المفضلة ." : "There are no products in the favorites."}
                                 <Link
                                     to="/"

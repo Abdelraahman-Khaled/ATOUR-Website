@@ -13,10 +13,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
-
-
 }
-.all-pagination .page-item .page-link:focus{
+.all-pagination .page-item .page-link:focus {
   box-shadow: 0 0 0 0.25rem rgb(20 128 53 / 23%) !important;
 }
 .all-pagination .page-item.active-1 .page-link,
@@ -24,6 +22,14 @@
   background: var(--green-01-color) !important;
   border-color: var(--green-01-color) !important;
   color: var(--white-01-color) !important;
+}
+body.dark-theme .all-pagination .page-item.active-1 .page-link,
+.all-pagination .page-item:hover .page-link {
+  color: var(--black-01-color) !important;
+}
+body.dark-theme .all-pagination .page-item .page-link,
+body.dark-theme .all-pagination .break .page-link {
+  color: var(--white-01-color);
 }
 
 .all-pagination .pagination {

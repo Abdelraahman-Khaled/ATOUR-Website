@@ -17,6 +17,7 @@ import { CurrencyProvider } from "Components/Currencies/CurrencyContext";
 import { useEffect, useState } from "react";
 import { ProfileProvider } from "context/ProfileContext";
 import { HomeProvider, useHome } from "context/HomeContext";
+import { ThemeProvider } from "context/ThemeContext";
 import ChatBot from "./Components/ChatBot/ChatBot";
 import AdPopup from "./Components/AdPopup/AdPopup";
 import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
@@ -55,17 +56,19 @@ const AppContent = () => {
 
 function App() {
   return (
-    <AosAnimation>
-      <LanguageProvider>
-        <CurrencyProvider>
-          <ProfileProvider>
-            <HomeProvider>
-              <AppContent />
-            </HomeProvider>
-          </ProfileProvider>
-        </CurrencyProvider>
-      </LanguageProvider>
-    </AosAnimation>
+    <ThemeProvider>
+      <AosAnimation>
+        <LanguageProvider>
+          <CurrencyProvider>
+            <ProfileProvider>
+              <HomeProvider>
+                <AppContent />
+              </HomeProvider>
+            </ProfileProvider>
+          </CurrencyProvider>
+        </LanguageProvider>
+      </AosAnimation>
+    </ThemeProvider>
   );
 }
 

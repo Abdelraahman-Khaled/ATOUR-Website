@@ -39,6 +39,50 @@
   --border-02: 1px solid #dcdcdc;
 }
 
+/* Dark theme variables */
+body.dark-theme {
+  --green-01-color: #fff;
+  --green-02-color: #fff;
+  --green-03-color: #fff;
+  --warning-01-color: #f39c12;
+  --danger-01-color: #e74c3c;
+  --dark-01-color: black;
+  --dark-02-color: black;
+  --blue-01-color: #3498db;
+  --white-01-color: #ffffff;
+  --white-02-color: #ffffff;
+  --white-03-color: #ffffff;
+  --gray-01-color: #b3b3b3;
+  --gray-02-color: #404040;
+  --box-shadow: 0px 30px 70px rgba(0, 0, 0, 0.5);
+  --box-shadow-1: 0px 20px 40px rgba(0, 0, 0, 0.3);
+  --overlay-bg: rgba(255, 255, 255,0);
+  --border-01: 1px solid #404040;
+  --border-02: 1px solid #404040;
+}
+
+/* Light theme variables (explicit for consistency) */
+body.light-theme {
+  --green-01-color: #148035;
+  --green-02-color: rgba(231, 242, 235, 1);
+  --green-03-color: #32a840;
+  --warning-01-color: #d29439;
+  --danger-01-color: #ff2b2b;
+  --dark-01-color: #212121;
+  --dark-02-color: #121212;
+  --blue-01-color: #1884cb;
+  --white-01-color: #ffffff;
+  --white-02-color: #fafaff;
+  --white-03-color: #f1f3f3;
+  --gray-01-color: #727272;
+  --gray-02-color: #dcdcdc;
+  --box-shadow: 0px 30px 70px #524c641f;
+  --box-shadow-1: 0px 20px 40px #4345701a;
+  --overlay-bg: rgba(0 0 0 / 30%);
+  --border-01: 1px solid #ffffff;
+  --border-02: 1px solid #dcdcdc;
+}
+
 .loader-svg svg {
   width: 35px !important;
   height: 35px !important;
@@ -55,6 +99,115 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode body background */
+body.dark-theme {
+  background: #000000 !important;
+}
+
+/* Dark mode text classes */
+body.dark-theme .content-slider-info .title-silde {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .text-black {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .footer .footer-two-links .title-footer {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme
+  .footer
+  .final-footer
+  :is(.title-final, .link-web, .license-number-footer) {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .footer .footer-two-links .nav-link {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .footer .footer-two-links .nav-link:hover {
+  color: var(--green-01-color) !important;
+}
+
+/* Additional dark mode text classes */
+body.dark-theme .breadcrumb-page-2 .breadcrumb-item.active {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme
+  .card-favorite-one
+  :is(.bottom-content-card .text-one-card, .info-content-card .text) {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .card-collection-one .content-info-card .price-info {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme
+  .top-content-info-details
+  .right-info-details
+  :is(.title, .rate-num) {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .all-content-info-details-right :is(.title, .text, .rate-info) {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme
+  .content-info-details-left-trip
+  :is(.title, .text, .title-text) {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme
+  html[dir="ltr"]
+  .main-add-place-date--1
+  .input-date-content
+  input {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme [aria-label="Select a trip date"] {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .banner-main-area--1 .info-banner .content-slide .text {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .header-top-trip-cards .title {
+  color: var(--white-01-color) !important;
+}
+
+/* Dark mode SVG styling */
+body.dark-theme svg {
+  fill: var(--white-01-color) !important;
+}
+
+body.dark-theme svg path {
+  fill: var(--white-01-color) ;
+  stroke: var(--white-01-color) !important;
+}
+
+body.dark-theme .water-waves path {
+  fill: #00a8ff !important;
+  stroke: #96c896 !important;
+}
+
+body.dark-theme .tabs-content-info .nav-link {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .current-currency {
+  color: var(--white-01-color) !important;
 }
 
 h1,
@@ -132,7 +285,9 @@ html {
   justify-content: center;
   text-align: center;
 }
-
+body.dark-theme .btn-main {
+  color: var(--black-01-color);
+}
 .btn-height {
   height: 45px;
 }

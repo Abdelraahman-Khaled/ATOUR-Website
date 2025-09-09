@@ -1,0 +1,72 @@
+/* Theme toggle button using website's icon-border style */
+.theme-toggle-btn {
+  background: var(--white-01-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--green-01-color);
+  box-shadow: 0 4px 12px rgba(20, 128, 53, 0.2);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(0);
+}
+
+/* Icon styling */
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Light mode styling */
+.theme-toggle-btn.light-mode .theme-icon {
+  color: var(--warning-01-color);
+}
+
+.theme-toggle-btn.light-mode:hover .theme-icon {
+  color: var(--green-01-color);
+  transform: rotate(180deg);
+}
+
+
+
+/* Dark mode styling */
+.theme-toggle-btn.dark-mode {
+  background: var(--dark-02-color);
+  border-color: var(--gray-02-color);
+}
+
+.theme-toggle-btn.dark-mode .theme-icon {
+  color: var(--blue-01-color);
+}
+
+.theme-toggle-btn.dark-mode:hover .theme-icon {
+  transform: rotate(0deg);
+}
+
+/* Smooth icon transitions */
+.theme-icon svg {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.theme-toggle-btn:focus {
+  outline: 2px solid var(--green-01-color);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toggle-btn:hover {
+    transform: none;
+  }
+
+  .theme-toggle-btn:active {
+    transform: scale(0.95);
+  }
+}

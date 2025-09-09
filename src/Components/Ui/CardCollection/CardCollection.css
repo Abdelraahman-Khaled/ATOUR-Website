@@ -3,6 +3,11 @@
   cursor: pointer;
 }
 
+/* Dark mode - remove background */
+body.dark-theme .card-collection-one {
+  background: transparent;
+}
+
 .card-collection-one .image-collection {
   position: relative;
 }
@@ -23,10 +28,7 @@
   border-radius: 12px;
   height: auto !important;
   max-height: 230px !important;
-
 }
-
-
 
 .card-collection-one .image-collection .icon-heart {
   position: absolute;
@@ -71,7 +73,7 @@ html[dir="ltr"] .card-collection-one .image-collection .info-text {
 
 .card-collection-one .content-info-card :is(.title, .rate-card) {
   font-weight: 500;
-  color: var(--dark-01-color);
+  color: var(--white-01-color);
 }
 
 .card-collection-one .content-info-card .title {
@@ -89,7 +91,6 @@ html[dir="ltr"] .card-collection-one .image-collection .info-text {
   font-weight: 600;
 }
 
-
 html[dir="ltr"] .swiper .card-collection-one .content-info-card {
   text-align: left;
 }
@@ -98,6 +99,3 @@ html[dir="ltr"] .swiper .card-collection-one .content-info-card .rate-card {
   justify-content: end;
   flex-direction: row-reverse;
 }
-
-
-

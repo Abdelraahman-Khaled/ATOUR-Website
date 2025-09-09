@@ -8,6 +8,11 @@
     text-align: center;
 }
 
+/* Dark mode styling */
+body.dark-theme .title-section :is(.title, .text) {
+    color: var(--white-01-color) !important;
+}
+
 .title-section .title {
     font-size: 28px;
     padding-bottom: 13px;

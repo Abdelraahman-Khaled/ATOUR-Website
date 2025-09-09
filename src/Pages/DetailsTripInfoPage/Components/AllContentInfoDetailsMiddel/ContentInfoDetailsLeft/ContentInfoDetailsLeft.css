@@ -40,7 +40,9 @@
   width: 100%;
   gap: 15px;
 }
-
+body.dark-theme .content-info-details-left-trip .end-info-detials{
+background-color: black;
+}
 .content-info-details-left-trip .detials-info-one .title-text {
   font-size: 14px;
 }

@@ -91,6 +91,30 @@
   display: none;
 }
 
+/* Dark mode navigation links */
+body.dark-theme .navbar-menu .nav-link {
+  color: var(--white-01-color) !important;
+}
+
+body.dark-theme .navbar-menu .nav-link:hover {
+  color: var(--green-01-color) !important;
+}
+
+body.dark-theme .navbar-menu .nav-link.active {
+  color: var(--green-01-color) !important;
+}
+
+/* Dark mode navbar background */
+body.dark-theme .navbar-menu {
+  background: var(--dark-02-color) !important;
+  border-bottom-color: var(--gray-02-color);
+}
+
+body.dark-theme .navbar-menu.menu-fixed {
+  background: var(--dark-02-color) !important;
+  border-bottom-color: var(--gray-02-color);
+}
+
 :is(.icon-lang, .dropmenu-user .drop-user) .btn-check:checked + .btn,
 :is(.icon-lang, .dropmenu-user .drop-user) .btn.active,
 :is(.icon-lang, .dropmenu-user .drop-user) .btn.show,
