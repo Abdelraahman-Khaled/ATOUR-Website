@@ -1,7 +1,7 @@
 /* ==============================
     START SLIDER CONTENT
     =================================*/
-    
+
 /* Style for search button when login is required */
 .login-required {
   cursor: pointer;
@@ -123,7 +123,16 @@
   border-radius: 50px;
   margin-top: 15px;
 }
-
+body.dark-theme .main-add-place-date {
+  background: var(--white-01-color);
+  align-items: center;
+  border-radius: 14px;
+  margin-top: 15px;
+  display: block;
+}
+body.dark-theme .icon-date-add svg path {
+  fill: black !important;
+}
 .main-add-place-date .input-search-content {
   margin: 0;
 }

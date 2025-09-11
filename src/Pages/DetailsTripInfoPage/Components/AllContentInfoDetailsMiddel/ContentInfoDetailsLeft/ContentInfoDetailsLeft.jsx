@@ -98,7 +98,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
                     <FontAwesomeIcon icon={faCheck} />
                   </div>
                 ) : (
-                  <div className="icon-times bg-secondary icon-check-link">
+                  <div className="icon-times bg-secondary icon-check-link ">
                     <FontAwesomeIcon icon={faTimes} />
                   </div>
                 )}
