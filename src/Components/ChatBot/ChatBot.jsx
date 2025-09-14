@@ -75,7 +75,7 @@ const ChatBot = () => {
   const handleOptionClick = (optionId, optionText) => {
     // Add user message
     addUserMessage(optionText);
-    
+
     // Process the conversation flow
     setTimeout(() => {
       handleConversationFlow(optionId);
@@ -103,8 +103,8 @@ const ChatBot = () => {
       ]
     },
     en: {
-      welcome: "I'm Layla from Jawla! 🌟 Welcome to Jawla 🤍",
-      initialPrompt: "Here you will explore more about Saudi Arabia through the Jawla platform and its distinguished service providers. You will experience cultural adventures 🕌, taste the most delicious authentic and traditional foods with their original flavor and method 🍲, and visit the most beautiful archaeological and tourist places that you can't reach elsewhere 🏰🌄. You can click on one of the options to help you:",
+      welcome: "I'm Layla from Atour! 🌟 Welcome to Atour 🤍",
+      initialPrompt: "Here you will explore more about Saudi Arabia through the Atour platform and its distinguished service providers. You will experience cultural adventures 🕌, taste the most delicious authentic and traditional foods with their original flavor and method 🍲, and visit the most beautiful archaeological and tourist places that you can't reach elsewhere 🏰🌄. You can click on one of the options to help you:",
       initialOptions: [
         { id: "services", text: " Services" },
         { id: "bookings", text: " Bookings" },
@@ -114,8 +114,8 @@ const ChatBot = () => {
       ]
     },
     fr: {
-      welcome: "Je suis Layla de Jawla! 🌟 Bienvenue à Jawla 🤍",
-      initialPrompt: "Ici, vous découvrirez davantage sur l'Arabie Saoudite à travers la plateforme Jawla et ses prestataires de services distingués. Vous vivrez des aventures culturelles 🕌, goûterez aux délicieux plats authentiques et traditionnels avec leur saveur et méthode originales 🍲, et visiterez les plus beaux sites archéologiques et touristiques que vous ne pourrez pas atteindre ailleurs 🏰🌄. Vous pouvez cliquer sur l'une des options pour vous aider:",
+      welcome: "Je suis Layla de Atour! 🌟 Bienvenue à Atour 🤍",
+      initialPrompt: "Ici, vous découvrirez davantage sur l'Arabie Saoudite à travers la plateforme Atour et ses prestataires de services distingués. Vous vivrez des aventures culturelles 🕌, goûterez aux délicieux plats authentiques et traditionnels avec leur saveur et méthode originales 🍲, et visiterez les plus beaux sites archéologiques et touristiques que vous ne pourrez pas atteindre ailleurs 🏰🌄. Vous pouvez cliquer sur l'une des options pour vous aider:",
       initialOptions: [
         { id: "services", text: " Services" },
         { id: "bookings", text: " Réservations" },
@@ -125,8 +125,8 @@ const ChatBot = () => {
       ]
     },
     de: {
-      welcome: "Ich bin Layla von Jawla! 🌟 Willkommen bei Jawla 🤍",
-      initialPrompt: "Hier werden Sie mehr über Saudi-Arabien durch die Jawla-Plattform und ihre ausgezeichneten Dienstleister entdecken. Sie werden kulturelle Abenteuer erleben 🕌, die köstlichsten authentischen und traditionellen Speisen mit ihrem ursprünglichen Geschmack und ihrer ursprünglichen Methode probieren 🍲 und die schönsten archäologischen und touristischen Orte besuchen, die Sie anderswo nicht erreichen können 🏰🌄. Sie können auf eine der Optionen klicken, um Ihnen zu helfen:",
+      welcome: "Ich bin Layla von Atour! 🌟 Willkommen bei Atour 🤍",
+      initialPrompt: "Hier werden Sie mehr über Saudi-Arabien durch die Atour-Plattform und ihre ausgezeichneten Dienstleister entdecken. Sie werden kulturelle Abenteuer erleben 🕌, die köstlichsten authentischen und traditionellen Speisen mit ihrem ursprünglichen Geschmack und ihrer ursprünglichen Methode probieren 🍲 und die schönsten archäologischen und touristischen Orte besuchen, die Sie anderswo nicht erreichen können 🏰🌄. Sie können auf eine der Optionen klicken, um Ihnen zu helfen:",
       initialOptions: [
         { id: "services", text: " Dienstleistungen" },
         { id: "bookings", text: " Buchungen" },
@@ -136,8 +136,8 @@ const ChatBot = () => {
       ]
     },
     es: {
-      welcome: "¡Soy Layla de Jawla! 🌟 Bienvenido a Jawla 🤍",
-      initialPrompt: "Aquí explorarás más sobre Arabia Saudita a través de la plataforma Jawla y sus distinguidos proveedores de servicios. Experimentarás aventuras culturales 🕌, probarás las comidas auténticas y tradicionales más deliciosas con su sabor y método original 🍲, y visitarás los lugares arqueológicos y turísticos más hermosos a los que no puedes llegar en otro lugar 🏰🌄. Puedes hacer clic en una de las opciones para ayudarte:",
+      welcome: "¡Soy Layla de Atour! 🌟 Bienvenido a Atour 🤍",
+      initialPrompt: "Aquí explorarás más sobre Arabia Saudita a través de la plataforma Atour y sus distinguidos proveedores de servicios. Experimentarás aventuras culturales 🕌, probarás las comidas auténticas y tradicionales más deliciosas con su sabor y método original 🍲, y visitarás los lugares arqueológicos y turísticos más hermosos a los que no puedes llegar en otro lugar 🏰🌄. Puedes hacer clic en una de las opciones para ayudarte:",
       initialOptions: [
         { id: "services", text: " Servicios" },
         { id: "bookings", text: " Reservas" },
@@ -147,8 +147,8 @@ const ChatBot = () => {
       ]
     },
     tr: {
-      welcome: "Ben Jawla'dan Layla! 🌟 Jawla'ya hoş geldiniz 🤍",
-      initialPrompt: "Burada Jawla platformu ve seçkin hizmet sağlayıcıları aracılığıyla Suudi Arabistan hakkında daha fazla bilgi edineceksiniz. Kültürel maceralar yaşayacak 🕌, orijinal lezzet ve yöntemiyle en lezzetli otantik ve geleneksel yemekleri tadacak 🍲 ve başka bir yerde ulaşamayacağınız en güzel arkeolojik ve turistik yerleri ziyaret edeceksiniz 🏰🌄. Size yardımcı olmak için seçeneklerden birine tıklayabilirsiniz:",
+      welcome: "Ben Atour'dan Layla! 🌟 Atour'ya hoş geldiniz 🤍",
+      initialPrompt: "Burada Atour platformu ve seçkin hizmet sağlayıcıları aracılığıyla Suudi Arabistan hakkında daha fazla bilgi edineceksiniz. Kültürel maceralar yaşayacak 🕌, orijinal lezzet ve yöntemiyle en lezzetli otantik ve geleneksel yemekleri tadacak 🍲 ve başka bir yerde ulaşamayacağınız en güzel arkeolojik ve turistik yerleri ziyaret edeceksiniz 🏰🌄. Size yardımcı olmak için seçeneklerden birine tıklayabilirsiniz:",
       initialOptions: [
         { id: "services", text: " Hizmetler" },
         { id: "bookings", text: " Rezervasyonlar" },
@@ -169,8 +169,8 @@ const ChatBot = () => {
       ]
     },
     zh: {
-      welcome: "我是来自Jawla的莉莉！🌟 欢迎来到Jawla 🤍",
-      initialPrompt: "在这里，您将通过Jawla平台及其杰出的服务提供商探索更多关于沙特阿拉伯的信息。您将体验文化冒险 🕌，品尝最美味的正宗传统食物，享受其原始风味和制作方法 🍲，并参观您在其他地方无法到达的最美丽的考古和旅游景点 🏰🌄。您可以点击以下选项之一来获取帮助：",
+      welcome: "我是来自Atour的莉莉！🌟 欢迎来到Atour 🤍",
+      initialPrompt: "在这里，您将通过Atour平台及其杰出的服务提供商探索更多关于沙特阿拉伯的信息。您将体验文化冒险 🕌，品尝最美味的正宗传统食物，享受其原始风味和制作方法 🍲，并参观您在其他地方无法到达的最美丽的考古和旅游景点 🏰🌄。您可以点击以下选项之一来获取帮助：",
       initialOptions: [
         { id: "services", text: " 服务" },
         { id: "bookings", text: " 预订" },
@@ -180,8 +180,8 @@ const ChatBot = () => {
       ]
     },
     ko: {
-      welcome: "저는 Jawla의 릴리입니다! 🌟 Jawla에 오신 것을 환영합니다 🤍",
-      initialPrompt: "여기에서 Jawla 플랫폼과 그 우수한 서비스 제공업체를 통해 사우디 아라비아에 대해 더 많이 탐색하게 됩니다. 문화적 모험을 경험하고 🕌, 원래의 맛과 방법으로 가장 맛있는 정통 및 전통 음식을 맛보며 🍲, 다른 곳에서는 도달할 수 없는 가장 아름다운 고고학적 및 관광 장소를 방문하게 됩니다 🏰🌄. 도움을 받으려면 다음 옵션 중 하나를 클릭하세요:",
+      welcome: "저는 Atour의 릴리입니다! 🌟 Atour에 오신 것을 환영합니다 🤍",
+      initialPrompt: "여기에서 Atour 플랫폼과 그 우수한 서비스 제공업체를 통해 사우디 아라비아에 대해 더 많이 탐색하게 됩니다. 문화적 모험을 경험하고 🕌, 원래의 맛과 방법으로 가장 맛있는 정통 및 전통 음식을 맛보며 🍲, 다른 곳에서는 도달할 수 없는 가장 아름다운 고고학적 및 관광 장소를 방문하게 됩니다 🏰🌄. 도움을 받으려면 다음 옵션 중 하나를 클릭하세요:",
       initialOptions: [
         { id: "services", text: " 서비스" },
         { id: "bookings", text: " 예약" },
@@ -191,8 +191,8 @@ const ChatBot = () => {
       ]
     },
     pt: {
-      welcome: "Sou Layla da Jawla! 🌟 Bem-vindo à Jawla 🤍",
-      initialPrompt: "Aqui você explorará mais sobre a Arábia Saudita através da plataforma Jawla e seus distintos prestadores de serviços. Você experimentará aventuras culturais 🕌, provará as comidas autênticas e tradicionais mais deliciosas com seu sabor e método original 🍲, e visitará os mais belos lugares arqueológicos e turísticos que você não pode alcançar em outro lugar 🏰🌄. Você pode clicar em uma das opções para ajudá-lo:",
+      welcome: "Sou Layla da Atour! 🌟 Bem-vindo à Atour 🤍",
+      initialPrompt: "Aqui você explorará mais sobre a Arábia Saudita através da plataforma Atour e seus distintos prestadores de serviços. Você experimentará aventuras culturais 🕌, provará as comidas autênticas e tradicionais mais deliciosas com seu sabor e método original 🍲, e visitará os mais belos lugares arqueológicos e turísticos que você não pode alcançar em outro lugar 🏰🌄. Você pode clicar em uma das opções para ajudá-lo:",
       initialOptions: [
         { id: "services", text: " Serviços" },
         { id: "bookings", text: " Reservas" },
@@ -318,10 +318,10 @@ const ChatBot = () => {
         back: 'メインメニューに戻る'
       }
     };
-    
+
     // Get language-specific text or fallback to English
     const getLangText = (textObj) => textObj[currentLanguage] || textObj['en'];
-    
+
     switch (optionId) {
       case 'services':
         addBotMessage(
@@ -334,7 +334,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'tour_service':
         // Tour service options text by language
         const tourOptions = {
@@ -399,7 +399,7 @@ const ChatBot = () => {
             back: 'サービスに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(tourOptions).prompt,
           [
@@ -408,7 +408,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'gift_service':
         // Gift service options text by language
         const giftOptions = {
@@ -473,7 +473,7 @@ const ChatBot = () => {
             back: 'サービスに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(giftOptions).prompt,
           [
@@ -482,7 +482,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'event_service':
         // Event service options text by language
         const eventOptions = {
@@ -547,7 +547,7 @@ const ChatBot = () => {
             back: 'サービスに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(eventOptions).prompt,
           [
@@ -556,7 +556,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'main_menu':
         // Main menu options text by language
         const mainMenuOptions = {
@@ -657,7 +657,7 @@ const ChatBot = () => {
             customer: 'カスタマーサービス'
           }
         };
-        
+
         addBotMessage(
           getLangText(mainMenuOptions).prompt,
           [
@@ -669,7 +669,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'bookings':
         // Bookings options text by language
         const bookingsOptions = {
@@ -758,7 +758,7 @@ const ChatBot = () => {
             back: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(bookingsOptions).prompt,
           [
@@ -769,7 +769,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'payment':
         // Payment options text by language
         const paymentOptions = {
@@ -822,7 +822,7 @@ const ChatBot = () => {
             back: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(paymentOptions).prompt,
           [
@@ -830,7 +830,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'auth':
         // Auth options text by language
         const authOptions = {
@@ -931,7 +931,7 @@ const ChatBot = () => {
             back: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(authOptions).prompt,
           [
@@ -943,7 +943,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'customer_service':
         // Customer service options text by language
         const customerServiceOptions = {
@@ -1008,7 +1008,7 @@ const ChatBot = () => {
             back: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(customerServiceOptions).prompt,
           [
@@ -1017,7 +1017,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'booking_method':
         // Booking method options text by language
         const bookingMethodOptions = {
@@ -1070,7 +1070,7 @@ const ChatBot = () => {
             back: '予約に戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(bookingMethodOptions).prompt,
           [
@@ -1078,7 +1078,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'manage_bookings':
       case 'view_bookings':
         // Manage bookings options text by language
@@ -1144,7 +1144,7 @@ const ChatBot = () => {
             back: '予約に戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(manageBookingsOptions).prompt,
           [
@@ -1153,7 +1153,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'contact_info':
         // Contact info options text by language
         const contactInfoOptions = {
@@ -1206,7 +1206,7 @@ const ChatBot = () => {
             back: 'カスタマーサービスに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(contactInfoOptions).prompt,
           [
@@ -1214,7 +1214,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'reset_password':
         // Reset password options text by language
         const resetPasswordOptions = {
@@ -1255,56 +1255,62 @@ const ChatBot = () => {
             prompt: 'ログインページからパスワードをリセットできます 🔑'
           }
         };
-        
+
         addBotMessage(
           getLangText(resetPasswordOptions).prompt,
           [
-            { id: 'go_to_login', text: getLangText({
-              ar: { text: 'انتقل إلى صفحة تسجيل الدخول' },
-              en: { text: 'Go to Login Page' },
-              fr: { text: 'Aller à la Page de Connexion' },
-              de: { text: 'Zur Anmeldeseite' },
-              es: { text: 'Ir a la Página de Inicio de Sesión' },
-              tr: { text: 'Giriş Sayfasına Git' },
-              ru: { text: 'Перейти на Страницу Входа' },
-              zh: { text: '前往登录页面' },
-              ko: { text: '로그인 페이지로 이동' },
-              pt: { text: 'Ir para a Página de Login' },
-              ur: { text: 'لاگ ان پیج پر جائیں' },
-              ja: { text: 'ログインページへ移動' }
-            }).text, link: '/login' },
-            { id: 'auth', text: getLangText({
-              ar: { text: 'العودة للقائمة السابقة' },
-              en: { text: 'Back to Previous Menu' },
-              fr: { text: 'Retour au Menu Précédent' },
-              de: { text: 'Zurück zum vorherigen Menü' },
-              es: { text: 'Volver al Menú Anterior' },
-              tr: { text: 'Önceki Menüye Dön' },
-              ru: { text: 'Вернуться в Предыдущее Меню' },
-              zh: { text: '返回上一菜单' },
-              ko: { text: '이전 메뉴로 돌아가기' },
-              pt: { text: 'Voltar ao Menu Anterior' },
-              ur: { text: 'پچھلے مینو پر واپس جائیں' },
-              ja: { text: '前のメニューに戻る' }
-            }).text },
-            { id: 'main_menu', text: getLangText({
-              ar: { text: 'العودة للقائمة الرئيسية' },
-              en: { text: 'Back to Main Menu' },
-              fr: { text: 'Retour au Menu Principal' },
-              de: { text: 'Zurück zum Hauptmenü' },
-              es: { text: 'Volver al Menú Principal' },
-              tr: { text: 'Ana Menüye Dön' },
-              ru: { text: 'Вернуться в Главное Меню' },
-              zh: { text: '返回主菜单' },
-              ko: { text: '메인 메뉴로 돌아가기' },
-              pt: { text: 'Voltar ao Menu Principal' },
-              ur: { text: 'مین مینو پر واپس جائیں' },
-              ja: { text: 'メインメニューに戻る' }
-            }).text }
+            {
+              id: 'go_to_login', text: getLangText({
+                ar: { text: 'انتقل إلى صفحة تسجيل الدخول' },
+                en: { text: 'Go to Login Page' },
+                fr: { text: 'Aller à la Page de Connexion' },
+                de: { text: 'Zur Anmeldeseite' },
+                es: { text: 'Ir a la Página de Inicio de Sesión' },
+                tr: { text: 'Giriş Sayfasına Git' },
+                ru: { text: 'Перейти на Страницу Входа' },
+                zh: { text: '前往登录页面' },
+                ko: { text: '로그인 페이지로 이동' },
+                pt: { text: 'Ir para a Página de Login' },
+                ur: { text: 'لاگ ان پیج پر جائیں' },
+                ja: { text: 'ログインページへ移動' }
+              }).text, link: '/login'
+            },
+            {
+              id: 'auth', text: getLangText({
+                ar: { text: 'العودة للقائمة السابقة' },
+                en: { text: 'Back to Previous Menu' },
+                fr: { text: 'Retour au Menu Précédent' },
+                de: { text: 'Zurück zum vorherigen Menü' },
+                es: { text: 'Volver al Menú Anterior' },
+                tr: { text: 'Önceki Menüye Dön' },
+                ru: { text: 'Вернуться в Предыдущее Меню' },
+                zh: { text: '返回上一菜单' },
+                ko: { text: '이전 메뉴로 돌아가기' },
+                pt: { text: 'Voltar ao Menu Anterior' },
+                ur: { text: 'پچھلے مینو پر واپس جائیں' },
+                ja: { text: '前のメニューに戻る' }
+              }).text
+            },
+            {
+              id: 'main_menu', text: getLangText({
+                ar: { text: 'العودة للقائمة الرئيسية' },
+                en: { text: 'Back to Main Menu' },
+                fr: { text: 'Retour au Menu Principal' },
+                de: { text: 'Zurück zum Hauptmenü' },
+                es: { text: 'Volver al Menú Principal' },
+                tr: { text: 'Ana Menüye Dön' },
+                ru: { text: 'Вернуться в Главное Меню' },
+                zh: { text: '返回主菜单' },
+                ko: { text: '메인 메뉴로 돌아가기' },
+                pt: { text: 'Voltar ao Menu Principal' },
+                ur: { text: 'مین مینو پر واپس جائیں' },
+                ja: { text: 'メインメニューに戻る' }
+              }).text
+            }
           ]
         );
         break;
-      
+
       case 'contact_support':
         // Contact support options text by language
         const contactSupportOptions = {
@@ -1381,7 +1387,7 @@ const ChatBot = () => {
             main: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(contactSupportOptions).prompt,
           [
@@ -1391,7 +1397,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'register_customer':
         // Register customer options text by language
         const registerCustomerOptions = {
@@ -1468,7 +1474,7 @@ const ChatBot = () => {
             main: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(registerCustomerOptions).prompt,
           [
@@ -1478,7 +1484,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       case 'register_provider':
         // Register provider options text by language
         const registerProviderOptions = {
@@ -1555,7 +1561,7 @@ const ChatBot = () => {
             main: 'メインメニューに戻る'
           }
         };
-        
+
         addBotMessage(
           getLangText(registerProviderOptions).prompt,
           [
@@ -1565,7 +1571,7 @@ const ChatBot = () => {
           ]
         );
         break;
-      
+
       default:
         // Default error message options text by language
         const defaultErrorOptions = {
@@ -1582,7 +1588,7 @@ const ChatBot = () => {
           ur: 'معذرت، میں آپ کی درخواست کو نہیں سمجھ سکا۔ آپ دستیاب اختیارات میں سے انتخاب کر سکتے ہیں۔',
           ja: '申し訳ありませんが、リクエストを理解できませんでした。利用可能なオプションから選択してください。'
         };
-        
+
         addBotMessage(
           defaultErrorOptions[currentLanguage] || defaultErrorOptions['en'],
           getConversationData().initialOptions
@@ -1678,10 +1684,10 @@ const ChatBot = () => {
                   <img src={lailaAvatar} alt={lilaName[currentLanguage] || "Lily"} className="bot-avatar" />
                 )}
                 {message.type === 'user' && (
-                  <img 
-                    src={profile?.photo || userPlaceholder} 
-                    alt={{ar: 'المستخدم', en: 'User', fr: 'Utilisateur', de: 'Benutzer', es: 'Usuario', tr: 'Kullanıcı', ru: 'Пользователь', zh: '用户', ko: '사용자', pt: 'Usuário', ur: 'صارف', ja: 'ユーザー'}[currentLanguage] || 'User'} 
-                    className="user-avatar" 
+                  <img
+                    src={profile?.photo || userPlaceholder}
+                    alt={{ ar: 'المستخدم', en: 'User', fr: 'Utilisateur', de: 'Benutzer', es: 'Usuario', tr: 'Kullanıcı', ru: 'Пользователь', zh: '用户', ko: '사용자', pt: 'Usuário', ur: 'صارف', ja: 'ユーザー' }[currentLanguage] || 'User'}
+                    className="user-avatar"
                   />
                 )}
                 <div className="message-content">
@@ -1690,9 +1696,9 @@ const ChatBot = () => {
                     <div className="message-options">
                       {message.options.map((option, optIndex) => (
                         option.link ? (
-                          <Link 
-                            key={optIndex} 
-                            to={option.link} 
+                          <Link
+                            key={optIndex}
+                            to={option.link}
                             className="message-option"
                             {...(option.id === 'customer_video' || option.id === 'provider_video' ? { target: '_blank' } : {})}
                           >
