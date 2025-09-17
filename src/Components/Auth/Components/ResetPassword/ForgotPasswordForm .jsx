@@ -6,6 +6,7 @@ import FormField from "Components/Forms/FormFiled";
 import EndLoginInfo from "../EndLoginInfo/EndLoginInfo";
 import OtpForm from "Components/Auth/OtpForm/OtpForm";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import forgotPasswordContent from "./forgotPasswordContent";
 
 const ForgotPasswordForm = ({ onClose }) => {
     const { currentLanguage } = useLanguage();
@@ -13,62 +14,7 @@ const ForgotPasswordForm = ({ onClose }) => {
     const [username, setUsername] = useState("");
     const [showOtpForm, setShowOtpForm] = useState(false);
 
-    const content = {
-        title: {
-            ar: "إعادة تعيين كلمة المرور",
-            en: "Reset Password",
-        },
-        emailOrPhoneLabel: {
-            ar: "البريد الإلكتروني أو رقم الهاتف",
-            en: "Email or Phone Number",
-        },
-        emailOrPhonePlaceholder: {
-            ar: "أدخل البريد الإلكتروني أو رقم الهاتف",
-            en: "Enter your email or phone number",
-        },
-        newPasswordLabel: {
-            ar: "كلمة المرور الجديدة",
-            en: "New Password",
-        },
-        newPasswordPlaceholder: {
-            ar: "أدخل كلمة المرور الجديدة",
-            en: "Enter new password",
-        },
-        confirmPasswordLabel: {
-            ar: "تأكيد كلمة المرور",
-            en: "Confirm Password",
-        },
-        confirmPasswordPlaceholder: {
-            ar: "أدخل تأكيد كلمة المرور",
-            en: "Confirm new password",
-        },
-        submitButton: {
-            ar: "إرسال",
-            en: "Submit",
-        },
-        validation: {
-            emailOrPhoneRequired: {
-                ar: "ادخل البريد الإلكتروني أو رقم الهاتف",
-                en: "Enter your email or phone number",
-            },
-            emailOrPhoneInvalid: {
-                ar: "رقم هاتف أو بريد إلكتروني غير صحيح",
-                en: "Invalid email or phone number",
-            },
-            newPasswordRequired: {
-                ar: "ادخل كلمة المرور الجديدة",
-                en: "Enter new password",
-            },
-            confirmPasswordRequired: {
-                ar: "ادخل تأكيد كلمة المرور",
-                en: "Confirm new password",
-            },
-            passwordMismatch: {
-                ar: "كلمة المرور غير متطابقة",
-                en: "Passwords do not match",
-            },
-        },
-    };
+    const content = forgotPasswordContent;
 
     const validationSchemaStep1 = Yup.object().shape({
         username: Yup.string()

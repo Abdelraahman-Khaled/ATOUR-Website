@@ -4,6 +4,7 @@ import HomeAPI from "api/homeApi";
 import GeneralAPI from "api/generalApi";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import { toast } from "react-toastify";
 
 const HomeContext = createContext(null);
 
@@ -25,11 +26,10 @@ export const HomeProvider = ({ children }) => {
         try {
             const response = await HomeAPI.getHomeData(currentLanguage);
             setHomeData(response.data);
-            console.log(response.data, currentLanguage);
             return response.data.data;
         } catch (err) {
             console.error("Error fetching home data:", err);
-            setError("Failed to load home data.");
+            toast.error("Failed to load home data.");
             return null;
         } finally {
             setLoading(false);
@@ -55,7 +55,7 @@ export const HomeProvider = ({ children }) => {
             };
         } catch (err) {
             console.error("Error fetching sliders or cities:", err);
-            setError("Failed to fetch slider data. Please try again later.");
+            toast.error("Failed to fetch slider data. Please try again later.");
             return { sliders: [], cities: [] };
         }
     };

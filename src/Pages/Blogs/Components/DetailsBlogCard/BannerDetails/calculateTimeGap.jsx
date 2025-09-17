@@ -22,6 +22,76 @@ const timeUnits = {
         day: (n) => `${convertToArabicNumbers(n)} يوم${n > 2 ? '' : n === 2 ? "ين" : n === 1 ? "" : "ًا"}`,
         hour: (n) => `${convertToArabicNumbers(n)} ساعة${n > 2 ? '' : n === 2 ? "ين" : n === 1 ? "" : "ات"}`,
         since: "منذ"
+    },
+    tr: {
+        year: (n) => `${n} yıl${n > 1 ? 'lar' : ''}`,
+        month: (n) => `${n} ay${n > 1 ? 'lar' : ''}`,
+        day: (n) => `${n} gün${n > 1 ? 'ler' : ''}`,
+        hour: (n) => `${n} saat${n > 1 ? 'ler' : ''}`,
+        since: "Önce"
+    },
+    fr: {
+        year: (n) => `${n} an${n > 1 ? 's' : ''}`,
+        month: (n) => `${n} moi${n > 1 ? 's' : ''}`,
+        day: (n) => `${n} jour${n > 1 ? 's' : ''}`,
+        hour: (n) => `${n} heure${n > 1 ? 's' : ''}`,
+        since: "Depuis"
+    },
+    de: {
+        year: (n) => `${n} Jahr${n > 1 ? 'e' : ''}`,
+        month: (n) => `${n} Monat${n > 1 ? 'e' : ''}`,
+        day: (n) => `${n} Tag${n > 1 ? 'e' : ''}`,
+        hour: (n) => `${n} Stunde${n > 1 ? 'n' : ''}`,
+        since: "Seit"
+    },
+    es: {
+        year: (n) => `${n} año${n > 1 ? 's' : ''}`,
+        month: (n) => `${n} mes${n > 1 ? 'es' : ''}`,
+        day: (n) => `${n} día${n > 1 ? 's' : ''}`,
+        hour: (n) => `${n} hora${n > 1 ? 's' : ''}`,
+        since: "Desde"
+    },
+    ru: {
+        year: (n) => `${n} год${n > 1 ? 'а' : ''}`,
+        month: (n) => `${n} месяц${n > 1 ? 'а' : ''}`,
+        day: (n) => `${n} день${n > 1 ? 'я' : ''}`,
+        hour: (n) => `${n} час${n > 1 ? 'а' : ''}`,
+        since: "С"
+    },
+    zh: {
+        year: (n) => `${n} 年`,
+        month: (n) => `${n} 月`,
+        day: (n) => `${n} 天`,
+        hour: (n) => `${n} 小时`,
+        since: "自"
+    },
+    ko: {
+        year: (n) => `${n} 년`,
+        month: (n) => `${n} 개월`,
+        day: (n) => `${n} 일`,
+        hour: (n) => `${n} 시간`,
+        since: "부터"
+    },
+    pt: {
+        year: (n) => `${n} ano${n > 1 ? 's' : ''}`,
+        month: (n) => `${n} mês${n > 1 ? 'es' : ''}`,
+        day: (n) => `${n} dia${n > 1 ? 's' : ''}`,
+        hour: (n) => `${n} hora${n > 1 ? 's' : ''}`,
+        since: "Desde"
+    },
+    ur: {
+        year: (n) => `${n} سال`,
+        month: (n) => `${n} مہینہ`,
+        day: (n) => `${n} دن`,
+        hour: (n) => `${n} گھنٹہ`,
+        since: "کے بعد"
+    },
+    ja: {
+        year: (n) => `${n} 年`,
+        month: (n) => `${n} ヶ月`,
+        day: (n) => `${n} 日`,
+        hour: (n) => `${n} 時間`,
+        since: "以来"
     }
 };
 
@@ -56,7 +126,7 @@ const TimeGapCalculator = ({ createdAt }) => {
 
     return (
         <div>
-            <p>{timeUnits[currentLanguage].since} {timeGap}</p>
+            <p>{timeUnits[currentLanguage].since  } {timeGap}</p>
         </div>
     );
 };

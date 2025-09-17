@@ -4,7 +4,21 @@ import "./SliderHeader.css";
 
 const SliderHeader = ({ biography }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  const description = currentLanguage === "en" ? biography.description_en : biography.description_ar;
+
+  const welcomeTranslations = {
+    en: "Welcome to ",
+    ar: "مرحبا بكم في ",
+    fr: "Bienvenue à ",
+    de: "Willkommen bei ",
+    es: "Bienvenido a ",
+    tr: "Hoşgeldiniz ",
+    ru: "Добро пожаловать в ",
+    zh: "欢迎来到 ",
+    ko: "환영합니다 ",
+    pt: "Bem-vindo a ",
+    ur: "خوش آمدید ",
+    ja: "ようこそ ",
+  };
 
   return (
     <>
@@ -30,13 +44,16 @@ const SliderHeader = ({ biography }) => {
               <div className="col-12">
                 <div className="content-slide">
                   <h1 className="title" data-aos="fade-down">
-                    {currentLanguage === "ar" ? "مرحبا بكم في " + biography.title : "Welcome to " + biography.title}
+                    {welcomeTranslations[currentLanguage] || welcomeTranslations.en}
+                    {biography.title}
                   </h1>
                   <p
                     className="text text-font-400-white font-18 favDev"
                     data-aos="fade-up"
-                    dangerouslySetInnerHTML={{ __html: description }}
                   >
+                    {biography.translations.filter((item) => {
+                      return item.locale === currentLanguage
+                    })[0].description}
                   </p>
                 </div>
               </div>

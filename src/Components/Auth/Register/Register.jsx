@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageLogin from "../Components/ImageLogin/ImageLogin";
 import HeaderLogin from "../Components/HeaderLogin/HeaderLogin";
 import FormField from "Components/Forms/FormFiled";
@@ -7,50 +7,13 @@ import * as Yup from "yup";
 import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi";
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import registerContent from "../registerContent"; // Import the content object
 
 const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
   const { currentLanguage } = useLanguage(); // Get current language
+  const [loading, setLoading] = useState(false);
 
-  const content = {
-    title: {
-      ar: "تسجيل حساب جديد",
-      en: "Create a New Account",
-    },
-    email: {
-      ar: "البريد الإلكتروني ",
-      en: "Email or Phone Number",
-    },
-    emailOrPhonePlaceholder: {
-      ar: "أدخل البريد الإلكتروني ",
-      en: "Enter your email or phone number",
-    },
-    submitButton: {
-      ar: "إرسال رمز الامان",
-      en: "Send OTP",
-    },
-    alreadyHaveAccount: {
-      ar: "لديك حساب بالفعل؟",
-      en: "Already have an account?",
-    },
-    loginLink: {
-      ar: "تسجيل الدخول",
-      en: "Log In",
-    },
-    validation: {
-      emailOrPhoneRequired: {
-        ar: "ادخل البريد الإلكتروني ",
-        en: "Enter your email or phone number",
-      },
-      emailOrPhoneInvalid: {
-        ar: "رقم هاتف أو بريد إلكتروني غير صحيح",
-        en: "Invalid email or phone number",
-      },
-      phoneInvalid: {
-        ar: "رقم الهاتف غير صحيح",
-        en: "Invalid phone number",
-      },
-    },
-  };
+  const content = registerContent; // Use the imported content object
 
   const validationSchema = Yup.object().shape({
     emailRegOrPhoneNumber: Yup.string()
@@ -78,12 +41,15 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
 
   const handleRegisterSubmit = async (values, { resetForm }) => {
     try {
+      setLoading(true);
       await AuthAPI.sendOtp(values.emailRegOrPhoneNumber); // Send OTP
       onRegisterSubmit(values.emailRegOrPhoneNumber); // Pass email/phone to parent
       hideModalForm(); // Close Register modal
       resetForm();
     } catch (error) {
       console.error("Error sending OTP:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,8 +70,8 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
               placeholder={content.email[currentLanguage]}
               success
             />
-            <button type="submit" className="btn-main btn-submit w-100 mt-3">
-              {content.submitButton[currentLanguage]}
+            <button type="submit" className="btn-main btn-submit w-100 mt-3" disabled={loading}>
+              {loading ? registerContent.loading[currentLanguage] : registerContent.submitButton[currentLanguage]}
             </button>
           </FormField>
           <div className="bottom-info-not-accout gap-2 d-flex justify-content-center align-items-center">

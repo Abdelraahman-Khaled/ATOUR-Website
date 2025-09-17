@@ -16,7 +16,7 @@ const translations = {
         ko: "제공할 서비스가 있으신가요?",
         pt: "Você tem um serviço para oferecer?",
         ur: "کیا آپ کے پاس پیش کرنے کے لیے کوئی خدمت ہے؟",
-        ja: "提供できるサービスはありますか？"
+        ja: "提供できるサービスはありますか？",
       },
       description: {
         en: "Seize the opportunity and become part of a world full of creativity and connection! If you have a unique service or an innovative idea, now is the time to share it with others. Let us help you reach a wider audience and create an experience that meets your aspirations. All you need to do is download the app, register your service, and embark on the journey to success!",
@@ -30,7 +30,7 @@ const translations = {
         ko: "기회를 잡고 창의성과 연결로 가득한 세계의 일부가 되세요! 독특한 서비스나 혁신적인 아이디어가 있다면 지금이 다른 사람들과 공유할 때입니다. 더 넓은 청중에게 다가가고 귀하의 열망에 부합하는 경험을 만들 수 있도록 도와드리겠습니다. 앱을 다운로드하고, 서비스를 등록하고, 성공을 향한 여정을 시작하세요!",
         pt: "Aproveite a oportunidade e torne-se parte de um mundo cheio de criatividade e conexão! Se você tem um serviço único ou uma ideia inovadora, agora é o momento de compartilhá-la com os outros. Deixe-nos ajudá-lo a alcançar um público mais amplo e criar uma experiência que atenda às suas aspirações. Tudo o que você precisa fazer é baixar o aplicativo, registrar seu serviço e embarcar na jornada para o sucesso!",
         ur: "موقع کو غنیمت سمجھیں اور تخلیقی صلاحیت اور رابطے سے بھرپور دنیا کا حصہ بنیں! اگر آپ کے پاس کوئی منفرد خدمت یا جدید خیال ہے، تو اب وقت آ گیا ہے کہ آپ اسے دوسروں کے ساتھ شیئر کریں۔ ہمیں آپ کو وسیع تر سامعین تک پہنچنے اور ایک ایسا تجربہ بنانے میں مدد دینے دیں جو آپ کی خواہشات کو پورا کرے۔ آپ کو صرف ایپ ڈاؤن لوڈ کرنے، اپنی خدمت رجسٹر کرنے، اور کامیابی کی طرف سفر شروع کرنے کی ضرورت ہے!",
-        ja: "チャンスをつかみ、創造性とつながりに満ちた世界の一員になりましょう！ユニークなサービスや革新的なアイデアをお持ちなら、今こそそれを他の人と共有する時です。より広い視聴者にリーチし、あなたの願望に応える体験を作るお手伝いをさせてください。アプリをダウンロードし、サービスを登録し、成功への旅に出発するだけです！"
+        ja: "チャンスをつかみ、創造性とつながりに満ちた世界の一員になりましょう！ユニークなサービスや革新的なアイデアをお持ちなら、今こそそれを他の人と共有する時です。より広い視聴者にリーチし、あなたの願望に応える体験を作るお手伝いをさせてください。アプリをダウンロードし、サービスを登録し、成功への旅に出発するだけです！",
       },
       appsTitle: {
         en: "Download the app and register now",
@@ -44,8 +44,8 @@ const translations = {
         ko: "앱을 다운로드하고 지금 등록하세요",
         pt: "Baixe o aplicativo e registre-se agora",
         ur: "ایپ ڈاؤن لوڈ کریں اور ابھی رجسٹر کریں",
-        ja: "アプリをダウンロードして今すぐ登録"
-      }
+        ja: "アプリをダウンロードして今すぐ登録",
+      },
     },
     mostVisitedDestinations: {
       sectionTitle: {
@@ -60,7 +60,7 @@ const translations = {
         ko: "가장 많이 방문한 목적지",
         pt: "Destinos mais visitados",
         ur: "سب سے زیادہ دیکھے جانے والے مقامات",
-        ja: "最も訪問された目的地"
+        ja: "最も訪問された目的地",
       },
       sectionText: {
         en: "Explore the beauty of the world through the most captivating destinations that inspire the soul and touch the heart. Whether you seek adventure, culture, or relaxation, these places combine the charm of nature with the essence of history to offer you an unforgettable experience. Let us take you on a journey filled with lifelong memories.",
@@ -74,11 +74,28 @@ const translations = {
         ko: "영혼을 고무시키고 마음을 감동시키는 가장 매력적인 목적지를 통해 세계의 아름다움을 탐험하세요. 모험, 문화 또는 휴식을 찾든, 이 장소들은 자연의 매력과 역사의 본질을 결합하여 잊을 수 없는 경험을 제공합니다. 평생 기억에 남을 추억으로 가득한 여행으로 안내해 드리겠습니다.",
         pt: "Explore a beleza do mundo através dos destinos mais cativantes que inspiram a alma e tocam o coração. Seja você busque aventura, cultura ou relaxamento, esses lugares combinam o charme da natureza com a essência da história para oferecer uma experiência inesquecível. Deixe-nos levá-lo em uma jornada repleta de memórias para toda a vida.",
         ur: "دنیا کی خوبصورتی کو ان سب سے دلکش مقامات کے ذریعے دریافت کریں جو روح کو متاثر کرتے ہیں اور دل کو چھوتے ہیں۔ چاہے آپ مہم جوئی، ثقافت، یا آرام کی تلاش میں ہوں، یہ مقامات فطرت کے سحر کو تاریخ کے جوہر کے ساتھ ملا کر آپ کو ایک یادگار تجربہ پیش کرتے ہیں۔ ہمیں آپ کو زندگی بھر کی یادوں سے بھرپور سفر پر لے جانے دیں۔",
-        ja: "魂を鼓舞し、心に触れる最も魅力的な目的地を通して、世界の美しさを探検してください。冒険、文化、またはリラクゼーションを求めるかどうかにかかわらず、これらの場所は自然の魅力と歴史の本質を組み合わせて、忘れられない体験を提供します。生涯の思い出で満たされた旅にご案内します。"
-      }
-    }
+        ja: "魂を鼓舞し、心に触れる最も魅力的な目的地を通して、世界の美しさを探検してください。冒険、文化、またはリラクゼーションを求めるかどうかにかかわらず、これらの場所は自然の魅力と歴史の本質を組み合わせて、忘れられない体験を提供します。生涯の思い出で満たされた旅にご案内します。",
+      },
+    },
+    mostCountries: {
+      sectionTitle: {
+        en: "Most visited countries",
+        ar: "الدول الأكثر زيارة",
+        fr: "Les pays les plus visités",
+        de: "Meist besuchte Länder",
+        es: "Países más visitados",
+        tr: "En Çok Ziyaret Edilen Ülkeler",
+        ru: "Самые посещаемые страны",
+        zh: "最受欢迎的国家",
+        ko: "가장 많이 방문한 나라",
+        pt: "Países mais visitados",
+        ur: "سب سے زیادہ دیکھی جانے والے国情報",
+        ja: "最も訪問された国",
+      },
+     
+    },
   },
-  
+
   // NavbarMenu translations
   navMenu: {
     blog: {
@@ -93,7 +110,7 @@ const translations = {
       ko: "블로그",
       pt: "Blog",
       ur: "بلاگ",
-      ja: "ブログ"
+      ja: "ブログ",
     },
     news: {
       en: "News",
@@ -107,7 +124,7 @@ const translations = {
       ko: "뉴스",
       pt: "Notícias",
       ur: "خبریں",
-      ja: "ニュース"
+      ja: "ニュース",
     },
     articles: {
       en: "Articles",
@@ -121,7 +138,7 @@ const translations = {
       ko: "기사",
       pt: "Artigos",
       ur: "مضامین",
-      ja: "記事"
+      ja: "記事",
     },
     aboutUs: {
       en: "About Us",
@@ -135,7 +152,7 @@ const translations = {
       ko: "회사 소개",
       pt: "Sobre Nós",
       ur: "ہمارے بارے میں",
-      ja: "会社概要"
+      ja: "会社概要",
     },
     termsConditions: {
       en: "Terms & Conditions",
@@ -149,7 +166,7 @@ const translations = {
       ko: "이용약관",
       pt: "Termos e Condições",
       ur: "شرائط و ضوابط",
-      ja: "利用規約"
+      ja: "利用規約",
     },
     login: {
       en: "Login",
@@ -163,10 +180,10 @@ const translations = {
       ko: "로그인",
       pt: "Entrar",
       ur: "لاگ ان",
-      ja: "ログイン"
-    }
+      ja: "ログイン",
+    },
   },
-  
+
   // Auth components
   auth: {
     final: {
@@ -182,7 +199,7 @@ const translations = {
         ko: "마지막 단계",
         pt: "Etapa Final",
         ur: "آخری مرحلہ",
-        ja: "最終ステップ"
+        ja: "最終ステップ",
       },
       email: {
         en: "Email",
@@ -196,7 +213,7 @@ const translations = {
         ko: "이메일",
         pt: "Email",
         ur: "ای میل",
-        ja: "メール"
+        ja: "メール",
       },
       name: {
         en: "Name",
@@ -210,7 +227,7 @@ const translations = {
         ko: "이름",
         pt: "Nome",
         ur: "نام",
-        ja: "名前"
+        ja: "名前",
       },
       phone: {
         en: "Phone Number",
@@ -224,7 +241,7 @@ const translations = {
         ko: "전화번호",
         pt: "Número de telefone",
         ur: "فون نمبر",
-        ja: "電話番号"
+        ja: "電話番号",
       },
       password: {
         en: "Password",
@@ -238,7 +255,7 @@ const translations = {
         ko: "비밀번호",
         pt: "Senha",
         ur: "پاس ورڈ",
-        ja: "パスワード"
+        ja: "パスワード",
       },
       passwordConfirm: {
         en: "Confirm Password",
@@ -252,7 +269,7 @@ const translations = {
         ko: "비밀번호 확인",
         pt: "Confirmar senha",
         ur: "پاس ورڈ کی تصدیق کریں",
-        ja: "パスワードを確認"
+        ja: "パスワードを確認",
       },
       submit: {
         en: "Complete Registration",
@@ -266,7 +283,7 @@ const translations = {
         ko: "등록 완료",
         pt: "Concluir registro",
         ur: "رجسٹریشن مکمل کریں",
-        ja: "登録を完了する"
+        ja: "登録を完了する",
       },
       alreadyHaveAccount: {
         en: "Already have an account?",
@@ -280,7 +297,7 @@ const translations = {
         ko: "이미 계정이 있으신가요?",
         pt: "Já tem uma conta?",
         ur: "پہلے سے اکاؤنٹ ہے؟",
-        ja: "すでにアカウントをお持ちですか？"
+        ja: "すでにアカウントをお持ちですか？",
       },
       login: {
         en: "Login",
@@ -294,7 +311,7 @@ const translations = {
         ko: "로그인",
         pt: "Entrar",
         ur: "لاگ ان",
-        ja: "ログイン"
+        ja: "ログイン",
       },
       validation: {
         email: {
@@ -309,7 +326,7 @@ const translations = {
           ko: "유효한 이메일을 입력하세요",
           pt: "Digite um email válido",
           ur: "درست ای میل درج کریں",
-          ja: "有効なメールアドレスを入力してください"
+          ja: "有効なメールアドレスを入力してください",
         },
         emailRequired: {
           en: "Email is required",
@@ -323,7 +340,7 @@ const translations = {
           ko: "이메일이 필요합니다",
           pt: "O email é obrigatório",
           ur: "ای میل درکار ہے",
-          ja: "メールアドレスが必要です"
+          ja: "メールアドレスが必要です",
         },
         nameRequired: {
           en: "Name is required",
@@ -337,7 +354,7 @@ const translations = {
           ko: "이름이 필요합니다",
           pt: "O nome é obrigatório",
           ur: "نام درکار ہے",
-          ja: "名前が必要です"
+          ja: "名前が必要です",
         },
         phoneInvalid: {
           en: "Invalid phone number",
@@ -351,7 +368,7 @@ const translations = {
           ko: "유효하지 않은 전화번호",
           pt: "Número de telefone inválido",
           ur: "غلط فون نمبر",
-          ja: "無効な電話番号"
+          ja: "無効な電話番号",
         },
         phoneRequired: {
           en: "Phone number is required",
@@ -365,7 +382,7 @@ const translations = {
           ko: "전화번호가 필요합니다",
           pt: "O número de telefone é obrigatório",
           ur: "فون نمبر درکار ہے",
-          ja: "電話番号が必要です"
+          ja: "電話番号が必要です",
         },
         passwordMin: {
           en: "Password must be at least 8 characters",
@@ -379,7 +396,7 @@ const translations = {
           ko: "비밀번호는 최소 8자 이상이어야 합니다",
           pt: "A senha deve ter pelo menos 8 caracteres",
           ur: "پاس ورڈ کم از کم 8 حروف کا ہونا چاہیے",
-          ja: "パスワードは8文字以上である必要があります"
+          ja: "パスワードは8文字以上である必要があります",
         },
         passwordRequired: {
           en: "Password is required",
@@ -393,17 +410,17 @@ const translations = {
           ko: "비밀번호가 필요합니다",
           pt: "A senha é obrigatória",
           ur: "پاس ورڈ درکار ہے",
-          ja: "パスワードが必要です"
+          ja: "パスワードが必要です",
         },
         passwordConfirmMatch: {
           en: "Password confirmation does not match",
-          ar: "تأكيد كلمة المرور غير متطابق"
+          ar: "تأكيد كلمة المرور غير متطابق",
         },
         passwordConfirmRequired: {
           en: "Password confirmation is required",
-          ar: "تأكيد كلمة المرور مطلوب"
-        }
-      }
+          ar: "تأكيد كلمة المرور مطلوب",
+        },
+      },
     },
     otp: {
       title: {
@@ -418,7 +435,7 @@ const translations = {
         ko: "OTP 코드 입력",
         pt: "Digite o código OTP",
         ur: "OTP درج کریں",
-        ja: "OTPコードを入力"
+        ja: "OTPコードを入力",
       },
       description: {
         en: "Please enter the security code sent to your email",
@@ -432,7 +449,7 @@ const translations = {
         ko: "이메일로 전송된 보안 코드를 입력하세요",
         pt: "Por favor, digite o código de segurança enviado para seu email",
         ur: "براہ کرم اپنے ای میل پر بھیجے گئے سیکیورٹی کوڈ درج کریں",
-        ja: "メールに送信されたセキュリティコードを入力してください"
+        ja: "メールに送信されたセキュリティコードを入力してください",
       },
       resendIn: {
         en: "Resend in",
@@ -446,7 +463,7 @@ const translations = {
         ko: "재전송까지",
         pt: "Reenviar em",
         ur: "دوبارہ بھیجیں",
-        ja: "再送信まで"
+        ja: "再送信まで",
       },
       seconds: {
         en: "seconds",
@@ -460,7 +477,7 @@ const translations = {
         ko: "초",
         pt: "segundos",
         ur: "سیکنڈ",
-        ja: "秒"
+        ja: "秒",
       },
       resendOtp: {
         en: "Resend OTP",
@@ -474,7 +491,7 @@ const translations = {
         ko: "OTP 재전송",
         pt: "Reenviar OTP",
         ur: "OTP دوبارہ بھیجیں",
-        ja: "OTPを再送信"
+        ja: "OTPを再送信",
       },
       confirmOtp: {
         en: "Confirm OTP",
@@ -488,7 +505,7 @@ const translations = {
         ko: "OTP 확인",
         pt: "Confirmar OTP",
         ur: "OTP کی تصدیق کریں",
-        ja: "OTPを確認"
+        ja: "OTPを確認",
       },
       fullOtp: {
         en: "Please enter all OTP digits",
@@ -502,7 +519,7 @@ const translations = {
         ko: "모든 OTP 숫자를 입력하세요",
         pt: "Por favor, digite todos os dígitos do OTP",
         ur: "براہ کرم تمام OTP ہندسے درج کریں",
-        ja: "すべてのOTP数字を入力してください"
+        ja: "すべてのOTP数字を入力してください",
       },
       wrongOtp: {
         en: "Invalid OTP. Please try again",
@@ -516,8 +533,8 @@ const translations = {
         ko: "잘못된 OTP입니다. 다시 시도하세요",
         pt: "OTP inválido. Por favor, tente novamente",
         ur: "غلط OTP۔ براہ کرم دوبارہ کوشش کریں",
-        ja: "無効なOTPです。もう一度お試しください"
-      }
+        ja: "無効なOTPです。もう一度お試しください",
+      },
     },
     login: {
       title: {
@@ -532,7 +549,7 @@ const translations = {
         ko: "Tour에 오신 것을 환영합니다",
         pt: "Bem-vindo ao Tour",
         ur: "ٹور میں خوش آمدید",
-        ja: "Tourへようこそ"
+        ja: "Tourへようこそ",
       },
       emailOrPhoneLabel: {
         en: "Email or Phone Number",
@@ -546,7 +563,7 @@ const translations = {
         ko: "이메일 또는 전화번호",
         pt: "Email ou Número de Telefone",
         ur: "ای میل یا فون نمبر",
-        ja: "メールアドレスまたは電話番号"
+        ja: "メールアドレスまたは電話番号",
       },
       emailOrPhonePlaceholder: {
         en: "Enter your email or phone",
@@ -560,7 +577,7 @@ const translations = {
         ko: "이메일 또는 전화번호 입력",
         pt: "Digite seu email ou telefone",
         ur: "اپنا ای میل یا فون درج کریں",
-        ja: "メールアドレスまたは電話番号を入力"
+        ja: "メールアドレスまたは電話番号を入力",
       },
       passwordLabel: {
         en: "Password",
@@ -574,7 +591,7 @@ const translations = {
         ko: "비밀번호",
         pt: "Senha",
         ur: "پاس ورڈ",
-        ja: "パスワード"
+        ja: "パスワード",
       },
       passwordPlaceholder: {
         en: "Enter your password",
@@ -588,7 +605,7 @@ const translations = {
         ko: "비밀번호 입력",
         pt: "Digite sua senha",
         ur: "اپنا پاس ورڈ درج کریں",
-        ja: "パスワードを入力"
+        ja: "パスワードを入力",
       },
       submitButton: {
         en: "Log In",
@@ -602,7 +619,7 @@ const translations = {
         ko: "로그인",
         pt: "Entrar",
         ur: "لاگ ان کریں",
-        ja: "ログイン"
+        ja: "ログイン",
       },
       noAccount: {
         en: "Don't have an account?",
@@ -616,7 +633,167 @@ const translations = {
         ko: "계정이 없으신가요?",
         pt: "Não tem uma conta?",
         ur: "اکاؤنٹ نہیں ہے؟",
-        ja: "アカウントをお持ちでないですか？"
+        ja: "アカウントをお持ちでないですか？",
+      },
+      register: {
+        title: {
+          ar: "تسجيل حساب جديد",
+          en: "Create a New Account",
+          fr: "Créer un nouveau compte",
+          de: "Neues Konto erstellen",
+          es: "Crear una nueva cuenta",
+          tr: "Yeni Hesap Oluştur",
+          ru: "Создать новый аккаунт",
+          zh: "创建新账户",
+          ko: "새 계정 만들기",
+          pt: "Criar uma nova conta",
+          ur: "نیا اکاؤنٹ بنائیں",
+          ja: "新しいアカウントを作成する",
+        },
+        email: {
+          ar: "البريد الإلكتروني",
+          en: "Email or Phone Number",
+          fr: "E-mail ou numéro de téléphone",
+          de: "E-Mail oder Telefonnummer",
+          es: "Correo electrónico o número de teléfono",
+          tr: "E-posta veya Telefon Numarası",
+          ru: "Электронная почта или номер телефона",
+          zh: "电子邮件或电话号码",
+          ko: "이메일 또는 전화번호",
+          pt: "E-mail ou número de telefone",
+          ur: "ای میل یا فون نمبر",
+          ja: "メールアドレスまたは電話番号",
+        },
+        emailOrPhonePlaceholder: {
+          ar: "أدخل البريد الإلكتروني أو رقم الهاتف",
+          en: "Enter your email or phone number",
+          fr: "Entrez votre e-mail ou numéro de téléphone",
+          de: "Geben Sie Ihre E-Mail-Adresse oder Telefonnummer ein",
+          es: "Introduce tu correo electrónico o número de teléfono",
+          tr: "E-postanızı veya telefon numaranızı girin",
+          ru: "Введите свой адрес электронной почты или номер телефона",
+          zh: "输入您的电子邮件或电话号码",
+          ko: "이메일 또는 전화번호를 입력하세요",
+          pt: "Digite seu e-mail ou número de telefone",
+          ur: "اپنا ای میل یا فون نمبر درج کریں",
+          ja: "メールアドレスまたは電話番号を入力してください",
+        },
+        submitButton: {
+          ar: "إرسال رمز الامان",
+          en: "Send OTP",
+          fr: "Envoyer l'OTP",
+          de: "OTP senden",
+          es: "Enviar OTP",
+          tr: "OTP Gönder",
+          ru: "Отправить OTP",
+          zh: "发送OTP",
+          ko: "OTP 보내기",
+          pt: "Enviar OTP",
+          ur: "OTP بھیجیں",
+          ja: "OTPを送信",
+        },
+        alreadyHaveAccount: {
+          ar: "لديك حساب بالفعل؟",
+          en: "Already have an account?",
+          fr: "Vous avez déjà un compte?",
+          de: "Haben Sie bereits ein Konto?",
+          es: "¿Ya tienes una cuenta?",
+          tr: "Zaten bir hesabınız var mı?",
+          ru: "Уже есть аккаунт?",
+          zh: "已有账户？",
+          ko: "이미 계정이 있으신가요?",
+          pt: "Já tem uma conta?",
+          ur: "پہلے سے ہی ایک اکاؤنٹ ہے؟",
+          ja: "すでにアカウントをお持ちですか？",
+        },
+        loginLink: {
+          ar: "تسجيل الدخول",
+          en: "Log In",
+          fr: "Se connecter",
+          de: "Anmelden",
+          es: "Iniciar sesión",
+          tr: "Giriş Yap",
+          ru: "Войти",
+          zh: "登录",
+          ko: "로그인",
+          pt: "Entrar",
+          ur: "لاگ ان کریں",
+          ja: "ログイン",
+        },
+        validation: {
+          emailOrPhoneRequired: {
+            ar: "ادخل البريد الإلكتروني أو رقم الهاتف",
+            en: "Enter your email or phone number",
+            fr: "Veuillez entrer votre e-mail ou numéro de téléphone",
+            de: "Bitte geben Sie Ihre E-Mail-Adresse oder Telefonnummer ein",
+            es: "Por favor, introduce tu correo electrónico o número de teléfono",
+            tr: "Lütfen e-postanızı veya telefon numaranızı girin",
+            ru: "Пожалуйста, введите свой адрес электронной почты или номер телефона",
+            zh: "请输入您的电子邮件或电话号码",
+            ko: "이메일 또는 전화번호를 입력하세요",
+            pt: "Por favor, insira seu e-mail ou número de telefone",
+            ur: "براہ کرم اپنا ای میل یا فون نمبر درج کریں",
+            ja: "メールアドレスまたは電話番号を入力してください",
+          },
+          emailOrPhoneInvalid: {
+            ar: "رقم هاتف أو بريد إلكتروني غير صحيح",
+            en: "Invalid email or phone number",
+            fr: "E-mail ou numéro de téléphone invalide",
+            de: "Ungültige E-Mail-Adresse oder Telefonnummer",
+            es: "Correo electrónico o número de teléfono no válido",
+            tr: "Geçersiz e-posta veya telefon numarası",
+            ru: "Неверный адрес электронной почты или номер телефона",
+            zh: "无效的电子邮件或电话号码",
+            ko: "유효하지 않은 이메일 또는 전화번호",
+            pt: "E-mail ou número de telefone inválido",
+            ur: "غلط ای میل یا فون نمبر",
+            ja: "無効なメールアドレスまたは電話番号",
+          },
+          phoneInvalid: {
+            ar: "رقم الهاتف غير صحيح",
+            en: "Invalid phone number",
+            fr: "Numéro de téléphone invalide",
+            de: "Ungültige Telefonnummer",
+            es: "Número de teléfono no válido",
+            tr: "Geçersiz telefon numarası",
+            ru: "Неверный номер телефона",
+            zh: "无效的电话号码",
+            ko: "유효하지 않은 전화번호",
+            pt: "Número de telefone inválido",
+            ur: "غلط فون نمبر",
+            ja: "無効な電話番号",
+          },
+        },
+        licenseNumber: {
+          ar: "رقم الترخيص: ",
+          en: "License Number: ",
+          fr: "Numéro de licence: ",
+          de: "Lizenznummer: ",
+          es: "Número de licencia: ",
+          tr: "Lisans Numarası: ",
+          ru: "Номер лицензии: ",
+          zh: "许可证编号：",
+          ko: "라이센스 번호: ",
+          pt: "Número da licença: ",
+          ur: "لائسنس نمبر: ",
+          ja: "ライセンス番号: ",
+        },
+      },
+      common: {
+        loading: {
+          ar: "جار التحميل...",
+          en: "Loading...",
+          fr: "Chargement...",
+          de: "Wird geladen...",
+          es: "Cargando...",
+          tr: "Yükleniyor...",
+          ru: "Загрузка...",
+          zh: "加载中...",
+          ko: "로딩 중...",
+          pt: "Carregando...",
+          ur: "لوڈ ہو رہا ہے...",
+          ja: "読み込み中...",
+        },
       },
       registerLink: {
         en: "Register Here",
@@ -630,7 +807,7 @@ const translations = {
         ko: "여기서 등록하기",
         pt: "Registre-se aqui",
         ur: "یہاں رجسٹر کریں",
-        ja: "ここで登録"
+        ja: "ここで登録",
       },
       forgetPassword: {
         en: "Forget Password",
@@ -644,7 +821,7 @@ const translations = {
         ko: "비밀번호 찾기",
         pt: "Esqueci a senha",
         ur: "پاس ورڈ بھول گئے",
-        ja: "パスワードをお忘れですか"
+        ja: "パスワードをお忘れですか",
       },
       validation: {
         emailOrPhoneRequired: {
@@ -659,7 +836,7 @@ const translations = {
           ko: "이메일 또는 전화번호를 입력하세요",
           pt: "Digite seu email ou número de telefone",
           ur: "اپنا ای میل یا فون نمبر درج کریں",
-          ja: "メールアドレスまたは電話番号を入力してください"
+          ja: "メールアドレスまたは電話番号を入力してください",
         },
         emailOrPhoneInvalid: {
           en: "Please enter a valid email or phone number",
@@ -673,7 +850,7 @@ const translations = {
           ko: "유효한 이메일 또는 전화번호를 입력하세요",
           pt: "Por favor, insira um email ou número de telefone válido",
           ur: "براہ کرم درست ای میل یا فون نمبر درج کریں",
-          ja: "有効なメールアドレスまたは電話番号を入力してください"
+          ja: "有効なメールアドレスまたは電話番号を入力してください",
         },
         passwordRequired: {
           en: "Password is required",
@@ -687,7 +864,7 @@ const translations = {
           ko: "비밀번호가 필요합니다",
           pt: "A senha é obrigatória",
           ur: "پاس ورڈ درکار ہے",
-          ja: "パスワードが必要です"
+          ja: "パスワードが必要です",
         },
         passwordMinLength: {
           en: "Password must be at least 6 characters",
@@ -701,7 +878,7 @@ const translations = {
           ko: "비밀번호는 최소 6자 이상이어야 합니다",
           pt: "A senha deve ter pelo menos 6 caracteres",
           ur: "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے",
-          ja: "パスワードは6文字以上である必要があります"
+          ja: "パスワードは6文字以上である必要があります",
         },
         phoneInvalid: {
           en: "Invalid phone number",
@@ -715,12 +892,12 @@ const translations = {
           ko: "유효하지 않은 전화번호",
           pt: "Número de telefone inválido",
           ur: "غلط فون نمبر",
-          ja: "無効な電話番号"
-        }
-      }
-    }
+          ja: "無効な電話番号",
+        },
+      },
+    },
   },
-  
+
   // Common UI elements
   userDropMenu: {
     accountInfo: {
@@ -735,7 +912,7 @@ const translations = {
       ko: "계정 정보",
       pt: "Informações da conta",
       ur: "اکاؤنٹ کی معلومات",
-      ja: "アカウント情報"
+      ja: "アカウント情報",
     },
     myReservations: {
       en: "My Reservations",
@@ -749,11 +926,11 @@ const translations = {
       ko: "내 예약",
       pt: "Minhas reservas",
       ur: "میری بکنگز",
-      ja: "私の予約"
+      ja: "私の予約",
     },
     rewards: {
       en: "Rewards",
-      ar: "المكافآت"
+      ar: "المكافآت",
     },
     currency: {
       en: "Saudi Riyal",
@@ -767,7 +944,7 @@ const translations = {
       ko: "사우디 리얄",
       pt: "Riyal saudita",
       ur: "سعودی ریال",
-      ja: "サウジリヤル"
+      ja: "サウジリヤル",
     },
     logout: {
       en: "Log Out",
@@ -781,8 +958,8 @@ const translations = {
       ko: "로그아웃",
       pt: "Sair",
       ur: "لاگ آؤٹ",
-      ja: "ログアウト"
-    }
+      ja: "ログアウト",
+    },
   },
   common: {
     search: {
@@ -797,7 +974,7 @@ const translations = {
       ko: "검색",
       pt: "Pesquisar",
       ur: "تلاش کریں",
-      ja: "検索"
+      ja: "検索",
     },
     more: {
       en: "More",
@@ -811,7 +988,7 @@ const translations = {
       ko: "더 보기",
       pt: "Mais",
       ur: "مزید",
-      ja: "もっと見る"
+      ja: "もっと見る",
     },
     less: {
       en: "Less",
@@ -825,7 +1002,7 @@ const translations = {
       ko: "접기",
       pt: "Menos",
       ur: "کم",
-      ja: "閉じる"
+      ja: "閉じる",
     },
     save: {
       en: "Save",
@@ -839,7 +1016,7 @@ const translations = {
       ko: "저장",
       pt: "Salvar",
       ur: "محفوظ کریں",
-      ja: "保存"
+      ja: "保存",
     },
     cancel: {
       en: "Cancel",
@@ -853,7 +1030,7 @@ const translations = {
       ko: "취소",
       pt: "Cancelar",
       ur: "منسوخ",
-      ja: "キャンセル"
+      ja: "キャンセル",
     },
     favorite: {
       en: "Favorite",
@@ -867,9 +1044,263 @@ const translations = {
       ko: "즐겨찾기",
       pt: "Favorito",
       ur: "پسندیدہ",
-      ja: "お気に入り"
-    }
-  }
+      ja: "お気に入り",
+    },
+    blog: {
+      en: "Blog",
+      ar: "المدونة",
+      tr: "Blog",
+      fr: "Blog",
+      es: "Blog",
+      de: "Blog",
+      ru: "Блог",
+      zh: "博客",
+      ja: "ブログ",
+      pt: "Blog",
+      hi: "ब्लॉग",
+      ko: "블로그",
+    },
+    noData: {
+      en: "No data available.",
+      ar: "لا يوجد بيانات متاحة.",
+      tr: "Veri yok.",
+      fr: "Aucune donnée disponible.",
+      es: "No hay datos disponibles.",
+      de: "Keine Daten verfügbar.",
+      ru: "Нет данных.",
+      zh: "无可用数据",
+      ja: "データがありません",
+      pt: "Nenhum dado disponível.",
+      hi: "कोई डेटा उपलब्ध नहीं है।",
+      ko: "사용 가능한 데이터가 없습니다.",
+    },
+    home: {
+      en: "Home",
+      ar: "الصفحة الرئيسية",
+      tr: "Ana Sayfa",
+      fr: "Accueil",
+      es: "Inicio",
+      de: "Startseite",
+      ru: "Главная",
+      zh: "主页",
+      ja: "ホーム",
+      pt: "Início",
+      hi: "होम",
+      ko: "홈",
+    },
+    all: {
+      en: "All",
+      ar: "الكل",
+      fr: "Tous",
+      de: "Alle",
+      es: "Todos",
+      tr: "Tümü",
+      ru: "Все",
+      zh: "所有",
+      ko: "모두",
+      pt: "Todos",
+      ur: "تمام",
+      ja: "すべて",
+    },
+    countries: {
+      السعودية: {
+        en: "Saudi Arabia",
+        ar: "السعودية",
+        fr: "Arabie Saoudite",
+        de: "Saudi-Arabien",
+        es: "Arabia Saudita",
+        tr: "Suudi Arabistan",
+        ru: "Саудовская Аравия",
+        zh: "沙特阿拉伯",
+        ko: "사우디아라비아",
+        pt: "Arábia Saudita",
+        ur: "سعودی عرب",
+        ja: "サウジアラビア",
+      },
+      قطر: {
+        en: "Qatar",
+        ar: "قطر",
+        fr: "Qatar",
+        de: "Katar",
+        es: "Qatar",
+        tr: "Katar",
+        ru: "Катар",
+        zh: "卡塔尔",
+        ko: "카타르",
+        pt: "Catar",
+        ur: "قطر",
+        ja: "カタール",
+      },
+      البحرين: {
+        en: "Bahrain",
+        ar: "البحرين",
+        fr: "Bahreïn",
+        de: "Bahrain",
+        es: "Baréin",
+        tr: "Bahreyn",
+        ru: "Бахрейн",
+        zh: "巴林",
+        ko: "바레인",
+        pt: "Bahrein",
+        ur: "بحرین",
+        ja: "バーレーン",
+      },
+      عمان: {
+        en: "Oman",
+        ar: "عمان",
+        fr: "Oman",
+        de: "Oman",
+        es: "Omán",
+        tr: "Umman",
+        ru: "Оман",
+        zh: "阿曼",
+        ko: "오만",
+        pt: "Omã",
+        ur: "عمان",
+        ja: "オマーン",
+      },
+      الأردن: {
+        en: "Jordan",
+        ar: "الأردن",
+        fr: "Jordanie",
+        de: "Jordanien",
+        es: "Jordania",
+        tr: "Ürdün",
+        ru: "Иордания",
+        zh: "约旦",
+        ko: "요르단",
+        pt: "Jordânia",
+        ur: "اردن",
+        ja: "ヨルダン",
+      },
+      لبنان: {
+        en: "Lebanon",
+        ar: "لبنان",
+        fr: "Liban",
+        de: "Libanon",
+        es: "Líbano",
+        tr: "Lübnan",
+        ru: "Ливан",
+        zh: "黎巴嫩",
+        ko: "레바논",
+        pt: "Líbano",
+        ur: "لبنان",
+        ja: "レバノン",
+      },
+      سوريا: {
+        en: "Syria",
+        ar: "سوريا",
+        fr: "Syrie",
+        de: "Syrien",
+        es: "Siria",
+        tr: "Suriye",
+        ru: "Сирия",
+        zh: "叙利亚",
+        ko: "시리아",
+        pt: "Síria",
+        ur: "شام",
+        ja: "シリア",
+      },
+      العراق: {
+        en: "Iraq",
+        ar: "العراق",
+        fr: "Irak",
+        de: "Irak",
+        es: "Irak",
+        tr: "Irak",
+        ru: "Ирак",
+        zh: "伊拉克",
+        ko: "이라크",
+        pt: "Iraque",
+        ur: "عراق",
+        ja: "イラク",
+      },
+      اليمن: {
+        en: "Yemen",
+        ar: "اليمن",
+        fr: "Yémen",
+        de: "Jemen",
+        es: "Yemen",
+        tr: "Yemen",
+        ru: "Йемен",
+        zh: "也门",
+        ko: "예멘",
+        pt: "Iêmen",
+        ur: "یمن",
+        ja: "イエメン",
+      },
+      المغرب: {
+        en: "Morocco",
+        ar: "المغرب",
+        fr: "Maroc",
+        de: "Marokko",
+        es: "Marruecos",
+        tr: "Fas",
+        ru: "Марокко",
+        zh: "摩洛哥",
+        ko: "모로코",
+        pt: "Marrocos",
+        ur: "مراکش",
+        ja: "モロッコ",
+      },
+      تونس: {
+        en: "Tunisia",
+        ar: "تونس",
+        fr: "Tunisie",
+        de: "Tunesien",
+        es: "Túnez",
+        tr: "Tunus",
+        ru: "Тунис",
+        zh: "突尼斯",
+        ko: "튀니지",
+        pt: "Tunísia",
+        ur: "تیونس",
+        ja: "チュニジア",
+      },
+      الجزائر: {
+        en: "Algeria",
+        ar: "الجزائر",
+        fr: "Algérie",
+        de: "Algerien",
+        es: "Argelia",
+        tr: "Cezayir",
+        ru: "Алжир",
+        zh: "阿尔及利亚",
+        ko: "알제리",
+        pt: "Argélia",
+        ur: "الجیریا",
+        ja: "アルジェリア",
+      },
+      ليبيا: {
+        en: "Libya",
+        ar: "ليبيا",
+        fr: "Libye",
+        de: "Libyen",
+        es: "Libia",
+        tr: "Libya",
+        ru: "Ливия",
+        zh: "利比亚",
+        ko: "리비아",
+        pt: "Líbia",
+        ur: "لیبیا",
+        ja: "リビア",
+      },
+      السودان: {
+        en: "Sudan",
+        ar: "السودان",
+        fr: "Soudan",
+        de: "Sudan",
+        es: "Sudán",
+        tr: "Sudan",
+        ru: "Судан",
+        zh: "苏丹",
+        ko: "수단",
+        pt: "Sudão",
+        ur: "سوڈان",
+        ja: "スーダン",
+      },
+    },
+  },
 };
 
 export default translations;

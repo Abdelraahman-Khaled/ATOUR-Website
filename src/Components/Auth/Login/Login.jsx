@@ -6,26 +6,31 @@ import InputFiled from "Components/Forms/InputField";
 import * as Yup from "yup";
 import EndLoginInfo from "../Components/EndLoginInfo/EndLoginInfo";
 import AuthAPI from "api/authApi"; // Import your API file
-import useTranslation from "Components/Languages/useTranslation"; // Import Translation Hook
+// import useTranslation from "Components/Languages/useTranslation"; // Import Translation Hook
 import "./Login.css";
 import ForgotPasswordForm from "../Components/ResetPassword/ForgotPasswordForm ";
+import { useLanguage } from "Components/Languages/LanguageContext";
+import loginContent from "./loginContent";
 
 const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
-  const { t, currentLanguage } = useTranslation(); // Get translation function and current language
+  const { currentLanguage } = useLanguage();
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const content = loginContent;
 
   const validationSchema = Yup.object().shape({
     emailOrPhoneNumber: Yup.string()
-      .required(t('auth.login.validation.emailOrPhoneRequired'))
+      .required(content.validation.emailOrPhoneRequired[currentLanguage])
       .test(
         "emailOrPhoneNumber",
-        t('auth.login.validation.emailOrPhoneInvalid'),
+        content.validation.emailOrPhoneInvalid[currentLanguage],
         function (value) {
           return (
             Yup.string().email().isValidSync(value) ||
             Yup.string()
               .matches(/^[0-9]{10,14}$/, {
-                message: t('auth.login.validation.phoneInvalid'),
+                message: content.validation.phoneInvalid[currentLanguage],
                 excludeEmptyString: true,
               })
               .isValidSync(value)
@@ -33,8 +38,8 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
         }
       ),
     password: Yup.string()
-      .min(6, t('auth.login.validation.passwordMinLength'))
-      .required(t('auth.login.validation.passwordRequired')),
+      .min(6, content.validation.passwordMinLength[currentLanguage])
+      .required(content.validation.passwordRequired[currentLanguage]),
   });
 
   const initialValues = {
@@ -44,6 +49,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
+      setLoading(true);
       const response = await AuthAPI.login(values.emailOrPhoneNumber, values.password);
 
       // Store token in localStorage
@@ -57,6 +63,8 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
       resetForm();
     } catch (error) {
       console.error("Login failed:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,7 +73,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
       <div className="info-login-content">
         <div className="row g-4 g-md-3">
           <div className="col-12 col-md-6">
-            <HeaderLogin titleTop={t('auth.login.title')} />
+            <HeaderLogin titleTop={content.title[currentLanguage]} />
             {forgotPasswordOpen ? (
               <ForgotPasswordForm onClose={() => setForgotPasswordOpen(false)} />
             ) : (
@@ -75,31 +83,31 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 onSubmit={handleSubmit}
               >
                 <InputFiled
-                  label={t('auth.login.emailOrPhoneLabel')}
+                  label={content.emailOrPhoneLabel[currentLanguage]}
                   name="emailOrPhoneNumber"
                   type="text"
-                  placeholder={t('auth.login.emailOrPhonePlaceholder')}
+                  placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
                   success
                 />
                 <InputFiled
-                  label={t('auth.login.passwordLabel')}
+                  label={content.passwordLabel[currentLanguage]}
                   name="password"
                   type="password"
-                  placeholder={t('auth.login.passwordPlaceholder')}
+                  placeholder={content.passwordPlaceholder[currentLanguage]}
                   success
                 />
-                <button type="submit" className="btn-main btn-submit w-100 mt-3">
-                  {t('auth.login.submitButton')}
+                <button type="submit" className="btn-main btn-submit w-100 mt-3" disabled={loading}>
+                  {loading ? content.loading[currentLanguage] : content.submitButton[currentLanguage]}
                 </button>
               </FormField>
             )}
             <div className="bottom-info-not-accout gap-2 d-flex justify-content-center align-items-center">
-              {t('auth.login.noAccount')}{" "}
+              {content.noAccount[currentLanguage]}{" "}
               <div
                 onClick={buttonLogin}
                 className="cursor-pointer-event text-decoration-underline link-a"
               >
-                {t('auth.login.registerLink')}
+                {content.registerLink[currentLanguage]}
               </div>
             </div>
             {!forgotPasswordOpen && (
@@ -107,7 +115,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
                 onClick={() => setForgotPasswordOpen(true)}
                 className="cursor-pointer-event mb-3 text-decoration-underline link-a text-center mt-2"
               >
-                {t('auth.login.forgetPassword')}
+                {content.forgetPassword[currentLanguage]}
               </div>
             )}
             <div className="license-number text-center ">

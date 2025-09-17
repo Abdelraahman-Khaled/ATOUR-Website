@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const LanguageContext = createContext();
+const LanguageContext = createContext(null);
 
 // Define supported languages
 const SUPPORTED_LANGUAGES = [

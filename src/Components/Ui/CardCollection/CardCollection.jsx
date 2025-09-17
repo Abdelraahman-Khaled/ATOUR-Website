@@ -122,11 +122,12 @@ const CardCollection = ({
             onClick={handleLinkClick}
           />
           {/* Use the Favicon component here */}
-          <Favicon
-            modelType={type}
-            modelId={itemId}
-            initialIsFavorite={isFav}
-          />
+          {isFav &&
+            <Favicon
+              modelType={type}
+              modelId={itemId}
+              initialIsFavorite={isFav}
+            />}
           <div className="info-text">
             <IconLocation /> {infoPlaceCard}
           </div>
@@ -139,10 +140,12 @@ const CardCollection = ({
               <IconStarRate /> {numRate} {ratingText}
             </div>
           )}
-          <h2 className="title">{titleCard}</h2>
-          <div className="price-info">
-            {priceStartText} <span className="price-num">{numPriceCard}</span> {perPersonText}
-          </div>
+          <h2 className="title ">{titleCard}</h2>
+          {numPriceCard &&
+            <div className="price-info">
+              {priceStartText} <span className="price-num">{numPriceCard}</span> {perPersonText}
+            </div>
+          }
         </div>
         {/* =========== END CONTENT INFO CARD ========== */}
       </div>

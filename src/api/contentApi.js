@@ -72,19 +72,18 @@ const ContentAPI = {
 
   // Cities
   getCities: async (language) => {
-    const response = await axiosInstance.get("/cities",
-      {
-        headers: {
-          language: language, // Pass the language in the header
-        },
-      });
+    const response = await axiosInstance.get("/cities", {
+      headers: {
+        language: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
   getCitiesId: async (cityId, language) => {
     const response = await axiosInstance.get(`/search_by_city/${cityId}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;

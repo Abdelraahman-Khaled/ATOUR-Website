@@ -10,6 +10,7 @@ import { useHome } from "context/HomeContext";
 import OneOffer from "./Components/OneOffer/OneOffer";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import SplashScreen from "Components/SplashScreen/SplashScreen";
+import Countries from "./Components/Countries/Countries";
 const Home = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { homeData, loading, error } = useHome(); // Use the HomeContext
@@ -44,6 +45,7 @@ const Home = () => {
       <main>
         <ContainerMedia>
           <HeaderCard />
+          <Countries />
           {mostVisited.length > 0 && <ImagesCard mostVisited={mostVisited} />}
           {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
           {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}

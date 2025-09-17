@@ -2,22 +2,12 @@
 import CardBlog from "../CardBlog/CardBlog";
 import imageBlog from "../../../../assets/images/blogs/01.png";
 import img_1 from "../../../../assets/images/users/01.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import GeneralAPI from "api/generalApi";
-import { useLanguage } from "Components/Languages/LanguageContext";
+import content from "../../../../Components/Languages/translations";
 import { Link } from "react-router-dom";
-
-
-const text = {
-  ar: {
-    noData: "لا يوجد بيانات متاحة.",
-    home: "الصفحة الرئيسية",
-  },
-  en: {
-    noData: "No data available.",
-    home: "Home",
-  },
-};
+import { toast } from "react-toastify";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const CardsBlogs = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -33,7 +23,7 @@ const CardsBlogs = () => {
         setBlogData(data.data); // Set the fetched data to state
       } catch (err) {
         console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
+        toast.error("Failed to load home data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
@@ -42,7 +32,6 @@ const CardsBlogs = () => {
     fetchBlogData(); // Call the API on component mount
   }, [currentLanguage]);
 
-
   if (loading) {
     return (
       <div className="airPlan-dot" />
@@ -50,10 +39,9 @@ const CardsBlogs = () => {
   }
 
   if (error) {
-    return <div>{error}</div>; // Display error message if fetching fails
+    return null; // No need to display error here, toast will handle it
   }
-
-
+  console.log(blogData);
 
   return (
     <div className="cards-blog-content padding-80">
@@ -73,12 +61,12 @@ const CardsBlogs = () => {
           </div>
         )) : (
           <p className="text-section-api fs-6 fw-medium text-center pt-5">
-            {text[currentLanguage].noData}{" "}
+            {content.common.noData[currentLanguage]}{" "}
             <Link
               to="/"
               className="fs-6 fw-medium text-danger text-decoration-underline"
             >
-              {text[currentLanguage].home}
+              {content.common.home[currentLanguage]}
             </Link>
           </p>
         )}

@@ -7,6 +7,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import { useEffect, useState } from "react";
 import ContentAPI from "api/contentApi";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const Events = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -40,7 +41,7 @@ const Events = () => {
         setEventsData(enrichedData)
       } catch (err) {
         console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
+        toast.error("Failed to load home data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
@@ -64,6 +65,10 @@ const Events = () => {
         <Loader />
       </div>
     );
+  }
+
+  if (error) {
+    return null; // No need to display error here, toast will handle it
   }
 
   return (

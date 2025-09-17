@@ -30,28 +30,6 @@ const TabsBiography = ({ biography }) => {
   const normalizedDataEff = normalizeData(biography.effectivenes); // Normalize the data
   const normalizedDataGift = normalizeData(biography.gifts); // Normalize the data
   const tabsDataBio = [
-    // {
-    //   eventKey: "tab1",
-    //   title: (
-    //     <>
-    //       <IconBio /> {currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"}
-    //     </>
-    //   ),
-    //   content: (
-    //     <>
-
-    //       <SliderHeader biography={biography} />
-    //       {/* <ContainerMedia>
-    //         <FamousLandmarksCards />
-    //         <CardsCollectionBio />
-    //         <ExploreBiographyCards />
-    //         <NewRates />
-    //       </ContainerMedia> */}
-    //     </>
-    //   )
-    // },
-
-
     {
       eventKey: "tab1",
       title: (

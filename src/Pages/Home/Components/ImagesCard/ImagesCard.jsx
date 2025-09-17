@@ -1,15 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import "./ImagesCard.css";
 import { Link } from "react-router-dom";
 import useTranslation from "Components/Languages/useTranslation";
 import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
-
+import "./ImagesCardFilter.css";
 const ImagesCard = ({ mostVisited }) => {
   const { t } = useTranslation(); // Get the translation function
-  // Auth
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [filteredMostVisited, setFilteredMostVisited] = useState(mostVisited);
+  const [availableCountries, setAvailableCountries] = useState([]);
+
+  useEffect(() => {
+    const uniqueCountries = Array.from(new Set(mostVisited.map(item => item.country_name)))
+      .map((countryName, index) => ({ id: index + 1, title: countryName }));
+    setAvailableCountries(uniqueCountries);
+  }, [mostVisited]);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      setFilteredMostVisited(
+        mostVisited.filter(
+          (item) => item.country_name.toLowerCase() === selectedCountry.toLowerCase()
+        )
+      );
+    } else {
+      setFilteredMostVisited(mostVisited);
+    }
+  }, [mostVisited, selectedCountry]);
+
   const handleShowLogin = () => {
     setShowLogin(true);
   };
@@ -35,11 +56,32 @@ const ImagesCard = ({ mostVisited }) => {
       <TitleSection title={sectionTitle} text={sectionText} />
       {/* =========== END SECTION TITLE ============ */}
 
+      {/* Filter buttons */}
+      <div className="container mb-4">
+        <div className="all-info-card d-flex flex-wrap justify-content-center gap-2  ">
+          <button
+            className={`btn ${selectedCountry === "" ? "btn-card-one active" : "btn-card-one "} `}
+            onClick={() => setSelectedCountry("")}
+          >
+            {t('common.all')}
+          </button>
+          {availableCountries.map((country) => (
+            <button
+              key={country.id}
+              className={`btn ${selectedCountry === country.title ? "btn-card-one active" : "btn-card-one "}`}
+              onClick={() => setSelectedCountry(country.title)}
+            >
+              {country.title}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* =========== START ALL IMAGES CARD =========== */}
       <div className="all-images-card" data-aos="fade-up">
         {/* ============ START ROW ========== */}
         <div className="row g-3 justify-content-center">
-          {mostVisited.map((item) => {
+          {filteredMostVisited.map((item) => {
             return (
               <div key={item.id} className="col-6 col-md-4 col-lg-3">
                 <Link to={`/biographyPage/${item.id}`} onClick={handleLinkClick}>
@@ -47,7 +89,7 @@ const ImagesCard = ({ mostVisited }) => {
                   <div className="card-image-one">
                     <div className="image-card position-relative overlay-bg">
                       <img
-                        src={item.photo}
+                        src={item.image}
                         alt="imageCard"
                         loading="lazy"
                         className="w-100 h-100 object-fit-cover image-card-src"

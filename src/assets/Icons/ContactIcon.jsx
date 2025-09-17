@@ -19,14 +19,14 @@ const ContactIcon = () => {
           <path
             d="M6.66602 8.75H13.3327"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
           />
           <path
             d="M6.66602 11.6665H11.2493"
             stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
           />
         </g>
         <defs>

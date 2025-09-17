@@ -16,7 +16,10 @@ const text = {
   },
 };
 const InfoBlogDetails = ({ blogDetailsCard }) => {
+
   const { currentLanguage } = useLanguage(); // Get the current language
+  console.log(blogDetailsCard);
+
 
   return (
 
@@ -42,7 +45,7 @@ const InfoBlogDetails = ({ blogDetailsCard }) => {
             <img
               src={blogDetailsCard.publisherphoto}
               alt="img person"
-              className="object-fit-cover"
+              className="object-fit-cover border border-2 border-green-01 rounded-circle"
               width={"45px"}
               height={"45px"}
             />
@@ -55,11 +58,8 @@ const InfoBlogDetails = ({ blogDetailsCard }) => {
           {/* ============ END INFO BLOG ADDED =========== */}
           {/* ============ START CONTENT TEXT ============ */}
           <div className="content-text">
-            <p className="text"
-              dangerouslySetInnerHTML={{
-                __html: currentLanguage === "ar" ?
-                  blogDetailsCard.content_ar : blogDetailsCard.content_en
-              }}>
+            <p className="text">
+              {blogDetailsCard.description}
             </p>
           </div>
           {/* ============ END CONTENT TEXT ============ */}

@@ -1,61 +1,57 @@
 .title-section {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .title-section :is(.title, .text) {
-    font-weight: 500;
-    color: var(--dark-01-color);
-    text-align: center;
+  font-weight: 500;
+  color: var(--dark-01-color);
+  text-align: center;
 }
 
 /* Dark mode styling */
 body.dark-theme .title-section :is(.title, .text) {
-    color: var(--white-01-color) !important;
+  color: var(--white-01-color) !important;
 }
 
 .title-section .title {
-    font-size: 28px;
-    padding-bottom: 13px;
+  font-size: 30px;
+  padding-bottom: 13px;
 }
 
 .title-section .text {
-    font-size: 15px;
-    line-height: 2;
-    max-width: 800px;
-    width: 100%;
-    margin: auto !important;
+  font-size: 17px;
+  line-height: 2;
+  max-width: 800px;
+  width: 100%;
+  margin: auto !important;
 }
 
 /* SCREEN 767PX */
-@media screen and (max-width:767px) {
-    .title-section .text {
-
-        max-width: 100%;
-
-    }
+@media screen and (max-width: 767px) {
+  .title-section .text {
+    max-width: 100%;
+  }
 }
 
 /* SCREEN 550PX */
-@media screen and (max-width:550px) {
-    .title-section .title {
-        font-size: 19px;
-        font-weight: 600;
-    }
+@media screen and (max-width: 550px) {
+  .title-section .title {
+    font-size: 19px;
+    font-weight: 600;
+  }
 
-    .title-section .text {
-        font-size: 13px;
-
-    }
+  .title-section .text {
+    font-size: 13px;
+  }
 }
 
 /* SCREEN 400PX */
-@media screen and (max-width:400px) {
-    .title-section .title {
-        font-size: 17px;
-    }
+@media screen and (max-width: 400px) {
+  .title-section .title {
+    font-size: 17px;
+  }
 
-    .title-section .text {
-        font-size: 12px;
-
-    }
+  .title-section .text {
+    font-size: 12px;
+  }
 }

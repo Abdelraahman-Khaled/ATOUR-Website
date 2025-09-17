@@ -109,7 +109,7 @@ const CardFavorite = ({
           </>
         )}
         {/* ========== END RATE CARD ============= */}
-        <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p>
+        {/* <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p> */}
         <div className="bottom-content-card mt-auto d-flex gap-3 flex-wrap align-items-center ">
           {isTrueTextOneCard_1 && (
             <div className="text-one-card d-flex align-items-center gap-2">

@@ -20,15 +20,17 @@ import GiftDetail from "Components/Ui/Gifts/GiftDetail";
 import PrivateRoute from "./PrivateRoute";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import TermsConditions from "../Pages/TermsConditions/TermsConditions";
-import Articles from "../Pages/Articles/Articles";
 import News from "../Pages/News/News";
 import NewsDetails from "../Pages/News/Components/NewsDetails/NewsDetails";
 import Rewards from "../Pages/Rewards/Rewards";
+import Articles from "Pages/Blogs/Articles/Articles";
+import Country from "Pages/Country/Country";
 
 let routers = createBrowserRouter([
   {
     path: "",
     element: <Layout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "",
@@ -116,6 +118,19 @@ let routers = createBrowserRouter([
         children: [
           { path: "", element: <BiographyPage /> },
           { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+        ],
+      },
+      {
+        path: "country/:id",
+        element: (
+          <>
+            <PrivateRoute>
+              <Outlet />
+            </PrivateRoute>
+          </>
+        ),
+        children: [
+          { path: "", element: <Country /> },
         ],
       },
       {

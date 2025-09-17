@@ -118,7 +118,7 @@ const GeneralAPI = {
   getSliders: async (language) => {
     const response = await axiosInstance.get("/sliders", {
       headers: {
-        language: language,
+        lang: language,
       },
     });
     return response.data;

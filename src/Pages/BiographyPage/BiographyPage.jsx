@@ -76,7 +76,7 @@ const BiographyPage = () => {
   }
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"} />
+      <HelmetInfo titlePage={biography?.title} />
 
       <div className="biography-page padding-60">
         <header>

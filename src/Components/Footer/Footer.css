@@ -129,7 +129,15 @@
 }
 
 .footer .final-footer .license-number-footer {
-  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer .final-footer .license-number-footer span {
+  
+  width: 33%;
+  text-align: center;
 }
 
 /* SCREEN 991PX */

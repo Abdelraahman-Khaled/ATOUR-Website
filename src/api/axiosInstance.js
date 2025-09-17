@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const API_BASE_URL = "https://backend.atour.sa/api/v1";
+const API_BASE_URL = "https://admin.atour.sa/api/v1";
 // const API_BASE_URL = "https://admin.atour.sa/api/v1";
 
 const axiosInstance = axios.create({

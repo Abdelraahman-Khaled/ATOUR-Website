@@ -17,8 +17,10 @@ const WhyBookingTrip = ({ tripData }) => {
           {services.length > 0 ? (
             services.map((feature, index) => (
               <ul key={index} className="list-one-info p-0 m-0 d-flex flex-column gap-3">
-                <li className="text-title--1 d-flex align-items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} />{" "}
+                <li className="text-title--1 d-flex align-items-center gap-2 ">
+                  <div className="icon-times  icon-check-link">
+                    <FontAwesomeIcon icon={faCheck} />
+                  </div>
                   {feature.title}
                 </li>
               </ul>

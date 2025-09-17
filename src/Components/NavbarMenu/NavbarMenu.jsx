@@ -15,6 +15,8 @@ import { isAuthenticated } from "api/axiosInstance";
 import useTranslation from "Components/Languages/useTranslation";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import ThemeToggle from "Components/ThemeToggle/ThemeToggle";
+import { toast } from "react-toastify";
+import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 
 const NavbarMenu = () => {
   const { t } = useTranslation(); // Get the translation function
@@ -46,7 +48,7 @@ const NavbarMenu = () => {
         const responseCities = await ContentAPI.getCities();
         setCities(responseCities.data || []);
       } catch (err) {
-        setError("Failed to fetch cities. Please try again later.");
+        toast.error("Failed to fetch cities. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -83,6 +85,7 @@ const NavbarMenu = () => {
 
   return (
     <>
+      <ToastContainerApp />
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
       <Navbar expand="lg" className={`navbar-menu z-3 ${isMenuFixed ? "menu-fixed" : ""}`}>
         <ContainerMedia>

@@ -7,6 +7,7 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { toast } from "react-toastify";
 const Offers = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
@@ -23,7 +24,7 @@ const Offers = () => {
         setGifts(data.data); // Set the fetched data to 
       } catch (err) {
         console.error("Error fetching home data:", err);
-        setError("Failed to load home data. Please try again later.");
+        toast.error("Failed to load home data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
@@ -40,7 +41,7 @@ const Offers = () => {
   }
 
   if (error) {
-    return <div>{error}</div>; // Display error message if fetching fails
+    return null; // No need to display error here, toast will handle it
   }
   return (
     <>

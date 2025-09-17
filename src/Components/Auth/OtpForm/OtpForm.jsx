@@ -3,8 +3,10 @@ import CustomModal from "Components/CustomModal/CustomModal";
 import "./OtpForm.css";
 import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import AuthAPI from "api/authApi";
-import { useTranslation } from "react-i18next"; // Import Translation Hook
+// import { useTranslation } from "react-i18next"; // Import Translation Hook
 import { toast } from "react-toastify";
+import { useLanguage } from "Components/Languages/LanguageContext";
+import otpContent from "../otpContent";
 
 const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) => {
   const [otpTimer, setOTPTimer] = useState(60);
@@ -12,7 +14,8 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   const inputRefs = useRef([]);
   const [timerRunning, setTimerRunning] = useState(false);
 
-  const { t } = useTranslation(); // Get translation function
+  const { currentLanguage } = useLanguage(); // Get current language
+  const content = otpContent;
 
   useEffect(() => {
     if (showOtpForm) {
@@ -81,7 +84,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
   const handleVerifyOtp = async () => {
     // Ensure OTP is fully entered
     if (!otp || otp.length !== 6 || otp.includes(" ")) {
-      toast.error(t('auth.otp.validation.fullOtp'));
+      toast.error(content.validation.fullOtp[currentLanguage]);
       return;
     }
     try {
@@ -92,7 +95,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
         toast.error(response.message);
       }
     } catch (error) {
-      toast.error(t('auth.otp.validation.wrongOtp'));
+      toast.error(content.validation.wrongOtp[currentLanguage]);
       // Optionally, show an error message
     }
   };
@@ -120,7 +123,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
     <CustomModal
       show={showOtpForm}
       onHide={hideOtpForm}
-      title={t('auth.otp.title')}
+      title={content.title[currentLanguage]}
       newClass="otp-form-modal"
     >
       <div className="info-otp-form">
@@ -128,19 +131,19 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
           <EmailIcon />
         </div>
         <div className="info-header-otp mt-3">
-          <h2 className="title">{t('auth.otp.title')}</h2>
+          <h2 className="title">{content.title[currentLanguage]}</h2>
           <p className="text">
-            {t('auth.otp.description')} <span>{emailOrPhone}</span>
+            {content.description[currentLanguage]} <span>{emailOrPhone}</span>
           </p>
           {timerRunning ? (
             <div className="timer-down-otp">
-              {t('auth.otp.resendIn')}{" "}
+              {content.resendIn[currentLanguage]}{" "}
               <span className="timer-otp">{formatTimer(otpTimer)}</span>{" "}
-              {t('auth.otp.seconds')}
+              {content.seconds[currentLanguage]}
             </div>
           ) : (
             <div className="resend-otp-link timer-down-otp" onClick={handleResendOTP}>
-              {t('auth.otp.resendOtp')}
+              {content.resendOtp[currentLanguage]}
             </div>
           )}
         </div>
@@ -165,7 +168,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
               onClick={handleVerifyOtp}
               className="btn-main btn-page-otp w-100"
             >
-              {t('auth.otp.confirmOtp')}
+              {content.confirmOtp[currentLanguage]}
             </button>
           </form>
         </div>

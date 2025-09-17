@@ -20,10 +20,13 @@ import GeneralAPI from "api/generalApi";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import { isAuthenticated } from "api/axiosInstance"; // Function to check auth status
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import language context
+import { toast } from "react-toastify";
 // import Loader from "Components/Auth/Components/Loader/Loader";
+import localizedText from "../../translations/footerTranslations";
 const Footer = () => {
   const { currentLanguage } = useLanguage(); // Access the current language from context
   const [footerData, setFooterData] = useState(null);
+
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
@@ -44,7 +47,7 @@ const Footer = () => {
 
       } catch (err) {
         console.error("Failed to fetch footer data:", err);
-        setError("Unable to fetch footer data. Please try again later.");
+        toast.error("Unable to fetch footer data. Please try again later.");
       }
       // finally {
       //   setLoading(false);
@@ -64,46 +67,13 @@ const Footer = () => {
 
 
   if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
+    return null; // No need to display error here, toast will handle it
   }
 
   const handleLinkClick = (e) => {
     if (!isAuthenticated()) {
       e.preventDefault();
       handleShowLogin(); // Open login form if not authenticated
-    }
-  };
-
-  const localizedText = {
-    ar: {
-      downloadApp: "حمل التطبيق",
-      importantLinks: "روابط تهمك",
-      contactUs: "تواصل معنا",
-      callUs: "إتصل بنا",
-      email: "البريد الإلكتروني",
-      location: "الموقع",
-      rightsReserved: "جميع الحقوق محفوظة",
-      home: "الرئيسية",
-      offers: "الهدايا",
-      events: "الفعاليات",
-      blog: "المدونة",
-      address: "الرياض , طريق المذنب , السعودية",
-      whatsapp: "تواصل معنا"
-    },
-    en: {
-      downloadApp: "Download the App",
-      importantLinks: "Important Links",
-      contactUs: "Contact Us",
-      callUs: "Call Us",
-      email: "Email",
-      location: "Location",
-      rightsReserved: "All rights reserved",
-      home: "Home",
-      offers: "Gifts",
-      events: "Events",
-      blog: "Blog",
-      address: "Riyadh, Al-Mathnib Road, Saudi Arabia",
-      whatsapp: "Contact Us"
     }
   };
 
@@ -120,7 +90,7 @@ const Footer = () => {
           {/* =============== START ROW ============ */}
           <div className="row  g-4">
             {/* ============= START COL ============= */}
-            <div className="col-12 col-sm-6 col-md-5">
+            <div className="col-12 col-sm-6 col-md-4">
               {/* ============ START FOOTER ONE ============ */}
               <div className="footer-one">
                 <Link to={"/"}>
@@ -261,13 +231,38 @@ const Footer = () => {
                       {text.blog}
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to="articlesPage" className="nav-link" onClick={handleLinkClick}>
+                      {text.articles}
+                    </Link>
+                  </li>
+                 
+                </ul>
+              </div>
+              {/* =========== END FOOTER TWO ========== */}
+            </div>
+            <div className="col-12 col-sm-6 col-md-3">
+              {/* =========== START FOOTER TWO ========== */}
+              <div className="footer-two-links">
+                <h2 className="title-footer">{text.helpfulLinks}</h2>
+                <ul className="nav flex-column p-0 m-0">
+                  <li className="nav-item">
+                    <Link to="/faq" className="nav-link" onClick={handleLinkClick}>
+                      {text.faq}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/cancel-terms" className="nav-link" onClick={handleLinkClick}>
+                      {text.cancelTerms}
+                    </Link>
+                  </li>
                 </ul>
               </div>
               {/* =========== END FOOTER TWO ========== */}
             </div>
             {/* ============= END COL ============ */}
             {/* ============= START COL ============ */}
-            <div className="col-12 col-sm-6 col-md-4">
+            <div className="col-12 col-sm-6 col-md-2">
               {/* =========== START FOOTER TWO ========== */}
               <div className="footer-two-links footer-right-contact">
                 <h2 className="title-footer">{text.contactUs}</h2>
@@ -302,9 +297,10 @@ const Footer = () => {
                   </a>
                   {/* ========= END INFO CONTACT ONE ========= */}
                   <a
-                    href={`mailto:${footerData?.email}?subject=Hello`}
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${footerData?.email}&su=Hello`}
                     className="info-contact-one d-flex gap-3"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <div className="icon-foot-contact">
                       <EmailIcon />
@@ -314,6 +310,8 @@ const Footer = () => {
                       <p className="link-contact">{footerData?.email}</p>
                     </div>
                   </a>
+
+
                   {/* <a href="##" className="info-contact-one d-flex gap-3">
                     <div className="icon-foot-contact">
                       <EmailIcon />
@@ -334,7 +332,7 @@ const Footer = () => {
         </div>
         {/* ================= END ALL FOOTER ============== */}
         <div className="final-footer">
-          <p className="title-final">
+          <p className="title-final mb-3">
             {text.rightsReserved} ©
             <Link to="/" className="link-web">
               a-tour
@@ -342,8 +340,18 @@ const Footer = () => {
             2024
           </p>
           <p className="license-number-footer">
-            <span className="license-number-text">{currentLanguage === "ar" ? "رقم الترخيص: " : "License Number: "}</span>
-            73106456
+            <span className="license-number-text">
+              <p>{text.travelLicenseNumber}</p>
+              <p>73103013</p>
+            </span>
+            <span className="license-number-text">
+              <p>{text.commercialRegistrationNumber}</p>
+              <p>1010363465</p>
+            </span>
+            <span className="license-number-text">
+              <p>{text.category}</p>
+              <p>{text.generalTravelTourismService}</p>
+            </span>
           </p>
         </div>
       </ContainerMedia>
