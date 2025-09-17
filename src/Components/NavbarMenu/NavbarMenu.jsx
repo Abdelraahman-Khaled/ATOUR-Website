@@ -111,7 +111,7 @@ const NavbarMenu = () => {
 
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             <Nav className="me-auto" data-aos="fade-right">
-              <NavLink to="/blogsPage" className="nav-link">
+              {/* <NavLink to="/blogsPage" className="nav-link">
                 {t('navMenu.blog')}
               </NavLink>
               <NavLink to="/news" className="nav-link">
@@ -125,7 +125,7 @@ const NavbarMenu = () => {
               </NavLink>
               <NavLink to="/termsConditions" className="nav-link">
                 {t('navMenu.termsConditions')}
-              </NavLink>
+              </NavLink> */}
               <SearchInputLocation cities={cities} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
             </Nav>
 
