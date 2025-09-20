@@ -16,7 +16,7 @@ const AccountInformationContent = () => {
   const { currentLanguage } = useLanguage(); // Get current language
   const { isAuthenticated } = useProfile(); // Get authentication status
   const navigate = useNavigate();
-  
+
   const [profileData, setProfileData] = useState({
     email: "",
     phone: "",
@@ -25,7 +25,7 @@ const AccountInformationContent = () => {
   const [loading, setLoading] = useState(true);
   const [showModalEditAccount, setShowModalEditAccount] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("+966 555 555 555");
-  
+
   // Check authentication on component mount
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -55,7 +55,7 @@ const AccountInformationContent = () => {
       setLoading(false);
       return;
     }
-    
+
     const fetchAccountInfo = async () => {
       try {
         const response = await ProfileAPI.getProfile();
@@ -127,9 +127,10 @@ const AccountInformationContent = () => {
                 value={profileData.email}
                 readOnly
               />
-              {/* <div className="icon-edit-input" onClick={buttonShowEditModal}> */}
-              <div className="icon-edit-input">
-                <EditIconUser />
+              <div className="icon-edit-input" onClick={buttonShowEditModal}>
+                <div className="icon-edit-input">
+                  <EditIconUser />
+                </div>
               </div>
             </div>
           </div>
@@ -149,9 +150,9 @@ const AccountInformationContent = () => {
                 onPhoneNumberChange={handlePhoneNumberChange}
                 separateDialCode
               />
-              <div className="icon-edit-input">
+              {/* <div className="icon-edit-input">
                 <EditIconUser />
-              </div>
+              </div> */}
             </div>
           </div>
 

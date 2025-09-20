@@ -1,12 +1,11 @@
 import axiosInstance from "./axiosInstance";
 
 const HomeAPI = {
-  getHomeData: async (currentLanguage, headers = {}) => {
+  getHomeData: async (currentLanguage, currentCurrency) => {
     const response = await axiosInstance.get("/home", {
       headers: {
-        ...headers,
         language: currentLanguage, // Include the language in headers
-        currency: "SAR",
+        currency: currentCurrency,
       },
     });
     return response.data;

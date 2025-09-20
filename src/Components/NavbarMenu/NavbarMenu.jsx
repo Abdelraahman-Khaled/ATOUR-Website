@@ -3,7 +3,7 @@ import logo from "../../assets/images/logo/logo.svg";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import "./NavbarMenu.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import LanguageSwitcher from "Components/Languages/LanguageSwitcher";
 import CurrencySwitcher from "Components/Currencies/CurrencySwitcher";
 import HeartIcon from "assets/Icons/HeartIcon";
@@ -29,6 +29,8 @@ const NavbarMenu = () => {
   // open form when it route
   const location = useLocation();
   const [showLogin, setShowLogin] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const navbarRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +42,6 @@ const NavbarMenu = () => {
 
   const buttonShowLogin = () => setShowLogin(true);
   const hideLogin = () => setShowLogin(false);
-
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -69,6 +70,19 @@ const NavbarMenu = () => {
     }
   }, [location.state]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navbarRef]);
+
   // if (loading) {
   //   return (
   //     <div style={{ margin: "200px 0px" }}>
@@ -87,7 +101,7 @@ const NavbarMenu = () => {
     <>
       <ToastContainerApp />
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
-      <Navbar expand="lg" className={`navbar-menu z-3 ${isMenuFixed ? "menu-fixed" : ""}`}>
+      <Navbar expanded={expanded} expand="lg" className={`navbar-menu z-3 ${isMenuFixed ? "menu-fixed" : ""}`} ref={navbarRef}>
         <ContainerMedia>
           <Navbar.Brand data-aos="fade-left">
             <Link to="/" className="image-logo">
@@ -101,12 +115,12 @@ const NavbarMenu = () => {
 
           <div className="main-info-left d-flex align-items-center gap-3" data-aos="fade-right">
             <div className="icon-lang icon-border">
-              <LanguageSwitcher />
+              <LanguageSwitcher align="end" popperOffset={[-8, 8]} renderToBody={true} />
             </div>
             <div className="icon-lang icon-border">
               <CurrencySwitcher />
             </div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} aria-controls="basic-navbar-nav" />
           </div>
 
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
@@ -131,7 +145,7 @@ const NavbarMenu = () => {
 
             <div className="left-nav-menu d-flex align-items-center gap-3 ">
               <div className="icon-lang icon-border">
-                <LanguageSwitcher />
+                <LanguageSwitcher align="end" popperOffset={[-8, 8]} renderToBody={true} />
               </div>
               <div className="icon-lang icon-border">
                 <CurrencySwitcher />

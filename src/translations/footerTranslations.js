@@ -20,7 +20,7 @@ const localizedText = {
     travelLicenseNumber: "رقم ترخيص خدمات السفر و السياحة",
     commercialRegistrationNumber: "رقم السجل التجاري",
     category: "الفئة",
-    generalTravelTourismService: "مقدم خدمات سفر و سياحة عامة",
+    generalTravelTourismService: "وكالة سفر وسياحة",
   },
   en: {
     downloadApp: "Download the App",
@@ -43,7 +43,7 @@ const localizedText = {
     travelLicenseNumber: "Travel and Tourism Services License Number",
     commercialRegistrationNumber: "Commercial Registration Number",
     category: "Category",
-    generalTravelTourismService: "General travel and tourism service provider",
+    generalTravelTourismService: "Travel and Tourism Agency",
   },
   fr: {
     downloadApp: "Télécharger l'application",
@@ -66,8 +66,7 @@ const localizedText = {
       "Numéro de licence de services de voyage et de tourisme",
     commercialRegistrationNumber: "Numéro d'enregistrement commercial",
     category: "Catégorie",
-    generalTravelTourismService:
-      "Fournisseur général de services de voyage et de tourisme",
+    generalTravelTourismService: "Agence de voyage et de tourisme",
   },
   de: {
     downloadApp: "App herunterladen",
@@ -89,8 +88,7 @@ const localizedText = {
     travelLicenseNumber: "Reise- und Tourismusdienstleistungs-Lizenznummer",
     commercialRegistrationNumber: "Handelsregisternummer",
     category: "Kategorie",
-    generalTravelTourismService:
-      "Allgemeiner Reise- und Tourismusdienstleister",
+    generalTravelTourismService: "Reise- und Tourismusbüro",
   },
   es: {
     downloadApp: "Descargar la aplicación",
@@ -112,8 +110,7 @@ const localizedText = {
     travelLicenseNumber: "Número de licencia de servicios de viajes y turismo",
     commercialRegistrationNumber: "Número de registro comercial",
     category: "Categoría",
-    generalTravelTourismService:
-      "Proveedor general de servicios de viajes y turismo",
+    generalTravelTourismService: "Agencia de viajes y turismo",
   },
   tr: {
     downloadApp: "Uygulamayı İndir",
@@ -135,7 +132,7 @@ const localizedText = {
     travelLicenseNumber: "Seyahat ve Turizm Hizmetleri Lisans Numarası",
     commercialRegistrationNumber: "Ticaret Sicil Numarası",
     category: "Kategori",
-    generalTravelTourismService: "Genel seyahat ve turizm hizmet sağlayıcısı",
+    generalTravelTourismService: "Seyahat ve Turizm Acentesi",
   },
   ru: {
     downloadApp: "Скачать приложение",
@@ -157,7 +154,7 @@ const localizedText = {
     travelLicenseNumber: "Номер лицензии на туристические услуги",
     commercialRegistrationNumber: "Номер коммерческой регистрации",
     category: "Категория",
-    generalTravelTourismService: "Общий поставщик туристических услуг",
+    generalTravelTourismService: "Туристическое агентство",
   },
   zh: {
     downloadApp: "下载应用程序",
@@ -179,7 +176,7 @@ const localizedText = {
     travelLicenseNumber: "旅行和旅游服务许可证号",
     commercialRegistrationNumber: "商业注册号",
     category: "类别",
-    generalTravelTourismService: "一般旅行和旅游服务提供商",
+    generalTravelTourismService: "旅行和旅游社",
   },
   ko: {
     downloadApp: "앱 다운로드",
@@ -201,7 +198,7 @@ const localizedText = {
     travelLicenseNumber: "여행 및 관광 서비스 라이선스 번호",
     commercialRegistrationNumber: "사업자 등록 번호",
     category: "카테고리",
-    generalTravelTourismService: "일반 여행 및 관광 서비스 제공업체",
+    generalTravelTourismService: "여행 및 관광사",
   },
   pt: {
     downloadApp: "Baixar aplicativo",
@@ -223,8 +220,7 @@ const localizedText = {
     travelLicenseNumber: "Número da licença de serviços de viagens e turismo",
     commercialRegistrationNumber: "Número de registro comercial",
     category: "Categoria",
-    generalTravelTourismService:
-      "Provedor geral de serviços de viagens e turismo",
+    generalTravelTourismService: "Agência de viagens e turismo",
   },
   ur: {
     downloadApp: "ایپ ڈاؤن لوڈ کریں",
@@ -246,7 +242,7 @@ const localizedText = {
     travelLicenseNumber: "سفر اور سیاحت کی خدمات کا لائسنس نمبر",
     commercialRegistrationNumber: "تجارتی رجسٹریشن نمبر",
     category: "قسم",
-    generalTravelTourismService: "عام سفر اور سیاحت کی خدمات فراہم کنندہ",
+    generalTravelTourismService: "سفر و سیاحت ایجنسی",
   },
   ja: {
     downloadApp: "アプリをダウンロード",
@@ -268,7 +264,7 @@ const localizedText = {
     travelLicenseNumber: "旅行および観光サービスライセンス番号",
     commercialRegistrationNumber: "商業登録番号",
     category: "カテゴリー",
-    generalTravelTourismService: "一般旅行および観光サービスプロバイダー",
+    generalTravelTourismService: "旅行観光代理店",
   },
 };
 

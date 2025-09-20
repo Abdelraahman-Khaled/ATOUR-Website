@@ -59,7 +59,7 @@ const OffersCards = ({ gifts }) => {
                       image={item.image}
                       textLocation={item.location || " السعودية"}
                       titleCard={item.title}
-                      NumPriceNew={`${item.price}`}
+                      NumPriceNew={`${item.customer_price}`}
                       isTrueNumTwo={false}
                       numInfoDangerOld={"70 SAR"}
                       rateNum={item.rate}

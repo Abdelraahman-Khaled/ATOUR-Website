@@ -79,11 +79,11 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         image={item.image}
                         textLocation={item.start_point}
                         titleCard={item.title} // Dynamic title
-                        NumPriceNew={`${item.price}`}
+                        NumPriceNew={`${item.customer_price}`}
                         isTrueNumTwo={false}
                         numInfoDangerOld={false}
                         rateNum={item.total_rates}
-                        textContent={currentLanguage === "ar" ? item.description_ar : item.description_en} // Dynamic title
+                        textContent={item.description} // Dynamic title
                         isTrueTextOneCard_1={item.free_cancelation ? item.free_cancelation : null}
                         textCardOne_1={item.textCardOne_1}
                         isTrueTextOneCard_2={item.pay_later ? item.pay_later : null}
@@ -94,6 +94,7 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         wishListCard={wishList_2}
                         addToWishList={addToWishList}
                         type={"trip"}
+                        bookingCount={item.booking_count}
                       />
                     </Link>
                   </div>

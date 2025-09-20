@@ -75,6 +75,7 @@ const ModalEditInfoAccount = ({
         showOtpForm={showOtp}
         hideOtpForm={hideOtp}
         successSendButton={successSendButton}
+        emailOrPhone={emailOrPhoneNumber}
       />
       <CustomModal
         show={showModalEditInfoAccount}

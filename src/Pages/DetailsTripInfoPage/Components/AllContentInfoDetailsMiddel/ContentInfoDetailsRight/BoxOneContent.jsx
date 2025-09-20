@@ -12,183 +12,55 @@ import ModalProviderInformation from "../../ModalsDetailsTripInfo/ModalProviderI
 import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 
+import enFlag from "assets/images/flags/en.svg";
+import arFlag from "assets/images/flags/ar.svg";
+import frFlag from "assets/images/flags/fr.svg";
+import deFlag from "assets/images/flags/de.svg";
+import esFlag from "assets/images/flags/es.svg";
+import trFlag from "assets/images/flags/tr.svg";
+import ruFlag from "assets/images/flags/ru.svg";
+import zhFlag from "assets/images/flags/zh.svg";
+import koFlag from "assets/images/flags/ko.svg";
+import ptFlag from "assets/images/flags/pt.svg";
+import urFlag from "assets/images/flags/ur.svg";
+import jaFlag from "assets/images/flags/ja.svg";
+import sgnFlag from "assets/images/flags/sgn.svg";
 
+import GroupOrIndividual from "Components/groupCount/GroupOrIndividual";
 
-const languageNames = {
-  en: {
-    en: "English",
-    ar: "الإنجليزية",
-    fr: "Anglais",
-    de: "Englisch",
-    es: "Inglés",
-    tr: "İngilizce",
-    ru: "Английский",
-    zh: "英语",
-    ko: "영어",
-    pt: "Inglês",
-    ur: "انگریزی",
-    ja: "英語",
-  },
-  ar: {
-    en: "Arabic",
-    ar: "العربية",
-    fr: "Arabe",
-    de: "Arabisch",
-    es: "Árabe",
-    tr: "Arapça",
-    ru: "Арабский",
-    zh: "阿拉伯语",
-    ko: "아랍어",
-    pt: "Árabe",
-    ur: "عربی",
-    ja: "アラビア語",
-  },
-  fr: {
-    en: "French",
-    ar: "الفرنسية",
-    fr: "Français",
-    de: "Französisch",
-    es: "Francés",
-    tr: "Fransızca",
-    ru: "Французский",
-    zh: "法语",
-    ko: "프랑스어",
-    pt: "Francês",
-    ur: "فرانسیسی",
-    ja: "フランス語",
-  },
-  de: {
-    en: "German",
-    ar: "الألمانية",
-    fr: "Allemand",
-    de: "Deutsch",
-    es: "Alemán",
-    tr: "Almanca",
-    ru: "Немецкий",
-    zh: "德语",
-    ko: "독일어",
-    pt: "Alemão",
-    ur: "جرمن",
-    ja: "ドイツ語",
-  },
-  es: {
-    en: "Spanish",
-    ar: "الإسبانية",
-    fr: "Espagnol",
-    de: "Spanisch",
-    es: "Español",
-    tr: "İspanyolca",
-    ru: "Испанский",
-    zh: "西班牙语",
-    ko: "스페인어",
-    pt: "Espanhol",
-    ur: "ہسپانوی",
-    ja: "スペイン語",
-  },
-  tr: {
-    en: "Turkish",
-    ar: "التركية",
-    fr: "Turc",
-    de: "Türkisch",
-    es: "Turco",
-    tr: "Türkçe",
-    ru: "Турецкий",
-    zh: "土耳其语",
-    ko: "터키어",
-    pt: "Turco",
-    ur: "ترکی",
-    ja: "トルコ語",
-  },
-  ru: {
-    en: "Russian",
-    ar: "الروسية",
-    fr: "Russe",
-    de: "Russisch",
-    es: "Ruso",
-    tr: "Rusça",
-    ru: "Русский",
-    zh: "俄语",
-    ko: "러시아어",
-    pt: "Russo",
-    ur: "روسی",
-    ja: "ロシア語",
-  },
-  zh: {
-    en: "Chinese",
-    ar: "الصينية",
-    fr: "Chinois",
-    de: "Chinesisch",
-    es: "Chino",
-    tr: "Çince",
-    ru: "Китайский",
-    zh: "中文",
-    ko: "중국어",
-    pt: "Chinês",
-    ur: "چینی",
-    ja: "中国語",
-  },
-  ko: {
-    en: "Korean",
-    ar: "الكورية",
-    fr: "Coréen",
-    de: "Koreanisch",
-    es: "Coreano",
-    tr: "Korece",
-    ru: "Корейский",
-    zh: "韩语",
-    ko: "한국어",
-    pt: "Coreano",
-    ur: "کوریائی",
-    ja: "韓国語",
-  },
-  pt: {
-    en: "Portuguese",
-    ar: "البرتغالية",
-    fr: "Portugais",
-    de: "Portugiesisch",
-    es: "Portugués",
-    tr: "Portekizce",
-    ru: "Португальский",
-    zh: "葡萄牙语",
-    ko: "포르투갈어",
-    pt: "Português",
-    ur: "پرتگالی",
-    ja: "ポルトガル語",
-  },
-  ur: {
-    en: "Urdu",
-    ar: "الأوردية",
-    fr: "Ourdou",
-    de: "Urdu",
-    es: "Urdu",
-    tr: "Urduca",
-    ru: "Урду",
-    zh: "乌尔都语",
-    ko: "우르두어",
-    pt: "Urdu",
-    ur: "اردو",
-    ja: "ウルドゥー語",
-  },
-  ja: {
-    en: "Japanese",
-    ar: "اليابانية",
-    fr: "Japonais",
-    de: "Japanisch",
-    es: "Japonés",
-    tr: "Japonca",
-    ru: "Японский",
-    zh: "日语",
-    ko: "일본어",
-    pt: "Japonês",
-    ur: "جاپانی",
-    ja: "日本語",
-  },
+const languageFlags = {
+  en: enFlag,
+  ar: arFlag,
+  fr: frFlag,
+  de: deFlag,
+  es: esFlag,
+  tr: trFlag,
+  ru: ruFlag,
+  zh: zhFlag,
+  ko: koFlag,
+  pt: ptFlag,
+  ur: urFlag,
+  ja: jaFlag,
+  sgn: sgnFlag,
+};
+const translations = {
+  ar: "لغات الإرشاد",
+  en: "Guide Languages",
+  fr: "Langues de guide",
+  de: "Führersprachen",
+  es: "Idiomas del guía",
+  tr: "Rehber Dilleri",
+  ru: "Языки гида",
+  zh: "导游语言",
+  ko: "가이드 언어",
+  pt: "Idiomas do guia",
+  ur: "رہنما کی زبانیں",
+  ja: "ガイドの言語",
 };
 
 
 
 const BoxOneContent = ({ tripData }) => {
-  console.log("box", tripData);
 
   const { currentLanguage } = useLanguage(); // Get the current language
   // SHOW MODAL DETAILS
@@ -263,7 +135,6 @@ const BoxOneContent = ({ tripData }) => {
         {/* ============= END BOX MIDDEL CONTENT =========== */}
         {/* ============= START END BOX CONTENT ============ */}
         <div className="end-box-content mt-3">
-          <h2 className="title">{currentLanguage === "ar" ? "برامج الرحلة" : "Trip Programs"}</h2>
           <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
             <div className="info-right--1 d-flex align-items-center gap-2">
               <ClockIcon />
@@ -274,19 +145,28 @@ const BoxOneContent = ({ tripData }) => {
           <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
             <div className="info-right--1 d-flex align-items-center gap-2">
               <UserIcon2 />
-              <p className="text">{currentLanguage === "ar" ? "عدد المسافرين" : "Number of passengers"}</p>
+              <p className="text">
+                <GroupOrIndividual isGroup={tripData.group_count > 0} />
+              </p>
             </div>
-            <p className="text"> {tripData.group_count} {currentLanguage === "ar" ? "فرد" : "Person"}</p>
+            <p className="text">
+              <GroupOrIndividual isGroup={tripData.group_count > 0} />
+              {tripData.group_count > 0 && ` (${tripData.group_count})`}
+            </p>
           </div>
           <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
             <div className="info-right--1 d-flex align-items-center gap-2">
               <UserIcon2 />
-              <p className="text">{currentLanguage === "ar" ? "لغات الارشاد" : "guide languages"}</p>
+              <p className="text">{translations[currentLanguage] || "guide languages"}</p>
             </div>
-            <p className="text">
+            <p className="text d-flex flex-wrap gap-2">
               {tripData.guide_languages.map((lang) => (
-                <span key={lang} className="me-2">
-                  {languageNames[lang]?.[currentLanguage] || lang}
+                <span key={lang} className="me-2 d-flex align-items-center">
+                  <img
+                    src={languageFlags[lang]}
+                    alt={lang}
+                    style={{ width: "24px", height: "16px" }}
+                  />
                 </span>
               ))}
             </p>

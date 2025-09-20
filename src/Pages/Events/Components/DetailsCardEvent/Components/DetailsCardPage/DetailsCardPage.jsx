@@ -17,7 +17,7 @@ const DetailsCardPage = ({ effective }) => {
         <div className="info-right-details d-flex align-items-center gap-3">
           <div className="num-price-info">
             <span className="price-num fw-bold">
-              {effective.price} {currentLanguage === "ar" ? "ريال" : "SAR"}
+              {effective.customer_price} {currentLanguage === "ar" ? "ريال" : "SAR"}
             </span>
             / {currentLanguage === "ar" ? "للفرد" : "per person"}
           </div>

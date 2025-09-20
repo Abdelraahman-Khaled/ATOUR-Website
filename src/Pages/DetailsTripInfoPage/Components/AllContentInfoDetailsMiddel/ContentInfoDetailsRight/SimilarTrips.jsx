@@ -17,6 +17,7 @@ const SimilarTrips = () => {
             try {
                 const response = await ContentAPI.getSimilarTrips(id, currentLanguage); // Replace with your API call
                 setSimilarTrips(response.data); // Store fetched data in state
+
             } catch (err) {
                 console.error("Error fetching trip data:", err);
                 setError("Failed to load trip data. Please try again later.");
@@ -38,10 +39,11 @@ const SimilarTrips = () => {
     };
 
     // Display if no data is available
-    if (!similarTrips) {
+    if (!similarTrips || similarTrips?.length === 0) {
         return <>
         </>
     }
+    console.log(similarTrips);
 
     return (
         <div className="cards-trips-details margin-top-1">

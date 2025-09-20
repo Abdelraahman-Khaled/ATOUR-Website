@@ -2,18 +2,20 @@ import axiosInstance from "./axiosInstance";
 
 const ContentAPI = {
   // Trips
-  getTrips: async (language) => {
+  getTrips: async (language,currency) => {
     const response = await axiosInstance.get("/trips", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
+        currency: currency,
       },
     });
     return response.data;
   },
-  getTripById: async (tripId, language) => {
+  getTripById: async (tripId, language,currency) => {
     const response = await axiosInstance.get(`/trips/${tripId}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
+        currency: currency,
       },
     });
     return response.data;
@@ -21,7 +23,7 @@ const ContentAPI = {
   getSimilarTrips: async (tripId, language) => {
     const response = await axiosInstance.get(`/similar_trips/${tripId}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -31,7 +33,7 @@ const ContentAPI = {
     // Default language is 'en' (English)
     const response = await axiosInstance.get("/gifts", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -39,7 +41,7 @@ const ContentAPI = {
   getGiftById: async (giftId, language) => {
     const response = await axiosInstance.get(`/gifts/${giftId}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -49,7 +51,7 @@ const ContentAPI = {
   getEffectiveness: async (language) => {
     const response = await axiosInstance.get("/effectivenes", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -58,7 +60,7 @@ const ContentAPI = {
   getEffectivenessById: async (effectiveneId, language) => {
     const response = await axiosInstance.get(`/effectivenes/${effectiveneId}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -74,7 +76,7 @@ const ContentAPI = {
   getCities: async (language) => {
     const response = await axiosInstance.get("/cities", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;

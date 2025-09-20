@@ -8,6 +8,7 @@ import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Link } from "react-router-dom";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
 
 const text = {
@@ -19,12 +20,54 @@ const text = {
     noData: "No data available.",
     home: "Home",
   },
+  fr: {
+    noData: "Aucune donnée disponible.",
+    home: "Accueil",
+  },
+  de: {
+    noData: "Keine Daten verfügbar.",
+    home: "Startseite",
+  },
+  es: {
+    noData: "No hay datos disponibles.",
+    home: "Inicio",
+  },
+  tr: {
+    noData: "Veri bulunmamaktadır.",
+    home: "Ana Sayfa",
+  },
+  ru: {
+    noData: "Данные недоступны.",
+    home: "Главная",
+  },
+  zh: {
+    noData: "没有可用数据。",
+    home: "首页",
+  },
+  ko: {
+    noData: "데이터가 없습니다.",
+    home: "홈",
+  },
+  pt: {
+    noData: "Nenhum dado disponível.",
+    home: "Início",
+  },
+  ur: {
+    noData: "کوئی ڈیٹا دستیاب نہیں ہے۔",
+    home: "ہوم",
+  },
+  ja: {
+    noData: "利用可能なデータがありません。",
+    home: "ホーム",
+  },
 };
 
 const TripsPage = () => {
   const { currentLanguage } = useLanguage(); // Access current language
+  const { currentCurrency } = useCurrency();
   const [tripsData, setTripsData] = useState([]); // State to store home data
   const [loading, setLoading] = useState(true); // State to manage loading
+  console.log(tripsData);
 
   // SHOW MODAL SELECT DESTINATION
   const [showModalSelectDestination, setShowModalSelectDestination] =
@@ -47,7 +90,7 @@ const TripsPage = () => {
   useEffect(() => {
     const fetchTripsData = async () => {
       try {
-        const data = await ContentAPI.getTrips(currentLanguage); // Fetch data from the API
+        const data = await ContentAPI.getTrips(currentLanguage, currentCurrency); // Fetch data from the API
         const normalizedData = normalizeData(data.data); // Normalize the data
 
         setTripsData(normalizedData); // Set the fetched data to state
@@ -57,7 +100,7 @@ const TripsPage = () => {
       }
     };
     fetchTripsData(); // Call the API on component mount
-  }, [currentLanguage]);
+  }, [currentLanguage, currentCurrency]);
 
   return (
     <>

@@ -236,7 +236,7 @@ const Footer = () => {
                       {text.articles}
                     </Link>
                   </li>
-                 
+
                 </ul>
               </div>
               {/* =========== END FOOTER TWO ========== */}
@@ -342,11 +342,11 @@ const Footer = () => {
           <p className="license-number-footer">
             <span className="license-number-text">
               <p>{text.travelLicenseNumber}</p>
-              <p>73103013</p>
+              <p>73106456</p>
             </span>
             <span className="license-number-text">
               <p>{text.commercialRegistrationNumber}</p>
-              <p>1010363465</p>
+              <p>7038542556</p>
             </span>
             <span className="license-number-text">
               <p>{text.category}</p>

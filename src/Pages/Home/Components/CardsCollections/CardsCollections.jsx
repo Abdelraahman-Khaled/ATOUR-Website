@@ -116,9 +116,10 @@ const CardsCollections = ({ data, type }) => {
                 }
                 numRate={item.total_rates}
                 titleCard={item.title}
-                numPriceCard={`${item.customer_price} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
+                numPriceCard={`${item.customer_price} `}
                 isFav={item.is_favourit}
                 type={type}
+                is_group={item.is_group}
               />
             </div>
           ))}

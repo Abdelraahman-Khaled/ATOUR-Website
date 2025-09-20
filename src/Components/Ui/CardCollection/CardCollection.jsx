@@ -8,6 +8,8 @@ import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import { toast } from "react-toastify";
 import Favicon from "Components/FavIcon/Favicon ";
+import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
+import GroupOrIndividual from "Components/groupCount/GroupOrIndividual";
 
 const CardCollection = ({
   itemId,
@@ -18,6 +20,7 @@ const CardCollection = ({
   numPriceCard,
   isFav,
   type,
+  is_group,
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const navigate = useNavigate();
@@ -122,12 +125,11 @@ const CardCollection = ({
             onClick={handleLinkClick}
           />
           {/* Use the Favicon component here */}
-          {isFav &&
-            <Favicon
-              modelType={type}
-              modelId={itemId}
-              initialIsFavorite={isFav}
-            />}
+          <Favicon
+            modelType={type}
+            modelId={itemId}
+            initialIsFavorite={isFav}
+          />
           <div className="info-text">
             <IconLocation /> {infoPlaceCard}
           </div>
@@ -143,7 +145,7 @@ const CardCollection = ({
           <h2 className="title ">{titleCard}</h2>
           {numPriceCard &&
             <div className="price-info">
-              {priceStartText} <span className="price-num">{numPriceCard}</span> {perPersonText}
+              {priceStartText} <span className="price-num"><CurrencyDisplay price={numPriceCard} /></span> / <GroupOrIndividual isGroup={is_group} />
             </div>
           }
         </div>

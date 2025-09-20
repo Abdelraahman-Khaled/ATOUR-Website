@@ -3,6 +3,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TopContentInfo.css";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Favicon from "Components/FavIcon/Favicon ";
+import ShareButton from "Components/ShareButton/ShareButton";
+
+const translations = {
+  en: "Top rated",
+  ar: "الأعلى تقييماً",
+  fr: "Les mieux notés",
+  de: "Bestbewertet",
+  es: "Mejor valorados",
+  tr: "En yüksek puanlı",
+  ru: "Самые высоко оцененные",
+  zh: "评分最高",
+  ko: "최고 평점",
+  pt: "Mais bem avaliados",
+  ur: "اعلی درجہ بندی",
+  ja: "最高評価"
+};
+
+
 const TopContentInfo = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
@@ -33,26 +51,33 @@ const TopContentInfo = ({ tripData }) => {
           }
           {tripData.total_rates > 0 &&
             <div className="rate-num d-flex align-items-center gap-2">
-              <span className="fw-blod">{tripData.total_rates} </span> {currentLanguage === "ar" ? "تقييم" : "Rates"}
+              <span className="fw-bold">
+                {tripData.total_rates ? tripData.total_rates.toFixed(1) : 0}
+              </span>{" "}
             </div>
           }
           <div className="badge-top">
-            {tripData.price
-              ? currentLanguage === "ar"
-                ? "مدفوعة"
-                : "Paid"
-              : currentLanguage === "ar"
-                ? "مجانية"
-                : "Free"}
+            {tripData.total_rates > 4
+              &&
+              translations[currentLanguage]
+            }
           </div>
+
         </div>
       </div>
-      <div className="favicon-cover">
-        <Favicon
-          modelType={"trip"}
-          modelId={tripData.id}
-          initialIsFavorite={tripData.is_favourit}
+      <div className="d-flex flex-row align-items-center gap-2">
+        <ShareButton
+          url={window.location.href}
+          title={tripData.title}
+          text={currentLanguage === "ar" ? "شارك هذه الرحلة" : "Share this trip"}
         />
+        <div className="favicon-cover">
+          <Favicon
+            modelType={"trip"}
+            modelId={tripData.id}
+            initialIsFavorite={tripData.is_favourit}
+          />
+        </div>
       </div>
     </div>
   );

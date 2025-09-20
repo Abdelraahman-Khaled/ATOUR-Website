@@ -23,3 +23,21 @@
     color: var(--danger-01-color);
     padding-top: 15px;
 }
+
+/* Align the language switcher to the far edge and match height */
+.setting-tab .info-one-setting .drop-lang {
+    margin-inline-start: auto;
+}
+
+.setting-tab .info-one-setting .right-info-settings .icon-setting svg {
+    width: 22px;
+    height: 22px;
+}
+
+.setting-tab .info-one-setting .right-info-settings .info-content .title {
+    margin: 0;
+}
+
+.setting-tab .info-one-setting .right-info-settings .info-content .text {
+    margin: 0;
+}

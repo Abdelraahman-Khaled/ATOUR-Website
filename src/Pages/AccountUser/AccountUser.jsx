@@ -14,6 +14,7 @@ import SettingsTab from "./Components/TabsContentAccount/SettingsTab/SettingsTab
 import { Link } from "react-router-dom";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import Language Context
+import translations from "./translations";
 
 const AccountUser = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -23,22 +24,6 @@ const AccountUser = () => {
     localStorage.removeItem("user");
   };
 
-  const translations = {
-    accountTitle: {
-      ar: "حسابى",
-      en: "My Account",
-    },
-    tabs: [
-      { id: 1, title: { ar: "المعلومات الشخصية", en: "Personal Information" }, icon: <UserIcon /> },
-      { id: 2, title: { ar: "معلومات الحساب", en: "Account Information" }, icon: <InformationIcon /> },
-      // { id: 3, title: { ar: "معلومات الدفع", en: "Payment Information" }, icon: <PayIcon /> },
-      { id: 3, title: { ar: "الإعدادات", en: "Settings" }, icon: <SettingsIcon /> },
-    ],
-    logout: {
-      ar: "تسجيل الخروج",
-      en: "Logout",
-    },
-  };
 
   const [tabs, setTabs] = useState([]);
 

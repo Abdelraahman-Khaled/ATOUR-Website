@@ -4,7 +4,8 @@ import CheckIcon from "assets/Icons/CheckIcon";
 import "./CardFavorite.css";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Favicon from "Components/FavIcon/Favicon ";
-
+import cardFavoriteTranslations from "./cardFavoriteTranslations";
+import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
 const CardFavorite = ({
   newClassCard,
   idCard,
@@ -26,7 +27,8 @@ const CardFavorite = ({
   wishListCard,
   addToWishList,
   type,
-  refresh
+  refresh,
+  bookingCount
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
@@ -81,12 +83,12 @@ const CardFavorite = ({
         <div className="header-top-card d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
-            {currentLanguage === "ar" ? "تبدأ من" : "Starting from"}{" "}
-            <span className="price-num">{NumPriceNew} {currentLanguage === "ar" ? "ريال" : "SAR"} </span>
-            {currentLanguage === "ar" ? "/ للفرد" : "/ per person"}{" "}
+            {cardFavoriteTranslations.startingFrom[currentLanguage]}
+            <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>
+            {cardFavoriteTranslations.perPerson[currentLanguage]}{" "}
             {isTrueNumTwo && (
               <p className="text-2">
-                {currentLanguage === "ar" ? "بدلا من" : "Instead of"}{" "}
+                {cardFavoriteTranslations.insteadOf[currentLanguage]}{" "}
                 <span className="text-danger text-decoration-line-through fw-bold">
                   {numInfoDangerOld}
                 </span>
@@ -96,35 +98,32 @@ const CardFavorite = ({
         </div>
         {/* ========== END HEADER TOP CARD ========== */}
         {/* ========== START RATE CARD ============= */}
-        {rateNum > 0 ? (
+        <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p>
+
+        {bookingCount >= 0 &&
+          <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
+            {cardFavoriteTranslations.bookingCount[currentLanguage]}
+            {" "}   {bookingCount}
+          </div>
+        }
+        {rateNum >= 0 &&
           <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
             <IconStarRate /> {rateNum}{" "}
-            {currentLanguage === "ar" ? "تقييم" : "Rating"}
+            {cardFavoriteTranslations.rating[currentLanguage]}
           </div>
-        ) : (
-          // <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
-          //   {currentLanguage === "ar" ? "لا يوجد تقييم حاليا" : "No ratings yet"}
-          // </div>
-          <>
-          </>
-        )}
+        }
         {/* ========== END RATE CARD ============= */}
-        {/* <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p> */}
         <div className="bottom-content-card mt-auto d-flex gap-3 flex-wrap align-items-center ">
           {isTrueTextOneCard_1 && (
             <div className="text-one-card d-flex align-items-center gap-2">
               <CheckIcon />{" "}
-              {currentLanguage === "ar"
-                ? "متاح إلغاء الحجز مجانا"
-                : "Free cancellation is available"}
+              {cardFavoriteTranslations.freeCancellation[currentLanguage]}
             </div>
           )}
           {isTrueTextOneCard_2 === 0 && (
             <div className="text-one-card d-flex align-items-center gap-2">
               <CheckIcon />{" "}
-              {currentLanguage === "ar"
-                ? "إحجز الآن إدفع لاحقا"
-                : "Book now pay later"}
+              {cardFavoriteTranslations.bookNowPayLater[currentLanguage]}
             </div>
           )}
         </div>

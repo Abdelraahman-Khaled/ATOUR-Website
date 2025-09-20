@@ -45,8 +45,8 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
       const normalized = normalizeText(value);
       const filtered = cities.filter((city) =>
         currentLanguage === "en"
-          ? normalizeText(city?.title_en).includes(normalized)
-          : normalizeText(city?.title_ar).includes(normalized)
+          ? normalizeText(city?.title).includes(normalized)
+          : normalizeText(city?.title).includes(normalized)
       );
       setFilteredCities(filtered);
     } else {
@@ -94,7 +94,7 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
                   <div className="icon-air">
                     <img src={searchIcon} alt="search-icon" width={20} />
                   </div>
-                  {currentLanguage === "en" ? city?.title_en : city?.title_ar}
+                  {currentLanguage === "en" ? city?.title : city?.title}
                 </div>
               ))
             ) : (

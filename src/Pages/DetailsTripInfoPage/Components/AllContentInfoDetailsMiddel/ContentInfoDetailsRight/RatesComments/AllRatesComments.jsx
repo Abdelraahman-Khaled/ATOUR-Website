@@ -1,56 +1,83 @@
 import { useState } from "react";
-
 import UserCommentRate from "./UserCommentRate";
 import PaginationPage from "Components/Pagination/Pagination";
 import { Link } from "react-router-dom";
-import { dataUser } from "./DataCommentsRate";
 import { useLanguage } from "Components/Languages/LanguageContext";
-const AllRatesComments = () => {
-  const { currentLanguage } = useLanguage(); // Get the current language
+import { formatTimeAgo } from "utils/timeAgo";
 
+const translations = {
+  noComments: {
+    ar: "لا يوجد تعليقات جديدة.",
+    en: "There are no new comments.",
+    fr: "Il n'y a pas de nouveaux commentaires.",
+    de: "Es gibt keine neuen Kommentare.",
+    es: "No hay comentarios nuevos.",
+    tr: "Yeni yorum yok.",
+    ru: "Новых комментариев нет.",
+    zh: "没有新的评论。",
+    ko: "새로운 댓글이 없습니다.",
+    pt: "Não há novos comentários.",
+    ur: "کوئی نئی تبصرے نہیں ہیں۔",
+    ja: "新しいコメントはありません。",
+  },
+  home: {
+    ar: "الصفحة الرئيسية",
+    en: "Home",
+    fr: "Accueil",
+    de: "Startseite",
+    es: "Inicio",
+    tr: "Ana Sayfa",
+    ru: "Главная",
+    zh: "首页",
+    ko: "홈",
+    pt: "Início",
+    ur: "مرکزی صفحہ",
+    ja: "ホーム",
+  },
+};
+
+const AllRatesComments = ({ rates }) => {
+  const { currentLanguage } = useLanguage();
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 5; // NUMBER OF PAGE ITEMS
-  const pageCount = Math.ceil(dataUser.length / perPage);
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected);
-  };
+  const perPage = 5;
+
+  const pageCount = Math.ceil(rates.length / perPage);
+  const handlePageChange = ({ selected }) => setCurrentPage(selected);
 
   const offset = currentPage * perPage;
-  const currentPageData = dataUser.slice(offset, offset + perPage);
+  const currentPageData = rates.slice(offset, offset + perPage);
+
   return (
     <div className="all-rates-comment-data margin-top-1">
       <div className="row g-3">
         {currentPageData.length > 0 ? (
-          currentPageData.map((item) => {
-            return (
-              <div className="col-12">
+          currentPageData
+            .reverse()
+            .map((item) => (
+              <div key={item.id} className="col-12">
                 <UserCommentRate
-                  imageUser={item.userImage}
-                  userName={item.userName}
-                  timeAdd={item.timeAdd}
-                  timeText={item.timeText}
+                  imageUser={item.created_by_image}
+                  userName={` ${item.created_by}`}
+                  timeAdd={formatTimeAgo(item.created_at, currentLanguage)}
                   comment={item.comment}
+                  rate={item.rate}
+                  images={item.images}
                 />
               </div>
-            );
-          })
+            ))
         ) : (
-          <>
-            <p className="text-section-api fs-6 fw-medium text-center pt-5">
-              {currentLanguage === "ar" ? "لا يوجد تعليقات جديدة." : "There are no new comments."}
-              <Link
-                to="/"
-                className="fs-6 fw-medium text-danger text-decoration-underline"
-              >
-                {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
-              </Link>
-            </p>
-          </>
+          <p className="text-section-api fs-6 fw-medium text-center pt-5">
+            {translations.noComments[currentLanguage]}{" "}
+            <Link
+              to="/"
+              className="fs-6 fw-medium text-danger text-decoration-underline"
+            >
+              {translations.home[currentLanguage]}
+            </Link>
+          </p>
         )}
       </div>
-      {/* ============ START PAGINATION ============= */}
       <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />
-      {/* ============ END PAGINATION ============= */}
     </div>
   );
 };

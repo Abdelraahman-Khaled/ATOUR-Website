@@ -6,7 +6,8 @@ import InputField from "Components/Forms/InputField";
 import FormField from "Components/Forms/FormFiled";
 import { toast } from "react-toastify";
 import { useProfile } from "context/ProfileContext";
-
+import translations from "./translations";
+import ProfileAPI from "api/profileApi";
 const ModalEditPersonalInformation = ({
   showModalEditInformation,
   hideModalEditInformation,
@@ -16,19 +17,12 @@ const ModalEditPersonalInformation = ({
   setRefresh, // Function to trigger refresh
 }) => {
 
+
   const [image, setImage] = useState(initialProfile?.image || image_1);
   const [name, setName] = useState(initialProfile?.name || "");
-  const [nationality, setNationality] = useState(initialProfile?.nationality || "");
-
-  const translations = {
-    name: { ar: "الإسم", en: "Name" },
-    nationality: { ar: "الجنسية", en: "Nationality" },
-    save: { ar: " حفظ", en: "Save" },
-    saveData: { ar: " جاري الحفظ", en: "Saving data..." },
-    editTitle: { ar: "تعديل المعلومات الشخصية", en: "Edit Personal Information" },
-    enterName: { ar: "أدخل اسمك", en: "Enter your name" },
-    enterNationality: { ar: "ادخل جنسيتك", en: "Enter your Nationality" },
-  };
+  const [selectedNationalityId, setSelectedNationalityId] = useState(initialProfile?.nationality_id || null);
+  const [phone, setPhone] = useState(initialProfile?.phone || "");
+  const [nationalities, setNationalities] = useState([])
 
   const fileInputRef = useRef(null);
 
@@ -48,17 +42,21 @@ const ModalEditPersonalInformation = ({
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
     try {
-
+      const selectedNat = nationalities.find((nat) => nat.id === parseInt(selectedNationalityId));
 
       onSubmitProfileUpdate({
         name: values.name,
-        nationality: values.nationality,
+        nationality_id: selectedNationalityId, // send id
         image: image !== image_1 ? fileInputRef.current.files[0] : null,
+        nationality: selectedNat
+          ? selectedNat.translations?.find((t) => t.locale === currentLanguage)?.name || selectedNat.name
+          : initialProfile.nationality, // send readable name
+        phone: values.phone,
       });
 
       toast.success(translations.saveData[currentLanguage]);
       hideModalEditInformation();
-      setRefresh(prev => !prev); // toggle instead of just true
+      setRefresh((prev) => !prev);
     } catch (error) {
       console.error(error);
       toast.error("حدث خطأ أثناء التحديث");
@@ -67,6 +65,21 @@ const ModalEditPersonalInformation = ({
     }
   };
 
+
+  useEffect(() => {
+    const fetchNationalities = async () => {
+      try {
+        const response = await ProfileAPI.getNationality();
+        setNationalities(response.data);
+
+      } catch (error) {
+        console.error('Error fetching nationalities:', error);
+        toast.error(translations.errorFetchingNationalities[currentLanguage]);
+      }
+    };
+
+    fetchNationalities();
+  }, [currentLanguage]);
 
 
   return (
@@ -96,7 +109,7 @@ const ModalEditPersonalInformation = ({
 
         <div className="form-edit-content">
           <FormField
-            initialValues={{ name, nationality }}
+            initialValues={{ name, selectedNationalityId, phone }}
             onSubmit={handleSubmit}
           >
             <div className="row g-3">
@@ -111,15 +124,38 @@ const ModalEditPersonalInformation = ({
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div className="col-6">
-                <InputField
-                  label={translations.nationality[currentLanguage]}
+              <div className="col-6 align-self-end d-flex flex-column">
+                <label className="form-label">
+                  {translations.nationality[currentLanguage]}
+                </label>
+                <select
+                  className="form-control m-0"
                   name="nationality"
+                  value={selectedNationalityId || ""}
+                  onChange={(e) => setSelectedNationalityId(parseInt(e.target.value))}
+                >
+                  <option value="">
+                    {initialProfile.nationality}
+                  </option>
+                  {nationalities.map((nat) => (
+                    <option key={nat.id} value={nat.id}>
+                      {
+                        nat.translations?.find((t) => t.locale === currentLanguage)?.name ||
+                        nat.name
+                      }
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="col-12">
+                <InputField
+                  label={translations.phone[currentLanguage]}
+                  name="phone"
                   type="text"
-                  placeholder={translations.enterNationality[currentLanguage]}
-                  value={nationality}
+                  placeholder={translations.phone[currentLanguage]}
+                  value={phone}
                   success
-                  onChange={(e) => setNationality(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
             </div>

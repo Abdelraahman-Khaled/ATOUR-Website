@@ -20,6 +20,7 @@
   color: var(--green-01-color) !important;
   border-color: var(--green-01-color);
 }
+
 @media screen and (max-width: 589px) {
   .images-card-content .btn-filter-country {
     flex: 1 1 auto;

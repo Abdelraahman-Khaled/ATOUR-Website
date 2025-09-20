@@ -8,17 +8,25 @@
   align-items: center;
   gap: 8px;
 }
-
+body.dark-theme .all-info-card .btn-card-one {
+  color: white;
+}
 .all-info-card .btn-card-one :is(i, svg) {
   width: 24px;
   height: 24px;
 }
 
-.all-info-card :is(.btn-card-one, svg path, i,a) {
+.all-info-card :is(.btn-card-one, svg path, i, a) {
   transition: all 0.5s;
 }
 
-.all-info-card .btn-card-one:hover ,.all-info-card .btn-card-one:hover a  {
+.all-info-card .btn-card-one:hover,
+.all-info-card .btn-card-one:hover a {
+  color: var(--green-01-color) !important;
+  border-color: var(--green-01-color);
+}
+.all-info-card .btn-card-one:hover,
+.all-info-card .btn-card-one:hover .active {
   color: var(--green-01-color) !important;
   border-color: var(--green-01-color);
 }

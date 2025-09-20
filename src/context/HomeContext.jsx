@@ -5,6 +5,7 @@ import GeneralAPI from "api/generalApi";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { toast } from "react-toastify";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
 const HomeContext = createContext(null);
 
@@ -15,6 +16,7 @@ export const HomeProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { currentLanguage } = useLanguage();
+    const { currentCurrency } = useCurrency();
 
     const fetchHomeData = async (forceRefresh = false) => {
         // Check if we already have data and no force refresh is requested
@@ -24,7 +26,7 @@ export const HomeProvider = ({ children }) => {
 
         setLoading(true);
         try {
-            const response = await HomeAPI.getHomeData(currentLanguage);
+            const response = await HomeAPI.getHomeData(currentLanguage, currentCurrency);
             setHomeData(response.data);
             return response.data.data;
         } catch (err) {
@@ -65,7 +67,7 @@ export const HomeProvider = ({ children }) => {
         fetchHomeData(true);
         fetchSliderData(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentLanguage]);
+    }, [currentLanguage, currentCurrency]);
 
     return (
         <HomeContext.Provider value={{

@@ -16,7 +16,7 @@ import ptFlag from "assets/images/flags/pt.svg";
 import urFlag from "assets/images/flags/ur.svg";
 import jaFlag from "assets/images/flags/ja.svg";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ align = "end", popperOffset = [0, 8], renderToBody = false }) => {
   // SWT CURRENT LANGUAGE
   const { currentLanguage, setCurrentLanguage } = useLanguage();
 
@@ -44,7 +44,7 @@ const LanguageSwitcher = () => {
   return (
     <Dropdown onSelect={handleLanguageChange}>
       <Dropdown.Toggle id="dropdown-basic" className="drop-lang">
-        <div className="lang cursor-pointer-1 d-flex align-items-center gap-1 flex-row-reverse">
+        <div className="lang cursor-pointer-1 d-flex align-items-center gap-1">
           {/* <LanguageIcon /> */}
           <img
             src={languages[currentLanguage].flag}
@@ -54,9 +54,24 @@ const LanguageSwitcher = () => {
         </div>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="language-dropdown-menu">
+      <Dropdown.Menu
+        align={align}
+        className="language-dropdown-menu"
+        popperConfig={{
+          modifiers: [
+            { name: "offset", options: { offset: popperOffset } },
+            { name: "preventOverflow", options: { boundary: "viewport" } },
+          ],
+        }}
+        container={renderToBody ? document.body : undefined}
+      >
         {Object.entries(languages).map(([code, { name, flag }]) => (
-          <Dropdown.Item eventKey={code} key={code} className="language-item">
+          <Dropdown.Item
+            eventKey={code}
+            key={code}
+            className="language-item"
+            active={code === currentLanguage}
+          >
             <img src={flag} alt={name} className="flag-icon" />
             <span>{name}</span>
           </Dropdown.Item>

@@ -45,6 +45,7 @@ body.dark-theme {
   --green-01-color: #fff;
   --green-02-color: #fff;
   --green-03-color: #fff;
+  --green-dark-01-color: #148035;
   --warning-01-color: #f39c12;
   --danger-01-color: #e74c3c;
   --dark-01-color: black;
@@ -186,16 +187,6 @@ body.dark-theme .banner-main-area--1 .info-banner .content-slide .text {
 
 body.dark-theme .header-top-trip-cards .title {
   color: var(--white-01-color) !important;
-}
-
-/* Dark mode SVG styling */
-body.dark-theme svg {
-  fill: var(--white-01-color) !important;
-}
-
-body.dark-theme svg path {
-  fill: var(--white-01-color);
-  stroke: var(--white-01-color) !important;
 }
 
 body.dark-theme .water-waves path {

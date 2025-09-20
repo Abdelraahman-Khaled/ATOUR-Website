@@ -8,7 +8,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import { useProfile } from "context/ProfileContext";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
+import translations from "./translations";
 const PersonalInformation = () => {
   const { setProfile, isAuthenticated } = useProfile();
   const navigate = useNavigate();
@@ -21,6 +21,8 @@ const PersonalInformation = () => {
     dateOfBirth: "",
     userType: "",
     image: "",
+    nationality_id: 0, // ✅ store the id
+    phone: "",
   });
 
   const validation = Yup.object().shape({
@@ -59,18 +61,23 @@ const PersonalInformation = () => {
     const fetchProfile = async () => {
       try {
         const response = await ProfileAPI.getProfile();
-        console.log("Profile data fetched:", response);
 
         if (response.success && response.data) {
+
           const profileData = response.data;
+          const nationality =
+            profileData?.nationality?.translations?.find(
+              (item) => item.locale === currentLanguage
+            )?.name || translations.notAvailable[currentLanguage];
+
           setProfiles({
             name: profileData.name || translations.notAvailable[currentLanguage],
-            nationality:
-              profileData.nationality || translations.notAvailable[currentLanguage],
-            dateOfBirth:
-              profileData.birthdate || translations.notAvailable[currentLanguage],
+            nationality: nationality || translations.notAvailable[currentLanguage],
+            nationality_id: profileData.nationality_id || 0, // ✅ store the id
+            dateOfBirth: profileData.birthdate || translations.notAvailable[currentLanguage],
             userType: profileData.gender || translations.notAvailable[currentLanguage],
             image: profileData.photo,
+            phone: profileData.phone || translations.notAvailable[currentLanguage],
           });
           setProfile(profileData); // Update the context with the fetched profile
 
@@ -96,11 +103,13 @@ const PersonalInformation = () => {
 
   // Handle profile update
   const handleProfileUpdate = async (updatedProfile) => {
+
     try {
       const response = await ProfileAPI.updateProfile(
         updatedProfile.name,
         updatedProfile.image,
-        updatedProfile.nationality,
+        updatedProfile.nationality_id,
+        updatedProfile.phone
       );
 
       if (response.success) {
@@ -109,7 +118,9 @@ const PersonalInformation = () => {
           ...prev,
           name: updatedProfile.name,
           image: updatedProfile.image,
-          nationality: updatedProfile.nationality,
+          nationality: updatedProfile.nationality, // ✅ now will have translated name
+          nationality_id: updatedProfile.nationality_id,
+          phone: updatedProfile.phone,
         }));
 
         // update localstorage data
@@ -121,47 +132,16 @@ const PersonalInformation = () => {
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         setRefresh(prev => !prev);
-        toast.success(
-          currentLanguage === "ar"
-            ? "تم تحديث البيانات الشخصية بنجاح."
-            : "Profile updated successfully."
-        );
+        toast.success(translations.profileUpdateSuccess[currentLanguage]);
         hideEditInfoButton(); // Close the modal
       } else {
-        toast.error(
-          currentLanguage === "ar"
-            ? "فشل تحديث البيانات الشخصية."
-            : "Failed to update profile."
-        );
+        toast.error(translations.profileUpdateFailed[currentLanguage]);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast.error(
-        currentLanguage === "ar"
-          ? "حدث خطأ أثناء تحديث البيانات الشخصية."
-          : "An error occurred while updating the profile."
-      );
+      toast.error(translations.profileUpdateError[currentLanguage]);
     }
   };
-
-  const translations = {
-    name: { ar: "الإسم", en: "Name" },
-    nationality: { ar: "الجنسية", en: "Nationality" },
-    dateOfBirth: { ar: "تاريخ الميلاد", en: "Date of Birth" },
-    userType: { ar: "الجنس", en: "Gender" },
-    notAvailable: { ar: "غير متوفر", en: "Not Available" },
-    fetchError: {
-      ar: "حدث خطأ أثناء تحميل البيانات الشخصية.",
-      en: "An error occurred while fetching personal data.",
-    },
-    edit: { ar: "تعديل", en: "Edit" },
-    interests: { ar: "الإهتمامات", en: "Interests" },
-    sea: { ar: "البحر", en: "Sea" },
-    culture: { ar: "الثقافة", en: "Culture" },
-    nature: { ar: "الطبيعة", en: "Nature" },
-    adventure: { ar: "المغامرات", en: "Adventure" },
-  };
-
   if (loading) {
     return <div className="loading-text">{translations.fetchError[currentLanguage]}</div>;
   }
@@ -212,6 +192,17 @@ const PersonalInformation = () => {
             </div>
             <div className="col-12 col-md-6">
               <InputField
+                label={translations.phone[currentLanguage]}
+                name="phone"
+                type="text"
+                placeholder={translations.phone[currentLanguage]}
+                value={profile.phone}
+                success
+                readOnly
+              />
+            </div>
+            <div className="col-12 col-md-6">
+              <InputField
                 label={translations.dateOfBirth[currentLanguage]}
                 name="dateOfBirth"
                 type="text"
@@ -240,15 +231,12 @@ const PersonalInformation = () => {
             {translations.interests[currentLanguage]}
           </h2>
           <div className="buttons-inter change-scroll d-flex align-items-center gap-3">
-            <button className="main-btn-filter">{translations.sea[currentLanguage]}</button>
+            <button className="main-btn-filter">{translations.trips[currentLanguage]}</button>
             <button className="main-btn-filter">
-              {translations.culture[currentLanguage]}
+              {translations.souvenirs[currentLanguage]}
             </button>
             <button className="main-btn-filter">
-              {translations.nature[currentLanguage]}
-            </button>
-            <button className="main-btn-filter">
-              {translations.adventure[currentLanguage]}
+              {translations.events[currentLanguage]}
             </button>
           </div>
         </div>

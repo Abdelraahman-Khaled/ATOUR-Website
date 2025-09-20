@@ -9,7 +9,7 @@ const ReadMoreText = ({ text, maxLength, newClass }) => {
   return (
     <div>
       <p className={`text-read-more ${newClass}`}>
-        {showAll ? text : `${text.slice(0, maxLength)}... `}
+        {showAll ? text : `${text.slice(0, maxLength)}`}
         {text.length > maxLength && (
           <span className="link-more-read" onClick={() => setShowAll(!showAll)}>
             {showAll ? t('common.less') : t('common.more')}

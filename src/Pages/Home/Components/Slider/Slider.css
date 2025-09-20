@@ -48,7 +48,7 @@
 .main-info-avatar .text-title {
   font-size: 16px;
   font-weight: 400;
-  color: var(--white-01-color);
+  color: var(--black-01-color);
 }
 
 .all-avatar {
@@ -123,13 +123,7 @@
   border-radius: 50px;
   margin-top: 15px;
 }
-body.dark-theme .main-add-place-date {
-  background: var(--white-01-color);
-  align-items: center;
-  border-radius: 14px;
-  margin-top: 15px;
-  display: block;
-}
+
 body.dark-theme .icon-date-add svg path {
   fill: black !important;
 }

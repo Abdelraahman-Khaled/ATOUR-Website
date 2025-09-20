@@ -138,7 +138,7 @@ function AllCardsEvents({ currentLanguage, eventsData, className = null }) {
                   nameCountry={item.city !== undefined ? item.city.country_name : currentLanguage === "ar" ? "السعودية" : "Saudi Arabia"}
                   // nameCountry={"السعودية"}
                   titleCard={item.title}
-                  numPrice={`${item.price} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
+                  numPrice={`${item.customer_price} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
                   textContent={item.description}
                   functionBookingButton={handleBookingButtonClick}
                   isFavoritePage={item.is_favourit}

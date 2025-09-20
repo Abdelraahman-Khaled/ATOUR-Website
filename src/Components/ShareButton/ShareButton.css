@@ -1,0 +1,19 @@
+.share-button {
+  background-color: var(--warning-01-color); /* Orange color */
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.share-button svg path {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}

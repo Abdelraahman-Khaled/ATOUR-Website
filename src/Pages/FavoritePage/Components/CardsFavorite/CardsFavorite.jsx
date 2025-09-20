@@ -25,7 +25,7 @@ const CardsFavorite = ({ data, refresh }) => {
                       image={item.cover}
                       textLocation={item.city.title + " .  " + item.city.country_name}
                       titleCard={item.title}
-                      NumPriceNew={`${item.price}`}
+                      NumPriceNew={`${item.customer_price}`}
                       isTrueNumTwo={false}
                       numInfoDangerOld={false}
                       rateNum={item.total_rates}

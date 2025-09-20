@@ -9,18 +9,21 @@ import ContentAPI from "api/contentApi";
 import { Link, useParams } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
 const DetailsTripInfoPage = () => {
   const [tripData, setTripData] = useState(null); // State to store fetched data
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const { currentLanguage } = useLanguage(); // Get the current language
+    const { currentCurrency } = useCurrency();
+
   const { id } = useParams();
   // Fetch data on component mount
   useEffect(() => {
     const fetchTripData = async () => {
       try {
-        const response = await ContentAPI.getTripById(id, currentLanguage); // Replace with your API call
+        const response = await ContentAPI.getTripById(id, currentLanguage,currentCurrency); // Replace with your API call
         setTripData(response.data); // Store fetched data in state
       } catch (err) {
         console.error("Error fetching trip data:", err);
@@ -31,7 +34,7 @@ const DetailsTripInfoPage = () => {
     };
 
     fetchTripData();
-  }, [id, currentLanguage]);
+  }, [id, currentLanguage,currentCurrency]);
 
   // Display loading state
   if (loading) {

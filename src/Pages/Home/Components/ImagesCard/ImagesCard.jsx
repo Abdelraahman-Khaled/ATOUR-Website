@@ -6,6 +6,7 @@ import useTranslation from "Components/Languages/useTranslation";
 import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import "./ImagesCardFilter.css";
+
 const ImagesCard = ({ mostVisited }) => {
   const { t } = useTranslation(); // Get the translation function
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
@@ -58,9 +59,9 @@ const ImagesCard = ({ mostVisited }) => {
 
       {/* Filter buttons */}
       <div className="container mb-4">
-        <div className="all-info-card d-flex flex-wrap justify-content-center gap-2  ">
+        <div className="d-flex flex-wrap justify-content-center gap-2 all-info-card ">
           <button
-            className={`btn ${selectedCountry === "" ? "btn-card-one active" : "btn-card-one "} `}
+            className={`btn ${selectedCountry === "" ? "btn-card-one active" : "btn-card-one"} `}
             onClick={() => setSelectedCountry("")}
           >
             {t('common.all')}
@@ -68,7 +69,7 @@ const ImagesCard = ({ mostVisited }) => {
           {availableCountries.map((country) => (
             <button
               key={country.id}
-              className={`btn ${selectedCountry === country.title ? "btn-card-one active" : "btn-card-one "}`}
+              className={`btn ${selectedCountry === country.title ? "btn-card-one active" : "btn-card-one"}`}
               onClick={() => setSelectedCountry(country.title)}
             >
               {country.title}

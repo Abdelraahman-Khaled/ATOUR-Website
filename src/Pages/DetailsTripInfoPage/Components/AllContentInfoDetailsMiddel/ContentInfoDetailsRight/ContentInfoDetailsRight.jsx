@@ -9,8 +9,7 @@ import TextContent from "./TextContent";
 import TripRequirement from "./TripRequirement";
 import WhyBookingTrip from "./WhyBookingTrip";
 const ContentInfoDetailsRight = ({ tripData }) => {
-  console.log(tripData);
-  
+
   return (
     <div className="all-content-info-details-right" data-aos="fade-left">
       <BoxOneContent tripData={tripData} />
@@ -19,7 +18,7 @@ const ContentInfoDetailsRight = ({ tripData }) => {
       {tripData.trip_requirements && <TripRequirement tripData={tripData} />}
       <MapContentBox tripData={tripData} />
       <TextContent />
-      <RatesComments />
+      <RatesComments modelId={tripData.id} modelType={"trip"} />
       {/* <PicturesPreviousTrips /> */}
       <SimilarTrips />
     </div>
