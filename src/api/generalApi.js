@@ -62,7 +62,7 @@ const GeneralAPI = {
   getBlogs: async (language) => {
     const response = await axiosInstance.get("/blogs", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -71,7 +71,7 @@ const GeneralAPI = {
   getBlogDetails: async (id, language) => {
     const response = await axiosInstance.get(`/blogs/${id}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -90,8 +90,21 @@ const GeneralAPI = {
   },
 
   // Articles
-  getArticles: async () => {
-    const response = await axiosInstance.get("/articles");
+  getArticles: async (language) => {
+    const response = await axiosInstance.get("/articles", {
+      headers: {
+        lang: language,
+      },
+    });
+    return response.data;
+  },
+  // Articles
+  getArticleDetails: async (id, language) => {
+    const response = await axiosInstance.get(`/articles/${id}`, {
+      headers: {
+        lang: language,
+      },
+    });
     return response.data;
   },
 
@@ -99,7 +112,7 @@ const GeneralAPI = {
   getNews: async (language) => {
     const response = await axiosInstance.get("/news", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -108,7 +121,7 @@ const GeneralAPI = {
   getNewsDetails: async (id, language) => {
     const response = await axiosInstance.get(`/news/${id}`, {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
       },
     });
     return response.data;
@@ -127,6 +140,12 @@ const GeneralAPI = {
   // Ads
   getAds: async () => {
     const response = await axiosInstance.get("/ads");
+    return response.data;
+  },
+
+  // Why Bookings
+  getWhyBookings: async () => {
+    const response = await axiosInstance.get("/why_bookings");
     return response.data;
   },
 

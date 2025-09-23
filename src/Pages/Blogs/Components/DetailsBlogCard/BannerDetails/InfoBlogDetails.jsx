@@ -4,6 +4,7 @@ import img from "../../../../../assets/images/blogs/01.png";
 import imgUser from "../../../../../assets/images/users/01.png";
 import "./BannerDetails.css";
 import TimeGapCalculator from "./calculateTimeGap";
+import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
 
 const text = {
   ar: {
@@ -30,13 +31,13 @@ const InfoBlogDetails = ({ blogDetailsCard }) => {
           <img
             src={blogDetailsCard.photo}
             alt="blogImage"
-            className="w-100  object-fit-cover"
+            className="w-100"
             loading="lazy"
           />
         </div>
         {/* ================== START IMAGE BLOG TOP =========== */}
         {/* ================== START CONTENT BLOG DETAILS ============= */}
-        <div className="content-blog-details">
+        <div className="content-blog-details mb-4">
           <h2 className="title">
             {blogDetailsCard.title}
           </h2>
@@ -65,6 +66,12 @@ const InfoBlogDetails = ({ blogDetailsCard }) => {
           {/* ============ END CONTENT TEXT ============ */}
         </div>
         {/* ================== END CONTENT BLOG DETAILS ============= */}
+        <div className=" overflow-hidden border rounded rounded-3">
+          <SwiperSlider
+            itemsSlider={blogDetailsCard.attachments}
+            sliderNewClass={"slider-height slider-details-right  "}
+          ></SwiperSlider>
+        </div>
       </div>
     )
       :

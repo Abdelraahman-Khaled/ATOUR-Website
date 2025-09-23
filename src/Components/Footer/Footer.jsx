@@ -232,8 +232,13 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="articlesPage" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="articals" className="nav-link" onClick={handleLinkClick}>
                       {text.articles}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="news" className="nav-link" onClick={handleLinkClick}>
+                      {text.news}
                     </Link>
                   </li>
 

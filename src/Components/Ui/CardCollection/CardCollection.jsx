@@ -21,6 +21,7 @@ const CardCollection = ({
   isFav,
   type,
   is_group,
+  showFavIcon = true
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const navigate = useNavigate();
@@ -48,66 +49,78 @@ const CardCollection = ({
       ratingText: "تقييم",
       priceStartText: "تبدأ من",
       perPersonText: "/ للفرد",
+      forGroup: "/ للمجموعة"
     },
     en: {
       ratingText: "Rating",
       priceStartText: "Starting from",
       perPersonText: "/ per person",
+      forGroup: "/ per group"
     },
     fr: {
       ratingText: "Évaluation",
       priceStartText: "À partir de",
       perPersonText: "/ par personne",
+      forGroup: "/ par groupe"
     },
     de: {
       ratingText: "Bewertung",
       priceStartText: "Ab",
       perPersonText: "/ pro Person",
+      forGroup: "/ pro Gruppe"
     },
     es: {
       ratingText: "Calificación",
       priceStartText: "Desde",
       perPersonText: "/ por persona",
+      forGroup: "/ por grupo"
     },
     tr: {
       ratingText: "Puan",
       priceStartText: "Başlangıç fiyatı",
       perPersonText: "/ kişi başı",
+      forGroup: "/ grup başına"
     },
     ru: {
       ratingText: "Рейтинг",
       priceStartText: "Начиная с",
       perPersonText: "/ за человека",
+      forGroup: "/ за группу"
     },
     zh: {
       ratingText: "评分",
       priceStartText: "起价",
       perPersonText: "/ 每人",
+      forGroup: "/ 每组"
     },
     ko: {
       ratingText: "평점",
       priceStartText: "부터 시작",
       perPersonText: "/ 1인당",
+      forGroup: "/ 그룹당"
     },
     pt: {
       ratingText: "Avaliação",
       priceStartText: "A partir de",
       perPersonText: "/ por pessoa",
+      forGroup: "/ por grupo"
     },
     ur: {
       ratingText: "درجہ بندی",
       priceStartText: "سے شروع",
       perPersonText: "/ فی شخص",
+      forGroup: "/ فی گروپ"
     },
     ja: {
       ratingText: "評価",
       priceStartText: "開始価格",
       perPersonText: "/ 1人あたり",
+      forGroup: "/ グループあたり"
     },
   };
 
 
-  const { ratingText, priceStartText, perPersonText } = localization[currentLanguage];
+  const { ratingText, priceStartText, perPersonText, forGroup } = localization[currentLanguage];
 
   return (
     <>
@@ -125,11 +138,15 @@ const CardCollection = ({
             onClick={handleLinkClick}
           />
           {/* Use the Favicon component here */}
-          <Favicon
-            modelType={type}
-            modelId={itemId}
-            initialIsFavorite={isFav}
-          />
+          {
+            showFavIcon && (
+              <Favicon
+                modelType={type}
+                modelId={itemId}
+                initialIsFavorite={isFav}
+              />
+            )
+          }
           <div className="info-text">
             <IconLocation /> {infoPlaceCard}
           </div>
@@ -139,13 +156,21 @@ const CardCollection = ({
         <div className="content-info-card pt-3">
           {numRate > 0 && (
             <div className="rate-card d-flex align-items-center gap-1">
-              <IconStarRate /> {numRate} {ratingText}
+              <IconStarRate /> {numRate.toFixed(1)} {ratingText}
             </div>
           )}
           <h2 className="title ">{titleCard}</h2>
           {numPriceCard &&
             <div className="price-info">
-              {priceStartText} <span className="price-num"><CurrencyDisplay price={numPriceCard} /></span> / <GroupOrIndividual isGroup={is_group} />
+              {
+                is_group ? " " : priceStartText
+              }
+              {" "}
+              <span className="price-num">
+                <CurrencyDisplay price={numPriceCard} />
+              </span>
+              {
+                is_group ? forGroup : perPersonText}
             </div>
           }
         </div>

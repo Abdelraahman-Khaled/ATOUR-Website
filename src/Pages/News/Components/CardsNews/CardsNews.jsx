@@ -4,6 +4,7 @@ import GeneralAPI from "api/generalApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Link } from "react-router-dom";
 import "./CardsNews.css";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const text = {
   ar: {
@@ -13,6 +14,46 @@ const text = {
   en: {
     noData: "No data available.",
     home: "Home",
+  },
+  fr: {
+    noData: "Aucune donnée disponible.",
+    home: "Accueil",
+  },
+  de: {
+    noData: "Keine Daten verfügbar.",
+    home: "Startseite",
+  },
+  es: {
+    noData: "No hay datos disponibles.",
+    home: "Inicio",
+  },
+  tr: {
+    noData: "Veri bulunmamaktadır.",
+    home: "Ana Sayfa",
+  },
+  ru: {
+    noData: "Нет доступных данных.",
+    home: "Главная",
+  },
+  zh: {
+    noData: "暂无可用数据。",
+    home: "首页",
+  },
+  ko: {
+    noData: "데이터가 없습니다.",
+    home: "홈",
+  },
+  pt: {
+    noData: "Nenhum dado disponível.",
+    home: "Início",
+  },
+  ja: {
+    noData: "利用可能なデータがありません。",
+    home: "ホーム",
+  },
+  ur: {
+    noData: "کوئی ڈیٹا دستیاب نہیں ہے۔",
+    home: "ہوم",
   },
 };
 
@@ -27,7 +68,7 @@ const CardsNews = () => {
     const fetchNewsData = async () => {
       try {
         // Use the blog API endpoint as requested by the user
-        const data = await GeneralAPI.getBlogs(currentLanguage);
+        const data = await GeneralAPI.getNews(currentLanguage);
         setNewsData(data.data);
 
         // If the API is not yet implemented, fall back to mock data
@@ -52,7 +93,9 @@ const CardsNews = () => {
 
   if (loading) {
     return (
-      <div className="airPlan-dot" />
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
+      </div>
     );
   }
 
@@ -81,10 +124,10 @@ const CardsNews = () => {
                 routeNewsCard={`/news/${item.id}`}
                 imageNews={item.photo}
                 titleNews={item.title}
-                imageUserNews={item.publisherphoto}
-                nameUserNews={item.publisher_name}
-                timeAddedNews={item.created_at}
-                description={item.content}
+                tags={item.tags}
+                timeAddedNews={item.start_date}
+                endTimeAddedNews={item.end_date}
+                description={item.description}
               />
             </div>
           ))}

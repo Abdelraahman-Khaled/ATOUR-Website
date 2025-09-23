@@ -57,7 +57,7 @@ const CardBlog = ({
         <img
           src={imageBlog}
           alt="img blog"
-          className="image-blog-src object-fit-cover"
+          className="image-blog-src "
         />
       </div>
       {/* ============= END IMAGE CARD BLOG ============== */}

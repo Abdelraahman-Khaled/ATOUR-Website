@@ -27,7 +27,7 @@ import jaFlag from "assets/images/flags/ja.svg";
 import sgnFlag from "assets/images/flags/sgn.svg";
 
 import GroupOrIndividual from "Components/groupCount/GroupOrIndividual";
-
+import boxTranslations from "./translates";
 const languageFlags = {
   en: enFlag,
   ar: arFlag,
@@ -43,21 +43,6 @@ const languageFlags = {
   ja: jaFlag,
   sgn: sgnFlag,
 };
-const translations = {
-  ar: "لغات الإرشاد",
-  en: "Guide Languages",
-  fr: "Langues de guide",
-  de: "Führersprachen",
-  es: "Idiomas del guía",
-  tr: "Rehber Dilleri",
-  ru: "Языки гида",
-  zh: "导游语言",
-  ko: "가이드 언어",
-  pt: "Idiomas do guia",
-  ur: "رہنما کی زبانیں",
-  ja: "ガイドの言語",
-};
-
 
 
 const BoxOneContent = ({ tripData }) => {
@@ -91,6 +76,10 @@ const BoxOneContent = ({ tripData }) => {
             </div>
             <div className="info-details-company">
               <h2 className="title">{tripData.vendor.name}</h2>
+              <div className="rate-info d-flex align-items-center gap-2 mt-1">
+                <div className="icon-star rate-star-icon">
+                </div>
+              </div>
               {/* <div className="rate-info d-flex align-items-center gap-2 mt-1">
                 <div className="icon-star rate-star-icon">
                   <FontAwesomeIcon icon={faStar} />
@@ -101,12 +90,12 @@ const BoxOneContent = ({ tripData }) => {
           </div>
           <div className="available-title d-flex align-items-center gap-2">
             <div className="icon-clock">
-              {tripData.active === 1 ? < FontAwesomeIcon icon={faClock} /> :
+              {tripData.vendor.active === 1 ? < FontAwesomeIcon icon={faClock} /> :
                 <FontAwesomeIcon icon={faClock} style={{ color: "gray" }} />}
             </div>
-            {tripData.active ? <span className="text p-0 m-0 text-decoration-underline">{currentLanguage === "ar" ? "متاح" : "Available"}</span>
+            {tripData.vendor.active ? <span className="text p-0 m-0 text-decoration-underline">{boxTranslations.available[currentLanguage]}</span>
               :
-              <span className="text p-0 m-0 text-decoration-underline text-secondary">{currentLanguage === "ar" ? "غير متاح" : "Unavailable"}</span>
+              <span className="text p-0 m-0 text-decoration-underline text-secondary">{boxTranslations.unavailable[currentLanguage]}</span>
             }
           </div>
         </div>
@@ -138,39 +127,67 @@ const BoxOneContent = ({ tripData }) => {
           <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
             <div className="info-right--1 d-flex align-items-center gap-2">
               <ClockIcon />
-              <p className="text">{currentLanguage === "ar" ? "وقت البرنامج" : "Program time"}</p>
+              <p className="text">{boxTranslations.programTime[currentLanguage]}</p>
             </div>
-            <p className="text">{tripData.program_time}</p>
+            <p className="text">{tripData.program_time || tripData.from_time}</p>
           </div>
+          {tripData.to_time &&
+            <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+              <div className="info-right--1 d-flex align-items-center gap-2">
+                <ClockIcon />
+                <p className="text">{boxTranslations.activityEndTime[currentLanguage]}</p>
+              </div>
+              <p className="text">{tripData.to_time}</p>
+            </div>
+          }
           <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
             <div className="info-right--1 d-flex align-items-center gap-2">
               <UserIcon2 />
               <p className="text">
-                <GroupOrIndividual isGroup={tripData.group_count > 0} />
+                {tripData.group_count > 0 ? boxTranslations.group[currentLanguage] : boxTranslations.individual[currentLanguage]}
               </p>
             </div>
             <p className="text">
-              <GroupOrIndividual isGroup={tripData.group_count > 0} />
-              {tripData.group_count > 0 && ` (${tripData.group_count})`}
+
+              {tripData.group_count > 0 ?
+                (
+                  <>
+                    <GroupOrIndividual isGroup={true} />
+                    {" "}
+                    ({tripData.group_count})
+                  </>
+                )
+                :
+                (
+                  <>
+                    <p>{boxTranslations.minBooking[currentLanguage]} ({tripData.min_people}) <GroupOrIndividual /></p>
+                    <p>{boxTranslations.maxBooking[currentLanguage]} ({tripData.max_people}) <GroupOrIndividual /></p>
+                  </>
+                )
+              }
             </p>
           </div>
-          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-            <div className="info-right--1 d-flex align-items-center gap-2">
-              <UserIcon2 />
-              <p className="text">{translations[currentLanguage] || "guide languages"}</p>
+          {tripData.guide_languages &&
+            <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+              <>
+                <div className="info-right--1 d-flex align-items-center gap-2">
+                  <UserIcon2 />
+                  <p className="text">{boxTranslations.guideLanguages[currentLanguage] || "guide languages"}</p>
+                </div>
+                <p className="text d-flex flex-wrap gap-2">
+                  {tripData.guide_languages.map((lang) => (
+                    <span key={lang} className="me-2 d-flex align-items-center">
+                      <img
+                        src={languageFlags[lang]}
+                        alt={lang}
+                        style={{ width: "24px", height: "16px" }}
+                      />
+                    </span>
+                  ))}
+                </p>
+              </>
             </div>
-            <p className="text d-flex flex-wrap gap-2">
-              {tripData.guide_languages.map((lang) => (
-                <span key={lang} className="me-2 d-flex align-items-center">
-                  <img
-                    src={languageFlags[lang]}
-                    alt={lang}
-                    style={{ width: "24px", height: "16px" }}
-                  />
-                </span>
-              ))}
-            </p>
-          </div>
+          }
         </div>
         {/* ============= END END BOX CONTENT ============ */}
       </div>

@@ -1,77 +1,131 @@
-
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import GeneralAPI from "api/generalApi";
-import content from "../../../Components/Languages/translations";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import CardArticles from "./CardArticles";
+import { Link } from "react-router-dom";
+import "./CardsNews.css";
+import Loader from "Components/Auth/Components/Loader/Loader";
+import CardNews from "Pages/News/Components/CardNews/CardNews";
 
-const CardsArticles = () => {
+const text = {
+    ar: {
+        noData: "لا يوجد بيانات متاحة.",
+        home: "الصفحة الرئيسية",
+    },
+    en: {
+        noData: "No data available.",
+        home: "Home",
+    },
+    fr: {
+        noData: "Aucune donnée disponible.",
+        home: "Accueil",
+    },
+    de: {
+        noData: "Keine Daten verfügbar.",
+        home: "Startseite",
+    },
+    es: {
+        noData: "No hay datos disponibles.",
+        home: "Inicio",
+    },
+    tr: {
+        noData: "Veri bulunmamaktadır.",
+        home: "Ana Sayfa",
+    },
+    ru: {
+        noData: "Нет доступных данных.",
+        home: "Главная",
+    },
+    zh: {
+        noData: "暂无可用数据。",
+        home: "首页",
+    },
+    ko: {
+        noData: "데이터가 없습니다.",
+        home: "홈",
+    },
+    pt: {
+        noData: "Nenhum dado disponível.",
+        home: "Início",
+    },
+    ja: {
+        noData: "利用可能なデータがありません。",
+        home: "ホーム",
+    },
+    ur: {
+        noData: "کوئی ڈیٹا دستیاب نہیں ہے۔",
+        home: "ہوم",
+    },
+};
+
+const CardsArticals = () => {
     const { currentLanguage } = useLanguage(); // Get the current language
 
-    const [blogData, setBlogData] = useState([]); // State to store home data
+    const [articals, setArticals] = useState([]); // State to store news data
     const [loading, setLoading] = useState(true); // State to manage loading
     const [error, setError] = useState(null); // State to handle errors
 
     useEffect(() => {
-        const fetchBlogData = async () => {
+        const fetcharticals = async () => {
             try {
-                const data = await GeneralAPI.getArticles(currentLanguage); // Fetch data from the API
-                setBlogData(data.data); // Set the fetched data to state
+                // Use the blog API endpoint as requested by the user
+                const data = await GeneralAPI.getArticles(currentLanguage);
+                setArticals(data.data);
             } catch (err) {
-                console.error("Error fetching home data:", err);
-                toast.error("Failed to load home data. Please try again later.");
+                console.error("Error fetching news data:", err);
+                setError("Failed to load news data. Please try again later.");
+
             } finally {
                 setLoading(false); // Stop the loading spinner
             }
         };
 
-        fetchBlogData(); // Call the API on component mount
+        fetcharticals(); // Call the API on component mount
     }, [currentLanguage]);
 
     if (loading) {
         return (
-            <div className="airPlan-dot" />
+            <div style={{ margin: "200px 0px" }}>
+                <Loader />
+            </div>
         );
     }
 
     if (error) {
-        return null; // No need to display error here, toast will handle it
+        return <div>{error}</div>; // Display error message if fetching fails
     }
-    console.log(blogData);
 
     return (
-        <div className="cards-blog-content padding-80">
-            {/* =========== START ROW =========== */}
-            <div className="row g-4">
-                {blogData.length > 0 ? blogData.map((item) => (
-                    <div key={item.id} className="col-12 col-sm-6 col-md-4 d-flex">
-                        <CardArticles
-                            routeArticleCard={`/blogsPage/${item.id}`}
-                            imageArticle={item.photo}
-                            titleArticle={item.title}
-                            imageUserArticle={item.publisherphoto}
-                            nameUserArticle={item.publisher_name}
-                            timeAddedArticle={item.created_at}
-                            description={item.content}
-                        />
-                    </div>
-                )) : (
-                    <p className="text-section-api fs-6 fw-medium text-center pt-5">
-                        {content.common.noData[currentLanguage]}{" "}
-                        <Link
-                            to="/"
-                            className="fs-6 fw-medium text-danger text-decoration-underline"
-                        >
-                            {content.common.home[currentLanguage]}
-                        </Link>
-                    </p>
-                )}
-            </div>
-            {/* =========== END ROW =========== */}
+        <div className="cards-news-container">
+            {/* =========== START CARDS GRID =========== */}
+            {articals.length <= 0 ? (
+                <p className="text-center w-100  my-4">
+                    {text[currentLanguage].noData}{" "}
+                    <Link
+                        to="/"
+                        className="fs-6 fw-medium text-danger text-decoration-underline"
+                    >
+                        {text[currentLanguage].home}
+                    </Link>
+                </p>
+            ) : (
+                <div className="cards-news-grid">
+                    {articals.map((item) => (
+                        <div key={item.id}>
+                            <CardNews
+                                routeNewsCard={`/articals/${item.id}`}
+                                imageNews={item.photo}
+                                titleNews={item.title}
+                                tags={item.tags}
+                                timeAddedNews={item.start_date}
+                                endTimeAddedNews={item.end_date}
+                                description={item.description}
+                            />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
 
-export default CardsArticles;
+export default CardsArticals;

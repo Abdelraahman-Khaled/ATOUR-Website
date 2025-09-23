@@ -45,7 +45,7 @@ const SwiperSlider = ({ sliderNewClass, itemsSlider, children, onSlideChange }) 
                 ) : (
                   <div
                     className="banner-one section-padding bg-image"
-                    style={{ backgroundImage: `url(${item.image})` }}
+                    style={{ backgroundImage: `url(${item.image || item})` }}
                   ></div>
                 )}
                 {/* ======== END BANNER ONE ========= */}

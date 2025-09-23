@@ -3,7 +3,6 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import CardsArticles from "./CardsArticals";
 import content from "../../../Components/Languages/translations";
-import SliderArticles from "./SliderBlogs/SliderArticles";
 
 
 
@@ -16,7 +15,7 @@ const Articles = () => {
       <div className="blogs-page">
         <header>
           {/* ============== START SLIDER BLOGS =========== */}
-          <SliderArticles />
+          {/* <SliderArticles /> */}
           {/* ============== END SLIDER BLOGS =========== */}
         </header>
         <main>

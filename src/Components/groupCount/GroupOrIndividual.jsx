@@ -2,7 +2,7 @@ import React from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import groupIndividualTranslations from "./groupIndividualTranslations";
 
-const GroupOrIndividual = ({ isGroup }) => {
+const GroupOrIndividual = ({ isGroup = false }) => {
     const { currentLanguage } = useLanguage();
 
     const lang = groupIndividualTranslations[currentLanguage] || groupIndividualTranslations["en"];

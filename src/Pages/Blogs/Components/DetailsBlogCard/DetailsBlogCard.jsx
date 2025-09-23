@@ -7,6 +7,7 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const DetailsBlogCard = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -37,7 +38,9 @@ const DetailsBlogCard = () => {
   // Display loading state
   if (loading) {
     return (
-      <div className="airPlan-dot" />
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
+      </div>
     );
   }
   // Display error state

@@ -7,6 +7,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import ContentAPI from "api/contentApi";
 import { Link, useParams } from "react-router-dom";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
 const BiographyPage = () => {
   const { id } = useParams(); // Extract the `id` from the URL
@@ -14,13 +15,14 @@ const BiographyPage = () => {
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const { currentLanguage } = useLanguage(); // Get the current language
-
+  const { currentCurrency } = useCurrency()
   // Fetch biography data based on the `id`
   useEffect(() => {
     const fetchBiography = async () => {
       try {
-        const response = await ContentAPI.getCitiesId(id, currentLanguage); // Fetch data from the API
+        const response = await ContentAPI.getCitiesId(id, currentLanguage, currentCurrency); // Fetch data from the API
         const data = response.data; // Extract the data from the response
+        console.log(data);
 
         if (data) {
           setBiography(data); // Set the fetched data to state
@@ -36,7 +38,7 @@ const BiographyPage = () => {
     };
 
     fetchBiography(); // Call the API on component mount
-  }, [id, currentLanguage]); // Re-run the effect if the `id` changes
+  }, [id, currentLanguage, currentCurrency]); // Re-run the effect if the `id` changes
 
   // Display loading state
   if (loading) {

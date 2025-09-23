@@ -4,7 +4,9 @@
   z-index: 10;
   padding: 0 15px;
 }
-
+.info-details-news .tags {
+  color: var(--green-01-color);
+}
 .info-details-news .image-news-top img {
   height: 450px;
   border-radius: 12px;

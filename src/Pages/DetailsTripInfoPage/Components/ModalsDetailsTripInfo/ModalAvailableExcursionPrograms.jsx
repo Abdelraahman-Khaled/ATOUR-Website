@@ -11,13 +11,16 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { useBooking } from "context/BookingContext";
+import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
+
 const ModalAvailableExcursionPrograms = ({
   tripData,
   showModalAvailable,
   hideModalAvailable,
-  initialAdults,
+  // initialAdults,
   initialChildren,
-  selectedDay
+  // selectedDay
 }) => {
   const iframeRef = useRef(null);
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
@@ -26,6 +29,7 @@ const ModalAvailableExcursionPrograms = ({
   const [selectedTime, setSelectedTime] = useState(null);
   const [paymentWay, setPaymentWay] = useState("online");
   const { currentLanguage } = useLanguage();
+  const { selectedDate, numberOfPeople } = useBooking();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const navigate = useNavigate();
@@ -97,19 +101,19 @@ const ModalAvailableExcursionPrograms = ({
 
 
   const buttonActiveBook = async (tripId) => {
-    if (!selectedTime || !selectedDay) {
+    if (!selectedTime || !selectedDate) {
       toast.error(currentLanguage === "en" ? "Please select both a time and a day before booking." : "يرجى تحديد الوقت واليوم قبل الحجز.");
       return;
     }
 
     setIsLoading(true);
     try {
-      const bookingDay = `${selectedDay.year}-${selectedDay.month}-${selectedDay.day}`; // Format date string
+      const bookingDay = `${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`; // Format date string
       const currentDate = new Date().toLocaleDateString("en-CA"); // "YYYY-MM-DD"
       const response = await BookingAPI.bookTrip({
         tripId,
         bookingDay,
-        peopleNumber: initialAdults,
+        peopleNumber: numberOfPeople,
         childrenNumber: initialChildren,
         paymentWay,
         time: selectedTime,
@@ -215,25 +219,41 @@ const ModalAvailableExcursionPrograms = ({
         title={content.availablePrograms[currentLanguage]}
         newClass="modal-available modal-width-content"
       >
-        <div className="all-content-available">
-          <div className="details-header">
-            <h2>{tripData.title || content.noTitle[currentLanguage]}</h2>
-            <p>{tripData.description || content.noDescription[currentLanguage]}</p>
+        <div className="all-content-available ">
+          <div className="details-header mb-4">
+            <h2 className="title mb-2">{tripData.title || content.noTitle[currentLanguage]}</h2>
+            <p className="text">{tripData.description || content.noDescription[currentLanguage]}</p>
           </div>
 
           {/* Select Time */}
-          <div className="times-trips d-flex align-items-center gap-2 py-3 flex-wrap">
-            {tripData.available_times.map((time, index) => (
-              <div
-                key={index}
-                className={`main-btn-filter ${selectedTimeIndex === index ? "active" : ""}`}
-                onClick={() => handleTimeClick(index)}
-              >
-                <ClockIcon /> {time.from_time} - {time.to_time}
-              </div>
-            ))}
-          </div>
 
+          {/* Details */}
+          <div className="">
+            <h2 className="title">تفاصيل الحجز</h2>
+            {selectedDate ? (
+              <>
+                <p className="text">{currentLanguage === "ar" ? "التاريخ المحدد:" : "Selected Date:"} {`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`}</p>
+              </>
+            )
+              : (
+                <p className="text">{currentLanguage === "ar" ? "التاريخ المحدد:" : "Selected Date:"} لا يوجد يوم محدد يرجي اختيار اليوم</p>
+              )
+            }
+            <p className="text">{currentLanguage === "ar" ? "العدد" : "Number:"}: {numberOfPeople}</p>
+            <p className="text">{currentLanguage === "ar" ? "السعر" : "price:"}: <CurrencyDisplay price={tripData.customer_price} /></p>
+            <p className="text">الاوقات المتاحة</p>
+            <div className="times-trips d-flex align-items-center gap-2 py-3 flex-wrap">
+              {tripData.available_times.map((time, index) => (
+                <div
+                  key={index}
+                  className={`main-btn-filter ${selectedTimeIndex === index ? "active" : ""}`}
+                  onClick={() => handleTimeClick(index)}
+                >
+                  <ClockIcon /> {time.from_time} - {time.to_time}
+                </div>
+              ))}
+            </div>
+          </div>
           {/* Select Day */}
           {/* <div className="times-trips d-flex align-items-center gap-2 py-3 mb-3 flex-wrap">
             {tripData.available_days.map((day, index) => (
@@ -277,7 +297,7 @@ const ModalAvailableExcursionPrograms = ({
             {isLoading ? <LoaderSvg /> : content.reserve[currentLanguage]}
           </button>
         </div>
-      </CustomModal>
+      </CustomModal >
     </>
   );
 };

@@ -25,164 +25,189 @@ import NewsDetails from "../Pages/News/Components/NewsDetails/NewsDetails";
 import Rewards from "../Pages/Rewards/Rewards";
 import Articles from "Pages/Blogs/Articles/Articles";
 import Country from "Pages/Country/Country";
+import ArticalsDetails from "Pages/Blogs/Articles/ArticalsDetails";
 
-let routers = createBrowserRouter([
-  {
-    path: "",
-    element: <Layout />,
-    errorElement: <NotFound />,
-    children: [
-      {
-        path: "",
-        element: (
-          <>
-            <Outlet />
-          </>
-        ),
-        children: [
-          { index: true, element: <Home /> },
-          {
-            path: "detailsTripInfoId/:detailsTripInfo",
-            element: <DetailsTripInfoPage />,
-          },
-        ],
-      },
-      {
-        path: "favoritePage", element:
-          <PrivateRoute>
-            <FavoritePage />
-          </PrivateRoute>
-      },
-      {
-        path: "blogsPage",
-        element: (
-          <>
-            <Outlet />
-          </>
-        ),
-        children: [
-          { path: "", element: <Blogs /> },
-          { path: ":idCardDetailsBlog", element: <DetailsBlogCard /> },
-        ],
-      },
-      {
-        path: "eventsPage",
-        element: (
-          <>
-            <PrivateRoute>
+let routers = createBrowserRouter(
+  [
+    {
+      path: "",
+      element: <Layout />,
+      errorElement: <NotFound />,
+      children: [
+        {
+          path: "",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <Events /> },
-          { path: ":id", element: <DetailsCardEvent /> },
-        ],
-      },
-      {
-        path: "offers",
-        element: (
-          <>
+            </>
+          ),
+          children: [
+            { index: true, element: <Home /> },
+            {
+              path: "detailsTripInfoId/:detailsTripInfo",
+              element: <DetailsTripInfoPage />,
+            },
+          ],
+        },
+        {
+          path: "favoritePage",
+          element: (
             <PrivateRoute>
-              <Outlet />
+              <FavoritePage />
             </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <Offers /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
-        ],
-      },
-      {
-        path: "gifts/:id",
-        element: (
-          <>
-            <PrivateRoute>
+          ),
+        },
+        {
+          path: "blogsPage",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [{ path: "", element: <GiftDetail /> }],
-      },
-      { path: "accountUser", element: <AccountUser /> },
-      { path: "reservations", element: <Reservations /> },
-      {
-        path: "biographyPage/:id",
-        element: (
-          <>
-            <PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <Blogs /> },
+            { path: ":idCardDetailsBlog", element: <DetailsBlogCard /> },
+          ],
+        },
+        {
+          path: "eventsPage",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <Events /> },
+            { path: ":id", element: <DetailsCardEvent /> },
+          ],
+        },
+        {
+          path: "offers",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <Offers /> },
+            { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+          ],
+        },
+        {
+          path: "gifts/:id",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [{ path: "", element: <GiftDetail /> }],
+        },
+        { path: "accountUser", element: <AccountUser /> },
+        { path: "reservations", element: <Reservations /> },
+        {
+          path: "biographyPage/:id",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <BiographyPage /> },
+            { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+          ],
+        },
+        {
+          path: "country/:id",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [{ path: "", element: <Country /> }],
+        },
+        {
+          path: "tripsPage",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <TripsPage /> },
+            { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
+          ],
+        },
+        {
+          path: "tripsPage/:id",
+          element: (
+            <>
+              <PrivateRoute>
+                <Outlet />
+              </PrivateRoute>
+            </>
+          ),
+          children: [
+            { path: "", element: <DetailsTripInfoPage /> },
+            // { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
+          ],
+        },
+        { path: "natureDventuresPage", element: <NatureDventuresPage /> },
+        { path: "payConfirmPage", element: <PayConfirmPage /> },
+        { path: "aboutUs", element: <AboutUs /> },
+        { path: "termsConditions", element: <TermsConditions /> },
+        { path: "rewards", element: <Rewards /> },
+        {
+          path: "news",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <BiographyPage /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
-        ],
-      },
-      {
-        path: "country/:id",
-        element: (
-          <>
-            <PrivateRoute>
+            </>
+          ),
+          children: [{ path: "", element: <News /> }],
+        },
+        {
+          path: "news/:id",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <Country /> },
-        ],
-      },
-      {
-        path: "tripsPage",
-        element: (
-          <>
-            <PrivateRoute>
+            </>
+          ),
+          children: [{ path: "", element: <NewsDetails /> }],
+        },
+        {
+          path: "articals",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <TripsPage /> },
-          { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> },
-        ],
-      },
-      {
-        path: "tripsPage/:id",
-        element: (
-          <>
-            <PrivateRoute>
+            </>
+          ),
+          children: [{ path: "", element: <Articles /> }],
+        },
+        {
+          path: "articals/:id",
+          element: (
+            <>
               <Outlet />
-            </PrivateRoute>
-          </>
-        ),
-        children: [
-          { path: "", element: <DetailsTripInfoPage /> },
-          // { path: ":detailsTripInfo", element: <DetailsTripInfoPage /> }
-        ],
-      },
-      { path: "natureDventuresPage", element: <NatureDventuresPage /> },
-      { path: "payConfirmPage", element: <PayConfirmPage /> },
-      { path: "aboutUs", element: <AboutUs /> },
-      { path: "termsConditions", element: <TermsConditions /> },
-      { path: "articles", element: <Articles /> },
-      { path: "rewards", element: <Rewards /> },
-      {
-        path: "news",
-        element: (
-          <>
-            <Outlet />
-          </>
-        ),
-        children: [
-          { path: "", element: <News /> },
-          { path: ":idCardDetailsNews", element: <NewsDetails /> },
-        ],
-      },
-      { path: "*", element: <NotFound /> },
-    ],
-  },
-],
+            </>
+          ),
+          children: [{ path: "", element: <ArticalsDetails /> }],
+        },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ],
   {
     future: {
       v7_skipActionErrorRevalidation: true, // Opt into future behavior

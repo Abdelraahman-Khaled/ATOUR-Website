@@ -9,6 +9,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 
 
 const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
+
   const { currentLanguage } = useLanguage(); // Get the current language
   const [currentPage_2, setCurrentPage_2] = useState(0);
   const perPage = 5; // NUMBER OF PAGE ITEMS
@@ -86,7 +87,7 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         textContent={item.description} // Dynamic title
                         isTrueTextOneCard_1={item.free_cancelation ? item.free_cancelation : null}
                         textCardOne_1={item.textCardOne_1}
-                        isTrueTextOneCard_2={item.pay_later ? item.pay_later : null}
+                        isTrueTextOneCard_2={item.pay_later}
                         textCardOne_2={item.textCardOne_2}
                         // removeFromFavorites={false}
                         isFavoritePage={item.is_favourit}
@@ -95,6 +96,7 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         addToWishList={addToWishList}
                         type={"trip"}
                         bookingCount={item.booking_count}
+                        is_group={item.is_group}
                       />
                     </Link>
                   </div>

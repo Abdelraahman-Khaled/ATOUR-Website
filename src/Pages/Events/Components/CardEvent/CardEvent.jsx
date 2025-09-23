@@ -17,7 +17,8 @@ const CardEvent = ({
   textContent,
   functionBookingButton,
   isFavoritePage,
-  type
+  type,
+  is_group
 }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -60,7 +61,10 @@ const CardEvent = ({
         <div className="header-top-card d-flex justify-content-between align-items-center flex-wrap gap-3">
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
-            <span className="price-num">{numPrice}</span> / {currentLanguage === "ar" ? "للفرد" : "per person"}
+            <span className="price-num">{numPrice}</span> /
+            {
+              is_group ? "للمجموعة" : "للفرد"
+            }
           </div>
         </div>
         {/* ========== END HEADER TOP CARD ========== */}

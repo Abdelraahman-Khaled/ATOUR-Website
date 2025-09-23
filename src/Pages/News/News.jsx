@@ -13,7 +13,7 @@ const News = () => {
       <HelmetInfo titlePage={currentLanguage === "ar" ? "الأخبار" : "News"} />
       <div className="news-page">
         {/* ========== START SLIDER NEWS ============ */}
-        <SliderNews />
+        {/* <SliderNews /> */}
         {/* ========== END SLIDER NEWS ============ */}
         {/* ========== START CARDS NEWS ============ */}
         <CardsNews />

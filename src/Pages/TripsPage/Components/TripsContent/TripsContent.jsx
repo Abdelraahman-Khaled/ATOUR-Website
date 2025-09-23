@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardsContentTrips from "./CardsContentTrips";
 import FilterTripsContent from "./FilterTripsContent";
 import "./TripsContent.css";
+import GeneralAPI from "api/generalApi";
 
 const TripsContent = ({ tripsData }) => {
+
+  const [subCategories, setSubCategories] = useState([]);
+
+  // getting categories
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const response = await GeneralAPI.getSubCategories();
+        setSubCategories(response.data.trips);
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    };
+
+    fetchSubCategories();
+  }, []);
   // SHOW MAP LOCTION
   const [activeMap, setActiveMap] = useState(true);
   const buttonActiveMap = () => {
@@ -11,7 +28,7 @@ const TripsContent = ({ tripsData }) => {
   };
   return (
     <div className="trips-content--info">
-      <FilterTripsContent activeMap={activeMap}  />
+      <FilterTripsContent activeMap={activeMap} subCategories={subCategories} />
       <CardsContentTrips tripsData={tripsData} buttonActiveMap={buttonActiveMap} activeMap={activeMap} />
     </div>
   );

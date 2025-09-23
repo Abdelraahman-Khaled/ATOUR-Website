@@ -8,6 +8,7 @@ import content from "../../../../Components/Languages/translations";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const CardsBlogs = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -34,7 +35,9 @@ const CardsBlogs = () => {
 
   if (loading) {
     return (
-      <div className="airPlan-dot" />
+      <div style={{ margin: "200px 0px" }}>
+        <Loader />
+      </div>
     );
   }
 
@@ -56,7 +59,7 @@ const CardsBlogs = () => {
               imageUserBlog={item.publisherphoto}
               nameUserBlog={item.publisher_name}
               timeAddedBlog={item.created_at}
-              description={item.content}
+              description={item.description}
             />
           </div>
         )) : (

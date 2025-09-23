@@ -112,6 +112,7 @@ const Country = () => {
                                             numPriceCard={""}
                                             isFav={null}
                                             type={null}
+                                            showFavIcon={false}
                                         />
                                     </Link>
                                 </div>

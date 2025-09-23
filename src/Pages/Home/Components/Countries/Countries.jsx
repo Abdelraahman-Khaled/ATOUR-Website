@@ -9,22 +9,14 @@ import CountryAPI from 'api/country';
 const Countries = () => {
     const { t } = useTranslation(); // Get the translation function
     const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
-    const [filteredMostVisited, setFilteredMostVisited] = useState([]);
+    const [countries, setCountries] = useState([]);
     const { currentLanguage } = useLanguage()
 
     useEffect(() => {
         const fetchCountries = async () => {
             try {
                 const response = await CountryAPI.getCountries(currentLanguage);
-                if (response.success) {
-                    setFilteredMostVisited(response.data.map(country => {
-                        return {
-                            ...country,
-                            image: require(`../../../../assets/images/countries_flags/${country.id}.png`)
-                        };
-                    }));
-                    console.log("res", response.data);
-                }
+                setCountries(response.data);
             } catch (error) {
                 console.error("Error fetching countries:", error);
             }
@@ -82,7 +74,7 @@ const Countries = () => {
             <div className="all-images-card" data-aos="fade-up">
                 {/* ============ START ROW ========== */}
                 <div className="row g-3 justify-content-center">
-                    {filteredMostVisited && filteredMostVisited.length > 0 && filteredMostVisited.map((item) => {
+                    {countries && countries.length > 0 && countries.map((item) => {
                         return (
                             <div key={item.id} className="col-6 col-md-4 col-lg-3">
                                 <Link to={`/country/${item.id}`} onClick={handleLinkClick}>
@@ -90,7 +82,7 @@ const Countries = () => {
                                     <div className="card-image-one">
                                         <div className="image-card position-relative overlay-bg">
                                             <img
-                                                src={item.image}
+                                                src={item.photo}
                                                 alt="imageCard"
                                                 loading="lazy"
                                                 className="w-100 h-100 object-fit-cover image-card-src"

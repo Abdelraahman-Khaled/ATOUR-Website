@@ -61,8 +61,8 @@ const DateDisplay = ({ from_date, language = "ar" }) => {
 
     return (
         <div className="text-date">
-            {dayName} <span className="fw-bold">{dayNumber}</span> {monthName},{" "}
-            <span className="fw-bold">{year}</span>
+            {dayName} <span>{dayNumber}</span> {monthName},{" "}
+            <span>{year}</span>
         </div>
     );
 };

@@ -28,7 +28,8 @@ const CardFavorite = ({
   addToWishList,
   type,
   refresh,
-  bookingCount
+  bookingCount,
+  is_group,
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
@@ -83,9 +84,9 @@ const CardFavorite = ({
         <div className="header-top-card d-flex justify-content-between align-items-center flex-wrap gap-2">
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
-            {cardFavoriteTranslations.startingFrom[currentLanguage]}
+            {is_group ? " " : cardFavoriteTranslations.startingFrom[currentLanguage]}
             <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>
-            {cardFavoriteTranslations.perPerson[currentLanguage]}{" "}
+            {is_group ? cardFavoriteTranslations.perGroup[currentLanguage] : cardFavoriteTranslations.perPerson[currentLanguage]}{" "}
             {isTrueNumTwo && (
               <p className="text-2">
                 {cardFavoriteTranslations.insteadOf[currentLanguage]}{" "}
@@ -98,7 +99,7 @@ const CardFavorite = ({
         </div>
         {/* ========== END HEADER TOP CARD ========== */}
         {/* ========== START RATE CARD ============= */}
-        <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p>
+        {/* <p className="text favDev" dangerouslySetInnerHTML={{ __html: sliceWords(textContent) }}></p> */}
 
         {bookingCount >= 0 &&
           <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
@@ -108,7 +109,9 @@ const CardFavorite = ({
         }
         {rateNum >= 0 &&
           <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
-            <IconStarRate /> {rateNum}{" "}
+            <IconStarRate />
+            {rateNum ? rateNum.toFixed(1) : 0}
+
             {cardFavoriteTranslations.rating[currentLanguage]}
           </div>
         }
@@ -120,7 +123,7 @@ const CardFavorite = ({
               {cardFavoriteTranslations.freeCancellation[currentLanguage]}
             </div>
           )}
-          {isTrueTextOneCard_2 === 0 && (
+          {isTrueTextOneCard_2 > 0 && (
             <div className="text-one-card d-flex align-items-center gap-2">
               <CheckIcon />{" "}
               {cardFavoriteTranslations.bookNowPayLater[currentLanguage]}

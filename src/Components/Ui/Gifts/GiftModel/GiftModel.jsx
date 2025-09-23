@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import content from "./translates"
+import translations from "Components/Languages/translations";
 
 const GiftModal = ({ gift }) => {
     const iframeRef = useRef(null);
@@ -17,40 +19,17 @@ const GiftModal = ({ gift }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [paymentUrl, setPaymentUrl] = useState(null);
     const [paymentWay, setPaymentWay] = useState("online");
+    const [countries, setCountries] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState("");
+    const [cities, setCities] = useState([]);
+    const [selectedCity, setSelectedCity] = useState("");
+    const [deliveryCost, setDeliveryCost] = useState(null);
     const { currentLanguage } = useLanguage();
     const navigate = useNavigate();
     const isRTL = currentLanguage === "ar";
+    console.log("gift", gift);
 
-    const content = {
-        bookNow: { ar: "احجز الآن", en: "Book Now" },
-        orderDetails: { ar: "تفاصيل الطلب", en: "Order Details" },
-        quantity: { ar: "الكمية", en: "Quantity" },
-        deliveryMethod: { ar: "طريقة التوصيل", en: "Delivery Method" },
-        byMyself: { ar: "سأستلمها بنفسي", en: "By Myself" },
-        delivery: { ar: "التوصيل", en: "Delivery" },
-        address: { ar: "العنوان", en: "Address" },
-        phoneNumber: { ar: "رقم الهاتف", en: "Phone Number" },
-        submit: { ar: "بدأ الدفع", en: "Starting Payment" },
-        paymentInitiated: { ar: "تم بدء عملية الدفع.", en: "Payment initiated." },
-        paymentFailed: { ar: "فشلت عملية الدفع.", en: "Payment failed." },
-        paymentSuccess: { ar: "تمت عملية الدفع بنجاح.", en: "Payment successful." },
-        paymentCancelled: {
-            ar: "تم الغاء عملية الدفع. يرجى المحاولة مرة أخرى.",
-            en: "Payment cancelled. Please try again.",
-        },
-        choosePaymentWay: {
-            ar: " أختر طريقة الدفع ",
-            en: "Payment Way",
-        },
-        cash: {
-            ar: "نقدي",
-            en: "Cash",
-        },
-        online: {
-            ar: "البطاقة البنكية",
-            en: "Online",
-        },
-    };
+
 
     const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -103,10 +82,8 @@ const GiftModal = ({ gift }) => {
     }, [processPaymentResponse]);
 
     const buttonActiveBook = async () => {
-        if (deliveryMethod === "delivery" && (!address || !phoneNumber)) {
-            toast.error(currentLanguage === "ar"
-                ? "الرجاء إدخال العنوان ورقم الهاتف"
-                : "Please enter address and phone number");
+        if (deliveryMethod === "delivery" && (!address || !phoneNumber || !selectedCountry || !selectedCity)) {
+            toast.error(content.errors.missingFields[currentLanguage]);
             return;
         }
 
@@ -120,6 +97,7 @@ const GiftModal = ({ gift }) => {
                 deliveryAddress: deliveryMethod === "delivery" ? address : "",
                 number: deliveryMethod === "delivery" ? phoneNumber : "",
                 location: deliveryMethod === "delivery" ? address : "",
+                selectedCity: deliveryMethod === "delivery" ? selectedCity : "",
             });
 
             if (response.success) {
@@ -154,8 +132,73 @@ const GiftModal = ({ gift }) => {
         };
     }, [handlePaymentMessage]);
 
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await BookingAPI.getCountries();
+                if (response.success && Array.isArray(response.data)) {
+                    setCountries(response.data);
+
+                } else {
+                    setCountries([]);
+                }
+            } catch (error) {
+                console.error("Failed to fetch countries:", error);
+                toast.error("Failed to load countries.");
+            }
+        };
+        fetchCountries();
+    }, []);
+
+    useEffect(() => {
+        if (selectedCountry) {
+            // console.log("Fetching cities for country ID:", selectedCountry);
+            const fetchCities = async () => {
+                try {
+                    const response = await BookingAPI.getCitiesByCountryId(selectedCountry);
+                    if (response.success && Array.isArray(response.data)) {
+                        setCities(response.data);
+
+                    } else {
+                        setCities([]);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch cities:", error);
+                    toast.error("Failed to load cities.");
+                }
+            };
+            fetchCities();
+        } else {
+            setCities([]);
+            setSelectedCity("");
+        }
+    }, [selectedCountry]);
+
+    useEffect(() => {
+        if (selectedCity && gift?.vendor?.id) {
+            const fetchDeliveryCost = async () => {
+                try {
+                    // Assuming BookingAPI has a method to get delivery cost
+                    const response = await BookingAPI.getDeliveryCost(selectedCity, gift.vendor.id);
+                    if (response.success) {
+                        console.log("Delivery Cost:", response.data);
+                        setDeliveryCost(response.data.cost); // Assuming the cost is in response.data.cost
+                    } else {
+                        console.error("Failed to fetch delivery cost:", response.data);
+                        toast.error("Failed to load delivery cost.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching delivery cost:", error);
+                    toast.error("Error loading delivery cost.");
+                }
+            };
+            fetchDeliveryCost();
+        }
+    }, [selectedCity, gift?.vendor?.id]);
+    console.log(selectedCity);
+
     return (
-        <div className={`text-${isRTL ? "right" : "left"}`}>
+        <div className={`text-${isRTL ? "right" : "left"} `}>
             {paymentUrl && (
                 <CustomModal
                     show={!!paymentUrl}
@@ -174,7 +217,7 @@ const GiftModal = ({ gift }) => {
                 </CustomModal>
             )}
 
-            <button onClick={handleOpenModal} className="btn-main">
+            <button onClick={handleOpenModal} className="btn-main w-100">
                 {content.bookNow[currentLanguage]}
             </button>
 
@@ -251,7 +294,55 @@ const GiftModal = ({ gift }) => {
                                         required
                                     />
                                 </Form.Group>
+                                <Form.Group controlId="countrySelect" className="mt-3">
+                                    <Form.Label>{content.country[currentLanguage]}</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        value={selectedCountry}
+                                        onChange={(e) => {
+                                            setSelectedCountry(e.target.value);
+                                            // console.log("Selected Country ID:", e.target.value);
+                                        }}
+                                        required
+                                    >
+                                        <option value="">{content.selectCountry[currentLanguage]}</option>
+                                        {countries.map((country) => (
+                                            <option key={country.id} value={country.id}>
+                                                {country.title}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Form.Group>
+                                {selectedCountry && (
+                                    <Form.Group controlId="citySelect" className="mt-3">
+                                        <Form.Label>{content.city[currentLanguage]}</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            value={selectedCity}
+                                            onChange={(e) => setSelectedCity(e.target.value)}
+                                            required
+                                        >
+                                            <option value="">{content.selectCity[currentLanguage]}</option>
+                                            {cities.map((city) => (
+                                                <option key={city.id} value={city.id}>
+                                                    {city.title}
+                                                </option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                )}
                             </>
+                        )}
+
+                        {deliveryMethod === "delivery" && deliveryCost !== null && (
+                            <Form.Group controlId="deliveryCost" className="mt-3">
+                                <Form.Label>{content.deliveryCost[currentLanguage]}</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={`${deliveryCost} ${currentLanguage === "ar" ? "ريال" : "SAR"}`}
+                                    readOnly
+                                />
+                            </Form.Group>
                         )}
 
                         {gift.pay_later == true && (
@@ -284,7 +375,7 @@ const GiftModal = ({ gift }) => {
                             disabled={isLoading}
                         >
                             {isLoading
-                                ? (currentLanguage === "ar" ? "جاري المعالجة..." : "Processing...")
+                                ? content.processing[currentLanguage]
                                 : content.submit[currentLanguage]}
                         </button>
                     </Form>

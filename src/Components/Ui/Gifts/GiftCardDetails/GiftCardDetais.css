@@ -26,4 +26,18 @@
   .location-content-info .google-map .iframe-map {
     height: 330px !important;
   }
+
+  .details-card-page .overflow-hidden {
+    flex-direction: column;
+  }
+
+  .details-card-page .header-details-card-page {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .details-card-page .padding-80 {
+    padding: 20px;
+  }
 }

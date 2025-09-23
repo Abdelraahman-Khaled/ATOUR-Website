@@ -10,20 +10,21 @@ import { Link, useParams } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
+import { detailsTripTranslations } from "./translation";
 
 const DetailsTripInfoPage = () => {
   const [tripData, setTripData] = useState(null); // State to store fetched data
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
   const { currentLanguage } = useLanguage(); // Get the current language
-    const { currentCurrency } = useCurrency();
+  const { currentCurrency } = useCurrency();
 
   const { id } = useParams();
   // Fetch data on component mount
   useEffect(() => {
     const fetchTripData = async () => {
       try {
-        const response = await ContentAPI.getTripById(id, currentLanguage,currentCurrency); // Replace with your API call
+        const response = await ContentAPI.getTripById(id, currentLanguage, currentCurrency); // Replace with your API call
         setTripData(response.data); // Store fetched data in state
       } catch (err) {
         console.error("Error fetching trip data:", err);
@@ -34,7 +35,7 @@ const DetailsTripInfoPage = () => {
     };
 
     fetchTripData();
-  }, [id, currentLanguage,currentCurrency]);
+  }, [id, currentLanguage, currentCurrency]);
 
   // Display loading state
   if (loading) {
@@ -49,12 +50,12 @@ const DetailsTripInfoPage = () => {
   // Display error state
   if (error) {
     return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
-      {currentLanguage === "ar" ? "هذه الرحلة غير متوفرة" : "This trip not available."}
+      {detailsTripTranslations.tourDetailsNotAvailable[currentLanguage]}
       <Link
         to="/"
         className="fs-6 fw-medium text-danger text-decoration-underline px-2"
       >
-        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+        {detailsTripTranslations.home[currentLanguage]}
       </Link>
     </p>;;
   }
@@ -62,26 +63,26 @@ const DetailsTripInfoPage = () => {
   // Display if no data is available
   if (!tripData) {
     return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
-      {currentLanguage === "ar" ? "تفاصيل الرحلة غير متوفرة" : "Trip details not available."}
+      {detailsTripTranslations.tourDetailsNotAvailable[currentLanguage]}
       <Link
         to="/"
         className="fs-6 fw-medium text-danger text-decoration-underline px-2"
       >
-        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+        {detailsTripTranslations.home[currentLanguage]}
       </Link>
     </p>;
   }
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "تفاصيل" : "Details"} />
+      <HelmetInfo titlePage={detailsTripTranslations.tourDetails[currentLanguage]} />
 
       <div className="details-trip-info-page padding-60">
         <header>
           <BreadcrumbsPage
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
-            titleTwoBread={currentLanguage === "ar" ? "رحلات" : "Trips"}
-            textBreadActive={currentLanguage === "ar" ? "تفاصيل الرحلة" : "Trip details"}
+            titleTwoBread={detailsTripTranslations.tours[currentLanguage]}
+            textBreadActive={detailsTripTranslations.tourDetails[currentLanguage]}
           />
         </header>
         <main>

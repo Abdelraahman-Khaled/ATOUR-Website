@@ -4,6 +4,7 @@ import "./SliderHeader.css";
 
 const SliderHeader = ({ biography }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  console.log(biography);
 
   const welcomeTranslations = {
     en: "Welcome to ",
@@ -37,7 +38,7 @@ const SliderHeader = ({ biography }) => {
             >
               <source src={videoSrc} type="video/mp4" />
             </video> */}
-            <img className="w-100 cover h-100" src={biography.photo} alt="cover-photo" />
+            <img className="w-100 cover h-100" src={biography.image} alt="cover-photo" />
           </div>
           <div className="info-banner position-relative z-1">
             <div className="row g-3 align-items-center justify-content-between">
@@ -51,9 +52,7 @@ const SliderHeader = ({ biography }) => {
                     className="text text-font-400-white font-18 favDev"
                     data-aos="fade-up"
                   >
-                    {biography.translations.filter((item) => {
-                      return item.locale === currentLanguage
-                    })[0].description}
+                    {biography.description}
                   </p>
                 </div>
               </div>

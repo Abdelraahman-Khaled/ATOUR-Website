@@ -4,32 +4,35 @@ import React, { useState } from "react";
 import "./CounterUpDown.css";
 
 function CounterUpDown({
-  initialValue = 1,
   minValue = 1,
   maxValue,
   onChange,
   disablePlus = false,
+  initialValue,
 }) {
-  const [count, setCount] = useState(initialValue);
+  // const [count, setCount] = useState(minValue);
+  // console.log("minValue", minValue);
+  // console.log("maxValue", maxValue);
+  
 
   const handleIncrease = () => {
-    if (count < maxValue && !disablePlus) {
-      setCount(count + 1);
-      onChange && onChange(count + 1);
+    if (initialValue < maxValue && !disablePlus) {
+      // setCount(count + 1);
+      onChange && onChange(initialValue + 1);
     }
   };
 
   const handleDecrease = () => {
-    if (count > minValue) {
-      setCount(count - 1);
-      onChange && onChange(count - 1);
+    if (initialValue > minValue) {
+      // setCount(count - 1);
+      onChange && onChange(initialValue - 1);
     }
   };
 
   const handleChange = (e) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value) && value >= minValue && value <= maxValue) {
-      setCount(value);
+      // setCount(value);
       onChange && onChange(value);
     }
   };
@@ -42,7 +45,7 @@ function CounterUpDown({
       <input
         type="text"
         className="num-counter"
-        value={count}
+        value={initialValue}
         onChange={handleChange}
       />
       <button className="btn-main" onClick={handleIncrease} disabled={disablePlus}>

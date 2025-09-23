@@ -24,19 +24,21 @@ const DatePickerComponent = ({ addTextPlaceHolder, setSelectedDay, selectedDay }
     fetchTripCalendar();
   }, [id]);
 
+  // ✅ Convert API dates to calendar format
+  const parseDate = (dateStr) => {
+    const [year, month, day] = dateStr.split("-").map(Number);
+    return { year, month, day };
+  };
+
+  // ✅ Available dates
   const availableDates = dates
     .filter(item => item.status === "available")
-    .map(item => {
-      const [year, month, day] = item.date.split("-").map(Number);
-      return { year, month, day };
-    });
+    .map(item => parseDate(item.date));
 
-  const notAvailableDates = dates
-    .filter(item => item.status === "not_available")
-    .map(item => {
-      const [year, month, day] = item.date.split("-").map(Number);
-      return { year, month, day };
-    });
+  // ✅ Disabled dates (full + not available)
+  const disabledDates = dates
+    .filter(item => item.status !== "available")
+    .map(item => parseDate(item.date));
 
   const handleDateChange = (date) => {
     setSelectedDay(date);
@@ -54,12 +56,11 @@ const DatePickerComponent = ({ addTextPlaceHolder, setSelectedDay, selectedDay }
           value={selectedDay}
           onChange={handleDateChange}
           inputPlaceholder={formatPlaceholder()}
-          shouldHighlightWeekends
           locale="en"
-          minimumDate={availableDates[0]}
+          minimumDate={availableDates[0]} // ✅ calendar starts from first available date
           maximumDate={availableDates[availableDates.length - 1]}
-          disabledDays={notAvailableDates}
-          customDaysClassName={notAvailableDates.map(date => ({
+          disabledDays={disabledDates} // ✅ disable full + not available
+          customDaysClassName={disabledDates.map(date => ({
             ...date,
             className: "not-available-date"
           }))}

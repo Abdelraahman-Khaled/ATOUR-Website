@@ -17,14 +17,14 @@ START BOX INFO ONE CONTENT
   padding: 10px;
   width: fit-content;
   border-radius: 8px;
-  width: 75px;
-  height: 50px;
+  width: 120px;
+  height: 80px;
 }
 
 .all-content-info-details-right .box-info-one-content .img-company img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .all-content-info-details-right :is(.title, .text, .rate-info) {

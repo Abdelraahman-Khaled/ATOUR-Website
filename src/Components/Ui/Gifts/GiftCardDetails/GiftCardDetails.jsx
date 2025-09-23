@@ -2,25 +2,117 @@ import "./GiftCardDetais.css";
 import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import CustomModal from "Components/CustomModal/CustomModal";
-import DateIcon2 from "assets/Icons/DateIcon2";
-import DateDisplay from "Components/DateDisplay/DateDisplay";
-import ClockIcon2 from "assets/Icons/ClockIcon2";
 import MapLocationInfo from "Components/Ui/MapLocationInfo/MapLocationInfo";
 import GiftModel from "../GiftModel/GiftModel";
 import { Link } from "react-router-dom";
+import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
+import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faCoins, faLocation, faTicket, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+
+const content = {
+    notFound: {
+        en: "Gift details not available",
+        ar: "تفاصيل الهدية غير متوافرة",
+        fr: "Détails du cadeau non disponibles",
+        de: "Geschenkdetails nicht verfügbar",
+        es: "Detalles del regalo no disponibles",
+        tr: "Hediye detayları mevcut değil",
+        ru: "Детали подарка недоступны",
+        zh: "礼物详情不可用",
+        ko: "선물 세부 정보 없음",
+        pt: "Detalhes do presente não disponíveis",
+        ur: "تحفے کی تفصیلات دستیاب نہیں ہیں",
+        ja: "ギフトの詳細は利用できません",
+    },
+    home: {
+        en: "Home",
+        ar: "الصفحة الرئيسية",
+        fr: "Accueil",
+        de: "Startseite",
+        es: "Inicio",
+        tr: "Ana Sayfa",
+        ru: "Главная",
+        zh: "主页",
+        ko: "홈",
+        pt: "Início",
+        ur: "ہوم",
+        ja: "ホーム",
+    },
+    modalTitle: {
+        en: "Complete Payment",
+        ar: "إتمام الدفع",
+        fr: "Terminer le paiement",
+        de: "Zahlung abschließen",
+        es: "Completar el pago",
+        tr: "Ödemeyi Tamamla",
+        ru: "Завершить оплату",
+        zh: "完成付款",
+        ko: "결제 완료",
+        pt: "Concluir Pagamento",
+        ur: "ادائیگی مکمل کریں",
+        ja: "支払いを完了する",
+    },
+    bookingCount: {
+        en: "Purchase count",
+        ar: "عدد الشراء",
+        fr: "Nombre d'achats",
+        de: "Anzahl der Käufe",
+        es: "Número de compras",
+        tr: "Satın Alma Sayısı",
+        ru: "Количество покупок",
+        zh: "购买次数",
+        ko: "구매 횟수",
+        pt: "Contagem de compras",
+        ur: "خریداری کی تعداد",
+        ja: "購入回数",
+    },
+    freeCancel: {
+        en: "Free cancellation available",
+        ar: "متاح إلغاء الحجز مجانا",
+        fr: "Annulation gratuite disponible",
+        de: "Kostenlose Stornierung verfügbar",
+        es: "Cancelación gratuita disponible",
+        tr: "Ücretsiz iptal mevcut",
+        ru: "Бесплатная отмена доступна",
+        zh: "可免费取消",
+        ko: "무료 취소 가능",
+        pt: "Cancelamento gratuito disponível",
+        ur: "مفت منسوخی دستیاب ہے",
+        ja: "無料キャンセル可",
+    },
+    payLater: {
+        en: "Book now, pay later",
+        ar: "إحجز الآن إدفع لاحقا",
+        fr: "Réservez maintenant, payez plus tard",
+        de: "Jetzt buchen, später bezahlen",
+        es: "Reserva ahora, paga después",
+        tr: "Şimdi Rezerv Et, Sonra Öde",
+        ru: "Забронируйте сейчас, оплатите позже",
+        zh: "现在预订，稍后付款",
+        ko: "지금 예약하고 나중에 결제",
+        pt: "Reserve agora, pague depois",
+        ur: "ابھی بک کریں، بعد میں ادائیگی کریں",
+        ja: "今すぐ予約、後で支払い",
+    },
+};
+
+
 const GiftCardDetails = ({ gift }) => {
     const { currentLanguage } = useLanguage(); // Get the current language
     const [paymentUrl, setPaymentUrl] = useState(null);
+    console.log(gift);
 
     if (!gift) {
         return <>
             <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
-                {currentLanguage === "ar" ? " تفاصيل الهدية غير متوافرة" : "Gift details not available"}
+                {content.notFound[currentLanguage]}
                 <Link
                     to="/"
                     className="fs-6 fw-medium text-danger text-decoration-underline px-2"
                 >
-                    {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+                    {content.home[currentLanguage]}
                 </Link>
             </p>
         </>;
@@ -32,7 +124,7 @@ const GiftCardDetails = ({ gift }) => {
                 <CustomModal
                     show={!!paymentUrl}
                     onHide={() => setPaymentUrl(null)}
-                    title={currentLanguage === "ar" ? "إتمام الدفع" : "Complete Payment"}
+                    title={content.modalTitle[currentLanguage]}
                     newClass={"modal-payment"}
                 >
                     <iframe
@@ -44,59 +136,69 @@ const GiftCardDetails = ({ gift }) => {
                     />
                 </CustomModal>
             )}
-
             <div className="details-card-page padding-80">
-                {/* Header */}
-                <div className="header-details-card-page d-flex justify-content-between align-items-center flex-wrap gap-3">
-                    <h2 className="title">
-                        {gift?.title}
-                    </h2>
-                    <div className="info-right-details d-flex align-items-center gap-3">
-                        <div className="num-price-info">
-                            <span className="price-num fw-bold">
-                                {gift?.price} {currentLanguage === "ar" ? "ريال" : "SAR"}
-                            </span>{" "}
-                            / {currentLanguage === "ar" ? "للفرد" : "per person"}
+                <div className="overflow-hidden  row g-0 ">
+                    <div className="col-12 col-lg-5 overflow-hidden border rounded rounded-2 ">
+                        <SwiperSlider
+                            itemsSlider={gift.attachments}
+                            sliderNewClass={"slider-height slider-details-right  "}
+                        ></SwiperSlider>
+                    </div>
+                    <div className="header-details-card-page d-flex justify-content-between align-items-center flex-wrap gap-3 col-12 col-lg-7 px-4 h-100 ">
+                        <div className="content-info-details-left-trip aos-init aos-animate col-12 col-lg-4 mt-3 mt-lg-0 w-100">
+                            <h2 className="title mb-1">{gift?.title}</h2>
+                            <p className="text mb-4">{gift.description}</p>
+                            <div className="num-price-info w-100 d-flex gap-1 justify-content-between mb-4">
+                                <div className="date-content-info d-flex gap-2 flex-column ">
+                                    <p> <FontAwesomeIcon icon={faLocation} /> {gift.location}</p>
+                                    <p><FontAwesomeIcon icon={faTicket} /> {content.bookingCount[currentLanguage]} {gift.booking_count} </p>
+                                    <p> <FontAwesomeIcon icon={faCoins} /> <CurrencyDisplay price={gift.customer_price} /></p>
+                                </div>
+                            </div>
                         </div>
-                        <GiftModel gift={gift} />
+                        <div className="content-info-details-left-trip aos-init aos-animate col-12 col-lg-4 mt-3 mt-lg-0 w-100">
+                            <div className="end-info-detials">
+                                {/* modal */}
+                                <GiftModel gift={gift} />
+                                <div className="detials-info-one d-flex align-items-center gap-2">
+
+                                    <div className="icon-check icon-check-link">
+                                        {gift.free_cancelation ? (
+                                            <div className="icon-times  icon-check-link">
+                                                <FontAwesomeIcon icon={faCheck} />
+                                            </div>
+                                        ) : (
+                                            <div className="icon-times bg-secondary icon-check-link ">
+                                                <FontAwesomeIcon icon={faTimes} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <span className="title-text">
+                                        {content.freeCancel[currentLanguage]}
+                                    </span>
+                                </div>
+                                <div className="detials-info-one d-flex align-items-center gap-2">
+                                    {gift.pay_later ? (
+                                        <div className="icon-times  icon-check-link">
+                                            <FontAwesomeIcon icon={faCheck} />
+                                        </div>
+                                    ) : (
+                                        <div className="icon-times bg-secondary icon-check-link">
+                                            <FontAwesomeIcon icon={faTimes} />
+                                        </div>
+                                    )}
+                                    <span className="title-text">
+                                        {content.payLater[currentLanguage]}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                {/* Date and Time */}
-                <div className="date-content-info pt-3">
-                    {gift?.from_date && (
-                        <div className="date-one d-flex align-items-center gap-2">
-                            <DateIcon2 />
-                            <DateDisplay from_date={gift.from_date} />
-                        </div>
-                    )}
-                    {gift?.from_time > 0 && (
-                        <div className="date-one pt-2 d-flex align-items-center gap-2">
-                            <ClockIcon2 />
-                            {gift.from_time.slice(0, -3)}
-                        </div>
-                    )}
-                </div>
-
-                {/* Description */}
-                <p className="text pt-3">
-                    {currentLanguage === "ar" ? gift?.description_ar : gift?.description_en}
-                </p>
-
                 {/* Location */}
                 <div className="location-content-info pt-4">
-                    {gift?.location && (
-                        <>
-                            <h2 className="title pb-4">
-                                {currentLanguage === "ar" ? "الموقع" : "Location"}
-                            </h2>
-                            <div className="info-location box-border-circle">
-                                <p className="text">
-                                    {currentLanguage === "en" ? gift.location : gift.location_ar}
-                                </p>
-                            </div>
-                        </>
-                    )}
                     <MapLocationInfo tripData={gift} />
                 </div>
             </div>

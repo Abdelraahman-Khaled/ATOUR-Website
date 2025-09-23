@@ -1,15 +1,17 @@
 import DateDisplay from "Components/DateDisplay/DateDisplay";
 import { Link } from "react-router-dom";
 import "./CardNews.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 const CardNews = ({
   routeNewsCard,
   description,
   imageNews,
   titleNews,
-  imageUserNews,
-  nameUserNews,
-  timeAddedNews
+  timeAddedNews,
+  tags,
+  endTimeAddedNews
 }) => {
   // Safely truncate HTML content while preserving entities
   const truncateDescription = (text, maxLength = 320) => {
@@ -58,33 +60,30 @@ const CardNews = ({
         <img
           src={imageNews}
           alt="img news"
-          className="image-news-src object-fit-cover"
+          className="image-news-src"
         />
       </div>
       {/* ============= END IMAGE CARD NEWS ============== */}
       {/* ============= START CONTENT INFO CARD NEWS ========== */}
       <div className="content-info-card-news">
-        <div className="mb-3">
-          <h2 className="title mb-3">{titleNews}</h2>
+        <div>
+          <h2 className="title">{titleNews}</h2>
+          <div className="description d-flex align-items-center gap-2">
+            من : <FontAwesomeIcon icon={faCalendar} />  <DateDisplay from_date={timeAddedNews} />
+          </div>
+          <div className="description d-flex align-items-center gap-2">
+            الي :  <FontAwesomeIcon icon={faCalendar} /> <DateDisplay from_date={endTimeAddedNews} />
+          </div>
           <p
             className="description"
-            dangerouslySetInnerHTML={{ __html: truncateDescription(description) }}
-          ></p>
+          >
+            {description}
+          </p>
         </div>
-        <div className="author-info">
-          <img
-            src={imageUserNews}
-            alt={nameUserNews}
-            className="author-image"
-          />
-          <div className="author-details ">
-            <h3 className="author-name">{nameUserNews}</h3>
-            <div className="time-add">{<DateDisplay from_date={timeAddedNews} />}</div>
-          </div>
-        </div>
+        <span className="description tags">{tags}</span>
       </div>
       {/* ============= END CONTENT INFO CARD NEWS ========== */}
-    </Link>
+    </Link >
   );
 };
 

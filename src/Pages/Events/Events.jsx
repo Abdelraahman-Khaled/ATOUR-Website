@@ -8,9 +8,50 @@ import { useEffect, useState } from "react";
 import ContentAPI from "api/contentApi";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { toast } from "react-toastify";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
+
+const translate = {
+  ar: {
+    title: "فعاليات",
+  },
+  en: {
+    title: "Events",
+  },
+  fr: {
+    title: "Événements",
+  },
+  es: {
+    title: "Eventos",
+  },
+  de: {
+    title: "Veranstaltungen",
+  },
+  it: {
+    title: "Eventi",
+  },
+  ru: {
+    title: "События",
+  },
+  zh: {
+    title: "活动",
+  },
+  ja: {
+    title: "イベント",
+  },
+  ko: {
+    title: "이벤트",
+  },
+  pt: {
+    title: "Eventos",
+  },
+  tr: {
+    title: "Etkinlikler",
+  }
+}
 const Events = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  const { currentCurrency } = useCurrency()
   const [eventsData, setEventsData] = useState([])
   const [loading, setLoading] = useState(true); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
@@ -19,7 +60,8 @@ const Events = () => {
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const data = await ContentAPI.getEffectiveness(currentLanguage); // Fetch data from the API
+        const data = await ContentAPI.getEffectiveness(currentLanguage, currentCurrency); // Fetch data from the API
+
         const enrichedData = data.data.map((item) => {
           // Assign categories dynamically based on date or logic
           const now = new Date();
@@ -41,14 +83,14 @@ const Events = () => {
         setEventsData(enrichedData)
       } catch (err) {
         console.error("Error fetching home data:", err);
-        toast.error("Failed to load home data. Please try again later.");
+        toast.error("Failed to load effective data. Please try again later.");
       } finally {
         setLoading(false); // Stop the loading spinner
       }
     };
 
     fetchEventsData(); // Call the API on component mount
-  }, [currentLanguage]);
+  }, [currentLanguage, currentCurrency]);
 
   // normalize images
   const normalizeData = (data) => {
@@ -73,12 +115,12 @@ const Events = () => {
 
   return (
     <>
-      <HelmetInfo titlePage={"الفعاليات"} />
+      <HelmetInfo titlePage={translate[currentLanguage].title} />
 
       <div className="events-page">
         <header>
           {/* =========== START SLIDER CONTENT ========== */}
-          <SliderEvents currentLanguage={currentLanguage} />
+          {/* <SliderEvents currentLanguage={currentLanguage} /> */}
           {/* =========== START SLIDER CONTENT ========== */}
         </header>
         <main>

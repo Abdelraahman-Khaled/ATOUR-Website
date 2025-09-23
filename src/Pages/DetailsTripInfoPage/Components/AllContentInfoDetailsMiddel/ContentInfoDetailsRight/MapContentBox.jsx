@@ -73,11 +73,13 @@ const MapContentBox = ({ tripData }) => {
             <h2 className="title">{content.title[currentLanguage]}</h2>
 
             {/* Group note */}
-            {tripData.is_group && (
+            {tripData.is_group ? (
               <p className="text-read-more mt-2">
                 {content.groupNote[currentLanguage]}
               </p>
-            )}
+            )
+              : null
+            }
 
             {/* Meeting Point */}
             <div className="box-border-circle">

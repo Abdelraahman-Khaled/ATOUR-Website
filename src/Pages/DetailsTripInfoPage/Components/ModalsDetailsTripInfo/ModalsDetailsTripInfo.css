@@ -53,9 +53,18 @@
 }
 
 .modal-available .all-content-available {
-  height: 600px;
   overflow: hidden;
   overflow-y: auto;
+}
+.modal-available .all-content-available .title {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--dark-01-color);
+}
+.modal-available .all-content-available .text {
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 12px 0 0 0;
 }
 
 .modal-available .all-content-available::-webkit-scrollbar {

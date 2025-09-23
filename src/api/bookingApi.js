@@ -39,9 +39,7 @@ const BookingAPI = {
 
   // tripe dates
   bookCalender: async (id) => {
-    const response = await axiosInstance.get(
-      `/trip-calendar/${id}`
-    );
+    const response = await axiosInstance.get(`/trip-calendar/${id}`);
     return response.data;
   },
   // Book a trip
@@ -53,7 +51,7 @@ const BookingAPI = {
     paymentWay,
     time,
     bookingDay,
-    language
+    language,
   }) => {
     const response = await axiosInstance.post("/booking-trip", {
       trip_id: tripId,
@@ -78,7 +76,8 @@ const BookingAPI = {
     deliveryWay,
     deliveryAddress,
     number,
-    location
+    location,
+    selectedCity,
   }) => {
     const response = await axiosInstance.post("/booking-gift", {
       gift_id: giftId,
@@ -87,16 +86,18 @@ const BookingAPI = {
       delivery_way: deliveryWay,
       delivery_address: deliveryAddress,
       delivery_number: number,
-      location
+      location,
+      selectedCity,
     });
     return response.data;
   },
 
   // Book an effectiveness package
-  bookEffectivene: async ({ effectiveneId, paymentWay }) => {
+  bookEffectivene: async ({ effectiveneId, paymentWay, people_number }) => {
     const response = await axiosInstance.post("/booking-effectivene", {
       effectivene_id: effectiveneId,
       payment_way: paymentWay,
+      people_number: people_number,
     });
     return response.data;
   },
@@ -107,10 +108,26 @@ const BookingAPI = {
     return response.data;
   },
 
-
   // get payment status
-  getPaymentStatus: async (url,id) => {
+  getPaymentStatus: async (url, id) => {
     const response = await axiosInstance.get(`/${url}/${id}`);
+    return response.data;
+  },
+
+  getCountries: async () => {
+    const response = await axiosInstance.get("/countries");
+    return response.data;
+  },
+
+  getCitiesByCountryId: async (countryId) => {
+    const response = await axiosInstance.get(`/countries/${countryId}`);
+    return response.data;
+  },
+
+  getDeliveryCost: async (cityId, vendorId) => {
+    const response = await axiosInstance.get(
+      `/delivery-cost/${cityId}/${vendorId}`
+    );
     return response.data;
   },
 };

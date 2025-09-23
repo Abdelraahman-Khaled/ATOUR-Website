@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 
 const FilterByTypeButton = ({ buttonCount, buttonLabels }) => {
   const [activeButtons, setActiveButtons] = useState([]);
@@ -22,13 +22,10 @@ const FilterByTypeButton = ({ buttonCount, buttonLabels }) => {
           <button
             key={index}
             onClick={() => handleClick(index)}
-            className={`main-btn-filter ${
-              activeButtons.includes(index) ? "active" : ""
-            }`}
+            className={`main-btn-filter ${activeButtons.includes(index) ? "active" : ""
+              }`}
           >
-            {buttonLabels && buttonLabels[index]
-              ? buttonLabels[index]
-              : `Button ${index + 1}`}
+            {buttonLabels[index]}
           </button>
         ))}
       </div>

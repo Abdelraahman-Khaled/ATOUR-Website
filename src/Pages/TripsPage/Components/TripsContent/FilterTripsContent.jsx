@@ -6,7 +6,7 @@ import PriceFilter from "Components/Ui/FilterCards/Components/PriceFilter";
 import FilterCards from "Components/Ui/FilterCards/FilterCards";
 import MapLocationInfo from "Components/Ui/MapLocationInfo/MapLocationInfo";
 import "react-datepicker/dist/react-datepicker.css";
-const FilterTripsContent = ({ activeMap }) => {
+const FilterTripsContent = ({ activeMap, subCategories }) => {
   const buttonText = [
     "رحلات ريفية",
     "رحلات ريفية",
@@ -22,32 +22,33 @@ const FilterTripsContent = ({ activeMap }) => {
     "السعر الأعلى أولا",
     "السعر الأقل أولا"
   ];
+  console.log(subCategories);
 
   return (
     <div className="main-right-trips-content">
-      {!activeMap ? (
+      {activeMap ? (
         <>
           <div className="all-filter-info">
             <FilterCards>
               <div className="main-add-place-date main-add-place-date--1">
                 {/* ======== START SEARCH INPUT ========= */}
-                <DatePickerComponent addTextPlaceHolder={"حدد تاريخ الرحلة "} />
+                {/* <DatePickerComponent addTextPlaceHolder={"حدد تاريخ الرحلة "} /> */}
                 {/* ======== END SEARCH INPUT ========= */}
               </div>
-              <PriceFilter />
+              {/* <PriceFilter /> */}
 
               {/* ============= START FILTER BY TYPE ============== */}
-              <FilterByTypeButton buttonCount={5} buttonLabels={buttonText} />
+              <FilterByTypeButton buttonCount={subCategories.length} buttonLabels={subCategories.map((item) => item.title)} />
               {/* ============= END FILTER BY TYPE ============== */}
 
               {/* ============= START FILTER CATEGORY ============ */}
-              <FilterByCategory
+              {/* <FilterByCategory
                 checkboxCount={checkboxLabels.length}
                 checkboxLabels={checkboxLabels}
-              />
+              /> */}
               {/* ============= END FILTER CATEGORY ============ */}
               {/* ============= START FILTER BY RATE ============ */}
-              <FilterByRate />
+              {/* <FilterByRate /> */}
               {/* ============= END FILTER BY RATE ============ */}
             </FilterCards>
           </div>

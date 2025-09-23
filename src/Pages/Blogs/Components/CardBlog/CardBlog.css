@@ -39,7 +39,7 @@
   height: 200px;
   width: 100%;
   border-radius: 12px 12px 0 0;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .card-blog-one .content-info-card-blog {
@@ -71,7 +71,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex-grow: 1;
-  text-align: left;
 }
 .card-blog-one .content-info-card-blog .description span {
   font-size: 16px !important;

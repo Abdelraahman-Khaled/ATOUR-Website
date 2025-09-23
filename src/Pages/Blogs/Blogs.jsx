@@ -14,7 +14,7 @@ const Blogs = () => {
       <div className="blogs-page">
         <header>
           {/* ============== START SLIDER BLOGS =========== */}
-          <SliderBlogs />
+          {/* <SliderBlogs /> */}
           {/* ============== END SLIDER BLOGS =========== */}
         </header>
         <main>

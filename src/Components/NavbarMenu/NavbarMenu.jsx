@@ -1,4 +1,4 @@
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/images/logo/logo.svg";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
@@ -125,6 +125,62 @@ const NavbarMenu = () => {
 
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             <Nav className="me-auto" data-aos="fade-right">
+
+
+              <NavDropdown title={"استكشف"} id="basic-nav-dropdown">
+
+
+                <NavDropdown
+                  title={"الجولات"}
+                  id="basic-nav-dropdown"
+                  drop="end" // Makes dropdown menu appear to the right
+                >
+                  <NavDropdown.Item as={NavLink} to="/trips/sites">
+                    جولات مواقع
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trips/city">
+                    جولات المدينة
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trips/cooking">
+                    جولة طهي
+                  </NavDropdown.Item>
+                </NavDropdown>
+
+
+                <NavDropdown
+                  title={"الفعاليات"}
+                  id="basic-nav-dropdown"
+                  drop="end" // Makes dropdown menu appear to the right
+                >
+                  <NavDropdown.Item as={NavLink} to={`/trips/effectiveness/4`}>
+                    مخصصة
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to={`/trips/effectiveness/7`}>
+                    فعاليات ترفيهية
+                  </NavDropdown.Item>
+                </NavDropdown>
+
+
+                <NavDropdown
+                  title={"المنتجات"}
+                  id="basic-nav-dropdown"
+                  drop="end" // Makes dropdown menu appear to the right
+                >
+                  <NavDropdown.Item as={NavLink} to="/trips/gift/3">
+                    هدايا تذكارية
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trips/gift/5">
+                    مستلزمات هايكنق
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/trips/gift/6">
+                    مستلزمات غوص
+                  </NavDropdown.Item>
+                </NavDropdown>
+
+              </NavDropdown>
+
+
+
               {/* <NavLink to="/blogsPage" className="nav-link">
                 {t('navMenu.blog')}
               </NavLink>

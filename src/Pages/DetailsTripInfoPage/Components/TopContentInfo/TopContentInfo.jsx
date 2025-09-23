@@ -23,6 +23,7 @@ const translations = {
 
 const TopContentInfo = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
+  console.log(tripData);
 
   return (
     <div data-aos="fade-left" className="top-content-info-details d-flex justify-content-between gap-2 flex-wrap">
@@ -49,19 +50,23 @@ const TopContentInfo = ({ tripData }) => {
             </div>
 
           }
-          {tripData.total_rates > 0 &&
-            <div className="rate-num d-flex align-items-center gap-2">
-              <span className="fw-bold">
-                {tripData.total_rates ? tripData.total_rates.toFixed(1) : 0}
-              </span>{" "}
-            </div>
+          {tripData.total_rates > 0 && (
+            <>
+              <div className="rate-num d-flex align-items-center gap-2">
+                <span className="fw-bold">
+                  {tripData.total_rates ? tripData.total_rates.toFixed(1) : 0}
+                </span>{" "}
+              </div>
+              <div className="badge-top">
+                {tripData.total_rates > 4
+                  &&
+                  translations[currentLanguage]
+                }
+              </div>
+            </>
+          )
           }
-          <div className="badge-top">
-            {tripData.total_rates > 4
-              &&
-              translations[currentLanguage]
-            }
-          </div>
+
 
         </div>
       </div>

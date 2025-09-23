@@ -13,6 +13,7 @@ const CardsCollections = ({ data, type }) => {
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+  console.log(data);
 
   const offset = currentPage * perPage;
   const currentPageData = data.slice(offset, offset + perPage);

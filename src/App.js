@@ -22,6 +22,7 @@ import ChatBot from "./Components/ChatBot/ChatBot";
 import AdPopup from "./Components/AdPopup/AdPopup";
 import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
 import { RatesProvider } from "context/RatesContext";
+import { BookingProvider } from "./context/BookingContext";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
@@ -63,9 +64,11 @@ function App() {
           <CurrencyProvider>
             <ProfileProvider>
               <RatesProvider>
-                <HomeProvider>
-                  <AppContent />
-                </HomeProvider>
+                <BookingProvider>
+                  <HomeProvider>
+                    <AppContent />
+                  </HomeProvider>
+                </BookingProvider>
               </RatesProvider>
             </ProfileProvider>
           </CurrencyProvider>
