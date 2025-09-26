@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTicket, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ticket from "assets/images/IconsHeader/Ticket";
 import translations from './translates'
+import MainSlider from "Components/Ui/MainSlider/MainSlider";
+import ShareButton from "Components/ShareButton/ShareButton";
+import Favicon from "Components/FavIcon/Favicon ";
 
 const DetailsCardPage = ({ effective }) => {
   const { currentLanguage } = useLanguage();
@@ -49,7 +52,7 @@ const DetailsCardPage = ({ effective }) => {
 
   return (
     <>
-      <div className="details-card-page ">
+      <div className="details-card-page">
         <ModalNumberIndividuals
           showModalNumberIndividuals={showModalNumberIndividuals}
           hideModalNumberIndividuals={hideModalNumberIndividuals}
@@ -58,39 +61,35 @@ const DetailsCardPage = ({ effective }) => {
           tripData={effective}
         />
 
-        <div>
-          <h2 className="title mb-2">{effective?.title}</h2>
-          <p className="text mb-4">{effective.description}</p>
-          <div className="num-price-info w-100 d-flex gap-1 justify-content-between mb-4">
-            <div className="date-content-info ">
-              {effective.from_date && (
-                <div className="date-one d-flex align-items-center gap-2 mb-2">
-                  <DateIcon2 />
-                  <DateDisplay from_date={effective.from_date} />
+        <div className="top-content-info-details d-flex justify-content-between align-items-center w-100 right-info-details">
+          <div className="right-info-details">
+            <h2 className="title ">{effective?.title}</h2>
+          </div>
+          <div className="num-price-info d-flex gap-1 justify-content-between ">
+            <div className="d-flex flex-column gap-2">
+              <div className="d-flex flex-row align-items-center justify-content-between gap-2">
+                <ShareButton
+                  url={window.location.href}
+                  title={effective.title}
+                  text={currentLanguage === "ar" ? "شارك هذه الرحلة" : "Share this trip"}
+                />
+                <div className="favicon-cover">
+                  <Favicon
+                    modelType={"effectivene"}
+                    modelId={effective.id}
+                    initialIsFavorite={effective.is_favourit}
+                  />
                 </div>
-              )}
-              {effective.from_time > 0 && (
-                <div className="date-one pt-2 d-flex align-items-center gap-2">
-                  <ClockIcon2 />
-                  {effective.from_time.slice(0, -3)}
-                </div>
-              )}
-
-              <FontAwesomeIcon icon={faTicket} />  {translations[currentLanguage].bookingsCount} {effective.booking_count}
+              </div>
             </div>
-            <span className="price-num ">
-              <CurrencyDisplay price={effective.customer_price} />
-              / {effective.is_group ? translations[currentLanguage].group : translations[currentLanguage].individual}
-            </span>
-
           </div>
         </div>
-        <div className="overflow-hidden border rounded rounded-2 col-12">
-          <SwiperSlider
+        {/* <SwiperSlider
             itemsSlider={effective.attachments}
             sliderNewClass={"slider-height slider-details-right  "}
-          ></SwiperSlider>
-        </div>
+          ></SwiperSlider> */}
+        <MainSlider images={effective.attachments} />
+
         <div className="all-content-info-details-right d-flex align-items-start gap-2 my-4 flex-column flex-lg-row" data-aos="fade-left">
           <div className="col-12 col-lg-8">
             <BoxOneContent tripData={effective} />

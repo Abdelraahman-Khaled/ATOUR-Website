@@ -235,9 +235,11 @@ START RATES COMMENTS
   padding: 10px 0;
 }
 
-/* ==================================
-END RATES COMMENTS
-===================================*/
+.tooltip-inner {
+  background-color: white;
+  border-radius: 8px;
+  color: black;
+}
 
 /* ================================
 START PICTURES PREVIOUS

@@ -6,27 +6,12 @@ import PriceFilter from "Components/Ui/FilterCards/Components/PriceFilter";
 import FilterCards from "Components/Ui/FilterCards/FilterCards";
 import MapLocationInfo from "Components/Ui/MapLocationInfo/MapLocationInfo";
 import "react-datepicker/dist/react-datepicker.css";
-const FilterTripsContent = ({ activeMap, subCategories }) => {
-  const buttonText = [
-    "رحلات ريفية",
-    "رحلات ريفية",
-    "رحلات ريفية",
-    "رحلات يومية",
-    "رحلات سيرا ع الأقدام",
-    "رحلات بحرية"
-  ];
-  const checkboxLabels = [
-    "الأقرب",
-    "الأحدث",
-    "الأقدم",
-    "السعر الأعلى أولا",
-    "السعر الأقل أولا"
-  ];
-  console.log(subCategories);
+const FilterTripsContent = ({ activeMap, subCategories, onSelectSubCategory }) => {
+ 
 
   return (
     <div className="main-right-trips-content">
-      {activeMap ? (
+      {!activeMap ? (
         <>
           <div className="all-filter-info">
             <FilterCards>
@@ -38,7 +23,12 @@ const FilterTripsContent = ({ activeMap, subCategories }) => {
               {/* <PriceFilter /> */}
 
               {/* ============= START FILTER BY TYPE ============== */}
-              <FilterByTypeButton buttonCount={subCategories.length} buttonLabels={subCategories.map((item) => item.title)} />
+              <FilterByTypeButton
+                buttonCount={subCategories.length}
+                buttonLabels={subCategories.map((item) => item.title)}
+                onButtonClick={onSelectSubCategory}
+                subCategories={subCategories}
+              />
               {/* ============= END FILTER BY TYPE ============== */}
 
               {/* ============= START FILTER CATEGORY ============ */}
@@ -56,7 +46,7 @@ const FilterTripsContent = ({ activeMap, subCategories }) => {
       ) : (
         <>
           {" "}
-          <MapLocationInfo />
+          {/* <MapLocationInfo /> */}
         </>
       )}
     </div>

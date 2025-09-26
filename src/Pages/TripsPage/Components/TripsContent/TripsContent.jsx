@@ -4,7 +4,7 @@ import FilterTripsContent from "./FilterTripsContent";
 import "./TripsContent.css";
 import GeneralAPI from "api/generalApi";
 
-const TripsContent = ({ tripsData }) => {
+const TripsContent = ({ tripsData, onSelectSubCategory }) => {
 
   const [subCategories, setSubCategories] = useState([]);
 
@@ -22,13 +22,13 @@ const TripsContent = ({ tripsData }) => {
     fetchSubCategories();
   }, []);
   // SHOW MAP LOCTION
-  const [activeMap, setActiveMap] = useState(true);
+  const [activeMap, setActiveMap] = useState(false);
   const buttonActiveMap = () => {
     setActiveMap(!activeMap);
   };
   return (
     <div className="trips-content--info">
-      <FilterTripsContent activeMap={activeMap} subCategories={subCategories} />
+      <FilterTripsContent activeMap={activeMap} subCategories={subCategories} onSelectSubCategory={onSelectSubCategory} />
       <CardsContentTrips tripsData={tripsData} buttonActiveMap={buttonActiveMap} activeMap={activeMap} />
     </div>
   );

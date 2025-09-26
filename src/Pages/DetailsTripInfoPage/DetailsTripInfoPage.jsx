@@ -11,6 +11,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
 import { detailsTripTranslations } from "./translation";
+import MainSlider from "Components/Ui/MainSlider/MainSlider";
 
 const DetailsTripInfoPage = () => {
   const [tripData, setTripData] = useState(null); // State to store fetched data
@@ -89,7 +90,7 @@ const DetailsTripInfoPage = () => {
           <ContainerMedia>
             <div className="all-info-page-details pt-3">
               <TopContentInfo tripData={tripData} />
-              <SliderDetailsContent tripData={tripData} />
+              <MainSlider images={tripData.attachments} />
               <AllContentInfoDetailsMiddel tripData={tripData} />
             </div>
           </ContainerMedia>

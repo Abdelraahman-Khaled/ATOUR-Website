@@ -1,3 +1,9 @@
 .most-visited img {
-    min-height: 230px;
+  min-height: 230px;
+}
+.most-visited .flags img {
+  min-height: unset;
+}
+.all-cards-collection .card-collection-one {
+  height: 370px !important;
 }

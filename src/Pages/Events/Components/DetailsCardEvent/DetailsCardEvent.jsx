@@ -195,7 +195,7 @@ const DetailsCardEvent = () => {
           />
         </header>
         <main>
-          <div className="details-card-event-page py-5">
+          <div className="details-card-event-page pt-3">
             {/* =========== START DETAILS CARD EVENT DETAILS ============= */}
             {/* <SliderEventCardDetails image={effective} /> */}
             {/* =========== END DETAILS CARD EVENT DETAILS ============= */}

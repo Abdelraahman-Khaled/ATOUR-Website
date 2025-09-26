@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlane } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import "./SearchInputLocation.css";
 import LocationIcon from "assets/Icons/LocationIcon";
 import { useLanguage } from "Components/Languages/LanguageContext";
@@ -8,11 +6,11 @@ import searchIcon from "../../../../src/assets/images/serachIcon/serachIcon.png"
 import { translations } from "./translations";
 
 
-const SearchInputLocation = ({ cities, setSelectedCity }) => {
+const SearchInputLocation = ({ searchItems, setSelectedCity }) => {
   const { currentLanguage } = useLanguage();
-  const [filteredCities, setFilteredCities] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [showCities, setShowCities] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const containerRef = useRef(null);
   const t = (key) =>
     translations[key][currentLanguage] || translations[key]["en"];
@@ -21,7 +19,7 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setShowCities(false);
+        setShowResults(false);
       }
     };
 
@@ -39,31 +37,45 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-    setShowCities(true);
+    setShowResults(true);
 
     if (value) {
       const normalized = normalizeText(value);
-      const filtered = cities.filter((city) =>
+      const filtered = searchItems.filter((item) =>
         currentLanguage === "en"
-          ? normalizeText(city?.title).includes(normalized)
-          : normalizeText(city?.title).includes(normalized)
+          ? normalizeText(item?.title).includes(normalized)
+          : normalizeText(item?.title).includes(normalized)
       );
-      setFilteredCities(filtered);
+      setFilteredItems(filtered);
     } else {
-      setFilteredCities([]);
+      setFilteredItems([]);
     }
   };
 
   // Handle city selection
-  const handleCityClick = (city) => {
-    setSelectedCity(city.id);
+  const handleItemClick = (item) => {
+    setSelectedCity(item.id);
     setInputValue(""); // Clear input after selection
-    setShowCities(false);
-    setFilteredCities([]);
+    setShowResults(false);
+    setFilteredItems([]);
   };
 
   // Decide what to show
-  const visibleCities = inputValue ? filteredCities : cities;
+  const visibleItems = inputValue ? filteredItems : searchItems;
+
+  // Group cities by country
+  const groupedItems = useMemo(() => {
+    const groups = {};
+    if (visibleItems) { // Add a check for visibleItems
+      visibleItems.forEach(item => {
+        if (!groups[item.countryName]) {
+          groups[item.countryName] = [];
+        }
+        groups[item.countryName].push(item);
+      });
+    }
+    return groups;
+  }, [visibleItems]);
 
   return (
     <div ref={containerRef} className="all-input-search-city position-relative">
@@ -74,32 +86,39 @@ const SearchInputLocation = ({ cities, setSelectedCity }) => {
           placeholder={t("placeholderSearch")}
           value={inputValue}
           onChange={handleInputChange}
-          onFocus={() => setShowCities(true)}
+          onFocus={() => setShowResults(true)}
         />
         <div className="icon-location">
           <LocationIcon />
         </div>
       </div>
 
-      {showCities && (
+      {showResults && (
         <div className="all-city-search">
           <div className="city-list-info change-scroll">
-            {visibleCities.length > 0 ? (
-              visibleCities.map((city) => (
-                <div
-                  key={city.id}
-                  className="city-item-one d-flex align-items-center gap-3"
-                  onClick={() => handleCityClick(city)}
-                >
-                  <div className="icon-air">
-                    <img src={searchIcon} alt="search-icon" width={20} />
+            {Object.keys(groupedItems).length > 0 ? (
+              Object.keys(groupedItems).map(countryName => (
+                <div key={countryName}>
+                  <div className="country-name-header p-2 fw-bold">
+                    {countryName}
                   </div>
-                  {currentLanguage === "en" ? city?.title : city?.title}
+                  {groupedItems[countryName].map((item) => (
+                    <div
+                      key={item.id}
+                      className="city-item-one d-flex align-items-center gap-3"
+                      onClick={() => handleItemClick(item)}
+                    >
+                      <div className="icon-air">
+                        <img src={searchIcon} alt="search-icon" width={20} />
+                      </div>
+                      {currentLanguage === "en" ? item?.title : item?.title}
+                    </div>
+                  ))}
                 </div>
               ))
-            ) : (
+            ) : (inputValue &&
               <div className="no-city-found text-muted p-2">
-                {currentLanguage === "en" ? "No cities found" : "هذه المدينة غير متوفرة حاليا"}
+                {currentLanguage === "en" ? "No results found" : "لا توجد نتائج"}
               </div>
             )}
           </div>

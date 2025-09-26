@@ -1,4 +1,18 @@
 const boxTranslations = {
+  instedOf: {
+    ar: "بدلا من",
+    en: "Instead of",
+    fr: "Au lieu de",
+    de: "Statt",
+    es: "En lugar de",
+    tr: "Yerine",
+    ru: "Вместо",
+    zh: "而不是",
+    ko: "대신",
+    pt: "Em vez de",
+    ur: "کی بجائے",
+    ja: "代わりに",
+  },
   available: {
     ar: "متاح",
     en: "Available",
@@ -124,7 +138,21 @@ const boxTranslations = {
     ko: "활동 종료 시간",
     pt: "Hora de término da atividade",
     ur: "سرگرمی کے اختتام کا وقت",
-    ja: "アクティビティ終了時間"
+    ja: "アクティビティ終了時間",
+  },
+  topRated: {
+    en: "Top rated",
+    ar: "الأعلى تقييماً",
+    fr: "Les mieux notés",
+    de: "Bestbewertet",
+    es: "Mejor valorados",
+    tr: "En yüksek puanlı",
+    ru: "Самые высоко оцененные",
+    zh: "评分最高",
+    ko: "최고 평점",
+    pt: "Mais bem avaliados",
+    ur: "اعلی درجہ بندی",
+    ja: "最高評価",
   },
 };
 export default boxTranslations;

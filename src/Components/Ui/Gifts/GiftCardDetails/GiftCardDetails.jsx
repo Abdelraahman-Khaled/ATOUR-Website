@@ -9,6 +9,10 @@ import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
 import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faCoins, faLocation, faTicket, faTimes } from "@fortawesome/free-solid-svg-icons";
+import MainSlider from "Components/Ui/MainSlider/MainSlider";
+import BoxOneContent from "Pages/DetailsTripInfoPage/Components/AllContentInfoDetailsMiddel/ContentInfoDetailsRight/BoxOneContent";
+import ShareButton from "Components/ShareButton/ShareButton";
+import Favicon from "Components/FavIcon/Favicon ";
 
 
 const content = {
@@ -136,71 +140,80 @@ const GiftCardDetails = ({ gift }) => {
                     />
                 </CustomModal>
             )}
-            <div className="details-card-page padding-80">
-                <div className="overflow-hidden  row g-0 ">
-                    <div className="col-12 col-lg-5 overflow-hidden border rounded rounded-2 ">
-                        <SwiperSlider
-                            itemsSlider={gift.attachments}
-                            sliderNewClass={"slider-height slider-details-right  "}
-                        ></SwiperSlider>
+            <div className="details-card-page ">
+                <div className="top-content-info-details d-flex justify-content-between align-items-center w-100 right-info-details">
+                    <div className="right-info-details">
+                        <h2 className="title ">{gift?.title}</h2>
                     </div>
-                    <div className="header-details-card-page d-flex justify-content-between align-items-center flex-wrap gap-3 col-12 col-lg-7 px-4 h-100 ">
-                        <div className="content-info-details-left-trip aos-init aos-animate col-12 col-lg-4 mt-3 mt-lg-0 w-100">
-                            <h2 className="title mb-1">{gift?.title}</h2>
-                            <p className="text mb-4">{gift.description}</p>
-                            <div className="num-price-info w-100 d-flex gap-1 justify-content-between mb-4">
-                                <div className="date-content-info d-flex gap-2 flex-column ">
-                                    <p> <FontAwesomeIcon icon={faLocation} /> {gift.location}</p>
-                                    <p><FontAwesomeIcon icon={faTicket} /> {content.bookingCount[currentLanguage]} {gift.booking_count} </p>
-                                    <p> <FontAwesomeIcon icon={faCoins} /> <CurrencyDisplay price={gift.customer_price} /></p>
+                    <div className="num-price-info d-flex gap-1 justify-content-between ">
+                        <div className="d-flex flex-column gap-2">
+                            <div className="d-flex flex-row align-items-center justify-content-between gap-2">
+                                <ShareButton
+                                    url={window.location.href}
+                                    title={gift.title}
+                                    text={currentLanguage === "ar" ? "شارك هذه الرحلة" : "Share this trip"}
+                                />
+                                <div className="favicon-cover">
+                                    <Favicon
+                                        modelType={"gift"}
+                                        modelId={gift.id}
+                                        initialIsFavorite={gift.is_favourit}
+                                    />
                                 </div>
                             </div>
                         </div>
-                        <div className="content-info-details-left-trip aos-init aos-animate col-12 col-lg-4 mt-3 mt-lg-0 w-100">
-                            <div className="end-info-detials">
-                                {/* modal */}
-                                <GiftModel gift={gift} />
-                                <div className="detials-info-one d-flex align-items-center gap-2">
+                    </div>
+                </div>
+                <MainSlider images={gift.attachments} />
+                <div className="all-content-info-details-right d-flex align-items-start gap-2 my-4 flex-column flex-lg-row aos-init aos-animate">
 
-                                    <div className="icon-check icon-check-link">
-                                        {gift.free_cancelation ? (
-                                            <div className="icon-times  icon-check-link">
-                                                <FontAwesomeIcon icon={faCheck} />
-                                            </div>
-                                        ) : (
-                                            <div className="icon-times bg-secondary icon-check-link ">
-                                                <FontAwesomeIcon icon={faTimes} />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <span className="title-text">
-                                        {content.freeCancel[currentLanguage]}
-                                    </span>
-                                </div>
-                                <div className="detials-info-one d-flex align-items-center gap-2">
-                                    {gift.pay_later ? (
+                    <div className="col-12 col-lg-8" data-aos="fade-left">
+                        <BoxOneContent tripData={gift} />
+                    </div>
+                    <div className="content-info-details-left-trip aos-init aos-animate col-12 col-lg-4 mt-3 mt-lg-0">
+                        <div className="end-info-detials">
+                            {/* modal */}
+                            <GiftModel gift={gift} />
+                            <div className="detials-info-one d-flex align-items-center gap-2">
+
+                                <div className="icon-check icon-check-link">
+                                    {gift.free_cancelation ? (
                                         <div className="icon-times  icon-check-link">
                                             <FontAwesomeIcon icon={faCheck} />
                                         </div>
                                     ) : (
-                                        <div className="icon-times bg-secondary icon-check-link">
+                                        <div className="icon-times bg-secondary icon-check-link ">
                                             <FontAwesomeIcon icon={faTimes} />
                                         </div>
                                     )}
-                                    <span className="title-text">
-                                        {content.payLater[currentLanguage]}
-                                    </span>
                                 </div>
+                                <span className="title-text">
+                                    {content.freeCancel[currentLanguage]}
+                                </span>
+                            </div>
+                            <div className="detials-info-one d-flex align-items-center gap-2">
+                                {gift.pay_later ? (
+                                    <div className="icon-times  icon-check-link">
+                                        <FontAwesomeIcon icon={faCheck} />
+                                    </div>
+                                ) : (
+                                    <div className="icon-times bg-secondary icon-check-link">
+                                        <FontAwesomeIcon icon={faTimes} />
+                                    </div>
+                                )}
+                                <span className="title-text">
+                                    {content.payLater[currentLanguage]}
+                                </span>
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                {/* Location */}
-                <div className="location-content-info pt-4">
-                    <MapLocationInfo tripData={gift} />
                 </div>
+            </div>
+
+            {/* Location */}
+            <div className="location-content-info pt-4">
+                <MapLocationInfo tripData={gift} />
             </div>
         </>
     );

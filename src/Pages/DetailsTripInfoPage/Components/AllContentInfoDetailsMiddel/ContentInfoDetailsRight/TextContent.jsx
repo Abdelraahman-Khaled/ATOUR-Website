@@ -1,6 +1,7 @@
 import ReadMoreText from "Components/Ui/ReadMoreText/ReadMoreText";
 import WhatsAppIcon from "assets/Icons/WhatsAppIcon";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import WhyBookingAtour from "./WhyBookingAtour";
 
 const TextContent = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -96,14 +97,7 @@ const TextContent = () => {
   return (
     <div className="all-text-content-info margin-top-1 d-flex flex-column gap-3">
       {/* ============ START TEXT CONTENT ONE =========== */}
-      <div className="text-content-one border-top pt-3">
-        <h2 className="title">{content.whyBook[currentLanguage]}</h2>
-        <ReadMoreText
-          newClass="mt-2"
-          text={content.text[currentLanguage]}
-          maxLength={120}
-        />
-      </div>
+        {/* <WhyBookingAtour /> */}
 
       {/* ============ START TEXT CONTENT TWO =========== */}
       <div className="text-content-one border-top pt-3">

@@ -2,13 +2,14 @@ import axiosInstance from "./axiosInstance";
 
 const ContentAPI = {
   // Trips
-  getTrips: async (language, currency) => {
+  getTrips: async (language, currency, params) => {
     const response = await axiosInstance.get("/trips", {
-      headers: {
-        lang: language, // Pass the language in the header
-        currency: currency,
-      },
-    });
+        headers: {
+          lang: language, // Pass the language in the header
+          currency: currency,
+        },
+        params: params,
+      });
     return response.data;
   },
   getTripById: async (tripId, language, currency) => {
@@ -29,13 +30,14 @@ const ContentAPI = {
     return response.data;
   },
   // Gifts
-  getGifts: async (language, currency) => {
+  getGifts: async (language, currency, params) => {
     // Default language is 'en' (English)
     const response = await axiosInstance.get("/gifts", {
       headers: {
         lang: language, // Pass the language in the header
         currency: currency,
       },
+      params: params,
     });
     return response.data;
   },

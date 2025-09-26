@@ -1,6 +1,9 @@
 .modal-width-content {
   --bs-modal-width: 730px !important;
 }
+.modal-width-content th {
+  font-weight: 400;
+}
 
 .modal-available .card-content-available {
   border: var(--border-02);

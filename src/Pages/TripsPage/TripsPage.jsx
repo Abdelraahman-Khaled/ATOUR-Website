@@ -67,11 +67,11 @@ const TripsPage = () => {
   const { currentCurrency } = useCurrency();
   const [tripsData, setTripsData] = useState([]); // State to store home data
   const [loading, setLoading] = useState(true); // State to manage loading
+  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
   console.log(tripsData);
 
   // SHOW MODAL SELECT DESTINATION
-  const [showModalSelectDestination, setShowModalSelectDestination] =
-    useState(false);
+  const [showModalSelectDestination, setShowModalSelectDestination] = useState(false);
   // SHOW MODAL ADD TRIP
   const buttonShowModal = () => {
     setShowModalSelectDestination(true);
@@ -86,11 +86,22 @@ const TripsPage = () => {
       image: item.photo || item.cover, // Use `photo` or `cover` as `image`
     }));
   };
+
+  const handleSelectSubCategory = (subCategoryIds) => {
+    setSelectedSubCategoryIds(subCategoryIds);
+  };
+
   // feching the Data
   useEffect(() => {
     const fetchTripsData = async () => {
       try {
-        const data = await ContentAPI.getTrips(currentLanguage, currentCurrency); // Fetch data from the API
+        const params = {};
+        if (selectedSubCategoryIds.length > 0) {
+          selectedSubCategoryIds.forEach((id, index) => {
+            params[`sub_category_id[${index}]`] = id;
+          });
+        }
+        const data = await ContentAPI.getTrips(currentLanguage, currentCurrency, params); // Fetch data from the API
         const normalizedData = normalizeData(data.data); // Normalize the data
 
         setTripsData(normalizedData); // Set the fetched data to state
@@ -100,11 +111,11 @@ const TripsPage = () => {
       }
     };
     fetchTripsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency]);
+  }, [currentLanguage, currentCurrency, selectedSubCategoryIds]);
 
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "الرحلات" : "Trips"} />
+      <HelmetInfo titlePage={currentLanguage === "ar" ? "الجولات" : "Experinces"} />
 
       <ModalSelectDestination
         showModalSelectDestination={showModalSelectDestination}
@@ -116,24 +127,24 @@ const TripsPage = () => {
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
             titleTwoBread={null}
-            textBreadActive={currentLanguage === "ar" ? "رحلات" : "Trips"}
+            textBreadActive={currentLanguage === "ar" ? "الجولات" : "Experinces"}
           />
         </header>
         <main>
           <ContainerMedia>
-            <div className="mt-5">
+            <div className="mt-4">
               {loading ? (
                 <div style={{ margin: "200px 0px" }}>
                   <Loader />
                 </div>
               ) : tripsData.length > 0 ? (
-                <TripsContent tripsData={tripsData} />
+                <TripsContent tripsData={tripsData} onSelectSubCategory={handleSelectSubCategory} />
               ) : (
                 <div className="d-flex justify-content-center ">
                   <div className="no-data-text">
                     {currentLanguage === "ar"
-                      ? "لا توجد رحلات متاحة"
-                      : "No trips available"}
+                      ? "لا توجد جولات متاحة"
+                      : "No experinces available"}
                     <Link
                       to="/"
                       className="fs-6 fw-medium text-danger text-decoration-underline px-2"

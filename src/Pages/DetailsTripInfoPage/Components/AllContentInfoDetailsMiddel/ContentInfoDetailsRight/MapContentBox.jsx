@@ -1,5 +1,6 @@
 import { useLanguage } from "Components/Languages/LanguageContext";
 import MapLocationInfo from "Components/Ui/MapLocationInfo/MapLocationInfo";
+import TooltipExample from "Components/Ui/Tooltip";
 
 const MapContentBox = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -70,17 +71,15 @@ const MapContentBox = ({ tripData }) => {
         <div className="col-12 col-md-7">
           <div className="content-info-map">
             {/* Title */}
-            <h2 className="title">{content.title[currentLanguage]}</h2>
+            <div className="d-flex gap-1">
+              <h2 className="title">{content.title[currentLanguage]}</h2>
+              {tripData.is_group ? (
+                <TooltipExample title={content.groupNote[currentLanguage]} />
+              )
+                : null
+              }
 
-            {/* Group note */}
-            {tripData.is_group ? (
-              <p className="text-read-more mt-2">
-                {content.groupNote[currentLanguage]}
-              </p>
-            )
-              : null
-            }
-
+            </div>
             {/* Meeting Point */}
             <div className="box-border-circle">
               <h2 className="title-text">{content.meetingPoint[currentLanguage]}</h2>

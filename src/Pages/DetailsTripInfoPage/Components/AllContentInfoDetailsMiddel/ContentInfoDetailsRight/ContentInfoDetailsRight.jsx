@@ -13,7 +13,7 @@ const ContentInfoDetailsRight = ({ tripData }) => {
   return (
     <div className="all-content-info-details-right" data-aos="fade-left">
       <BoxOneContent tripData={tripData} />
-      <SliderDetailsContentRight tripData={tripData} />
+      {/* <SliderDetailsContentRight tripData={tripData} /> */}
       {tripData.features && <WhyBookingTrip tripData={tripData} />}
       {tripData.trip_requirements && <TripRequirement tripData={tripData} />}
       <MapContentBox tripData={tripData} />

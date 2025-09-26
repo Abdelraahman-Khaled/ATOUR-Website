@@ -9,6 +9,11 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { toast } from "react-toastify";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
+import FilterByCategory from "Components/Ui/FilterCards/Components/FilterByCategory";
+import FilterCards from "Components/Ui/FilterCards/FilterCards";
+import FilterTripsContent from "Pages/TripsPage/Components/TripsContent/FilterTripsContent";
+import GeneralAPI from "api/generalApi";
+import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
 const translates = {
   en: {
     products: "Products",
@@ -58,12 +63,38 @@ const Offers = () => {
   const [gifts, setGifts] = useState([]); // State to store home data
   const [loading, setLoading] = useState(false); // State to manage loading
   const [error, setError] = useState(null); // State to handle errors
+  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
+
+  const handleSelectSubCategory = (subCategoryIds) => {
+    setSelectedSubCategoryIds(subCategoryIds);
+  };
+
+  const [subCategories, setSubCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchSubCategories = async () => {
+      try {
+        const response = await GeneralAPI.getSubCategories();
+        setSubCategories(response.data.gifts);
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    };
+
+    fetchSubCategories();
+  }, []);
 
   // Fetching Data
   useEffect(() => {
     const fetchGiftsData = async () => {
       try {
-        const data = await ContentAPI.getGifts(currentLanguage, currentCurrency); // Fetch data from the API
+        const params = {};
+        if (selectedSubCategoryIds.length > 0) {
+          selectedSubCategoryIds.forEach((id, index) => {
+            params[`sub_category_id[${index}]`] = id;
+          });
+        }
+        const data = await ContentAPI.getGifts(currentLanguage, currentCurrency, params); // Fetch data from the API
         setGifts(data.data); // Set the fetched data to 
       } catch (err) {
         console.error("Error fetching products data:", err);
@@ -73,7 +104,7 @@ const Offers = () => {
       }
     };
     fetchGiftsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency]);
+  }, [currentLanguage, currentCurrency, selectedSubCategoryIds]);
 
   if (loading) {
     return (
@@ -90,14 +121,23 @@ const Offers = () => {
     <>
       <HelmetInfo titlePage={translates[currentLanguage].products} />
 
-      <div className="offers-page">
-        <header>
+      <div className="offers-page padding-60">
+        <header className="mb-4">
           {/* <SliderOffers /> */}
+          <BreadcrumbsPage
+            newClassBreadHeader={"biography-bread breadcrumb-page-2"}
+            routeTitleTwoBread={false}
+            titleTwoBread={null}
+            textBreadActive={currentLanguage === "ar" ? "منتجات" : "Products"}
+          />
         </header>
         <main>
           {/* ============== START CONTAINER ============== */}
           <ContainerMedia>
-            <OffersContent gifts={gifts} />
+            <div className="trips-content--info">
+              <FilterTripsContent activeMap={false} subCategories={subCategories} onSelectSubCategory={handleSelectSubCategory} />
+              <OffersContent gifts={gifts} />
+            </div>
           </ContainerMedia>
           {/* ============== END CONTAINER ============== */}
         </main>

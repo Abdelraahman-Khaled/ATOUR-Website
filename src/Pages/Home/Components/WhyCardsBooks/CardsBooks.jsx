@@ -2,38 +2,57 @@ import TitleSection from "Components/TitleSection/TitleSection";
 import CardBook from "./CardBook";
 import "./CardsBooks.css";
 import { cardsBooks } from "./DataCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
 const CardsBooks = () => {
   return (
     <div className="cards-books padding-top">
       {/* =========== START SECTION TITLE ========== */}
       <TitleSection
-        title={"الوجهات الأكثر زيارة"}
+        title={"لماذا تحجز من جولة؟"}
         text={
-          "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق."
-        }
+          ""}
       />
       {/* =========== END SECTION TITLE ============ */}
       {/* ============ START ALL CARDS BOOKS =========== */}
       <div className="all-cards-books" data-aos="fade-right">
-        {/* ============= START ROW ============= */}
-        <div className="row g-3">
-          {cardsBooks.map((item) => {
+        <Swiper
+          breakpoints={{
+            300: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            992: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          modules={[Autoplay]}
+          className="mySwiper"
+        >
+          {cardsBooks.map((item, index) => {
             return (
-              <>
-                {/* ============ START COL ============ */}
-                <div className="col-12 col-sm-6 col-md-4">
-                  <CardBook
-                    iconCard={item.icon}
-                    titleCard={item.title}
-                    textCard={item.text}
-                  />
-                </div>
-                {/* ============ END COL ============ */}
-              </>
+              <SwiperSlide key={index}>
+                <CardBook
+                  iconCard={item.icon}
+                  titleCard={item.title}
+                  textCard={item.text}
+                />
+              </SwiperSlide>
             );
           })}
-        </div>
-        {/* ============= END ROW ============= */}
+        </Swiper>
       </div>
       {/* ============ END ALL CARDS BOOKS =========== */}
     </div>

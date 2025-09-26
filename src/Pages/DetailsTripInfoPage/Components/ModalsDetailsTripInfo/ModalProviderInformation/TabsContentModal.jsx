@@ -18,7 +18,7 @@ const TabsContentModal = () => {
         <>
           <ProgressBarRates />
 
-          <AllRatesComments />
+          <AllRatesComments rates={[]} />
         </>
       )
     },

@@ -8,6 +8,8 @@ import backUP from "../../../../assets/images/slider/01.png";
 import PaginationPage from "Components/Pagination/Pagination";
 
 const AllCardsReservations = ({ reservation, refresh }) => {
+  console.log(reservation);
+
   const { currentLanguage } = useLanguage(); // Get the current language
   // Pagenation
   const [currentPage, setCurrentPage] = useState(0);

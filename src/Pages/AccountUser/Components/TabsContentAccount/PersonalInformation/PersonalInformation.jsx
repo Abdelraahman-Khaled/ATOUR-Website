@@ -226,7 +226,7 @@ const PersonalInformation = () => {
           </div>
         </FormField>
 
-        <div className="interested-content mt-3">
+        {/* <div className="interested-content mt-3">
           <h2 className="title title-info-top-account py-3">
             {translations.interests[currentLanguage]}
           </h2>
@@ -239,7 +239,7 @@ const PersonalInformation = () => {
               {translations.events[currentLanguage]}
             </button>
           </div>
-        </div>
+        </div> */}
 
         <button onClick={showEditInfoButton} className="btn-main mt-5 edit-information-btn">
           {translations.edit[currentLanguage]}

@@ -9,6 +9,7 @@ import DatePickerComponent from "Components/Ui/DatePickerComponent/DatePickerCom
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useBooking } from "context/BookingContext";
 import { useEffect } from "react";
+import { content } from "./trasnslates"
 
 const ContentInfoDetailsLeft = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -78,7 +79,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
             <DatePickerComponent
               selectedDay={selectedDate}
               setSelectedDay={setSelectedDate}
-              addTextPlaceHolder={currentLanguage === "ar" ? "حدد تاريخ الرحلة " : "Select a trip date"} />
+              addTextPlaceHolder={content[currentLanguage].selectDate} />
           </div>
 
           {/* Number of Individuals Box */}
@@ -89,10 +90,10 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
             >
               <div className="info-box-right">
                 <h2 className="title">
-                  {currentLanguage === "ar" ? "عدد الأفراد" : "Number of people"}
+                  {content[currentLanguage].numberOfPeople}
                 </h2>
                 <p className="text">
-                  {numberOfPeople} {currentLanguage === "ar" ? "افراد" : "people"}
+                  {numberOfPeople} {content[currentLanguage].people}
                 </p>
               </div>
               <div className="icon-box">
@@ -103,7 +104,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
 
           {/* Show Available Programs Button */}
           <button className="btn-main w-100" onClick={buttonShowModal}>
-            {currentLanguage === "ar" ? "إظهر البرامج المتاحة" : "Show available programs"}
+            {content[currentLanguage].showPrograms}
           </button>
 
           {/* Additional Info */}
@@ -121,9 +122,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
                 )}
               </div>
               <span className="title-text">
-                {currentLanguage === "ar"
-                  ? "متاح إلغاء الحجز مجانا"
-                  : "Free cancellation is available."}
+                {content[currentLanguage].freeCancel}
               </span>
             </div>
             <div className="detials-info-one d-flex align-items-center gap-2">
@@ -137,7 +136,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
                 </div>
               )}
               <span className="title-text">
-                {currentLanguage === "ar" ? "إحجز الآن إدفع لاحقا" : "Book now pay later"}
+                {content[currentLanguage].payLater}
               </span>
             </div>
           </div>

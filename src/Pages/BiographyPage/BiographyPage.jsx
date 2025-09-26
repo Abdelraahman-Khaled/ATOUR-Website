@@ -8,39 +8,43 @@ import ContentAPI from "api/contentApi";
 import { Link, useParams } from "react-router-dom";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
+import biographyContent from "./translates";
+
+// 🔹 Translations
+
 
 const BiographyPage = () => {
-  const { id } = useParams(); // Extract the `id` from the URL
-  const [biography, setBiography] = useState(null); // State to store biography data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
-  const { currentLanguage } = useLanguage(); // Get the current language
-  const { currentCurrency } = useCurrency()
-  // Fetch biography data based on the `id`
+  const { id } = useParams();
+  const [biography, setBiography] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { currentLanguage } = useLanguage();
+  const { currentCurrency } = useCurrency();
+
+  const t = biographyContent[currentLanguage] || biographyContent.en;
+
   useEffect(() => {
     const fetchBiography = async () => {
       try {
-        const response = await ContentAPI.getCitiesId(id, currentLanguage, currentCurrency); // Fetch data from the API
-        const data = response.data; // Extract the data from the response
-        console.log(data);
+        const response = await ContentAPI.getCitiesId(id, currentLanguage, currentCurrency);
+        const data = response.data;
 
         if (data) {
-          setBiography(data); // Set the fetched data to state
+          setBiography(data);
         } else {
-          setError("Biography not found."); // Handle case where the ID doesn't match any item
+          setError(t.biographyNotFound);
         }
       } catch (err) {
         console.error("Error fetching biography data:", err);
-        setError("Failed to load biography data. Please try again later.");
+        setError(t.failedToLoad);
       } finally {
-        setLoading(false); // Stop the loading spinner
+        setLoading(false);
       }
     };
 
-    fetchBiography(); // Call the API on component mount
-  }, [id, currentLanguage, currentCurrency]); // Re-run the effect if the `id` changes
+    fetchBiography();
+  }, [id, currentLanguage, currentCurrency]);
 
-  // Display loading state
   if (loading) {
     return (
       <div style={{ margin: "200px 0px" }}>
@@ -49,33 +53,34 @@ const BiographyPage = () => {
     );
   }
 
-
-  // Display error state
   if (error) {
-    return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
-      {currentLanguage === "ar" ? "هذه المدينة غير متاحة" : "This city not available"}
-      <Link
-        to="/"
-        className="fs-6 fw-medium text-danger text-decoration-underline px-2"
-      >
-        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
-      </Link>
-    </p>;
+    return (
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+        {t.cityNotAvailable}
+        <Link
+          to="/"
+          className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+        >
+          {t.home}
+        </Link>
+      </p>
+    );
   }
 
-  // Display if no data is available
   if (!biography) {
-    return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
-      {currentLanguage === "ar" ? "تفاصيل المدينة غير متاحة" : "City details not available"}
-      <Link
-        to="/"
-        className="fs-6 fw-medium text-danger text-decoration-underline px-2"
-      >
-        {currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
-      </Link>
-    </p>;
-    ;
+    return (
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+        {t.cityDetailsNotAvailable}
+        <Link
+          to="/"
+          className="fs-6 fw-medium text-danger text-decoration-underline px-2"
+        >
+          {t.home}
+        </Link>
+      </p>
+    );
   }
+
   return (
     <>
       <HelmetInfo titlePage={biography?.title} />
@@ -86,11 +91,10 @@ const BiographyPage = () => {
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
             titleTwoBread={biography?.title}
-            textBreadActive={currentLanguage === "ar" ? "نبذة تعريفية" : "Introduction"}
+            textBreadActive={t.introduction}
           />
         </header>
         <main>
-          {/* Pass the biography data to the TabsBiography component */}
           <TabsBiography biography={biography} />
         </main>
       </div>

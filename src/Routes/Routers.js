@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import Layout from "../Components/Layout/Layout";
 import NotFound from "../Pages/NotFound/NotFound";
 import FavoritePage from "Pages/FavoritePage/FavoritePage";
+import NotificationPage from "../Pages/NotificationPage/NotificationPage";
 import Blogs from "Pages/Blogs/Blogs";
 import DetailsBlogCard from "Pages/Blogs/Components/DetailsBlogCard/DetailsBlogCard";
 import Events from "Pages/Events/Events";
@@ -168,6 +169,7 @@ let routers = createBrowserRouter(
         { path: "aboutUs", element: <AboutUs /> },
         { path: "termsConditions", element: <TermsConditions /> },
         { path: "rewards", element: <Rewards /> },
+        { path: "notification", element: <NotificationPage /> },
         {
           path: "news",
           element: (

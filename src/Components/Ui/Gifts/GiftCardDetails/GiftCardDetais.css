@@ -1,5 +1,5 @@
 .details-card-page :is(.title, .num-price-info, .date-one, .title-text) {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--dark-01-color);
 }

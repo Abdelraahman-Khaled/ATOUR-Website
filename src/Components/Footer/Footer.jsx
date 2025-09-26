@@ -297,7 +297,7 @@ const Footer = () => {
                     </div>
                     <div className="contact-info">
                       <h2 className="title-foot">{text.whatsapp}</h2>
-                      <p className="link-contact">{footerData?.phone}</p>
+                      <p className="link-contact">{footerData?.whatsapp}</p>
                     </div>
                   </a>
                   {/* ========= END INFO CONTACT ONE ========= */}
@@ -344,7 +344,7 @@ const Footer = () => {
             </Link>{" "}
             2024
           </p>
-          <p className="license-number-footer">
+          <div className="license-number-footer">
             <span className="license-number-text">
               <p>{text.travelLicenseNumber}</p>
               <p>73106456</p>
@@ -357,7 +357,7 @@ const Footer = () => {
               <p>{text.category}</p>
               <p>{text.generalTravelTourismService}</p>
             </span>
-          </p>
+          </div>
         </div>
       </ContainerMedia>
     </div>

@@ -1,0 +1,88 @@
+// 📝 translations
+const content = {
+  ar: {
+    slogan: "اكتشف المزيد مع جولة",
+    hi: "مرحبًا",
+    cityNotAvailable: "هذه المدينة غير متاحة لدينا حاليا",
+    loginToSearch: "يرجى تسجيل الدخول للبحث",
+    cityNotSupported: "هذه المدينة غير متاحة لدينا حاليا",
+  },
+  en: {
+    slogan: "Explore more with ATOUR",
+    hi: "Hi",
+    cityNotAvailable: "This city is not supported yet.",
+    loginToSearch: "Please login to search",
+    cityNotSupported: "This city is not supported yet.",
+  },
+  fr: {
+    slogan: "Explorez plus avec ATOUR",
+    hi: "Salut",
+    cityNotAvailable: "Cette ville n'est pas encore disponible.",
+    loginToSearch: "Veuillez vous connecter pour rechercher",
+    cityNotSupported: "Cette ville n'est pas encore disponible.",
+  },
+  de: {
+    slogan: "Entdecken Sie mehr mit ATOUR",
+    hi: "Hallo",
+    cityNotAvailable: "Diese Stadt wird noch nicht unterstützt.",
+    loginToSearch: "Bitte melden Sie sich an, um zu suchen",
+    cityNotSupported: "Diese Stadt wird noch nicht unterstützt.",
+  },
+  es: {
+    slogan: "Explora más con ATOUR",
+    hi: "Hola",
+    cityNotAvailable: "Esta ciudad aún no está disponible.",
+    loginToSearch: "Por favor inicia sesión para buscar",
+    cityNotSupported: "Esta ciudad aún no está disponible.",
+  },
+  tr: {
+    slogan: "ATOUR ile daha fazlasını keşfedin",
+    hi: "Merhaba",
+    cityNotAvailable: "Bu şehir henüz mevcut değil.",
+    loginToSearch: "Arama yapmak için lütfen giriş yapın",
+    cityNotSupported: "Bu şehir henüz mevcut değil.",
+  },
+  ru: {
+    slogan: "Исследуйте больше с ATOUR",
+    hi: "Привет",
+    cityNotAvailable: "Этот город пока недоступен.",
+    loginToSearch: "Пожалуйста, войдите, чтобы выполнить поиск",
+    cityNotSupported: "Этот город пока недоступен.",
+  },
+  zh: {
+    slogan: "与ATOUR一起探索更多",
+    hi: "你好",
+    cityNotAvailable: "该城市暂不支持。",
+    loginToSearch: "请登录后再搜索",
+    cityNotSupported: "该城市暂不支持。",
+  },
+  ko: {
+    slogan: "ATOUR와 함께 더 많은 것을 탐험하세요",
+    hi: "안녕하세요",
+    cityNotAvailable: "이 도시는 아직 지원되지 않습니다.",
+    loginToSearch: "검색하려면 로그인하세요",
+    cityNotSupported: "이 도시는 아직 지원되지 않습니다.",
+  },
+  pt: {
+    slogan: "Explore mais com a ATOUR",
+    hi: "Olá",
+    cityNotAvailable: "Esta cidade ainda não está disponível.",
+    loginToSearch: "Por favor, faça login para pesquisar",
+    cityNotSupported: "Esta cidade ainda não está disponível.",
+  },
+  ur: {
+    slogan: "ATOUR کے ساتھ مزید دریافت کریں",
+    hi: "ہیلو",
+    cityNotAvailable: "یہ شہر فی الحال دستیاب نہیں ہے۔",
+    loginToSearch: "براہ کرم تلاش کرنے کے لیے لاگ ان کریں",
+    cityNotSupported: "یہ شہر فی الحال دستیاب نہیں ہے۔",
+  },
+  ja: {
+    slogan: "ATOURでさらに探索しましょう",
+    hi: "こんにちは",
+    cityNotAvailable: "この都市はまだサポートされていません。",
+    loginToSearch: "検索するにはログインしてください",
+    cityNotSupported: "この都市はまだサポートされていません。",
+  },
+};
+export default content;

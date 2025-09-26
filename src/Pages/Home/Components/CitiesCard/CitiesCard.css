@@ -1,0 +1,35 @@
+.circular-image {
+  height: 200px !important;
+  width: 200px !important;
+  border-radius: 50% !important;
+  overflow: hidden;
+}
+
+.circular-image .image-card-src {
+  height: 100% !important;
+  width: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+}
+
+.city-image-one {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ensure it takes full height to center content vertically */
+}
+
+.city-image-one .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0;
+  width: 100%;
+}

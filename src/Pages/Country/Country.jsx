@@ -21,7 +21,7 @@ const Country = () => {
 
     // Pagenation
     const [currentPage, setCurrentPage] = useState(0);
-    const perPage = 8; // NUMBER OF PAGE ITEMS
+    const perPage = 24; // NUMBER OF PAGE ITEMS
     const pageCount = Math.ceil(country?.length / perPage);
     const offset = currentPage * perPage;
     const currentPageData = country?.slice(offset, offset + perPage);

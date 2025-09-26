@@ -1,15 +1,45 @@
 import "./CardCollection.css";
 import IconLocation from "assets/images/collection/IconLocation";
 import IconStarRate from "assets/images/collection/IconStarRate";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
-import { toast } from "react-toastify";
 import Favicon from "Components/FavIcon/Favicon ";
 import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
-import GroupOrIndividual from "Components/groupCount/GroupOrIndividual";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faCoins, faComments, faLanguage, faTicket, faTicketSimple, faTimes } from '@fortawesome/free-solid-svg-icons';
+import enFlag from "assets/images/flags/en.svg";
+import arFlag from "assets/images/flags/ar.svg";
+import frFlag from "assets/images/flags/fr.svg";
+import deFlag from "assets/images/flags/de.svg";
+import esFlag from "assets/images/flags/es.svg";
+import trFlag from "assets/images/flags/tr.svg";
+import ruFlag from "assets/images/flags/ru.svg";
+import zhFlag from "assets/images/flags/zh.svg";
+import koFlag from "assets/images/flags/ko.svg";
+import ptFlag from "assets/images/flags/pt.svg";
+import urFlag from "assets/images/flags/ur.svg";
+import jaFlag from "assets/images/flags/ja.svg";
+import sgnFlag from "assets/images/flags/sgn.svg";
+
+const languageFlags = {
+  en: enFlag,
+  ar: arFlag,
+  fr: frFlag,
+  de: deFlag,
+  es: esFlag,
+  tr: trFlag,
+  ru: ruFlag,
+  zh: zhFlag,
+  ko: koFlag,
+  pt: ptFlag,
+  ur: urFlag,
+  ja: jaFlag,
+  sgn: sgnFlag,
+};
+
 
 const CardCollection = ({
   itemId,
@@ -21,8 +51,13 @@ const CardCollection = ({
   isFav,
   type,
   is_group,
-  showFavIcon = true
+  showFavIcon = true,
+  hasFreeCancellation = true,
+  hasPayLater = true,
+  guide_languages = [],
+  booking_count = 0
 }) => {
+
   const { currentLanguage } = useLanguage(); // Get the current language
   const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
@@ -47,80 +82,67 @@ const CardCollection = ({
   const localization = {
     ar: {
       ratingText: "تقييم",
-      priceStartText: "تبدأ من",
       perPersonText: "/ للفرد",
       forGroup: "/ للمجموعة"
     },
     en: {
       ratingText: "Rating",
-      priceStartText: "Starting from",
       perPersonText: "/ per person",
       forGroup: "/ per group"
     },
     fr: {
       ratingText: "Évaluation",
-      priceStartText: "À partir de",
       perPersonText: "/ par personne",
       forGroup: "/ par groupe"
     },
     de: {
       ratingText: "Bewertung",
-      priceStartText: "Ab",
       perPersonText: "/ pro Person",
       forGroup: "/ pro Gruppe"
     },
     es: {
       ratingText: "Calificación",
-      priceStartText: "Desde",
       perPersonText: "/ por persona",
       forGroup: "/ por grupo"
     },
     tr: {
       ratingText: "Puan",
-      priceStartText: "Başlangıç fiyatı",
       perPersonText: "/ kişi başı",
       forGroup: "/ grup başına"
     },
     ru: {
       ratingText: "Рейтинг",
-      priceStartText: "Начиная с",
       perPersonText: "/ за человека",
       forGroup: "/ за группу"
     },
     zh: {
       ratingText: "评分",
-      priceStartText: "起价",
       perPersonText: "/ 每人",
       forGroup: "/ 每组"
     },
     ko: {
       ratingText: "평점",
-      priceStartText: "부터 시작",
       perPersonText: "/ 1인당",
       forGroup: "/ 그룹당"
     },
     pt: {
       ratingText: "Avaliação",
-      priceStartText: "A partir de",
       perPersonText: "/ por pessoa",
       forGroup: "/ por grupo"
     },
     ur: {
       ratingText: "درجہ بندی",
-      priceStartText: "سے شروع",
       perPersonText: "/ فی شخص",
       forGroup: "/ فی گروپ"
     },
     ja: {
       ratingText: "評価",
-      priceStartText: "開始価格",
       perPersonText: "/ 1人あたり",
       forGroup: "/ グループあたり"
     },
   };
 
-
-  const { ratingText, priceStartText, perPersonText, forGroup } = localization[currentLanguage];
+  const { ratingText, perPersonText, forGroup } = localization[currentLanguage];
 
   return (
     <>
@@ -154,28 +176,87 @@ const CardCollection = ({
         {/* =========== END IMAGE COLLECTION =========== */}
         {/* =========== START CONTENT INFO CARD ========== */}
         <div className="content-info-card pt-3">
-          {numRate > 0 && (
-            <div className="rate-card d-flex align-items-center gap-1">
-              <IconStarRate /> {numRate.toFixed(1)} {ratingText}
+
+          <div className="d-flex align-items-center justify-content-between gap-4">
+            <h2 className="title">{titleCard}</h2>
+            <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content",fontSize:"12px" }}>
+              <FontAwesomeIcon icon={faTicket} />
+              <span>
+                {booking_count}
+                {" "}
+                {currentLanguage === "ar" ? "مرة" : "times"}
+              </span>
             </div>
-          )}
-          <h2 className="title ">{titleCard}</h2>
+          </div>
           {numPriceCard &&
-            <div className="price-info">
-              {
-                is_group ? " " : priceStartText
-              }
-              {" "}
-              <span className="price-num">
+            <div className="price-info pb-2">
+              <span className="price-num ">
                 <CurrencyDisplay price={numPriceCard} />
               </span>
-              {
-                is_group ? forGroup : perPersonText}
+              <span>{is_group ? forGroup : perPersonText}</span>
             </div>
+          }
+          <div className="d-flex flex-wrap align-items-center gap-2 pb-2 ">
+            {numRate > 0 && (
+              <div className="rate-card d-flex align-items-center gap-1">
+                <IconStarRate /> {numRate?.toFixed(1)} {ratingText}
+              </div>
+            )}
+            {hasFreeCancellation ? (
+              <div className="detials-info-one d-flex align-items-center gap-2">
+                {hasFreeCancellation ? (
+                  <div className="icon-times  icon-check-link">
+                    <FontAwesomeIcon icon={faCheck} />
+                  </div>
+                ) : (
+                  <div className="icon-times bg-secondary icon-check-link">
+                    <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                )}
+                <span className="title-text">
+                  {currentLanguage === "ar" ? "إلغاء مجاني" : "Free Cancellation"}
+                </span>
+              </div>
+            ) : null}
+            {hasPayLater ? (
+              <div className="detials-info-one d-flex align-items-center gap-2">
+                {hasPayLater ? (
+                  <div className="icon-times  icon-check-link">
+                    <FontAwesomeIcon icon={faCheck} />
+                  </div>
+                ) : (
+                  <div className="icon-times bg-secondary icon-check-link">
+                    <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                )}
+                <span className="title-text">
+                  {currentLanguage === "ar" ? " إدفع لاحقا" : "Book now pay later"}
+                </span>
+              </div>
+            ) : null}
+
+          </div>
+          {
+            guide_languages && guide_languages.length > 0 ? (
+              <div className="d-flex gap-3 align-items-center ">
+                <FontAwesomeIcon icon={faLanguage} />
+                <div className="text d-flex flex-wrap gap-2 ">
+                  {guide_languages.map((lang) => (
+                    <span key={lang} className="me-2 d-flex align-items-center flags">
+                      <img
+                        src={languageFlags[lang]}
+                        alt={lang}
+                        style={{ width: "20px", height: "14px" }}
+                      />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null
           }
         </div>
         {/* =========== END CONTENT INFO CARD ========== */}
-      </div>
+      </div >
       {/* ============ END CARD COLLECTION ONE =========== */}
     </>
   );

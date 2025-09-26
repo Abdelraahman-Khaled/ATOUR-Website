@@ -6,6 +6,8 @@ import { useEffect } from "react";
 const UserInfo = () => {
   const { profile, loading, isAuthenticated } = useProfile();
   const navigate = useNavigate();
+  console.log(profile);
+
 
   // Redirect to home if not authenticated
   useEffect(() => {
@@ -15,7 +17,7 @@ const UserInfo = () => {
   }, [loading, navigate, isAuthenticated]);
 
   if (loading) return <div>Loading...</div>;
-  
+
   // Don't render anything if not authenticated
   if (!isAuthenticated()) return null;
 
@@ -31,6 +33,7 @@ const UserInfo = () => {
         />
       </div>
       <h2 className="name-user-info">{profile?.name || "Guest"}</h2>
+      <p className="name-user-info"> C-{profile?.code || "Guest"}</p>
     </div>
   );
 };

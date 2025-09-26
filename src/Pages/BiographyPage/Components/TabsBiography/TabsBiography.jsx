@@ -15,10 +15,16 @@ import Gift from "assets/images/IconsHeader/Gift";
 import AllCardsEvents from "Pages/Events/Components/AllCardsEvents/AllCardsEvents";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import OffersCards from "Pages/Offers/Components/OffersContent/OffersCards";
+import { useState } from "react";
 
 const TabsBiography = ({ biography }) => {
   // lang
   const { currentLanguage } = useLanguage(); // Get the current language
+  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
+
+  const handleSelectSubCategory = (subCategoryIds) => {
+    setSelectedSubCategoryIds(subCategoryIds);
+  };
   // Normalize data || convert image name to be the same with all trips
   const normalizeData = (data) => {
     return data.map((item) => ({
@@ -40,7 +46,7 @@ const TabsBiography = ({ biography }) => {
       content: (
         <>
           <ContainerMedia>
-            <TripsContent tripsData={normalizedData} />
+            <TripsContent tripsData={normalizedData} onSelectSubCategory={handleSelectSubCategory} />
           </ContainerMedia>
         </>
       ),

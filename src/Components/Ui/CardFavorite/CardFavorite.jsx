@@ -111,7 +111,7 @@ const CardFavorite = ({
           <div className="rate-card d-flex align-items-center gap-1 mt-sm-1 mt-md-0">
             <IconStarRate />
             {rateNum ? rateNum.toFixed(1) : 0}
-
+            {" "}
             {cardFavoriteTranslations.rating[currentLanguage]}
           </div>
         }

@@ -11,17 +11,21 @@ import UserDropMenu from "Components/Ui/UserDropMenu/UserDropMenu";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import SearchInputLocation from "Components/Ui/SearchInputLocation/SearchInputLocation";
 import ContentAPI from "api/contentApi";
+import CountryAPI from "api/country";
 import { isAuthenticated } from "api/axiosInstance";
 import useTranslation from "Components/Languages/useTranslation";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import ThemeToggle from "Components/ThemeToggle/ThemeToggle";
 import { toast } from "react-toastify";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const NavbarMenu = () => {
   const { t } = useTranslation(); // Get the translation function
   const [isMenuFixed, setMenuFixed] = useState(false);
-  const [cities, setCities] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]); // Reintroduce cities state
+  const [searchableItems, setSearchableItems] = useState([]); // New state for combined data
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -31,6 +35,8 @@ const NavbarMenu = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef(null);
+  const { currentLanguage } = useLanguage()
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,18 +50,36 @@ const NavbarMenu = () => {
   const hideLogin = () => setShowLogin(false);
 
   useEffect(() => {
-    const fetchCities = async () => {
+    const fetchAllData = async () => {
       try {
-        const responseCities = await ContentAPI.getCities();
+        const [responseCountries, responseCities] = await Promise.all([
+          CountryAPI.getCountries(currentLanguage),
+          ContentAPI.getCities(currentLanguage),
+        ]);
+        setCountries(responseCountries.data || []);
         setCities(responseCities.data || []);
       } catch (err) {
-        toast.error("Failed to fetch cities. Please try again later.");
+        toast.error("Failed to fetch data. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
-    fetchCities();
-  }, []);
+    fetchAllData();
+  }, [currentLanguage]);
+
+  useEffect(() => {
+    if (countries.length > 0 && cities.length > 0) {
+      const combined = cities.map(city => {
+        const country = countries.find(c => c.id === city.country_id);
+        return {
+          ...city,
+          countryName: country ? country.title : 'Unknown',
+          type: 'city'
+        };
+      });
+      setSearchableItems(combined);
+    }
+  }, [countries, cities]);
 
   useEffect(() => {
     if (selectedCity) {
@@ -110,7 +134,7 @@ const NavbarMenu = () => {
           </Navbar.Brand>
 
           <div className="navbar-search" data-aos="fade-right">
-            <SearchInputLocation cities={cities} setSelectedCity={setSelectedCity} />
+            <SearchInputLocation searchItems={searchableItems} setSelectedCity={setSelectedCity} />
           </div>
 
           <div className="main-info-left d-flex align-items-center gap-3" data-aos="fade-right">
@@ -126,7 +150,7 @@ const NavbarMenu = () => {
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
             <Nav className="me-auto" data-aos="fade-right">
 
-
+              {/* 
               <NavDropdown title={"استكشف"} id="basic-nav-dropdown">
 
 
@@ -177,7 +201,7 @@ const NavbarMenu = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
 
-              </NavDropdown>
+              </NavDropdown> */}
 
 
 
@@ -196,7 +220,7 @@ const NavbarMenu = () => {
               <NavLink to="/termsConditions" className="nav-link">
                 {t('navMenu.termsConditions')}
               </NavLink> */}
-              <SearchInputLocation cities={cities} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
+              <SearchInputLocation searchItems={searchableItems} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
             </Nav>
 
             <div className="left-nav-menu d-flex align-items-center gap-3 ">

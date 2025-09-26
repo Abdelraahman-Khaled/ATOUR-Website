@@ -1,3 +1,14 @@
 .box-middel-content .text span {
   color: black !important;
 }
+.badge-top {
+    padding: 5px 15px;
+    background: var(--warning-01-color);
+    border: var(--border-02);
+    border-color: var(--warning-01-color);
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white-01-color);
+    width: fit-content;
+}

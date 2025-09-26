@@ -8,9 +8,15 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useHome } from "context/HomeContext";
 import OneOffer from "./Components/OneOffer/OneOffer";
-import Loader from "Components/Auth/Components/Loader/Loader";
 import SplashScreen from "Components/SplashScreen/SplashScreen";
 import Countries from "./Components/Countries/Countries";
+import VendorOffers from "./Components/VendorOffers/VendorOffers";
+import CardsBooks from "./Components/WhyCardsBooks/CardsBooks";
+import CitiesCard from "./Components/CitiesCard/CitiesCard";
+
+
+
+
 const Home = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { homeData, loading, error } = useHome(); // Use the HomeContext
@@ -20,6 +26,7 @@ const Home = () => {
   const experince = homeData?.old_experiences || [];
   const effectivenes = homeData?.effectivenes || [];
   const offerData = homeData?.offers || null;
+  const offerVendorData = homeData?.vendor_offers || null;
 
 
   if (loading) {
@@ -46,10 +53,12 @@ const Home = () => {
         <ContainerMedia>
           <HeaderCard />
           <Countries />
-          {mostVisited.length > 0 && <ImagesCard mostVisited={mostVisited} />}
-          {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
-          {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
+          {mostVisited.length > 0 && <CitiesCard CityData={mostVisited} />}
           {offerData && <OneOffer offer={offerData} />}
+          {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
+          {offerVendorData && <VendorOffers offer={offerVendorData} />}
+          {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
+          <CardsBooks />
           <BannerHome />
         </ContainerMedia>
       </main>

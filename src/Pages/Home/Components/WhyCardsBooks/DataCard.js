@@ -1,8 +1,23 @@
-
-import DateIconBooking from "assets/Icons/DateIconBooking";
-import CardVisaIcon from "assets/images/IconsBooks/CardVisaIcon";
+import {
+  faAmericanSignLanguageInterpreting,
+  faCheckCircle,
+  faGlobe,
+  faHandshake,
+  faHeadphones,
+  faLanguage,
+  faMoneyBill,
+  faMoneyBill1,
+  faMoneyBill1Wave,
+  faMoneyBillWave,
+  faPercent,
+  faPercentage,
+  faSackDollar,
+  faSignLanguage,
+  faTicket,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CheckIcon from "assets/Icons/CheckIcon";
 import Edite from "assets/images/IconsBooks/Edite";
-import Free from "assets/images/IconsBooks/Free";
 import GiftCardIcon from "assets/images/IconsBooks/GiftCardIcon";
 import LocationIconCard from "assets/images/IconsBooks/LocationIconCard";
 import PayIcon from "assets/images/IconsBooks/PayIcon";
@@ -12,56 +27,52 @@ import TicketIcon from "assets/images/IconsBooks/TicketIcon";
 export const cardsBooks = [
   {
     id: 0,
-    icon: <Star />,
-    title: "تقييمات موثوقة",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <FontAwesomeIcon icon={faHeadphones} className="font-awesome" />,
+    title: "خدمة عملاء متميزة",
+    text: "فريق دعم متواجد دائمًا للرد على استفساراتك ومساعدتك في كل خطوة من رحلتك، لضمان تجربة سلسة ومريحة.",
   },
   {
     id: 1,
-    icon: <DateIconBooking />,
-    title: "احجز الآن، وادفع لاحقا",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <PayIcon />,
+    title: "بوابة دفع آمنة",
+    text: " احجز وادفع بثقة من خلال نظام دفع محمي ومتوافق مع أعلى معايير الأمان الإلكتروني.",
   },
+
   {
     id: 2,
-    icon: <Free />,
-    title: "إلغاء مجاني",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <FontAwesomeIcon icon={faGlobe} className="font-awesome" />,
+    title: "متعدد اللغات",
+    text: "منصة متاحة بـ12 لغة لتسهيل تجربة الحجز لجميع المستخدمين حول العالم، بلغتك المفضلة.",
   },
   {
     id: 3,
-    icon: <Edite />,
-    title: "إمكانية تعديل الحجز حسب السياسات",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <CheckIcon />,
+
+    title: "موثق ومرخص",
+    text: "جميع الخدمات والمرشدين المرخصين لضمان تجربة قانونية وآمنة مع التزام تام بالمعايير المحلية والدولية.",
   },
   {
     id: 4,
-    icon: <PayIcon />,
-    title: " استرداد الأموال في حالة عدم توفر الخدمة",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <FontAwesomeIcon icon={faHandshake} className="font-awesome" />,
+    title: "شركاء موثوقون",
+    text: "نتعاون فقط مع المرشدين، منظمي الجولات، والمتاجر الموثوق بها لتقديم تجربة عالية الجودة ومضمونة.",
   },
   {
     id: 5,
-    icon: <CardVisaIcon />,
-    title: "خطوات استخراج الفيزا السياحية",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <FontAwesomeIcon icon={faSackDollar} className="font-awesome" />,
+    title: "عروض ومكافآت",
+    text: "استمتع بخصومات حصرية، عروض موسمية، وبرامج مكافآت تكافئ حجزك وتجعل كل تجربة أكثر قيمة.",
   },
   {
     id: 6,
-    icon: <GiftCardIcon />,
-    title: "مبيعات الهدايا التذكارية",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <Star />,
+    title: "مراجعات دقيقة",
+    text: " تقييمات ومراجعات موثوقة من المستخدمين تساعدك في اختيار أفضل الجولات والخدمات بثقة.",
   },
   {
     id: 7,
-    icon: <TicketIcon />,
-    title: " مبيعات التذاكر الخاصة ببعض أماكن الجذب",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
+    icon: <FontAwesomeIcon icon={faMoneyBillWave} className="font-awesome" />,
+    title: "عروض واضحة وأسعار منافسة",
+    text: "استمتع بخصومات وعروض حصرية مع شفافية كاملة للأسعار، لضمان أفضل قيمة مقابل كل تجربة تحجزها",
   },
-  {
-    id: 8,
-    icon: <LocationIconCard />,
-    title: "خريطة لاستعراض الموقع الخاص بالنشاط",
-    text: "ذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص."
-  }
 ];

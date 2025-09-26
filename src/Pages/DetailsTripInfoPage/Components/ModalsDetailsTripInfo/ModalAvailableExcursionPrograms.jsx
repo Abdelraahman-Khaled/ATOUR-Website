@@ -222,37 +222,51 @@ const ModalAvailableExcursionPrograms = ({
         <div className="all-content-available ">
           <div className="details-header mb-4">
             <h2 className="title mb-2">{tripData.title || content.noTitle[currentLanguage]}</h2>
-            <p className="text">{tripData.description || content.noDescription[currentLanguage]}</p>
+            <div className="text">{tripData.description || content.noDescription[currentLanguage]}</div>
           </div>
 
           {/* Select Time */}
 
           {/* Details */}
-          <div className="">
-            <h2 className="title">تفاصيل الحجز</h2>
-            {selectedDate ? (
-              <>
-                <p className="text">{currentLanguage === "ar" ? "التاريخ المحدد:" : "Selected Date:"} {`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`}</p>
-              </>
-            )
-              : (
-                <p className="text">{currentLanguage === "ar" ? "التاريخ المحدد:" : "Selected Date:"} لا يوجد يوم محدد يرجي اختيار اليوم</p>
-              )
-            }
-            <p className="text">{currentLanguage === "ar" ? "العدد" : "Number:"}: {numberOfPeople}</p>
-            <p className="text">{currentLanguage === "ar" ? "السعر" : "price:"}: <CurrencyDisplay price={tripData.customer_price} /></p>
-            <p className="text">الاوقات المتاحة</p>
-            <div className="times-trips d-flex align-items-center gap-2 py-3 flex-wrap">
-              {tripData.available_times.map((time, index) => (
-                <div
-                  key={index}
-                  className={`main-btn-filter ${selectedTimeIndex === index ? "active" : ""}`}
-                  onClick={() => handleTimeClick(index)}
-                >
-                  <ClockIcon /> {time.from_time} - {time.to_time}
-                </div>
-              ))}
-            </div>
+          <div className="table-responsive">
+            <table className="table table-bordered">
+              <tbody>
+                <tr>
+                  <th>{currentLanguage === "ar" ? "التاريخ المحدد:" : "Selected Date:"}</th>
+                  <td>
+                    {selectedDate ? (
+                      `${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`
+                    ) : (
+                      currentLanguage === "ar" ? "لا يوجد يوم محدد يرجي اختيار اليوم" : "No selected day, please choose a day"
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <th>{currentLanguage === "ar" ? "العدد" : "Number:"}</th>
+                  <td>{numberOfPeople}</td>
+                </tr>
+                <tr>
+                  <th>{currentLanguage === "ar" ? "السعر" : "Price:"}</th>
+                  <td><CurrencyDisplay price={tripData.customer_price} /></td>
+                </tr>
+                <tr>
+                  <th>{currentLanguage === "ar" ? "الأوقات المتاحة" : "Available Times"}</th>
+                  <td>
+                    <div className="times-trips d-flex align-items-center gap-2 flex-wrap">
+                      {tripData.available_times.map((time, index) => (
+                        <div
+                          key={index}
+                          className={`main-btn-filter ${selectedTimeIndex === index ? "active" : ""}`}
+                          onClick={() => handleTimeClick(index)}
+                        >
+                          <ClockIcon /> {time.from_time} - {time.to_time}
+                        </div>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           {/* Select Day */}
           {/* <div className="times-trips d-flex align-items-center gap-2 py-3 mb-3 flex-wrap">

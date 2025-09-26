@@ -1,97 +1,110 @@
 import { useState } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import CardCollection from "Components/Ui/CardCollection/CardCollection";
-import PaginationPage from "Components/Pagination/Pagination";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import './CardCollection.css'
+import SwiperCards from "Components/Ui/SwiperCards/SwiperCards";
+import { SwiperSlide } from "swiper/react";
 
 const CardsCollections = ({ data, type }) => {
   const { currentLanguage } = useLanguage(); // Get the selected language from context
-  const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 5; // NUMBER OF PAGE ITEMS
-  const pageCount = Math.ceil(data.length / perPage);
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected);
-  };
   console.log(data);
-
-  const offset = currentPage * perPage;
-  const currentPageData = data.slice(offset, offset + perPage);
-  const content = {
-    ar: {
-      title: "احداث ممتعة",
-      text: "في عالم مليء بالفرص والمغامرات، هناك تجارب لا يمكن تفويتها. تجارب تأخذك بعيدًا عن الروتين اليومي، تفتح أمامك أبوابًا جديدة لاكتشاف ذاتك والعالم من حولك. سواء كنت تبحث عن مغامرة تضخ الأدرينالين في عروقك، أو لحظة هدوء تنعش روحك، فإن هذه التجارب مصممة لتبقى محفورة في ذاكرتك إلى الأبد. استعد لتجربة تستحق أن تُروى!",
-      addToFavorites: "تم الاضافة الى المفضلة.",
-      removeFromFavorites: "تم الأزالة من المفضلة.",
-    },
-    en: {
-      title: "Experiences Worth Trying",
-      text: "In a world full of opportunities and adventures, there are experiences that cannot be missed. Experiences that take you far from the daily routine and open new doors to discover yourself and the world around you. Whether you're seeking an adrenaline-pumping adventure or a moment of tranquility to refresh your soul, these experiences are designed to remain etched in your memory forever. Get ready for an experience worth sharing!",
-      addToFavorites: "Added to favorites.",
-      removeFromFavorites: "Removed from favorites.",
-    },
-    fr: {
-      title: "Expériences à vivre",
-      text: "Dans un monde plein d'opportunités et d'aventures, certaines expériences sont incontournables. Elles vous éloignent de la routine quotidienne et ouvrent de nouvelles portes pour découvrir vous-même et le monde qui vous entoure. Que vous recherchiez une aventure pleine d'adrénaline ou un moment de calme pour rafraîchir votre âme, ces expériences resteront gravées dans votre mémoire pour toujours. Préparez-vous à une expérience qui mérite d'être partagée !",
-      addToFavorites: "Ajouté aux favoris.",
-      removeFromFavorites: "Supprimé des favoris.",
-    },
-    de: {
-      title: "Erlebnisse, die es wert sind",
-      text: "In einer Welt voller Möglichkeiten und Abenteuer gibt es Erlebnisse, die man nicht verpassen darf. Sie nehmen Sie weit weg vom Alltag und öffnen neue Türen, um sich selbst und die Welt um Sie herum zu entdecken. Ob Sie ein Adrenalinabenteuer suchen oder einen ruhigen Moment, der Ihre Seele erfrischt – diese Erlebnisse bleiben für immer in Ihrer Erinnerung. Machen Sie sich bereit für ein Erlebnis, das es wert ist, geteilt zu werden!",
-      addToFavorites: "Zu Favoriten hinzugefügt.",
-      removeFromFavorites: "Aus Favoriten entfernt.",
-    },
-    es: {
-      title: "Experiencias que valen la pena",
-      text: "En un mundo lleno de oportunidades y aventuras, hay experiencias que no se pueden perder. Te alejan de la rutina diaria y abren nuevas puertas para descubrirte a ti mismo y el mundo que te rodea. Ya sea que busques una aventura llena de adrenalina o un momento de calma que refresque tu alma, estas experiencias están diseñadas para permanecer grabadas en tu memoria para siempre. ¡Prepárate para una experiencia que vale la pena compartir!",
-      addToFavorites: "Añadido a favoritos.",
-      removeFromFavorites: "Eliminado de favoritos.",
-    },
-    tr: {
-      title: "Denemeye Değer Deneyimler",
-      text: "Fırsatlarla ve maceralarla dolu bir dünyada, kaçırılmaması gereken deneyimler vardır. Günlük rutininizden uzaklaşıp kendinizi ve çevrenizdeki dünyayı keşfetmenizi sağlayan yeni kapılar açar. İster adrenalin dolu bir macera arıyor olun, ister ruhunuzu tazeleyecek huzurlu bir an, bu deneyimler hafızanızda sonsuza kadar kalacak. Anlatmaya değer bir deneyime hazır olun!",
-      addToFavorites: "Favorilere eklendi.",
-      removeFromFavorites: "Favorilerden çıkarıldı.",
-    },
-    ru: {
-      title: "Опыт, который стоит попробовать",
-      text: "В мире, полном возможностей и приключений, есть впечатления, которые нельзя пропустить. Они уводят вас от повседневной рутины и открывают новые двери для самопознания и открытия мира вокруг вас. Ищете ли вы приключение, полное адреналина, или момент спокойствия, освежающий вашу душу – эти впечатления навсегда останутся в вашей памяти. Приготовьтесь к опыту, которым стоит поделиться!",
-      addToFavorites: "Добавлено в избранное.",
-      removeFromFavorites: "Удалено из избранного.",
-    },
-    zh: {
-      title: "值得尝试的体验",
-      text: "在一个充满机会和冒险的世界里，有些体验是不能错过的。它们带你远离日常的惯例，开启新的大门，帮助你发现自我和周围的世界。无论你是在寻找一次肾上腺素飙升的冒险，还是一段让心灵焕然一新的宁静时光，这些体验都将永远铭刻在你的记忆中。准备好迎接一次值得分享的经历吧！",
-      addToFavorites: "已添加到收藏夹。",
-      removeFromFavorites: "已从收藏夹移除。",
-    },
-    ko: {
-      title: "시도해 볼 만한 경험",
-      text: "기회와 모험으로 가득한 세상에는 놓쳐서는 안 될 경험들이 있습니다. 일상에서 벗어나 자신과 주변 세상을 발견할 수 있는 새로운 문을 열어줍니다. 아드레날린이 솟구치는 모험을 찾든, 마음을 새롭게 해주는 평온한 순간을 찾든, 이 경험들은 영원히 기억에 남도록 설계되었습니다. 함께 나눌 가치가 있는 경험을 준비하세요!",
-      addToFavorites: "즐겨찾기에 추가되었습니다.",
-      removeFromFavorites: "즐겨찾기에서 제거되었습니다.",
-    },
-    pt: {
-      title: "Experiências que valem a pena",
-      text: "Em um mundo cheio de oportunidades e aventuras, existem experiências que não podem ser perdidas. Elas o afastam da rotina diária e abrem novas portas para descobrir a si mesmo e o mundo ao seu redor. Seja procurando uma aventura cheia de adrenalina ou um momento de tranquilidade para refrescar sua alma, essas experiências foram feitas para permanecer na memória para sempre. Prepare-se para uma experiência que vale a pena compartilhar!",
-      addToFavorites: "Adicionado aos favoritos.",
-      removeFromFavorites: "Removido dos favoritos.",
-    },
-    ur: {
-      title: "قابلِ ذکر تجربے",
-      text: "مواقع اور مہم جوئی سے بھری دنیا میں کچھ تجربات ایسے ہیں جنہیں نظرانداز نہیں کیا جا سکتا۔ یہ آپ کو روزمرہ کی روٹین سے دور لے جاتے ہیں اور خود کو اور اپنے اردگرد کی دنیا کو دریافت کرنے کے نئے دروازے کھولتے ہیں۔ چاہے آپ ایک ایسا ایڈونچر تلاش کر رہے ہوں جو ایڈرینالین بڑھا دے یا سکون کا لمحہ جو آپ کی روح کو تازگی بخشے، یہ تجربات ہمیشہ آپ کی یاد میں رہیں گے۔ ایک ایسا تجربہ پانے کے لیے تیار ہو جائیں جسے بانٹنا قابلِ فخر ہو!",
-      addToFavorites: "پسندیدہ میں شامل کر دیا گیا۔",
-      removeFromFavorites: "پسندیدہ سے ہٹا دیا گیا۔",
-    },
-    ja: {
-      title: "試す価値のある体験",
-      text: "チャンスと冒険に満ちた世界には、見逃せない体験があります。日常から離れ、自分自身や周囲の世界を発見する新しい扉を開きます。アドレナリンが湧き上がる冒険を求めているか、心をリフレッシュする静かな瞬間を求めているかに関わらず、これらの体験は永遠に記憶に残るように設計されています。共有する価値のある体験の準備をしましょう！",
-      addToFavorites: "お気に入りに追加しました。",
-      removeFromFavorites: "お気に入りから削除しました。",
-    },
-  };
-
+  const content =
+    type === "trip"
+      ? {
+        ar: {
+          title: "تجارب و جولات ممتعة",
+          text: "اكتشف أكثر الجولات والوجهات بين الاصالة والتاريخ وبين الإرث والعادات وبين الطبيعة والمدينة وبين البادية والحضارة بتضاريسها المتنوعة وثقافتها المختلفة كل تجربة مصممة لتبهرك أكثر ، اكتشفها الآن ",
+        },
+        en: {
+          title: "Exciting Experiences and Tours",
+          text: "Discover the best tours and destinations between authenticity and history, heritage and traditions, nature and city, desert and civilization. With diverse landscapes and cultures, each experience is designed to amaze you. Explore them now!",
+        },
+        fr: {
+          title: "Expériences et visites passionnantes",
+          text: "Découvrez les meilleures visites et destinations entre authenticité et histoire, patrimoine et traditions, nature et ville, désert et civilisation. Avec des paysages et des cultures variés, chaque expérience est conçue pour vous émerveiller. Explorez-les dès maintenant !",
+        },
+        es: {
+          title: "Experiencias y Tours Emocionantes",
+          text: "Descubre los mejores tours y destinos entre autenticidad e historia, patrimonio y tradiciones, naturaleza y ciudad, desierto y civilización. Con paisajes y culturas diversas, cada experiencia está diseñada para sorprenderte. ¡Descúbrelos ahora!",
+        },
+        de: {
+          title: "Spannende Erlebnisse und Touren",
+          text: "Entdecke die besten Touren und Reiseziele zwischen Authentizität und Geschichte, Erbe und Traditionen, Natur und Stadt, Wüste und Zivilisation. Mit vielfältigen Landschaften und Kulturen ist jedes Erlebnis darauf ausgelegt, dich zu begeistern. Entdecke sie jetzt!",
+        },
+        it: {
+          title: "Esperienze e Tour Emozionanti",
+          text: "Scopri i migliori tour e destinazioni tra autenticità e storia, patrimonio e tradizioni, natura e città, deserto e civiltà. Con paesaggi e culture diversi, ogni esperienza è progettata per sorprenderti. Scoprili ora!",
+        },
+        ru: {
+          title: "Увлекательные впечатления и туры",
+          text: "Откройте для себя лучшие туры и направления между аутентичностью и историей, наследием и традициями, природой и городом, пустыней и цивилизацией. С разнообразными ландшафтами и культурами каждый опыт создан, чтобы вас удивить. Исследуйте их сейчас!",
+        },
+        zh: {
+          title: "精彩体验与旅行",
+          text: "探索最精彩的旅行与目的地，在真实与历史、遗产与传统、自然与城市、沙漠与文明之间。多样的地貌与不同的文化，每一次体验都为让你惊叹而设计。立即探索吧！",
+        },
+        ja: {
+          title: "魅力的な体験とツアー",
+          text: "本物と歴史、遺産と伝統、自然と都市、砂漠と文明の間で、最高のツアーや目的地を発見しましょう。多様な地形と文化を備えた各体験は、あなたを驚かせるように設計されています。今すぐ発見してください！",
+        },
+        ko: {
+          title: "흥미진진한 경험과 투어",
+          text: "진정성과 역사, 유산과 전통, 자연과 도시, 사막과 문명 사이에서 최고의 투어와 목적지를 발견하세요. 다양한 지형과 문화로 이루어진 모든 경험은 당신을 놀라게 하도록 설계되었습니다. 지금 바로 탐험해 보세요!",
+        },
+        tr: {
+          title: "Heyecan Verici Deneyimler ve Turlar",
+          text: "Otantiklik ve tarih, miras ve gelenekler, doğa ve şehir, çöl ve medeniyet arasında en iyi turları ve destinasyonları keşfedin. Çeşitli manzaralar ve kültürlerle her deneyim sizi etkilemek için tasarlandı. Şimdi keşfedin!",
+        },
+      }
+      : {
+        ar: {
+          title: "فعاليات مختلفة ",
+          text: `عِش أجواء الفعاليات والمهرجانات الأكثر شعبية وإثارة
+من الفعليات الخاصة الى الفعاليات الموسمية والترفيهية المتخصصة، كل لحظة ستدعوك لاكتشاف المتعة مع جولة اكتشف أكثر.
+`,
+        },
+        en: {
+          title: "Diverse Events",
+          text: "Experience the atmosphere of the most popular and exciting festivals and events, from private gatherings to seasonal and specialized entertainment. Every moment invites you to discover joy with the Explore More tour.",
+        },
+        fr: {
+          title: "Événements Divers",
+          text: "Vivez l'ambiance des festivals et événements les plus populaires et passionnants, des rassemblements privés aux divertissements saisonniers et spécialisés. Chaque instant vous invite à découvrir le plaisir avec la tournée Explore More.",
+        },
+        es: {
+          title: "Eventos Diversos",
+          text: "Vive la atmósfera de los festivales y eventos más populares y emocionantes, desde reuniones privadas hasta entretenimiento estacional y especializado. Cada momento te invita a descubrir la diversión con el tour Explora Más.",
+        },
+        de: {
+          title: "Vielfältige Veranstaltungen",
+          text: "Erleben Sie die Atmosphäre der beliebtesten und aufregendsten Festivals und Veranstaltungen – von privaten Zusammenkünften bis hin zu saisonalen und spezialisierten Unterhaltungen. Jeder Moment lädt Sie ein, mit der 'Explore More'-Tour Freude zu entdecken.",
+        },
+        it: {
+          title: "Eventi Diversi",
+          text: "Vivi l'atmosfera dei festival ed eventi più popolari ed emozionanti, dagli incontri privati all'intrattenimento stagionale e specializzato. Ogni momento ti invita a scoprire il divertimento con il tour Esplora di Più.",
+        },
+        ru: {
+          title: "Разнообразные мероприятия",
+          text: "Ощутите атмосферу самых популярных и захватывающих фестивалей и мероприятий — от частных встреч до сезонных и специализированных развлечений. Каждый момент приглашает вас открыть радость с туром 'Открой больше'.",
+        },
+        zh: {
+          title: "多样化活动",
+          text: "体验最受欢迎和令人兴奋的节日与活动氛围，从私人聚会到季节性和专业娱乐。每一刻都邀请你通过“探索更多”之旅发现乐趣。",
+        },
+        ja: {
+          title: "多様なイベント",
+          text: "最も人気がありエキサイティングな祭りやイベントの雰囲気を体験してください。プライベートな集まりから季節限定や専門的なエンターテインメントまで、あらゆる瞬間が「もっと発見」ツアーで楽しさを発見するようあなたを誘います。",
+        },
+        ko: {
+          title: "다양한 이벤트",
+          text: "가장 인기 있고 흥미진진한 축제와 이벤트의 분위기를 경험하세요. 개인 모임부터 계절별 및 전문적인 엔터테인먼트까지, 모든 순간이 '더 탐험하기' 투어와 함께 즐거움을 발견하도록 초대합니다.",
+        },
+        tr: {
+          title: "Çeşitli Etkinlikler",
+          text: "En popüler ve heyecan verici festivallerin ve etkinliklerin atmosferini yaşayın. Özel toplantılardan mevsimlik ve özel eğlencelere kadar her an, 'Daha Fazla Keşfet' turu ile keyfi keşfetmeye davet ediyor.",
+        },
+      };
 
   const { title, text, addToFavorites, removeFromFavorites } =
     content[currentLanguage];
@@ -99,14 +112,14 @@ const CardsCollections = ({ data, type }) => {
   return (
     <div className="cards-collections padding-top">
       {/* ============== START TITLE SECTION ============ */}
-      <TitleSection title={title} text={text} />
       {/* ============== END TITLE SECTION ============ */}
+      <TitleSection title={title} text={text} />
 
       {/* ============ START ALL CARDS COLLECTION ============ */}
       <div className="all-cards-collection" data-aos="fade-up">
-        <div className="row g-3 justify-content-center">
-          {currentPageData.map((item) => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 most-visited" key={item.id}>
+        <SwiperCards swiperId="cards-collection-swiper">
+          {data.map((item) => (
+            <SwiperSlide key={item.id}>
               <CardCollection
                 itemId={`${item.id}`}
                 imageCard={item.cover}
@@ -121,11 +134,14 @@ const CardsCollections = ({ data, type }) => {
                 isFav={item.is_favourit}
                 type={type}
                 is_group={item.is_group}
+                hasFreeCancellation={item.free_cancelation}
+                hasPayLater={item.pay_later}
+                guide_languages={item.guide_languages}
+                booking_count={item.booking_count}
               />
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
-        {pageCount > 1 && <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />}
+        </SwiperCards>
       </div>
     </div>
   );

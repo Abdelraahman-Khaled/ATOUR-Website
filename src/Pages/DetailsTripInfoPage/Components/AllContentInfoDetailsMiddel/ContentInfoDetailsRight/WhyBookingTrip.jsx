@@ -1,6 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import TooltipExample from "../../../../../Components/Ui/Tooltip";
 
 const translations = {
   title: {
@@ -53,8 +54,10 @@ const WhyBookingTrip = ({ tripData }) => {
 
   return (
     <div className="why-booking-trip pt-3 margin-top-1">
-      <h2 className="title">{translations.title[currentLanguage]}</h2>
-      <p className="text-read-more mt-2">{translations.description[currentLanguage]}</p>
+      <div className="d-flex gap-2">
+        <h2 className="title">{translations.title[currentLanguage]}</h2>
+        <TooltipExample title={translations.description[currentLanguage]} />
+      </div>
 
       <div className="list-content-info d-flex align-items-center gap-5 flex-wrap mt-4">
         <ul className="list-one-info p-0 m-0 d-flex flex-column gap-3">

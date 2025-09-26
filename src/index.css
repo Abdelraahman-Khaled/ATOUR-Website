@@ -642,34 +642,46 @@ html[dir="ltr"] .all-cards-swiper .all-arrows-swiper {
   display: none;
 }
 
+
 .all-cards-swiper .swiper-next,
 .all-cards-swiper .swiper-prev {
   font-size: 15px;
-  color: var(--green-01-color);
-  width: 20px;
-  height: 20px;
+  color: var(--gray-01-color);
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.all-cards-swiper .swiper-next:hover,
+.all-cards-swiper .swiper-prev:hover {
+  background-color: var(--white-01-color);
 }
 
 .all-cards-swiper .swiper-prev {
-  right: 98% !important;
-  left: initial !important;
+  left: -2.2rem !important;
+  right: initial !important;
 }
 
 html[dir="ltr"] .all-cards-swiper .swiper-prev {
-  left: 95% !important;
+  left: -2.2rem !important;
   right: initial !important;
 }
 
 .all-cards-swiper .swiper-next {
   left: initial !important;
-  right: 95% !important;
+  right: -2.2rem !important;
 }
 
 html[dir="ltr"] .all-cards-swiper .swiper-next {
-  right: initial !important;
-  left: 98% !important;
+  left: initial !important;
+  right: -2.2rem !important;
 }
-
+/* 
 @media screen and (max-width: 767px) {
   .all-cards-swiper .swiper-prev {
     right: 97% !important;
@@ -708,19 +720,19 @@ html[dir="ltr"] .all-cards-swiper .swiper-next {
 
 @media screen and (max-width: 485px) {
   .all-cards-swiper .swiper-prev {
-    right: 95% !important;
+    left: -2.2rem !important;
   }
 
   .all-cards-swiper .swiper-next {
-    right: 89% !important;
+    right: -2.2rem !important;
   }
 
   html[dir="ltr"] .all-cards-swiper .swiper-prev {
-    left: 89% !important;
+    left: -2.2rem !important;
   }
 
   .all-cards-swiper .swiper-next {
-    left: 95% !important;
+    right: -2.2rem !important;
   }
 }
 
@@ -740,18 +752,196 @@ html[dir="ltr"] .all-cards-swiper .swiper-next {
   html[dir="ltr"] .all-cards-swiper .swiper-next {
     left: 94% !important;
   }
-}
+} */
 
 .icon-check-link {
-  width: 27px;
-  height: 27px;
+  width: 20px;
+  height: 20px;
   background: var(--green-01-color);
   color: var(--white-01-color);
-  font-size: 15px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 450px) {
+  .icon-check-link {
+    width: 23px;
+    height: 23px;
+    font-size: 12px;
+  }
+}
+
+/* END SWIPER CARDS ARROW */
+/* For Webkit browsers (Chrome, Safari, etc.) */
+.change-scroll::-webkit-scrollbar {
+  height: 6px !important;
+  width: 8px;
+}
+
+/* Track */
+.change-scroll::-webkit-scrollbar-track {
+  background: var(--green-02-color);
+  border-radius: 10px;
+}
+
+/* Handle */
+.change-scroll::-webkit-scrollbar-thumb {
+  background: var(--green-01-color);
+  border-radius: 10px;
+}
+
+/* ===========================
+START CIRCLE BORDER
+==================================*/
+
+.box-border-circle {
+  position: relative;
+  padding-right: 25px;
+}
+
+html[dir="ltr"] .box-border-circle {
+  padding: 0 0 0 25px;
+}
+
+.box-border-circle::before,
+.box-border-circle::after {
+  content: "";
+  position: absolute;
+}
+
+.box-border-circle::after {
+  width: 2px;
+  height: 100%;
+  background: var(--blue-01-color);
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+html[dir="ltr"] .box-border-circle::after {
+  left: 0;
+  right: initial;
+}
+
+.box-border-circle::before {
+  width: 20px;
+  height: 20px;
+  background: var(--white-01-color);
+  border: 5px solid var(--blue-01-color);
+  z-index: 1;
+  border-radius: 50%;
+  top: -9px;
+  right: -18px;
+  transform: translateX(-50%);
+}
+
+html[dir="ltr"] .box-border-circle::before {
+  right: initial;
+  left: 1px;
+}
+
+.box-border-circle .title-text {
+  color: var(--blue-01-color);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+html[dir="ltr"] .accordion-button::after {
+  margin-left: auto;
+  margin-right: initial;
+}
+
+/* ===========================
+END CIRCLE BORDER
+==================================*/
+
+/* =================================
+START AIRPLAN
+================================== */
+.air-plan.show {
+  display: block;
+}
+
+.air-plan.hidden {
+  display: none;
+}
+
+.airPlan-dot {
+  width: 10px;
+  height: 10px;
+  background: #ff0000;
+  border-radius: 50%;
+  bottom: 318px;
+  position: absolute;
+  z-index: 1000;
+  left: 94px;
+  animation: dotAnim 800ms ease-in-out 0s infinite alternate;
+}
+
+.air-plan {
+  position: fixed;
+  top: 0px;
+  right: -600px;
+  animation: airPlanAnim 10s linear 0s reverse;
+  z-index: 1001;
+}
+
+@keyframes dotAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes airPlanAnim {
+  from {
+    right: -600px;
+  }
+
+  to {
+    right: 102%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .air-plan img {
+    width: 330px;
+    object-fit: cover;
+  }
+
+  .airPlan-dot {
+    top: 36%;
+    left: 48px;
+  }
+}
+
+/* ===============================
+END AIRPLAN
+============================== */
+
+/* Custom Scrollbar for all-info-card */
+.all-info-card::-webkit-scrollbar {
+  height: 6px;
+}
+
+.all-info-card::-webkit-scrollbar-track {
+  background: var(--green-02-color);
+  border-radius: 10px;
+}
+
+.all-info-card::-webkit-scrollbar-thumb {
+  background: var(--green-01-color);
+  border-radius: 10px;
+}
+
+.all-info-card::-webkit-scrollbar-thumb:hover {
+  background: var(--green-01-color);
 }
 
 @media screen and (max-width: 450px) {

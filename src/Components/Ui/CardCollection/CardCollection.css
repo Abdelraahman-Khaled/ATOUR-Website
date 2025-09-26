@@ -1,6 +1,9 @@
 .card-collection-one {
   background: var(--white-01-color);
   cursor: pointer;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  padding: 10px;
+  border-radius: 12px;
 }
 
 /* Dark mode - remove background */
@@ -27,7 +30,7 @@ body.dark-theme .card-collection-one {
 .card-collection-one .image-collection img {
   border-radius: 12px;
   height: auto !important;
-  max-height: 230px !important;
+  height: 230px !important;
 }
 
 .card-collection-one .image-collection .icon-heart {
@@ -68,9 +71,24 @@ html[dir="ltr"] .card-collection-one .image-collection .info-text {
 }
 
 .card-collection-one .content-info-card .rate-card {
-  font-size: 14px;
+  font-size: 12px;
+  border-left: 2px solid var(--black-01-color);
+  padding-right: 10px;
 }
 
+html[dir="ltr"] .card-collection-one .content-info-card .rate-card {
+  border-left: none;
+  border-left: 2px solid var(--black-01-color);
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+html[dir="rtl"] .card-collection-one .content-info-card .rate-card {
+  border-right: none;
+  border-left: 2px solid var(--black-01-color);
+  padding-left: 10px;
+  padding-right: 0;
+}
 .card-collection-one .content-info-card :is(.title, .rate-card) {
   font-weight: 500;
   color: var(--black-01-color);
@@ -83,12 +101,15 @@ body.dark-theme
 }
 
 .card-collection-one .content-info-card .title {
-  font-size: 16px;
+  font-size: 12px;
   padding: 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-collection-one .content-info-card .price-info {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--dark-01-color);
 }
@@ -104,4 +125,13 @@ html[dir="ltr"] .swiper .card-collection-one .content-info-card {
 html[dir="ltr"] .swiper .card-collection-one .content-info-card .rate-card {
   justify-content: end;
   flex-direction: row-reverse;
+}
+
+.card-collection-one .content-info-card .detials-info-one .icon-times {
+  width: 20px;
+  height: 20px;
+}
+
+.card-collection-one .content-info-card .detials-info-one .title-text {
+  font-size: 12px;
 }

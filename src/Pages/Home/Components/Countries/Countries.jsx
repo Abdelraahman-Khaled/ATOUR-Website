@@ -6,6 +6,9 @@ import { isAuthenticated } from 'api/axiosInstance';
 import { Link } from 'react-router-dom';
 import { useLanguage } from 'Components/Languages/LanguageContext';
 import CountryAPI from 'api/country';
+import { SwiperSlide } from "swiper/react";
+import SwiperCards from 'Components/Ui/SwiperCards/SwiperCards';
+
 const Countries = () => {
     const { t } = useTranslation(); // Get the translation function
     const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
@@ -25,6 +28,7 @@ const Countries = () => {
     }, []);
 
     const sectionTitle = t('homePage.mostCountries.sectionTitle');
+    const sectionText = t('homePage.mostCountries.sectionText');
 
     const handleShowLogin = () => {
         setShowLogin(true);
@@ -46,7 +50,7 @@ const Countries = () => {
             {/* Auth login */}
             <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
             {/* =========== START SECTION TITLE ========== */}
-            <TitleSection title={sectionTitle} text={""} />
+            <TitleSection title={sectionTitle} text={sectionText} />
             {/* =========== END SECTION TITLE ============ */}
 
             {/* Filter buttons */}
@@ -73,10 +77,10 @@ const Countries = () => {
             {/* =========== START ALL IMAGES CARD =========== */}
             <div className="all-images-card" data-aos="fade-up">
                 {/* ============ START ROW ========== */}
-                <div className="row g-3 justify-content-center">
+                <SwiperCards swiperId="countries-swiper">
                     {countries && countries.length > 0 && countries.map((item) => {
                         return (
-                            <div key={item.id} className="col-6 col-md-4 col-lg-3">
+                            <SwiperSlide key={item.id}>
                                 <Link to={`/country/${item.id}`} onClick={handleLinkClick}>
                                     {/* ============ START CARD IMAGE ONE =========== */}
                                     <div className="card-image-one">
@@ -96,10 +100,10 @@ const Countries = () => {
                                     </div>
                                     {/* ============ END CARD IMAGE ONE =========== */}
                                 </Link>
-                            </div>
+                            </SwiperSlide>
                         );
                     })}
-                </div>
+                </SwiperCards>
                 {/* ============ END ROW ========== */}
             </div>
             {/* =========== END ALL IMAGES CARD =========== */}
