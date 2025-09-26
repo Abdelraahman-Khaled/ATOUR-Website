@@ -74,6 +74,7 @@ const OffersCards = ({ gifts }) => {
                       // wishListCard={wishList_2}
                       // addToWishList={addToWishList}
                       type={"gift"}
+                      discount={item.discount}
                     />
                   </Link>
                 </div>

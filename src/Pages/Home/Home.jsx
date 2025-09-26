@@ -25,6 +25,7 @@ const Home = () => {
   const mostVisited = homeData?.most_visited || [];
   const experince = homeData?.old_experiences || [];
   const effectivenes = homeData?.effectivenes || [];
+  const gifts = homeData?.top_gifts || [];
   const offerData = homeData?.offers || null;
   const offerVendorData = homeData?.vendor_offers || null;
 
@@ -56,6 +57,7 @@ const Home = () => {
           {mostVisited.length > 0 && <CitiesCard CityData={mostVisited} />}
           {offerData && <OneOffer offer={offerData} />}
           {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
+          {effectivenes.length > 0 && <CardsCollections data={gifts} type={"gift"} />}
           {offerVendorData && <VendorOffers offer={offerVendorData} />}
           {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
           <CardsBooks />

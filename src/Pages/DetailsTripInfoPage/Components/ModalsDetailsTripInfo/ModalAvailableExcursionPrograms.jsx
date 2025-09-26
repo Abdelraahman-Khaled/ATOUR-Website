@@ -247,7 +247,13 @@ const ModalAvailableExcursionPrograms = ({
                 </tr>
                 <tr>
                   <th>{currentLanguage === "ar" ? "السعر" : "Price:"}</th>
-                  <td><CurrencyDisplay price={tripData.customer_price} /></td>
+                  {tripData.discount && tripData.discount < tripData.customer_price ?
+                    <td>
+                      <CurrencyDisplay price={tripData.discount} />
+                    </td>
+                    :
+                    <td><CurrencyDisplay price={tripData.customer_price} /></td>
+                  }
                 </tr>
                 <tr>
                   <th>{currentLanguage === "ar" ? "الأوقات المتاحة" : "Available Times"}</th>

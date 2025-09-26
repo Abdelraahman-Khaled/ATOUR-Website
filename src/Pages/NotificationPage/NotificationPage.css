@@ -1,41 +1,107 @@
-/* NotificationPage.css */
+/* ===== NotificationPage.css ===== */
+
+.notification-page-container {
+  display: flex;
+  /* Removed justify-content: center; as content will be 100% width */
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  width: 100%;
+}
+
 .notification-page {
-  padding: 20px;
-  text-align: center;
+  width: 100%;
+  max-width: 100%; /* Changed to 100% to take full width */
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
 }
 
 .notification-page h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
   color: #333;
-  margin-bottom: 15px;
-}
-
-.notification-page p {
-  color: #666;
-  font-size: 1.1em;
+  text-align: center;
 }
 
 .notifications-list {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+/* Notification item card */
 .notification-item {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  background: #fefefe;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.notification-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Left content */
+.notification-content {
+  flex: 1;
+  margin-right: 1rem;
 }
 
 .notification-message {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #444;
   margin: 0;
-  font-size: 1em;
-  color: #333;
+  margin-bottom: 0.5rem;
 }
 
+.read-more-button {
+  background: none;
+  border: none;
+  color: var(--green-01-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.read-more-button:hover {
+  color: var(--green-03-color);
+}
+
+/* Right timestamp */
 .notification-time {
-  font-size: 0.8em;
-  color: #999;
+  font-size: 0.85rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* No notifications */
+.notifications-list > p {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  padding: 1.5rem 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .notification-page {
+    padding: 1.2rem;
+  }
+
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notification-time {
+    margin-top: 0.5rem;
+  }
 }

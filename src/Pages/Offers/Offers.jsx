@@ -117,6 +117,7 @@ const Offers = () => {
   if (error) {
     return null; // No need to display error here, toast will handle it
   }
+  
   return (
     <>
       <HelmetInfo titlePage={translates[currentLanguage].products} />

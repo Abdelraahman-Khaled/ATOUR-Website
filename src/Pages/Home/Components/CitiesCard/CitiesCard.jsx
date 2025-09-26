@@ -6,6 +6,12 @@ import useTranslation from "Components/Languages/useTranslation";
 import { isAuthenticated } from "api/axiosInstance";
 import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import "./CitiesCardFilter.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
+import SwiperCards from "Components/Ui/SwiperCards/SwiperCards";
 
 const CitiesCard = ({ CityData }) => {
   const { t } = useTranslation(); // Get the translation function
@@ -80,31 +86,33 @@ const CitiesCard = ({ CityData }) => {
       {/* =========== START ALL IMAGES CARD =========== */}
       <div className="all-images-card" data-aos="fade-up">
         {/* ============ START ROW ========== */}
-        <div className="row g-3 justify-content-center">
+        <SwiperCards swiperId="cities-card-swiper">
           {filteredCityData.map((item) => {
             return (
-              <div key={item.id} className="w-auto" >
-                <Link to={`/biographyPage/${item.id}`} onClick={handleLinkClick}>
-                  {/* ============ START CARD IMAGE ONE =========== */}
-                  <div className="city-image-one">
-                    <div className="image-card position-relative overlay-bg circular-image">
-                      <img
-                        src={item.image}
-                        alt="imageCard"
-                        loading="lazy"
-                        className="w-100 h-100 object-fit-cover image-card-src"
-                      />
-                    </div>
+              <SwiperSlide key={item.id}>
+                <div className="w-auto" >
+                  <Link to={`/biographyPage/${item.id}`} onClick={handleLinkClick}>
+                    {/* ============ START CARD IMAGE ONE =========== */}
+                    <div className="city-image-one">
+                      <div className="image-card position-relative overlay-bg circular-image">
+                        <img
+                          src={item.image}
+                          alt="imageCard"
+                          loading="lazy"
+                          className="w-100 h-100 object-fit-cover image-card-src"
+                        />
+                      </div>
                       <h2 className="title">
                         {item.title}
                       </h2>
-                  </div>
-                  {/* ============ END CARD IMAGE ONE =========== */}
-                </Link>
-              </div>
+                    </div>
+                    {/* ============ END CARD IMAGE ONE =========== */}
+                  </Link>
+                </div>
+              </SwiperSlide>
             );
           })}
-        </div>
+        </SwiperCards>
         {/* ============ END ROW ========== */}
       </div>
       {/* =========== END ALL IMAGES CARD =========== */}

@@ -30,23 +30,14 @@ const CardFavorite = ({
   refresh,
   bookingCount,
   is_group,
+  discount
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
 
-  // CHECK IF WISHLISTCARD IS AN ARRAY AND IF IT INCLUDES THE CURRENT ITEM'S ID
-  const isWishListed_2 =
-    wishListCard &&
-    Array.isArray(wishListCard) &&
-    wishListCard.includes(idCard);
 
-  // TO SLICE WORDS OF TEXT CONTENT
-  const sliceWords = (text) => {
-    const words = text.split(" ");
-    return words.slice(0, 25).join(" ") + (words.length > 25 ? "..." : "");
-  };
   return (
     <div
-      className={`card-collection-one card-favorite-one d-flex h-100 gap-3 ${newClassCard}`}
+      className={`card-favorite-one card-collection-one  d-flex h-100 gap-3 ${newClassCard}`}
     >
       {/* =========== START IMAGE CARD FAVORITE =========== */}
       <div className="image-collection overlay-bg">
@@ -85,7 +76,17 @@ const CardFavorite = ({
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
             {is_group ? " " : cardFavoriteTranslations.startingFrom[currentLanguage]}
-            <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>
+            {discount && NumPriceNew > discount ?
+              <>
+                <span className="price-num"><CurrencyDisplay price={discount} /></span>
+                {" "}
+                {cardFavoriteTranslations.insteadOf[currentLanguage]}
+                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={NumPriceNew} /></span>
+              </>
+              :
+              <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>
+            }
+
             {is_group ? cardFavoriteTranslations.perGroup[currentLanguage] : cardFavoriteTranslations.perPerson[currentLanguage]}{" "}
             {isTrueNumTwo && (
               <p className="text-2">

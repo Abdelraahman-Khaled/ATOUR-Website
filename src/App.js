@@ -23,6 +23,7 @@ import AdPopup from "./Components/AdPopup/AdPopup";
 import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
 import { RatesProvider } from "context/RatesContext";
 import { BookingProvider } from "./context/BookingContext";
+import { SubCategoriesProvider } from "./context/SubCategoriesContext";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
@@ -65,9 +66,11 @@ function App() {
             <ProfileProvider>
               <RatesProvider>
                 <BookingProvider>
-                  <HomeProvider>
-                    <AppContent />
-                  </HomeProvider>
+                  <SubCategoriesProvider>
+                    <HomeProvider>
+                      <AppContent />
+                    </HomeProvider>
+                  </SubCategoriesProvider>
                 </BookingProvider>
               </RatesProvider>
             </ProfileProvider>

@@ -451,7 +451,6 @@ textarea::placeholder,
 .form-select {
   font-size: 13px !important;
   font-weight: 500 !important;
-  color: #a8b1ce !important;
 }
 
 .form-select option {
@@ -641,7 +640,6 @@ html[dir="ltr"] .all-cards-swiper .all-arrows-swiper {
 .all-cards-swiper .swiper-next::before {
   display: none;
 }
-
 
 .all-cards-swiper .swiper-next,
 .all-cards-swiper .swiper-prev {

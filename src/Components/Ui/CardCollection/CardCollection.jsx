@@ -9,7 +9,7 @@ import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import Favicon from "Components/FavIcon/Favicon ";
 import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCoins, faComments, faLanguage, faTicket, faTicketSimple, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faLanguage, faTicket, faTimes } from '@fortawesome/free-solid-svg-icons';
 import enFlag from "assets/images/flags/en.svg";
 import arFlag from "assets/images/flags/ar.svg";
 import frFlag from "assets/images/flags/fr.svg";
@@ -55,7 +55,8 @@ const CardCollection = ({
   hasFreeCancellation = true,
   hasPayLater = true,
   guide_languages = [],
-  booking_count = 0
+  booking_count = 0,
+  discount
 }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -73,8 +74,13 @@ const CardCollection = ({
     if (!isAuthenticated()) {
       e.preventDefault();
       handleShowLogin(); // Open login form if not authenticated
-    } else {
+    } else if (type === "trip") {
       navigate(`/tripsPage/${itemId}`);
+
+    } else if (type === "gift") {
+      navigate(`/gifts/${itemId}`);
+    } else {
+      navigate(`/eventsPage/${itemId}`);
     }
   };
 
@@ -83,66 +89,124 @@ const CardCollection = ({
     ar: {
       ratingText: "تقييم",
       perPersonText: "/ للفرد",
-      forGroup: "/ للمجموعة"
+      forGroup: "/ للمجموعة",
+      instedOF: "بدلاً من",
+      times: "مرة",
+      freeCancel: "إلغاء مجاني",
+      payLater: "ادفع لاحقًا",
     },
     en: {
       ratingText: "Rating",
       perPersonText: "/ per person",
-      forGroup: "/ per group"
+      forGroup: "/ per group",
+      instedOF: "instead of",
+      times: "times",
+      freeCancel: "Free Cancellation",
+      payLater: "Book now, pay later",
     },
     fr: {
       ratingText: "Évaluation",
       perPersonText: "/ par personne",
-      forGroup: "/ par groupe"
+      forGroup: "/ par groupe",
+      instedOF: "au lieu de",
+      times: "fois",
+      freeCancel: "Annulation gratuite",
+      payLater: "Réservez maintenant, payez plus tard",
     },
     de: {
       ratingText: "Bewertung",
       perPersonText: "/ pro Person",
-      forGroup: "/ pro Gruppe"
+      forGroup: "/ pro Gruppe",
+      instedOF: "anstatt",
+      times: "Mal",
+      freeCancel: "Kostenlose Stornierung",
+      payLater: "Jetzt buchen, später bezahlen",
     },
     es: {
       ratingText: "Calificación",
       perPersonText: "/ por persona",
-      forGroup: "/ por grupo"
+      forGroup: "/ por grupo",
+      instedOF: "en lugar de",
+      times: "veces",
+      freeCancel: "Cancelación gratuita",
+      payLater: "Reserva ahora, paga después",
     },
     tr: {
       ratingText: "Puan",
       perPersonText: "/ kişi başı",
-      forGroup: "/ grup başına"
+      forGroup: "/ grup başına",
+      instedOF: "yerine",
+      times: "kez",
+      freeCancel: "Ücretsiz iptal",
+      payLater: "Şimdi rezervasyon yap, sonra öde",
     },
     ru: {
       ratingText: "Рейтинг",
       perPersonText: "/ за человека",
-      forGroup: "/ за группу"
+      forGroup: "/ за группу",
+      instedOF: "вместо",
+      times: "раз",
+      freeCancel: "Бесплатная отмена",
+      payLater: "Забронируйте сейчас, оплатите позже",
     },
     zh: {
       ratingText: "评分",
       perPersonText: "/ 每人",
-      forGroup: "/ 每组"
+      forGroup: "/ 每组",
+      instedOF: "代替",
+      times: "次",
+      freeCancel: "免费取消",
+      payLater: "立即预订，稍后付款",
     },
     ko: {
       ratingText: "평점",
       perPersonText: "/ 1인당",
-      forGroup: "/ 그룹당"
+      forGroup: "/ 그룹당",
+      instedOF: "대신",
+      times: "회",
+      freeCancel: "무료 취소",
+      payLater: "지금 예약하고 나중에 결제",
     },
     pt: {
       ratingText: "Avaliação",
       perPersonText: "/ por pessoa",
-      forGroup: "/ por grupo"
+      forGroup: "/ por grupo",
+      instedOF: "em vez de",
+      times: "vezes",
+      freeCancel: "Cancelamento gratuito",
+      payLater: "Reserve agora, pague depois",
     },
     ur: {
       ratingText: "درجہ بندی",
       perPersonText: "/ فی شخص",
-      forGroup: "/ فی گروپ"
+      forGroup: "/ فی گروپ",
+      instedOF: "کے بجائے",
+      times: "بار",
+      freeCancel: "مفت منسوخی",
+      payLater: "اب بک کریں، بعد میں ادا کریں",
     },
     ja: {
       ratingText: "評価",
       perPersonText: "/ 1人あたり",
-      forGroup: "/ グループあたり"
+      forGroup: "/ グループあたり",
+      instedOF: "の代わりに",
+      times: "回",
+      freeCancel: "無料キャンセル",
+      payLater: "今すぐ予約、後払い",
     },
+    sgn: {
+      ratingText: "Rating (Sign)",
+      perPersonText: "/ per person (Sign)",
+      forGroup: "/ per group (Sign)",
+      instedOF: "instead of (Sign)",
+      times: "times (Sign)",
+      freeCancel: "Free Cancellation (Sign)",
+      payLater: "Book now, pay later (Sign)",
+    }
   };
 
-  const { ratingText, perPersonText, forGroup } = localization[currentLanguage];
+
+  const { ratingText, perPersonText, forGroup, instedOF, times, freeCancel, payLater } = localization[currentLanguage];
 
   return (
     <>
@@ -179,23 +243,32 @@ const CardCollection = ({
 
           <div className="d-flex align-items-center justify-content-between gap-4">
             <h2 className="title">{titleCard}</h2>
-            <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content",fontSize:"12px" }}>
+            <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content", fontSize: "12px" }}>
               <FontAwesomeIcon icon={faTicket} />
               <span>
                 {booking_count}
                 {" "}
-                {currentLanguage === "ar" ? "مرة" : "times"}
+                {times}
               </span>
             </div>
           </div>
-          {numPriceCard &&
+          {discount && discount < numPriceCard ? (
+            <div className="price-info pb-2">
+              <span className="price-num ">
+                <CurrencyDisplay price={discount} />
+                {"  "}  {instedOF}
+                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={numPriceCard} /></span>
+                <span>{is_group ? forGroup : perPersonText}</span>
+              </span>
+            </div>
+          ) : (
             <div className="price-info pb-2">
               <span className="price-num ">
                 <CurrencyDisplay price={numPriceCard} />
               </span>
               <span>{is_group ? forGroup : perPersonText}</span>
             </div>
-          }
+          )}
           <div className="d-flex flex-wrap align-items-center gap-2 pb-2 ">
             {numRate > 0 && (
               <div className="rate-card d-flex align-items-center gap-1">
@@ -214,7 +287,7 @@ const CardCollection = ({
                   </div>
                 )}
                 <span className="title-text">
-                  {currentLanguage === "ar" ? "إلغاء مجاني" : "Free Cancellation"}
+                  {freeCancel}
                 </span>
               </div>
             ) : null}
@@ -230,7 +303,7 @@ const CardCollection = ({
                   </div>
                 )}
                 <span className="title-text">
-                  {currentLanguage === "ar" ? " إدفع لاحقا" : "Book now pay later"}
+                  {payLater}
                 </span>
               </div>
             ) : null}

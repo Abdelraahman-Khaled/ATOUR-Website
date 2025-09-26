@@ -18,7 +18,10 @@
   height: 160px !important;
   width: 240.5px !important;
 }
-
+.image-collection .card-offer-one img {
+  height: 160px !important;
+  width: 240.5px !important;
+}
 .card-favorite-one .info-content-card .rate-card {
   padding: 8px 0;
 }

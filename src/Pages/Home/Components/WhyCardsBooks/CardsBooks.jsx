@@ -6,7 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import { useLanguage } from "Components/Languages/LanguageContext";
 const CardsBooks = () => {
+  const { currentLanguage } = useLanguage()
   return (
     <div className="cards-books padding-top">
       {/* =========== START SECTION TITLE ========== */}
@@ -46,8 +48,8 @@ const CardsBooks = () => {
               <SwiperSlide key={index}>
                 <CardBook
                   iconCard={item.icon}
-                  titleCard={item.title}
-                  textCard={item.text}
+                  titleCard={item.title[currentLanguage]}
+                  textCard={item.text[currentLanguage]}
                 />
               </SwiperSlide>
             );

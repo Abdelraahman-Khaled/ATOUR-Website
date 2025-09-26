@@ -1,5 +1,18 @@
-
 const cardFavoriteTranslations = {
+  instedOf: {
+    ar: "بدلا من",
+    en: "Instead of",
+    fr: "Au lieu de",
+    de: "Statt",
+    es: "En lugar de",
+    tr: "Yerine",
+    ru: "Вместо",
+    zh: "而不是",
+    ko: "대신",
+    pt: "Em vez de",
+    ur: "کے بجائے",
+    ja: "代わりに",
+  },
   startingFrom: {
     ar: "تبدأ من",
     en: "Starting from",

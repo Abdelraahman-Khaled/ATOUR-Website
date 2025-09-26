@@ -216,7 +216,7 @@ const BoxOneContent = ({ tripData }) => {
                 <div className="info-right--1 d-flex align-items-center gap-2">
                   <FontAwesomeIcon icon={faCoins} />
                 </div>
-                {tripData.discount ?
+                {tripData.discount && tripData.discount < tripData.customer_price ?
                   <p className="text d-flex gap-1">
                     <CurrencyDisplay price={tripData.discount} />
                     {boxTranslations.instedOf[currentLanguage]}
