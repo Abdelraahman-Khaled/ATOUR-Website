@@ -65,8 +65,91 @@ const Offers = () => {
   const [error, setError] = useState(null); // State to handle errors
   const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
 
+  // Applied filters (used for API calls)
+  const [appliedFilters, setAppliedFilters] = useState({
+    selectedSubCategoryIds: [],
+    priceFilter: { min_price: null, max_price: null },
+    selectedCountryId: null,
+    selectedCityId: null,
+    checkboxFilters: {
+      max_rate: 0,
+      max_booked: 0,
+      has_offer: 0
+    }
+  });
+
+  // Temporary filters (user selections before submission)
+  const [tempFilters, setTempFilters] = useState({
+    selectedSubCategoryIds: [],
+    priceFilter: { min_price: null, max_price: null },
+    selectedCountryId: null,
+    selectedCityId: null,
+    checkboxFilters: {
+      max_rate: 0,
+      max_booked: 0,
+      has_offer: 0
+    }
+  });
+
   const handleSelectSubCategory = (subCategoryIds) => {
-    setSelectedSubCategoryIds(subCategoryIds);
+    setTempFilters(prev => ({
+      ...prev,
+      selectedSubCategoryIds: subCategoryIds
+    }));
+  };
+
+  const handlePriceChange = (priceData) => {
+    setTempFilters(prev => ({
+      ...prev,
+      priceFilter: priceData
+    }));
+  };
+
+  const handleCountryChange = (countryId) => {
+    setTempFilters(prev => ({
+      ...prev,
+      selectedCountryId: countryId,
+      selectedCityId: null // Reset city when country changes
+    }));
+  };
+
+  const handleCityChange = (cityId) => {
+    setTempFilters(prev => ({
+      ...prev,
+      selectedCityId: cityId
+    }));
+  };
+
+  const handleCheckboxChange = (checkboxType, isChecked) => {
+    setTempFilters(prev => ({
+      ...prev,
+      checkboxFilters: {
+        ...prev.checkboxFilters,
+        [checkboxType]: isChecked ? 1 : 0
+      }
+    }));
+  };
+
+  // Submit filters function
+  const handleSubmitFilters = () => {
+    setAppliedFilters(tempFilters);
+  };
+
+  // Clear filters function
+  const handleClearFilters = () => {
+    const clearedFilters = {
+      selectedSubCategoryIds: [],
+      priceFilter: { min_price: null, max_price: null },
+      selectedCountryId: null,
+      selectedCityId: null,
+      checkboxFilters: {
+        max_rate: 0,
+        max_booked: 0,
+        has_offer: 0
+      }
+    };
+    setTempFilters(clearedFilters);
+    setAppliedFilters(clearedFilters);
   };
 
   const [subCategories, setSubCategories] = useState([]);
@@ -89,11 +172,39 @@ const Offers = () => {
     const fetchGiftsData = async () => {
       try {
         const params = {};
-        if (selectedSubCategoryIds.length > 0) {
-          selectedSubCategoryIds.forEach((id, index) => {
+        if (appliedFilters.selectedSubCategoryIds.length > 0) {
+          appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
             params[`sub_category_id[${index}]`] = id;
           });
         }
+
+        // Add price filter parameters
+        if (appliedFilters.priceFilter.min_price !== null) {
+          params.min_price = appliedFilters.priceFilter.min_price;
+        }
+        if (appliedFilters.priceFilter.max_price !== null) {
+          params.max_price = appliedFilters.priceFilter.max_price;
+        }
+
+        // Add country and city filter parameters
+        if (appliedFilters.selectedCountryId !== null) {
+          params.country_id = appliedFilters.selectedCountryId;
+        }
+        if (appliedFilters.selectedCityId !== null) {
+          params.city_id = appliedFilters.selectedCityId;
+        }
+
+        // Add checkbox filter parameters
+        if (appliedFilters.checkboxFilters.max_rate === 1) {
+          params.max_rate = 1;
+        }
+        if (appliedFilters.checkboxFilters.max_booked === 1) {
+          params.max_booked = 1;
+        }
+        if (appliedFilters.checkboxFilters.has_offer === 1) {
+          params.has_offer = 1;
+        }
+
         const data = await ContentAPI.getGifts(currentLanguage, currentCurrency, params); // Fetch data from the API
         setGifts(data.data); // Set the fetched data to 
       } catch (err) {
@@ -104,7 +215,7 @@ const Offers = () => {
       }
     };
     fetchGiftsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency, selectedSubCategoryIds]);
+  }, [currentLanguage, currentCurrency, appliedFilters]);
 
   if (loading) {
     return (
@@ -136,7 +247,20 @@ const Offers = () => {
           {/* ============== START CONTAINER ============== */}
           <ContainerMedia>
             <div className="trips-content--info">
-              <FilterTripsContent activeMap={false} subCategories={subCategories} onSelectSubCategory={handleSelectSubCategory} />
+              <FilterTripsContent
+                activeMap={false}
+                subCategories={subCategories}
+                onSelectSubCategory={handleSelectSubCategory}
+                onPriceChange={handlePriceChange}
+                onCountryChange={handleCountryChange}
+                onCityChange={handleCityChange}
+                selectedCountryId={tempFilters.selectedCountryId}
+                selectedCityId={tempFilters.selectedCityId}
+                onCheckboxChange={handleCheckboxChange}
+                checkboxFilters={tempFilters.checkboxFilters}
+                onSubmitFilters={handleSubmitFilters}
+                onClearFilters={handleClearFilters}
+              />
               <OffersContent gifts={gifts} />
             </div>
           </ContainerMedia>

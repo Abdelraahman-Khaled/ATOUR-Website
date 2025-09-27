@@ -458,8 +458,9 @@ textarea,
 .form-control {
   padding: 10px 12px !important;
   text-align: right !important;
-  border-color: #d4d8e5 !important;
+  border-color: var(--border-02) !important;
   text-transform: capitalize !important;
+  color: var(--dark-01-color) !important;
 }
 
 html[dir="ltr"] :is(input, textarea) {
@@ -482,7 +483,9 @@ label {
   font-size: 13px;
   font-weight: 500;
 }
-
+body.dark-theme label {
+  color: var(--white-01-color);
+}
 textarea {
   resize: none !important;
 }

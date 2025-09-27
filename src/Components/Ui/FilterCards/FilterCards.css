@@ -91,18 +91,22 @@ START RAANGE PRICE FILTER
   padding-bottom: 0;
 }
 
-.price-filter-content :is(.MuiSlider-thumb, .MuiSlider-track, .MuiSlider-rail) {
-  background: var(--dark-01-color);
+.price-filter-content :is(.MuiSlider-thumb, .MuiSlider-track) {
+  background: var(--green-01-color);
+}
+
+.price-filter-content .MuiSlider-rail {
+  background: var(--gray-01-color);
 }
 
 .price-filter-content .MuiSlider-root {
-  color: var(--dark-01-color);
+  color: var(--green-01-color);
 }
 
 .price-filter-content .MuiSlider-thumb:hover,
 .price-filter-content .MuiSlider-thumb:focus,
 .price-filter-content .MuiSlider-thumb:active {
-  box-shadow: 0px 0px 0px 8px rgb(16 17 18 / 16%);
+  box-shadow: 0px 0px 0px 8px var(--green-01-color-02);
 }
 
 /* =================================

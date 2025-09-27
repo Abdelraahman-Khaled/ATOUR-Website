@@ -47,16 +47,16 @@ const CardCollection = ({
   infoPlaceCard,
   numRate,
   titleCard,
-  numPriceCard,
+  numPriceCard = false,
   isFav,
   type,
   is_group,
   showFavIcon = true,
-  hasFreeCancellation = true,
-  hasPayLater = true,
+  hasFreeCancellation = false,
+  hasPayLater = false,
   guide_languages = [],
-  booking_count = 0,
-  discount
+  booking_count = null,
+  discount = null,
 }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
@@ -213,7 +213,7 @@ const CardCollection = ({
       <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
 
       {/* ============ START CARD COLLECTION ONE =========== */}
-      <div className="card-collection-one">
+      <div className={`card-collection-one ${discount === null && "border-0 p-0" }`}>
         {/* =========== START IMAGE COLLECTION =========== */}
         <div className="image-collection overlay-bg">
           <img
@@ -243,14 +243,16 @@ const CardCollection = ({
 
           <div className="d-flex align-items-center justify-content-between gap-4">
             <h2 className="title">{titleCard}</h2>
-            <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content", fontSize: "12px" }}>
-              <FontAwesomeIcon icon={faTicket} />
-              <span>
-                {booking_count}
-                {" "}
-                {times}
-              </span>
-            </div>
+            {booking_count && (
+              <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content", fontSize: "12px" }}>
+                <FontAwesomeIcon icon={faTicket} />
+                <span>
+                  {booking_count}
+                  {" "}
+                  {times}
+                </span>
+              </div>
+            )}
           </div>
           {discount && discount < numPriceCard ? (
             <div className="price-info pb-2">
@@ -262,13 +264,17 @@ const CardCollection = ({
               </span>
             </div>
           ) : (
-            <div className="price-info pb-2">
-              <span className="price-num ">
-                <CurrencyDisplay price={numPriceCard} />
-              </span>
-              <span>{is_group ? forGroup : perPersonText}</span>
-            </div>
+            numPriceCard ? (
+
+              <div className="price-info pb-2">
+                <span className="price-num ">
+                  <CurrencyDisplay price={numPriceCard} />
+                </span>
+                <span>{is_group ? forGroup : perPersonText}</span>
+              </div>
+            ) : null
           )}
+
           <div className="d-flex flex-wrap align-items-center gap-2 pb-2 ">
             {numRate > 0 && (
               <div className="rate-card d-flex align-items-center gap-1">

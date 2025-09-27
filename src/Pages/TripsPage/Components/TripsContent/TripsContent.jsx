@@ -4,7 +4,20 @@ import FilterTripsContent from "./FilterTripsContent";
 import "./TripsContent.css";
 import GeneralAPI from "api/generalApi";
 
-const TripsContent = ({ tripsData, onSelectSubCategory }) => {
+const TripsContent = ({
+  tripsData,
+  onSelectSubCategory,
+  onPriceChange,
+  onCountryChange,
+  onCityChange,
+  selectedCountryId,
+  selectedCityId,
+  onCheckboxChange,
+  checkboxFilters,
+  onSubmitFilters,
+  onClearFilters,
+  loading
+}) => {
 
   const [subCategories, setSubCategories] = useState([]);
 
@@ -28,7 +41,21 @@ const TripsContent = ({ tripsData, onSelectSubCategory }) => {
   };
   return (
     <div className="trips-content--info">
-      <FilterTripsContent activeMap={activeMap} subCategories={subCategories} onSelectSubCategory={onSelectSubCategory} />
+      <FilterTripsContent
+        activeMap={activeMap}
+        subCategories={subCategories}
+        onSelectSubCategory={onSelectSubCategory}
+        onPriceChange={onPriceChange}
+        onCountryChange={onCountryChange}
+        onCityChange={onCityChange}
+        selectedCountryId={selectedCountryId}
+        selectedCityId={selectedCityId}
+        onCheckboxChange={onCheckboxChange}
+        checkboxFilters={checkboxFilters}
+        onSubmitFilters={onSubmitFilters}
+        onClearFilters={onClearFilters}
+        loading={loading}
+      />
       <CardsContentTrips tripsData={tripsData} buttonActiveMap={buttonActiveMap} activeMap={activeMap} />
     </div>
   );

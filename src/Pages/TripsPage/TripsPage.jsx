@@ -15,50 +15,62 @@ const text = {
   ar: {
     noData: "لا يوجد بيانات متاحة.",
     home: "الصفحة الرئيسية",
+    experiences: "الجولات",
   },
   en: {
     noData: "No data available.",
     home: "Home",
+    experiences: "Experiences",
   },
   fr: {
     noData: "Aucune donnée disponible.",
     home: "Accueil",
+    experiences: "Expériences",
   },
   de: {
     noData: "Keine Daten verfügbar.",
     home: "Startseite",
+    experiences: "Erlebnisse",
   },
   es: {
     noData: "No hay datos disponibles.",
     home: "Inicio",
+    experiences: "Experiencias",
   },
   tr: {
     noData: "Veri bulunmamaktadır.",
     home: "Ana Sayfa",
+    experiences: "Deneyimler",
   },
   ru: {
     noData: "Данные недоступны.",
     home: "Главная",
+    experiences: "Впечатления",
   },
   zh: {
     noData: "没有可用数据。",
     home: "首页",
+    experiences: "体验",
   },
   ko: {
     noData: "데이터가 없습니다.",
     home: "홈",
+    experiences: "체험",
   },
   pt: {
     noData: "Nenhum dado disponível.",
     home: "Início",
+    experiences: "Experiências",
   },
   ur: {
     noData: "کوئی ڈیٹا دستیاب نہیں ہے۔",
     home: "ہوم",
+    experiences: "تجربات",
   },
   ja: {
     noData: "利用可能なデータがありません。",
     home: "ホーム",
+    experiences: "体験",
   },
 };
 
@@ -67,7 +79,31 @@ const TripsPage = () => {
   const { currentCurrency } = useCurrency();
   const [tripsData, setTripsData] = useState([]); // State to store home data
   const [loading, setLoading] = useState(true); // State to manage loading
-  const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
+  // Applied filters (used for API calls)
+  const [appliedFilters, setAppliedFilters] = useState({
+    selectedSubCategoryIds: [],
+    priceFilter: { min_price: null, max_price: null },
+    selectedCountryId: null,
+    selectedCityId: null,
+    checkboxFilters: {
+      max_rate: 0,
+      max_booked: 0,
+      has_offer: 0
+    }
+  });
+
+  // Temporary filters (user selections before submission)
+  const [tempFilters, setTempFilters] = useState({
+    selectedSubCategoryIds: [],
+    priceFilter: { min_price: null, max_price: null },
+    selectedCountryId: null,
+    selectedCityId: null,
+    checkboxFilters: {
+      max_rate: 0,
+      max_booked: 0,
+      has_offer: 0
+    }
+  });
   console.log(tripsData);
 
   // SHOW MODAL SELECT DESTINATION
@@ -88,7 +124,64 @@ const TripsPage = () => {
   };
 
   const handleSelectSubCategory = (subCategoryIds) => {
-    setSelectedSubCategoryIds(subCategoryIds);
+    setTempFilters(prev => ({
+      ...prev,
+      selectedSubCategoryIds: subCategoryIds
+    }));
+  };
+
+  const handlePriceChange = (priceData) => {
+    setTempFilters(prev => ({
+      ...prev,
+      priceFilter: priceData
+    }));
+  };
+
+  const handleCountryChange = (countryId) => {
+    setTempFilters(prev => ({
+      ...prev,
+      selectedCountryId: countryId,
+      selectedCityId: null // Reset city when country changes
+    }));
+  };
+
+  const handleCityChange = (cityId) => {
+    setTempFilters(prev => ({
+      ...prev,
+      selectedCityId: cityId
+    }));
+  };
+
+  const handleCheckboxChange = (checkboxType, isChecked) => {
+    setTempFilters(prev => ({
+      ...prev,
+      checkboxFilters: {
+        ...prev.checkboxFilters,
+        [checkboxType]: isChecked ? 1 : 0
+      }
+    }));
+  };
+
+  // Submit filters function
+  const handleSubmitFilters = () => {
+    setAppliedFilters(tempFilters);
+  };
+
+  // Clear filters function
+  const handleClearFilters = () => {
+    const clearedFilters = {
+      selectedSubCategoryIds: [],
+      priceFilter: { min_price: null, max_price: null },
+      selectedCountryId: null,
+      selectedCityId: null,
+      checkboxFilters: {
+        max_rate: 0,
+        max_booked: 0,
+        has_offer: 0
+      }
+    };
+    setTempFilters(clearedFilters);
+    setAppliedFilters(clearedFilters);
   };
 
   // feching the Data
@@ -96,11 +189,39 @@ const TripsPage = () => {
     const fetchTripsData = async () => {
       try {
         const params = {};
-        if (selectedSubCategoryIds.length > 0) {
-          selectedSubCategoryIds.forEach((id, index) => {
+        if (appliedFilters.selectedSubCategoryIds.length > 0) {
+          appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
             params[`sub_category_id[${index}]`] = id;
           });
         }
+
+        // Add price filter parameters
+        if (appliedFilters.priceFilter.min_price !== null) {
+          params.min_price = appliedFilters.priceFilter.min_price;
+        }
+        if (appliedFilters.priceFilter.max_price !== null) {
+          params.max_price = appliedFilters.priceFilter.max_price;
+        }
+
+        // Add country and city filter parameters
+        if (appliedFilters.selectedCountryId !== null) {
+          params.country_id = appliedFilters.selectedCountryId;
+        }
+        if (appliedFilters.selectedCityId !== null) {
+          params.city_id = appliedFilters.selectedCityId;
+        }
+
+        // Add checkbox filter parameters
+        if (appliedFilters.checkboxFilters.max_rate === 1) {
+          params.max_rate = 1;
+        }
+        if (appliedFilters.checkboxFilters.max_booked === 1) {
+          params.max_booked = 1;
+        }
+        if (appliedFilters.checkboxFilters.has_offer === 1) {
+          params.has_offer = 1;
+        }
+
         const data = await ContentAPI.getTrips(currentLanguage, currentCurrency, params); // Fetch data from the API
         const normalizedData = normalizeData(data.data); // Normalize the data
 
@@ -111,11 +232,11 @@ const TripsPage = () => {
       }
     };
     fetchTripsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency, selectedSubCategoryIds]);
+  }, [currentLanguage, currentCurrency, appliedFilters]);
 
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "الجولات" : "Experinces"} />
+      <HelmetInfo titlePage={text[currentLanguage].experiences} />
 
       <ModalSelectDestination
         showModalSelectDestination={showModalSelectDestination}
@@ -127,7 +248,7 @@ const TripsPage = () => {
             newClassBreadHeader={"biography-bread breadcrumb-page-2"}
             routeTitleTwoBread={false}
             titleTwoBread={null}
-            textBreadActive={currentLanguage === "ar" ? "الجولات" : "Experinces"}
+            textBreadActive={text[currentLanguage].experiences}
           />
         </header>
         <main>
@@ -137,23 +258,21 @@ const TripsPage = () => {
                 <div style={{ margin: "200px 0px" }}>
                   <Loader />
                 </div>
-              ) : tripsData.length > 0 ? (
-                <TripsContent tripsData={tripsData} onSelectSubCategory={handleSelectSubCategory} />
               ) : (
-                <div className="d-flex justify-content-center ">
-                  <div className="no-data-text">
-                    {currentLanguage === "ar"
-                      ? "لا توجد جولات متاحة"
-                      : "No experinces available"}
-                    <Link
-                      to="/"
-                      className="fs-6 fw-medium text-danger text-decoration-underline px-2"
-                    >
-                      {text[currentLanguage].home}
-                    </Link>
-                  </div>
-
-                </div>
+                <TripsContent
+                  tripsData={tripsData}
+                  onSelectSubCategory={handleSelectSubCategory}
+                  onPriceChange={handlePriceChange}
+                  onCountryChange={handleCountryChange}
+                  onCityChange={handleCityChange}
+                  selectedCountryId={tempFilters.selectedCountryId}
+                  selectedCityId={tempFilters.selectedCityId}
+                  onCheckboxChange={handleCheckboxChange}
+                  checkboxFilters={tempFilters.checkboxFilters}
+                  onSubmitFilters={handleSubmitFilters}
+                  onClearFilters={handleClearFilters}
+                  loading={loading}
+                />
               )}
             </div>
           </ContainerMedia>
