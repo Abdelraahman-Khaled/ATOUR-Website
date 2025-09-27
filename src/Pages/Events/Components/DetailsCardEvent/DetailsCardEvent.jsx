@@ -156,7 +156,7 @@ const DetailsCardEvent = () => {
 
   if (!effective) {
     return <>
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
         {text[currentLanguage].notFound}
         <Link
           to="/"
@@ -170,7 +170,7 @@ const DetailsCardEvent = () => {
 
   if (error) {
     return <>
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
         {text[currentLanguage].notAvailable}
         <Link
           to="/"

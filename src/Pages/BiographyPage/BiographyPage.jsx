@@ -55,7 +55,7 @@ const BiographyPage = () => {
 
   if (error) {
     return (
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
         {t.cityNotAvailable}
         <Link
           to="/"
@@ -69,7 +69,7 @@ const BiographyPage = () => {
 
   if (!biography) {
     return (
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
         {t.cityDetailsNotAvailable}
         <Link
           to="/"

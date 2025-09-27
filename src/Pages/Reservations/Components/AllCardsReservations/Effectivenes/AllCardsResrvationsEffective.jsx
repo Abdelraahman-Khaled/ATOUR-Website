@@ -89,7 +89,7 @@ const AllCardsResrvationsEffective = ({ reservation, refresh }) => {
                         })
 
                     ) : (
-                        <p className="text-section-api fs-6 fw-medium text-center pt-5">
+                        <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
                             {text[currentLanguage].noData}{" "}
                             <Link
                                 to="/"

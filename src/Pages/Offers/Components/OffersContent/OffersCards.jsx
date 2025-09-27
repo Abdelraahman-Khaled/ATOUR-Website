@@ -84,7 +84,7 @@ const OffersCards = ({ gifts }) => {
           })
         ) : (
           <>
-            <p className="text-section-api fs-6 fw-medium text-center pt-5">
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
 
               {currentLanguage === "ar" ? "لا يوجد عروض جديدة." : "There are no new offers."}
 

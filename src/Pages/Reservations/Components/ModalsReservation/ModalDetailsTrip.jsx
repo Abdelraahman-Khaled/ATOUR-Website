@@ -15,11 +15,20 @@ import GeneralAPI from "api/generalApi";
 import EffectiveneCardReservation from "../AllCardsReservations/Effectivenes/EffectiveneCardReservation";
 import GiftCardReservation from "../AllCardsReservations/Gifts/GiftCardReservation";
 import ModalProviderInformation from "Pages/DetailsTripInfoPage/Components/ModalsDetailsTripInfo/ModalProviderInformation/ModalProviderInformation";
+import { useTheme } from "context/ThemeContext";
 
 const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, currentLanguage, refresh }) => {
+  const { isDarkMode } = useTheme();
   const [showModalRemove, setShowModalRemove] = useState(false);
   const [showModalProviderInformation, setShowModalProviderInformation] =
     useState(false);
+
+  // Dark mode styles for text and SVG elements
+  const darkModeStyles = {
+    color: isDarkMode ? '#000000' : 'inherit',
+    fill: isDarkMode ? '#000000' : 'inherit',
+    stroke: isDarkMode ? '#000000' : 'inherit'
+  };
 
 
 

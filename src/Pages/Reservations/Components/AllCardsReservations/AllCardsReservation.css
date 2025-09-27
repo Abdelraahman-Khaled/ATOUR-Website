@@ -52,7 +52,9 @@
   font-weight: 500;
   color: var(--danger-01-color);
 }
-
+body.dark-theme .card-reservation-one .content-info-card .price-num {
+  color: var(--white-01-color);
+}
 .card-reservation-one .content-info-card .info-one-content {
   font-size: 15px;
   margin-top: 10px;

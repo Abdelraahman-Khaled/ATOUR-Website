@@ -366,7 +366,9 @@ html[dir="ltr"] .input-search-content .input-search-location {
   font-weight: 500;
   color: var(--dark-01-color);
 }
-
+body.dark-theme .dropmenu-user .dropdown-item .link-drop-item svg path {
+  fill: var(--dark-green-01-color) !important;
+}
 /* SCREEN 1500px */
 @media screen and (max-width: 1500px) {
   .left-nav-menu--2 .dropmenu-user .dropdown-menu {

@@ -61,7 +61,7 @@ const Country = () => {
 
     // Display error state
     if (error) {
-        return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+        return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
             {currentLanguage === "ar" ? "هذه المدينة غير متاحة" : "This city not available"}
             <Link
                 to="/"
@@ -74,7 +74,7 @@ const Country = () => {
 
     // Display if no data is available
     if (!country) {
-        return <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+        return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
             {currentLanguage === "ar" ? "تفاصيل المدينة غير متاحة" : "City details not available"}
             <Link
                 to="/"

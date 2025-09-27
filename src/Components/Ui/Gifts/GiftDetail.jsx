@@ -130,13 +130,13 @@ const GiftDetail = () => {
 
     if (error) {
         return <>
-            <p className="text-section-api fs-6 fw-medium text-center pt-5 d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
                 {content.notFound[currentLanguage]}
                 <Link
                     to="/"
                     className="fs-6 fw-medium text-danger text-decoration-underline px-2"
                 >
-                    {content.home[currentLanguage]} 
+                    {content.home[currentLanguage]}
                 </Link>
             </p>
         </>;

@@ -1110,6 +1110,9 @@ body.dark-theme .nav-pills .nav-link {
   background-color: var(--dark-02-color) !important;
   color: var(--white-01-color) !important;
 }
+body.dark-theme .dakr-not-found{
+color: var(--white-01-color);
+} 
 /* ===============================
 END AIRPLAN
 ============================== */
