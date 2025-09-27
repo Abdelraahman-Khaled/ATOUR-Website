@@ -51,7 +51,7 @@ START TABS CONTENT ACCOUNT
   position: relative;
 }
 body.dark-theme .account-user-content .nav-item .nav-link.active {
-  color: var(--black-01-color);
+  background: var(--green-dark-01-color);
 }
 .account-user-content .nav-item .nav-link.active {
   color: var(--white-01-color);

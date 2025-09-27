@@ -21,9 +21,11 @@ import GiftDetail from "Components/Ui/Gifts/GiftDetail";
 import PrivateRoute from "./PrivateRoute";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import TermsConditions from "../Pages/TermsConditions/TermsConditions";
+import FaqPage from "../Pages/Faq/FaqPage";
 import News from "../Pages/News/News";
 import NewsDetails from "../Pages/News/Components/NewsDetails/NewsDetails";
 import Rewards from "../Pages/Rewards/Rewards";
+import ContactUsPage from "../Pages/ContactUs/ContactUsPage";
 import Articles from "Pages/Blogs/Articles/Articles";
 import Country from "Pages/Country/Country";
 import ArticalsDetails from "Pages/Blogs/Articles/ArticalsDetails";
@@ -168,7 +170,9 @@ let routers = createBrowserRouter(
         { path: "payConfirmPage", element: <PayConfirmPage /> },
         { path: "aboutUs", element: <AboutUs /> },
         { path: "termsConditions", element: <TermsConditions /> },
+        { path: "faq", element: <FaqPage /> },
         { path: "rewards", element: <Rewards /> },
+        { path: "contactUs", element: <ContactUsPage /> },
         { path: "notification", element: <NotificationPage /> },
         {
           path: "news",

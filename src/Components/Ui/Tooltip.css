@@ -11,6 +11,9 @@
   padding: 0 7px;
   font-size: 14px;
 }
+body.dark-theme .exclamation {
+  background: var(--green-dark-01-color);
+}
 
 .tooltip-text {
   visibility: hidden;

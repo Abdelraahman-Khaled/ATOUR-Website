@@ -84,7 +84,9 @@ body.light-theme {
   --border-01: 1px solid #ffffff;
   --border-02: 1px solid #dcdcdc;
 }
-
+body.dark-theme svg path {
+  fill: var(--white-01-color);
+}
 .loader-svg svg {
   width: 35px !important;
   height: 35px !important;
@@ -163,17 +165,8 @@ body.dark-theme .all-content-info-details-right :is(.title, .text, .rate-info) {
   color: var(--white-01-color) !important;
 }
 
-body.dark-theme
-  .content-info-details-left-trip
-  :is(.title, .text, .title-text) {
-  color: var(--white-01-color) !important;
-}
-
-body.dark-theme
-  html[dir="ltr"]
-  .main-add-place-date--1
-  .input-date-content
-  input {
+body.dark-theme :is(.title, .text, .title-text),
+body.dark-theme span {
   color: var(--white-01-color) !important;
 }
 
@@ -278,7 +271,9 @@ html {
   text-align: center;
 }
 body.dark-theme .btn-main {
-  color: var(--black-01-color);
+  background: var(--green-dark-01-color);
+  box-shadow: unset;
+  border: none;
 }
 .btn-height {
   height: 45px;
@@ -485,7 +480,6 @@ html[dir="ltr"] .form-select {
 
 label {
   font-size: 13px;
-  color: var(--gray-01-color);
   font-weight: 500;
 }
 
@@ -505,7 +499,10 @@ html[dir="ltr"] textarea::placeholder {
   background-color: var(--green-01-color) !important;
   border-color: var(--green-01-color) !important;
 }
-
+body.dark-theme .form-check-input:checked {
+  background-color: var(--green-dark-01-color) !important;
+  border-color: var(--green-dark-01-color) !important;
+}
 .form-check-input:focus {
   box-shadow: 0 0 0 0.25rem rgb(18 115 48 / 18%) !important;
 }
@@ -582,7 +579,12 @@ html[dir="ltr"] .form-check .form-check-input {
   border-color: var(--green-01-color);
   color: var(--green-01-color);
 }
-
+body.dark-theme .main-btn-filter.active,
+body.dark-theme .main-btn-filter:hover {
+  border-color: var(--white-01-color);
+  color: var(--white-01-color);
+  background-color: var(--dark-01-color);
+}
 .rate-star-icon {
   font-size: 17px;
   color: var(--warning-01-color);
@@ -763,7 +765,11 @@ html[dir="ltr"] .all-cards-swiper .swiper-next {
   justify-content: center;
   border-radius: 50%;
 }
-
+body.dark-theme .icon-check-link svg path {
+  background: var(--white-01-color);
+  color: var(--green-dark-01-color);
+  fill: unset;
+}
 @media screen and (max-width: 450px) {
   .icon-check-link {
     width: 23px;
@@ -1095,6 +1101,10 @@ START AIRPLAN
     top: 36%;
     left: 48px;
   }
+}
+
+body.dark-theme img[alt="sgn"] {
+  filter: invert(1) brightness(2);
 }
 
 /* ===============================

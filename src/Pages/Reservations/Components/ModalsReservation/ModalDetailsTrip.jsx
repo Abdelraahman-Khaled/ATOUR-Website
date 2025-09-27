@@ -9,7 +9,9 @@ import InterrogativeIcon from "assets/Icons/InterrogativeIcon";
 import { useState } from "react";
 import ModalRemove from "Components/Ui/ModalRemove/ModalRemove";
 import SubmitTicketProblem from "./SubmitTicketProblem";
+import ModalTermsAndConditions from "./ModalTermsAndConditions";
 import { format, parseISO } from "date-fns";
+import GeneralAPI from "api/generalApi";
 import EffectiveneCardReservation from "../AllCardsReservations/Effectivenes/EffectiveneCardReservation";
 import GiftCardReservation from "../AllCardsReservations/Gifts/GiftCardReservation";
 import ModalProviderInformation from "Pages/DetailsTripInfoPage/Components/ModalsDetailsTripInfo/ModalProviderInformation/ModalProviderInformation";
@@ -19,9 +21,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
   const [showModalProviderInformation, setShowModalProviderInformation] =
     useState(false);
 
-  const buttonShow = () => {
-    setShowModalProviderInformation(true);
-  };
+
 
   const buttonHide = () => {
     setShowModalProviderInformation(false);
@@ -38,6 +38,10 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
 
   // MODAL SEND PROBLEM
   const [showSubmitTicket, setShowSubmitTicket] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [termsContent, setTermsContent] = useState("");
+  const [isLoadingTerms, setIsLoadingTerms] = useState(false);
+
   const buttonShowModalTicket = () => {
     setShowSubmitTicket(true);
     hideDetailsModal();
@@ -46,12 +50,36 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
     setShowSubmitTicket(false);
   };
 
+  const buttonShowTermsModal = async () => {
+    setShowTermsModal(true);
+    setIsLoadingTerms(true);
+    try {
+      const response = await GeneralAPI.getTerms(currentLanguage);
+      if (response.success) {
+        setTermsContent(response.data.content);
+        console.log(response.data.content);
+
+      } else {
+        setTermsContent(text[currentLanguage].noData);
+      }
+    } catch (error) {
+      console.error("Error fetching terms and conditions:", error);
+      setTermsContent(text[currentLanguage].noData);
+    } finally {
+      setIsLoadingTerms(false);
+    }
+  };
+
+  const hideTermsModal = () => {
+    setShowTermsModal(false);
+  };
+
   const text = {
     ar: {
       noData: "لا يوجد بيانات متاحة.",
       home: "الصفحة الرئيسية",
       children: "أطفال",
-      adults: "بالغين",
+      pepole: "افراد",
       from: "من",
       to: "إلي",
       cancelTrip: "الغاء الرحلة",
@@ -68,13 +96,14 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
       riyal: "ريال",
       temporaryTrip: "رحلة مؤقتة",
       delivery: "توصيل",
-      myself: "استلام شخصي"
+      myself: "استلام شخصي",
+      termsAndConditions: "الشروط والأحكام",
     },
     en: {
       noData: "No data available.",
       home: "Home",
       children: "Children",
-      adults: "Adults",
+      pepole: "Pepole",
       from: "From",
       to: "To",
       cancelTrip: "Cancel Trip",
@@ -91,7 +120,8 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
       riyal: "SAR",
       temporaryTrip: "Temporary Trip",
       delivery: "Delivery",
-      myself: "Self Pickup"
+      myself: "Self Pickup",
+      termsAndConditions: "Terms and Conditions",
     },
   };
 
@@ -115,6 +145,12 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
         showSubmitTicket={showSubmitTicket}
         hideSubmitTicket={hideSubmitTicket}
       />
+      <ModalTermsAndConditions
+        showModal={showTermsModal}
+        hideModal={hideTermsModal}
+        content={isLoadingTerms ? "Loading..." : termsContent}
+        currentLanguage={currentLanguage}
+      />
       <CustomModal
         show={showDetailsModal}
         onHide={hideDetailsModal}
@@ -131,7 +167,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 countryName={reservation.effectivene.city.title}
                 titleCard={(reservation.trip || reservation.effectivene || reservation.gift)?.title || "Ended"}
                 priceNum={`${reservation.total}`}
-                textUserInfo={`${reservation.people_number || 1} ${text[currentLanguage].adults}`}
+                textUserInfo={`${reservation.people_number} `}
                 dateTime={reservation.effectivene.from_date}
                 timeAdd={`${text[currentLanguage].from}  ${reservation.effectivene.from_time} ${text[currentLanguage].to} ${reservation.effectivene.to_time}`}
                 isTrueButtonDetails={false}
@@ -163,7 +199,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 countryName={reservation.trip.city.title}
                 titleCard={(reservation.trip || reservation.effectivene || reservation.gift)?.title || text[currentLanguage].temporaryTrip}
                 priceNum={reservation.total}
-                textUserInfo={`${reservation.people_number} ${text[currentLanguage].adults}, ${reservation.children_number > 0 ? reservation.children_number + ` ${text[currentLanguage].children}` : text[currentLanguage].noData}`}
+                textUserInfo={`${reservation.people_number} ${text[currentLanguage].pepole}`}
                 dateTime={reservation.booking_day}
                 timeAdd={reservation.booking_time}
                 isTrueButtonDetails={false}
@@ -214,7 +250,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                           />
                         </div>
                         <div className="info-serv">
-                          <h2 className="title">شركة سينتك للرحلات</h2>
+                          <h2 className="title">{reservation.vendor.name}</h2>
                           {/* <div className="rate-serv d-flex mt-1 align-items-center  gap-2">
                             <FontAwesomeIcon
                               icon={faStar}
@@ -224,12 +260,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                           </div> */}
                         </div>
                       </div>
-                      <button
-                        onClick={buttonShow}
-                        className="add-new-rate btn-main w-100 mt-3"
-                      >
-                        <FontAwesomeIcon icon={faPlus} /> إضافة تقييم
-                      </button>
+
                     </div>
                   </div>
                   {/* ============ END ALL INFO DETAILS PAYMENTS ============= */}
@@ -256,7 +287,9 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                         <span className="icon-check-1">
                           <FontAwesomeIcon icon={faCheck} />
                         </span>
-                        {text[currentLanguage].bookingPolicy}
+                        <span onClick={buttonShowTermsModal} className="cursor-pointer-event">
+                          {text[currentLanguage].bookingPolicy}
+                        </span>
                       </div>
                       <div
                         onClick={buttonShowModalTicket}

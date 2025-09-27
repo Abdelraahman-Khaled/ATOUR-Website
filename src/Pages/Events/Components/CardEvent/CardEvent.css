@@ -28,7 +28,9 @@
   font-size: 12px;
   display: block;
 }
-
+body.dark-theme .card-event-one .right-card-event span {
+  color: var(--dark-01-color) !important;
+}
 .card-event-one .right-card-event .num-month {
   font-size: 16px;
   font-weight: bold;

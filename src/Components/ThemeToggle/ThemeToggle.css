@@ -42,7 +42,7 @@
 }
 
 .theme-toggle-btn.dark-mode .theme-icon {
-  color: var(--blue-01-color);
+  color: var(--white-01-color);
 }
 
 .theme-toggle-btn.dark-mode:hover .theme-icon {

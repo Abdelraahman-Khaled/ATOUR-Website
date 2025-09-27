@@ -36,7 +36,7 @@ const CardsBooks = () => {
             },
           }}
           autoplay={{
-            delay: 2500,
+            delay: 9000000,
             disableOnInteraction: false,
           }}
           loop={true}

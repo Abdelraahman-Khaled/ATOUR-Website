@@ -10,14 +10,117 @@ import Gift from "assets/images/IconsHeader/Gift";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import AllCardsResrvationsEffective from "./AllCardsReservations/Effectivenes/AllCardsResrvationsEffective";
 import AllCardsResrvationsGift from "./AllCardsReservations/Gifts/AllCardsResrvationsGift";
+import { useCurrency } from "Components/Currencies/CurrencyContext";
 
 const TabsReservations = () => {
+  const { currentLanguage } = useLanguage();
+  const { currentCurrency } = useCurrency();
+
+  // 🔹 Translations
+  const content = {
+    ar: {
+      current: "الحالية",
+      completed: "المكتملة",
+      ended: "المنتهية",
+      experiences: "جَوْلات",
+      events: "فعاليات",
+      products: "منتجات",
+    },
+    en: {
+      current: "Current",
+      completed: "Completed",
+      ended: "Ended",
+      experiences: "Experiences",
+      events: "Events",
+      products: "Products",
+    },
+    fr: {
+      current: "En cours",
+      completed: "Terminées",
+      ended: "Expirées",
+      experiences: "Expériences",
+      events: "Événements",
+      products: "Produits",
+    },
+    de: {
+      current: "Aktuell",
+      completed: "Abgeschlossen",
+      ended: "Beendet",
+      experiences: "Erlebnisse",
+      events: "Veranstaltungen",
+      products: "Produkte",
+    },
+    es: {
+      current: "Actuales",
+      completed: "Completadas",
+      ended: "Finalizadas",
+      experiences: "Experiencias",
+      events: "Eventos",
+      products: "Productos",
+    },
+    tr: {
+      current: "Güncel",
+      completed: "Tamamlandı",
+      ended: "Bitti",
+      experiences: "Deneyimler",
+      events: "Etkinlikler",
+      products: "Ürünler",
+    },
+    ru: {
+      current: "Текущие",
+      completed: "Завершённые",
+      ended: "Истекшие",
+      experiences: "Впечатления",
+      events: "События",
+      products: "Продукты",
+    },
+    zh: {
+      current: "当前",
+      completed: "已完成",
+      ended: "已结束",
+      experiences: "体验",
+      events: "活动",
+      products: "产品",
+    },
+    ko: {
+      current: "현재",
+      completed: "완료됨",
+      ended: "종료됨",
+      experiences: "체험",
+      events: "이벤트",
+      products: "제품",
+    },
+    pt: {
+      current: "Atuais",
+      completed: "Concluídas",
+      ended: "Encerradas",
+      experiences: "Experiências",
+      events: "Eventos",
+      products: "Produtos",
+    },
+    ur: {
+      current: "موجودہ",
+      completed: "مکمل شدہ",
+      ended: "ختم شدہ",
+      experiences: "تجربات",
+      events: "تقریبات",
+      products: "مصنوعات",
+    },
+    ja: {
+      current: "現在",
+      completed: "完了",
+      ended: "終了",
+      experiences: "体験",
+      events: "イベント",
+      products: "製品",
+    },
+  };
 
   // State for buttons
   const [tabs_1, setTabs_1] = useState([
-    { id: 1, title: { ar: "الحالية", en: "Current" }, icon: "", active: true },
-    { id: 2, title: { ar: "المكتملة", en: "Completed" }, icon: "", active: false },
-    { id: 3, title: { ar: "المنتهية", en: "Ended" }, icon: "", active: false },
+    { id: 1, key: "current", active: true },
+    { id: 2, key: "completed", active: false },
+    { id: 3, key: "ended", active: false },
   ]);
 
   const handleTabClick = (id) => {
@@ -29,42 +132,34 @@ const TabsReservations = () => {
     );
   };
 
-  // State for fetching
-  const { currentLanguage } = useLanguage(); // Get the current language
+  // Reservation states
   const [curren, setCurrent] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [compleated, setCompleted] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [ended, setEnded] = useState({ gifts: [], effectivenes: [], trips: [] });
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
-  const [refresh, setRefresh] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
-  // refresh on deleting reservation
-  const handleRefresh = () => {
-    setRefresh((prev) => !prev); // Toggle refresh state
-  };
-  // Fetching All reservations
+  const handleRefresh = () => setRefresh((prev) => !prev);
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const data = await BookingAPI.getBookings(currentLanguage); // Fetch data from the API
-        console.log(data);
-
-        // Handle the new API response format
+        const data = await BookingAPI.getBookings(currentLanguage, currentCurrency);
         if (data && data.data) {
           setCurrent(data.data.curren || { gifts: [], effectivenes: [], trips: [] });
           setCompleted(data.data.compleated || { gifts: [], effectivenes: [], trips: [] });
           setEnded(data.data.ended || { gifts: [], effectivenes: [], trips: [] });
         }
       } catch (err) {
-        console.error("Error fetching reservation data:", err);
         setError("Failed to load reservation data. Please try again later.");
       } finally {
-        setLoading(false); // Stop the loading spinner
+        setLoading(false);
       }
     };
 
-    fetchReservations(); // Call the API on component mount
-  }, [currentLanguage, refresh]);
+    fetchReservations();
+  }, [currentLanguage, refresh, currentCurrency]);
 
   if (loading) {
     return (
@@ -74,16 +169,13 @@ const TabsReservations = () => {
     );
   }
 
-  if (error) {
-    return <div>{error}</div>; // Display error message if fetching fails
-  }
+  if (error) return <div>{error}</div>;
 
-  // Dynamically update tabsData based on the active tab
   const getActiveTabData = () => {
-    if (tabs_1[0].active) return curren; // Current tab
-    if (tabs_1[1].active) return compleated; // Completed tab
-    if (tabs_1[2].active) return ended; // Ended tab
-    return curren; // Default to current
+    if (tabs_1[0].active) return curren;
+    if (tabs_1[1].active) return compleated;
+    if (tabs_1[2].active) return ended;
+    return curren;
   };
 
   const activeData = getActiveTabData();
@@ -93,7 +185,7 @@ const TabsReservations = () => {
       eventKey: "tab1",
       title: (
         <>
-          <Tree /> {currentLanguage === "ar" ? "جَوْلات " : "Experiences"}
+          <Tree /> {content[currentLanguage]?.experiences}
         </>
       ),
       content: (
@@ -107,25 +199,29 @@ const TabsReservations = () => {
       eventKey: "tab2",
       title: (
         <>
-          <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
+          <Ticket /> {content[currentLanguage]?.events}
         </>
       ),
-      content: <AllCardsResrvationsEffective
-        reservation={activeData.effectivenes || []}
-        refresh={handleRefresh}
-      />,
+      content: (
+        <AllCardsResrvationsEffective
+          reservation={activeData.effectivenes || []}
+          refresh={handleRefresh}
+        />
+      ),
     },
     {
       eventKey: "tab3",
       title: (
         <>
-          <Gift /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
+          <Gift /> {content[currentLanguage]?.products}
         </>
       ),
-      content: <AllCardsResrvationsGift
-        reservation={activeData.gifts || []}
-        refresh={handleRefresh}
-      />,
+      content: (
+        <AllCardsResrvationsGift
+          reservation={activeData.gifts || []}
+          refresh={handleRefresh}
+        />
+      ),
     },
   ];
 
@@ -139,43 +235,34 @@ const TabsReservations = () => {
             role="tablist"
           >
             {tabs_1.map((tab) => (
-              <li
-                key={tab.id}
-                className="nav-item nav-item-info"
-                role="presentation"
-              >
+              <li key={tab.id} className="nav-item nav-item-info" role="presentation">
                 <button
-                  className={`nav-link main-btn-filter--1 ${tab.active ? "active" : ""
-                    } position-relative`}
-                  id={`pills-${tab.title.ar}-tab`}
+                  className={`nav-link main-btn-filter--1 ${tab.active ? "active" : ""} position-relative`}
+                  id={`pills-${tab.key}-tab`}
                   data-bs-toggle="pill"
-                  data-bs-target={`#pills-${tab.title.ar.toLowerCase()}`}
+                  data-bs-target={`#pills-${tab.key}`}
                   type="button"
                   role="tab"
-                  aria-controls={`pills-${tab.title.ar.toLowerCase()}`}
+                  aria-controls={`pills-${tab.key}`}
                   aria-selected={tab.active ? "true" : "false"}
                   onClick={() => handleTabClick(tab.id)}
                 >
-                  {tab.icon} {currentLanguage === "ar" ? tab.title.ar : tab.title.en}
+                  {content[currentLanguage]?.[tab.key]}
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* ============ START CONTENT INFO TABS ACCOUNT =============== */}
-          <div
-            className="tab-content w-100 border-account-user h-100"
-            id="pills-tabContent"
-          >
+          {/* Tabs content */}
+          <div className="tab-content w-100 border-account-user h-100" id="pills-tabContent">
             {tabs_1.map((tab) => (
               <div
                 key={tab.id}
                 className={`tab-pane fade ${tab.active ? "show active" : ""}`}
-                id={`pills-${tab.title.ar.toLowerCase()}`}
+                id={`pills-${tab.key}`}
                 role="tabpanel"
-                aria-labelledby={`pills-${tab.title.ar.toLowerCase()}-tab`}
+                aria-labelledby={`pills-${tab.key}-tab`}
               >
-                {/* Content for each tab */}
                 <TabsContent
                   tabsData={tabsData}
                   newClassTabsContent={"tabs-reservations-content-1"}
@@ -183,7 +270,6 @@ const TabsReservations = () => {
               </div>
             ))}
           </div>
-          {/* ============ END CONTENT INFO TABS ACCOUNT =============== */}
         </div>
       </ContainerMedia>
     </div>

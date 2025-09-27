@@ -71,7 +71,7 @@ background-color: black;
 }
 .all-box-content-left .main-add-place-date--1 .input-date-content {
   padding: 5px;
-  margin-bottom: 17px;
+  background-color: var(--white-01-color);
 }
 .all-box-content-left .main-add-place-date--1 .input-date-content::after {
   display: none;

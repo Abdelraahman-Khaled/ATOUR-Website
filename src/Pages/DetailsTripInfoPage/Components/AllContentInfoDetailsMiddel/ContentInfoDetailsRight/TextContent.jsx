@@ -100,7 +100,7 @@ const TextContent = () => {
         {/* <WhyBookingAtour /> */}
 
       {/* ============ START TEXT CONTENT TWO =========== */}
-      <div className="text-content-one border-top pt-3">
+      <div className="text-content-one pt-3">
         <h2 className="title">{content.cancellationPolicy[currentLanguage]}</h2>
         <ReadMoreText
           newClass="mt-2"

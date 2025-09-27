@@ -29,6 +29,9 @@
 .footer .all-footer .footer-one .socials-icons {
   padding: 35px 0 25px 0;
 }
+body.dark-theme .footer .all-footer .footer-one .socials-icons svg path {
+fill: unset;
+}
 
 .footer .all-footer .footer-one .socials-icons .link-social-one:hover {
   background: var(--green-01-color);

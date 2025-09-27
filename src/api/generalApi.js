@@ -17,8 +17,12 @@ const GeneralAPI = {
   },
 
   // FAQs
-  getFAQs: async () => {
-    const response = await axiosInstance.get("/faqs");
+  getFAQs: async (lang) => {
+    const response = await axiosInstance.get("/faqs", {
+      headers: {
+        lang: lang,
+      },
+    });
     return response.data;
   },
 
@@ -53,8 +57,12 @@ const GeneralAPI = {
   },
 
   // Terms
-  getTerms: async () => {
-    const response = await axiosInstance.get("/terms");
+  getTerms: async (language) => {
+    const response = await axiosInstance.get("/terms", {
+      headers: {
+        lang: language, // Pass the language in the header
+      },
+    });
     return response.data;
   },
 
@@ -146,6 +154,15 @@ const GeneralAPI = {
   // Why Bookings
   getWhyBookings: async () => {
     const response = await axiosInstance.get("/why_bookings");
+    return response.data;
+  },
+
+  // Send Ticket
+  sendTicket: async ({ title, description }) => {
+    const response = await axiosInstance.post("/tickets", {
+      title,
+      description,
+    });
     return response.data;
   },
 

@@ -28,10 +28,11 @@ const BookingAPI = {
   },
 
   // Get a list of all bookings
-  getBookings: async (language) => {
+  getBookings: async (language, currency) => {
     const response = await axiosInstance.get("/bookings", {
       headers: {
-        language: language, // Pass the language in the header
+        lang: language, // Pass the language in the header
+        currency: currency, // Pass the currency in the header
       },
     });
     return response.data;

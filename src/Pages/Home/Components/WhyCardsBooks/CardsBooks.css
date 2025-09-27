@@ -15,8 +15,14 @@
   width: 32px;
   height: 32px;
 }
-.cards-books .card-book-one .icon-card-book .font-awesome  path {
+.cards-books .card-book-one .icon-card-book .font-awesome path {
   fill: var(--green-01-color);
+}
+body.dark-theme .cards-books .card-book-one .icon-card-book .font-awesome path {
+  fill: var(--green-dark-color-01) !important;
+}
+body.dark-theme .cards-books .card-book-one .icon-card-book svg path {
+  fill: var(--dark-01-color) !important;
 }
 .cards-books .card-book-one .title {
   font-size: 15px;
@@ -31,7 +37,10 @@
   color: var(--gray-01-color);
   line-height: 1.8;
 }
-
+body.dark-theme .cards-books .card-book-one .title,
+body.dark-theme .cards-books .card-book-one .text {
+  color: var(--black-01-color) !important;
+}
 /* SCREEN 390PX */
 @media screen and (max-width: 420px) {
   .cards-books .card-book-one .title {

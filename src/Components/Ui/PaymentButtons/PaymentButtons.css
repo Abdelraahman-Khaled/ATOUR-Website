@@ -22,6 +22,10 @@
     display: none;
 }
 
+body.dark-theme .all-pay-bookings .card-pay-one::after {
+  background: var(--dark-01-color);
+}
+
 html[dir="ltr"] .all-pay-bookings .card-pay-one::after {
     right: 15px;
     left: initial;

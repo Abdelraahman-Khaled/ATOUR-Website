@@ -97,6 +97,7 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         type={"trip"}
                         bookingCount={item.booking_count}
                         is_group={item.is_group}
+                        discount={item.discount}
                       />
                     </Link>
                   </div>

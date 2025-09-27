@@ -3,6 +3,10 @@
 
 }
 
+.modal-terms-and-conditions {
+    --bs-modal-width: 900px !important;
+}
+
 .modal-details-trip .image-reservation img {
     width: 240px !important;
 }

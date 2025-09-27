@@ -12,7 +12,9 @@
   object-fit: contain;
   display: inline-block;
 }
-
+body.dark-theme .currency .currency-image {
+  filter: invert(1) brightness(2);
+}
 .currency-dropdown-menu {
   max-height: 300px;
   overflow-y: auto;

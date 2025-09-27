@@ -7,7 +7,9 @@
     padding: 15px;
     border-radius: 12px;
 }
-
+body.dark-theme .all-content-rate-progress .progressbar-rate-content {
+    background: var(--green-dark-02-color);
+}
 .all-content-rate-progress .progressbar-rate-one .num-rate {
     font-size: 15px;
     font-weight: 500;
@@ -23,6 +25,9 @@
 
 .all-content-rate-progress .progressbar-rate-one .progress .progress-bar {
     background: var(--green-01-color);
+}
+body.dark-theme .all-content-rate-progress .progressbar-rate-one .progress .progress-bar {
+    background: var(--green-dark-01-color);
 }
 
 .all-content-rate-progress .all-num-rates-info {

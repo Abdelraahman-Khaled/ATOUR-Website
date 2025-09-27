@@ -75,7 +75,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
         <div className="all-box-content-left">
           {/* Date Picker */}
 
-          <div className="main-add-place-date main-add-place-date--1">
+          <div className="main-add-place-date main-add-place-date--1 mb-3">
             <DatePickerComponent
               selectedDay={selectedDate}
               setSelectedDay={setSelectedDate}

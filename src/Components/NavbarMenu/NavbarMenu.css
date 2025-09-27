@@ -157,7 +157,9 @@ body.dark-theme .navbar-menu.menu-fixed {
   border: var(--border-02);
   cursor: pointer;
 }
-
+body.dark-theme .icon-border svg {
+  fill: white;
+}
 .icon-border .lang {
   padding: 10px 12px;
 }

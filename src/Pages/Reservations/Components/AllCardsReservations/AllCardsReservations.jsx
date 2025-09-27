@@ -7,8 +7,51 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import backUP from "../../../../assets/images/slider/01.png";
 import PaginationPage from "Components/Pagination/Pagination";
 
+// Text based on language
+const text = {
+  ar: {
+    noData: "لا يوجد بيانات متاحة.",
+    home: "الصفحة الرئيسية",
+    pepole: "افراد",
+  },
+  en: {
+    noData: "No data available.",
+    home: "Home",
+    pepole: "People",
+  },
+  fr: {
+    noData: "Aucune donnée disponible.",
+    home: "Accueil",
+    pepole: "Personnes",
+  },
+  es: {
+    noData: "No hay datos disponibles.",
+    home: "Inicio",
+    pepole: "Personas",
+  },
+  de: {
+    noData: "Keine Daten verfügbar.",
+    home: "Startseite",
+    pepole: "Personen",
+  },
+  it: {
+    noData: "Nessun dato disponibile.",
+    home: "Home",
+    pepole: "Persone",
+  },
+  ru: {
+    noData: "Нет доступных данных.",
+    home: "Главная",
+    pepole: "люди",
+  },
+  zh: {
+    noData: "没有可用数据。",
+    home: "首页",
+    pepole: "人",
+  },
+};
+
 const AllCardsReservations = ({ reservation, refresh }) => {
-  console.log(reservation);
 
   const { currentLanguage } = useLanguage(); // Get the current language
   // Pagenation
@@ -16,7 +59,7 @@ const AllCardsReservations = ({ reservation, refresh }) => {
   const perPage = 5; // NUMBER OF PAGE ITEMS
   const pageCount = Math.ceil(reservation.length / perPage);
   const offset = currentPage * perPage;
-  const currentPageData = reservation.reverse().slice(offset, offset + perPage);
+  const currentPageData = reservation.slice(offset, offset + perPage);
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
@@ -35,21 +78,7 @@ const AllCardsReservations = ({ reservation, refresh }) => {
     setSelectedReservation(null); // Clear selected reservation when closing
   };
 
-  // Text based on language
-  const text = {
-    ar: {
-      noData: "لا يوجد بيانات متاحة.",
-      home: "الصفحة الرئيسية",
-      children: "أطفال",
-      adults: "بالغين",
-    },
-    en: {
-      noData: "No data available.",
-      home: "Home",
-      children: "Children",
-      adults: "Adults",
-    },
-  };
+
   return (
     <>
       <ModalDetailsTrip
@@ -63,7 +92,7 @@ const AllCardsReservations = ({ reservation, refresh }) => {
         {/* =============== START ROW ============== */}
         <div className="row g-3">
           {reservation !== undefined && reservation.length > 0 ? (
-            [...currentPageData].map((item) => {
+            [...currentPageData].reverse().map((item) => {
               return (
                 <div key={item.id} className="col-12 col-md-6 col-lg-12">
                   <CardReservation
@@ -71,8 +100,8 @@ const AllCardsReservations = ({ reservation, refresh }) => {
                     typeReservation={item.payment_status}
                     countryName={item.trip?.city.title}
                     titleCard={(item.trip || item.effectivene || item.gift)?.title || "Ended"}
-                    priceNum={`${item.total}`}
-                    textUserInfo={`${text[currentLanguage].children} ${item.children_number || 0}, ${text[currentLanguage].adults} ${item.people_number || 1}`}
+                    priceNum={`${item.customer_total}`}
+                    textUserInfo={`  ${item.people_number || 1} ${text[currentLanguage].pepole}`}
                     dateTime={item.booking_day}
                     timeAdd={item.booking_time}
                     isTrueButtonDetails={true}

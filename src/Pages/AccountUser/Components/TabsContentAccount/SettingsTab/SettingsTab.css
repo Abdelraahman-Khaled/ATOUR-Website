@@ -1,43 +1,47 @@
 .setting-tab .info-one-setting {
-    border-bottom: var(--border-02);
-    padding: 15px 0;
+  border-bottom: var(--border-02);
+  padding: 15px 0;
 }
-
+body.dark-theme .setting-tab .title {
+  color: var(--black-01-color) !important;
+}
 .setting-tab .info-one-setting .title {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--dark-01-color);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark-01-color);
 }
-
+body.dark-theme .setting-tab .info-one-setting .title,
+body.dark-theme .setting-tab .info-one-setting .text {
+  color: var(--black-01-color) !important;
+}
 .setting-tab .info-one-setting .text {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--gray-01-color);
-    padding-top: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-01-color);
+  padding-top: 4px;
 }
-
 
 .setting-tab .remove-account-user {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--danger-01-color);
-    padding-top: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--danger-01-color);
+  padding-top: 15px;
 }
 
 /* Align the language switcher to the far edge and match height */
 .setting-tab .info-one-setting .drop-lang {
-    margin-inline-start: auto;
+  margin-inline-start: auto;
 }
 
 .setting-tab .info-one-setting .right-info-settings .icon-setting svg {
-    width: 22px;
-    height: 22px;
+  width: 22px;
+  height: 22px;
 }
 
 .setting-tab .info-one-setting .right-info-settings .info-content .title {
-    margin: 0;
+  margin: 0;
 }
 
 .setting-tab .info-one-setting .right-info-settings .info-content .text {
-    margin: 0;
+  margin: 0;
 }

@@ -56,7 +56,9 @@
   font-weight: 400;
   color: var(--black-01-color);
 }
-
+body.dark-theme .main-info-avatar .text-title {
+  color: var(--white-01-color);
+}
 .all-avatar {
   justify-content: center;
   align-items: center;

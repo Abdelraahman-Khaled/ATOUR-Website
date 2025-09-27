@@ -1,19 +1,20 @@
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import useTranslation from "Components/Languages/useTranslation";
 import SliderReservations from "./Components/SliderReservations";
 import TabsReservations from "./Components/TabsReservations";
 import "./Reservations.css";
 
 const Reservations = () => {
-  const { currentLanguage } = useLanguage(); // Get the current language
+  const { t } = useTranslation();
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "حجوزاتي" : "Reservations"} />
+      <HelmetInfo titlePage={t("common.reservations")} />
 
       <div className="reservations-page">
         <header>
           {/* ============ START RESERVATIONS SLIDER =============== */}
-          <SliderReservations />
+          {/* <SliderReservations /> */}
           {/* ============ END RESERVATIONS SLIDER =============== */}
         </header>
         <main>

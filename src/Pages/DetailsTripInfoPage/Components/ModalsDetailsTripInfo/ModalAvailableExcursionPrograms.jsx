@@ -290,7 +290,7 @@ const ModalAvailableExcursionPrograms = ({
           {/* Payment Method */}
           {tripData.pay_later == true && (
             <Form.Group controlId="paymentWay" className="gap-3 mx-1 my-3">
-              <Form.Label className="text-black my-2">{content.choosePaymentWay[currentLanguage]}</Form.Label>
+              <Form.Label className=" my-2">{content.choosePaymentWay[currentLanguage]}</Form.Label>
               <Form.Check
                 className="d-flex gap-2"
                 type="radio"

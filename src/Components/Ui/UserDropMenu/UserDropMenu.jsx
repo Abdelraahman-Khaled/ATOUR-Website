@@ -3,6 +3,7 @@ import UserIcon from "assets/images/AccountUser/UserIcon";
 import DateIcon from "assets/images/IconsBooks/DateIcon";
 import GiftCardIcon from "assets/images/IconsBooks/GiftCardIcon";
 import LogOutIcon from "assets/images/AccountUser/LogOutIcon";
+import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import { Link } from "react-router-dom";
 import useTranslation from "Components/Languages/useTranslation";
 const UserDropMenu = () => {
@@ -46,6 +47,13 @@ const UserDropMenu = () => {
           <Dropdown.Item>
             <Link className="link-drop-item" to="/rewards">
               <GiftCardIcon /> {t('userDropMenu.rewards')}
+            </Link>
+          </Dropdown.Item>
+
+          {/* Contact Us */}
+          <Dropdown.Item>
+            <Link className="link-drop-item" to="/contactus">
+              <EmailIcon /> {t('userDropMenu.contactUs')}
             </Link>
           </Dropdown.Item>
 

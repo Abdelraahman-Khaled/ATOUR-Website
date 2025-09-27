@@ -8,6 +8,9 @@
   align-items: center;
   gap: 8px;
 }
+.all-info-card .btn-card-one.active{
+  border-color: var(--green-01-color);
+}
 body.dark-theme .all-info-card .btn-card-one {
   color: white;
 }

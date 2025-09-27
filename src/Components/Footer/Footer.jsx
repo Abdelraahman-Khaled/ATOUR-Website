@@ -257,8 +257,13 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/cancel-terms" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="/termsConditions" className="nav-link" onClick={handleLinkClick}>
                       {text.cancelTerms}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/contactUs" className="nav-link" onClick={handleLinkClick}>
+                      {text.contactUs}
                     </Link>
                   </li>
                 </ul>

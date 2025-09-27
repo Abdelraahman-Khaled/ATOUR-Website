@@ -15,11 +15,11 @@ const FilterTripsContent = ({ activeMap, subCategories, onSelectSubCategory }) =
         <>
           <div className="all-filter-info">
             <FilterCards>
-              <div className="main-add-place-date main-add-place-date--1">
+              {/* <div className="main-add-place-date main-add-place-date--1"> */}
                 {/* ======== START SEARCH INPUT ========= */}
                 {/* <DatePickerComponent addTextPlaceHolder={"حدد تاريخ الرحلة "} /> */}
                 {/* ======== END SEARCH INPUT ========= */}
-              </div>
+              {/* </div> */}
               {/* <PriceFilter /> */}
 
               {/* ============= START FILTER BY TYPE ============== */}

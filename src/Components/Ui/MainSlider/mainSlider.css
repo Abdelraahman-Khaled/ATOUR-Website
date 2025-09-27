@@ -5,10 +5,8 @@
   height: 600px;
   border-radius: 12px;
   overflow: hidden;
-  background: #f8f9fa;
   flex-direction: row-reverse;
 }
-
 /* Thumbnail Gallery - Left Side */
 .thumbnail-gallery {
   display: flex;
@@ -74,7 +72,6 @@
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
   border-radius: 8px;
 }
 
@@ -438,7 +435,7 @@
   border-radius: 10px;
   border: 2px solid transparent;
 }
-{
+ {
   flex-direction: row;
   flex-wrap: wrap;
 }

@@ -180,6 +180,15 @@ const BoxOneContent = ({ tripData }) => {
               <p className="text">{tripData.program_time || tripData.from_time} {tripData.program_time_unit}</p>
             </div>
           }
+          {tripData.from_time && 
+            <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+              <div className="info-right--1 d-flex align-items-center gap-2">
+                <ClockIcon />
+                <p className="text">{boxTranslations.programTime[currentLanguage]}</p>
+              </div>
+              <p className="text">{tripData.program_time || tripData.from_time} {tripData.program_time_unit}</p>
+            </div>
+          }
           {tripData.to_time &&
             <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
               <div className="info-right--1 d-flex align-items-center gap-2">
