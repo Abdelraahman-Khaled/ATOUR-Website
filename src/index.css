@@ -1106,7 +1106,10 @@ START AIRPLAN
 body.dark-theme img[alt="sgn"] {
   filter: invert(1) brightness(2);
 }
-
+body.dark-theme .nav-pills .nav-link {
+  background-color: var(--dark-02-color) !important;
+  color: var(--white-01-color) !important;
+}
 /* ===============================
 END AIRPLAN
 ============================== */
