@@ -3,7 +3,7 @@ const localizedText = {
     downloadApp: "حمل التطبيق",
     importantLinks: "روابط تهمك",
     helpfulLinks: "روابط مساعدة",
-    contactUs: "تواصل معنا",
+    contactUs: "الدعم الفني",
     callUs: "إتصل بنا",
     email: "البريد الإلكتروني",
     location: "الموقع",
@@ -27,7 +27,7 @@ const localizedText = {
     downloadApp: "Download the App",
     importantLinks: "Important Links",
     helpfulLinks: "Helpful Links",
-    contactUs: "Contact Us",
+    contactUs: "Contact Support",
     callUs: "Call Us",
     email: "Email",
     location: "Location",
@@ -50,7 +50,7 @@ const localizedText = {
   fr: {
     downloadApp: "Télécharger l'application",
     importantLinks: "Liens importants",
-    contactUs: "Nous contacter",
+    contactUs: "Support technique",
     callUs: "Appelez-nous",
     email: "E-mail",
     location: "Emplacement",
@@ -74,7 +74,7 @@ const localizedText = {
   de: {
     downloadApp: "App herunterladen",
     importantLinks: "Wichtige Links",
-    contactUs: "Kontaktieren Sie uns",
+    contactUs: "Technischer Support",
     callUs: "Rufen Sie uns an",
     email: "E-Mail",
     location: "Standort",
@@ -97,7 +97,7 @@ const localizedText = {
   es: {
     downloadApp: "Descargar la aplicación",
     importantLinks: "Enlaces importantes",
-    contactUs: "Contáctenos",
+    contactUs: "Soporte técnico",
     callUs: "Llámenos",
     email: "Correo electrónico",
     location: "Ubicación",
@@ -120,7 +120,7 @@ const localizedText = {
   tr: {
     downloadApp: "Uygulamayı İndir",
     importantLinks: "Önemli Bağlantılar",
-    contactUs: "Bize Ulaşın",
+    contactUs: "Teknik Destek",
     callUs: "Bizi Arayın",
     email: "E-posta",
     location: "Konum",
@@ -143,7 +143,7 @@ const localizedText = {
   ru: {
     downloadApp: "Скачать приложение",
     importantLinks: "Важные ссылки",
-    contactUs: "Свяжитесь с нами",
+    contactUs: "Техническая поддержка",
     callUs: "Позвоните нам",
     email: "Электронная почта",
     location: "Местоположение",
@@ -166,7 +166,7 @@ const localizedText = {
   zh: {
     downloadApp: "下载应用程序",
     importantLinks: "重要链接",
-    contactUs: "联系我们",
+    contactUs: "技术支持",
     callUs: "致电我们",
     email: "电子邮件",
     location: "地点",
@@ -189,7 +189,7 @@ const localizedText = {
   ko: {
     downloadApp: "앱 다운로드",
     importantLinks: "중요 링크",
-    contactUs: "문의하기",
+    contactUs: "기술 지원",
     callUs: "전화하기",
     email: "이메일",
     location: "위치",
@@ -212,7 +212,7 @@ const localizedText = {
   pt: {
     downloadApp: "Baixar aplicativo",
     importantLinks: "Links importantes",
-    contactUs: "Contate-nos",
+    contactUs: "Suporte técnico",
     callUs: "Ligue para nós",
     email: "E-mail",
     location: "Localização",
@@ -235,7 +235,7 @@ const localizedText = {
   ur: {
     downloadApp: "ایپ ڈاؤن لوڈ کریں",
     importantLinks: "اہم لنکس",
-    contactUs: "ہم سے رابطہ کریں",
+    contactUs: "تکنیکی مدد",
     callUs: "ہمیں کال کریں",
     email: "ای میل",
     location: "مقام",
@@ -258,7 +258,7 @@ const localizedText = {
   ja: {
     downloadApp: "アプリをダウンロード",
     importantLinks: "重要なリンク",
-    contactUs: "お問い合わせ",
+    contactUs: "テクニカルサポート",
     callUs: "お電話ください",
     email: "Eメール",
     location: "場所",

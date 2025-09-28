@@ -16,6 +16,7 @@ import EffectiveneCardReservation from "../AllCardsReservations/Effectivenes/Eff
 import GiftCardReservation from "../AllCardsReservations/Gifts/GiftCardReservation";
 import ModalProviderInformation from "Pages/DetailsTripInfoPage/Components/ModalsDetailsTripInfo/ModalProviderInformation/ModalProviderInformation";
 import { useTheme } from "context/ThemeContext";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, currentLanguage, refresh }) => {
   const { isDarkMode } = useTheme();
@@ -30,6 +31,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
     stroke: isDarkMode ? '#000000' : 'inherit'
   };
 
+  console.log(reservation);
 
 
   const buttonHide = () => {
@@ -260,6 +262,19 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                         </div>
                         <div className="info-serv">
                           <h2 className="title">{reservation.vendor.name}</h2>
+                          <div className="contact-serv mt-2 d-flex align-items-center gap-2">
+                            <a
+                              href={`https://wa.me/${reservation.vendor.phone}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-sm btn-success d-flex align-items-center gap-1"
+                            >
+                              <FontAwesomeIcon icon={faWhatsapp} />
+                              WhatsApp
+                            </a>
+                            <span className="text-muted">|</span>
+                            <span className="text">{reservation.vendor.phone}</span>
+                          </div>
                           {/* <div className="rate-serv d-flex mt-1 align-items-center  gap-2">
                             <FontAwesomeIcon
                               icon={faStar}
