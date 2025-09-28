@@ -1,33 +1,40 @@
 import React, { useState, useEffect } from "react";
 import AdSwiper from "./AdSwiper";
+import GeneralAPI from "../../api/generalApi";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import Loader from "Components/Auth/Components/Loader/Loader";
 
 const AdPopup = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [loading, setLoading] = useState(true); // Simulate loading state
+  const [loading, setLoading] = useState(true);
+  const [adsData, setAdsData] = useState([]);
+  const [error, setError] = useState(null);
 
-  // Simulate data loading
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000); // Simulate 3 seconds loading time
+    const fetchAds = async () => {
+      try {
+        setLoading(true);
+        const response = await GeneralAPI.getAds();
+        setAdsData(response.data);
+      } catch (err) {
+        setError("Error fetching ads: " + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    fetchAds();
   }, []);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && adsData.length > 0) {
       setShowPopup(true);
     }
-  }, [loading]);
+  }, [loading, adsData]);
 
-  const adImages = [
-    require("../../assets/images/popupAds/ads(1).png"),
-    require("../../assets/images/popupAds/ads(2).png"),
-    require("../../assets/images/popupAds/ads(3).png"),
-  ];
+
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -43,11 +50,24 @@ const AdPopup = () => {
     return null;
   }
 
+  if (loading) {
+    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>; // Or a proper loader component
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="ad-popup-overlay" onClick={handleOverlayClick}>
       <div className="ad-popup-content" onClick={handleContentClick}>
-        <AdSwiper adImages={adImages} />
-        <p className="text-white py-3">Atour Company</p>
+        <AdSwiper adImages={adsData.map((item) => item.photo)} />
+        {adsData.length > 0 && (
+          <>
+            <h1 className="title text-white py-3">{adsData[0].title}</h1>
+            <p className="text-white py-3">{adsData[0].description}</p>
+          </>
+        )}
       </div>
     </div>
   );

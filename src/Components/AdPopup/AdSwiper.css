@@ -2,7 +2,14 @@
   width: 100%;
   height: auto;
 }
-
+.ad-popup-content h1 {
+  font-size: 16px;
+  font-weight: 500;
+}
+.ad-popup-content p {
+  font-size: 14px;
+  font-weight: 400;
+}
 .ad-popup-content .swiper-slide {
   display: flex;
   justify-content: center;

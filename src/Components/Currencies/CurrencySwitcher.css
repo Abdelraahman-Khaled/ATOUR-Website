@@ -12,8 +12,12 @@
   object-fit: contain;
   display: inline-block;
 }
-body.dark-theme  .currency-image {
-  filter: invert(1) brightness(2);
+/* body.dark-theme .currency-dropdown-menu span {
+  color: var(--dark-01-color) !important;
+} */
+body.dark-theme .currency-image,
+body.dark-theme .currency-symbol {
+  filter: invert(1) brightness(2) !important;
 }
 .currency-dropdown-menu {
   max-height: 300px;
