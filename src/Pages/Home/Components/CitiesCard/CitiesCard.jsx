@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import "./CitiesCard.css";
 import { Link } from "react-router-dom";
 import useTranslation from "Components/Languages/useTranslation";
-import { isAuthenticated } from "api/axiosInstance";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import "./CitiesCardFilter.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
@@ -15,7 +12,6 @@ import SwiperCards from "Components/Ui/SwiperCards/SwiperCards";
 
 const CitiesCard = ({ CityData }) => {
   const { t } = useTranslation(); // Get the translation function
-  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
   const [selectedCountry, setSelectedCountry] = useState("");
   const [filteredCityData, setFilteredCityData] = useState(CityData);
   const [availableCountries, setAvailableCountries] = useState([]);
@@ -41,27 +37,12 @@ const CitiesCard = ({ CityData }) => {
     }
   }, [CityData, selectedCountry]);
 
-  const handleShowLogin = () => {
-    setShowLogin(true);
-  };
-  const hideLogin = () => {
-    setShowLogin(false);
-  };
-  const handleLinkClick = (e) => {
-    if (!isAuthenticated()) {
-      e.preventDefault();
-      handleShowLogin(); // Open login form if not authenticated
-    }
-  };
-
   // Get translated section title and description
   const sectionTitle = t('homePage.mostVisitedDestinations.sectionTitle');
   const sectionText = t('homePage.mostVisitedDestinations.sectionText');
 
   return (
     <div className="city-card-content padding-top">
-      {/* Auth login */}
-      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
       {/* =========== START SECTION TITLE ========== */}
       <TitleSection title={sectionTitle} text={sectionText} />
       {/* =========== END SECTION TITLE ============ */}
@@ -91,7 +72,7 @@ const CitiesCard = ({ CityData }) => {
             return (
               <SwiperSlide key={item.id}>
                 <div className="w-auto" >
-                  <Link to={`/biographyPage/${item.id}`} onClick={handleLinkClick}>
+                  <Link to={`/biographyPage/${item.id}`}>
                     {/* ============ START CARD IMAGE ONE =========== */}
                     <div className="city-image-one">
                       <div className="image-card position-relative overlay-bg circular-image">

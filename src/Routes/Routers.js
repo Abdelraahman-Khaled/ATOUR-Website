@@ -18,7 +18,6 @@ import NatureDventuresPage from "Pages/NatureDventuresPage/NatureDventuresPage";
 import PayConfirmPage from "../Pages/PayConfirmPage/PayConfirmPage";
 import DetailsTripInfoPage from "Pages/DetailsTripInfoPage/DetailsTripInfoPage";
 import GiftDetail from "Components/Ui/Gifts/GiftDetail";
-import PrivateRoute from "./PrivateRoute";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import TermsConditions from "../Pages/TermsConditions/TermsConditions";
 import FaqPage from "../Pages/Faq/FaqPage";
@@ -55,9 +54,9 @@ let routers = createBrowserRouter(
         {
           path: "favoritePage",
           element: (
-            <PrivateRoute>
+            <>
               <FavoritePage />
-            </PrivateRoute>
+            </>
           ),
         },
         {
@@ -76,9 +75,7 @@ let routers = createBrowserRouter(
           path: "eventsPage",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [
@@ -90,9 +87,7 @@ let routers = createBrowserRouter(
           path: "offers",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [
@@ -104,9 +99,7 @@ let routers = createBrowserRouter(
           path: "gifts/:id",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [{ path: "", element: <GiftDetail /> }],
@@ -117,9 +110,7 @@ let routers = createBrowserRouter(
           path: "biographyPage/:id",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [
@@ -131,9 +122,7 @@ let routers = createBrowserRouter(
           path: "country/:id",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [{ path: "", element: <Country /> }],
@@ -142,9 +131,7 @@ let routers = createBrowserRouter(
           path: "tripsPage",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [
@@ -156,9 +143,7 @@ let routers = createBrowserRouter(
           path: "tripsPage/:id",
           element: (
             <>
-              <PrivateRoute>
-                <Outlet />
-              </PrivateRoute>
+              <Outlet />
             </>
           ),
           children: [
@@ -216,7 +201,7 @@ let routers = createBrowserRouter(
   ],
   {
     future: {
-      v7_skipActionErrorRevalidation: true, // Opt into future behavior
+      unstable_skipActionErrorRevalidation: true, // Opt into future behavior
     },
   }
 );

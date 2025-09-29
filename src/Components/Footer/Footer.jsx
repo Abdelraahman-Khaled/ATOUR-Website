@@ -17,11 +17,8 @@ import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import WhatsIcon from "assets/images/footerIcons/Whatsapp.Icon";
 import { useEffect, useState } from "react";
 import GeneralAPI from "api/generalApi";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
-import { isAuthenticated } from "api/axiosInstance"; // Function to check auth status
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import language context
 import { toast } from "react-toastify";
-// import Loader from "Components/Auth/Components/Loader/Loader";
 import localizedText from "../../translations/footerTranslations";
 const Footer = () => {
   const { currentLanguage } = useLanguage(); // Access the current language from context
@@ -29,15 +26,6 @@ const Footer = () => {
 
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
-
-  const handleShowLogin = () => {
-    setShowLogin(true);
-  };
-
-  const hideLogin = () => {
-    setShowLogin(false);
-  };
 
   useEffect(() => {
     const fetchFooterData = async () => {
@@ -71,17 +59,13 @@ const Footer = () => {
   }
 
   const handleLinkClick = (e) => {
-    if (!isAuthenticated()) {
-      e.preventDefault();
-      handleShowLogin(); // Open login form if not authenticated
-    }
+    // Authentication removed
   };
 
   const text = localizedText[currentLanguage] || localizedText.ar;
 
   return (
     <div className="footer">
-      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
 
       {/* =============== START CONTAINER ============== */}
       <ContainerMedia>

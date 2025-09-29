@@ -3,13 +3,10 @@ import TitleSection from "Components/TitleSection/TitleSection";
 import "./ImagesCard.css";
 import { Link } from "react-router-dom";
 import useTranslation from "Components/Languages/useTranslation";
-import { isAuthenticated } from "api/axiosInstance";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import "./ImagesCardFilter.css";
 
 const ImagesCard = ({ mostVisited }) => {
   const { t } = useTranslation(); // Get the translation function
-  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
   const [selectedCountry, setSelectedCountry] = useState("");
   const [filteredMostVisited, setFilteredMostVisited] = useState(mostVisited);
   const [availableCountries, setAvailableCountries] = useState([]);
@@ -32,17 +29,8 @@ const ImagesCard = ({ mostVisited }) => {
     }
   }, [mostVisited, selectedCountry]);
 
-  const handleShowLogin = () => {
-    setShowLogin(true);
-  };
-  const hideLogin = () => {
-    setShowLogin(false);
-  };
   const handleLinkClick = (e) => {
-    if (!isAuthenticated()) {
-      e.preventDefault();
-      handleShowLogin(); // Open login form if not authenticated
-    }
+    // Authentication removed
   };
 
   // Get translated section title and description
@@ -51,8 +39,6 @@ const ImagesCard = ({ mostVisited }) => {
 
   return (
     <div className="images-card-content padding-top">
-      {/* Auth login */}
-      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
       {/* =========== START SECTION TITLE ========== */}
       <TitleSection title={sectionTitle} text={sectionText} />
       {/* =========== END SECTION TITLE ============ */}

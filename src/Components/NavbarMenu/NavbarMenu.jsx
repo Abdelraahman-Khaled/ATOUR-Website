@@ -144,7 +144,7 @@ const NavbarMenu = () => {
             <div className="icon-lang icon-border">
               <CurrencySwitcher />
             </div>
-            <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle onClick={() => setExpanded(expanded ? false : true)} aria-controls="basic-navbar-nav" />
           </div>
 
           <Navbar.Collapse id="basic-navbar-nav" className="nav-menu">
@@ -220,7 +220,7 @@ const NavbarMenu = () => {
               <NavLink to="/termsConditions" className="nav-link">
                 {t('navMenu.termsConditions')}
               </NavLink> */}
-              <SearchInputLocation searchItems={searchableItems} setSelectedCity={isAuthenticated() ? setSelectedCity : buttonShowLogin} />
+              <SearchInputLocation searchItems={searchableItems} setSelectedCity={setSelectedCity} />
             </Nav>
 
             <div className="left-nav-menu d-flex align-items-center gap-3 ">
@@ -233,8 +233,8 @@ const NavbarMenu = () => {
               <ThemeToggle />
               {isAuthenticated() ? (
                 <>
+                  <HeartIcon />
                   <Link to="/favoritePage" className="icon-heart-fav icon-border">
-                    <HeartIcon />
                   </Link>
                   <UserDropMenu />
                 </>

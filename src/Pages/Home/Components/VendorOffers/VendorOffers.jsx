@@ -1,5 +1,3 @@
-import { isAuthenticated } from "api/axiosInstance";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import TitleSection from "Components/TitleSection/TitleSection";
 import { useState } from "react";
@@ -77,18 +75,8 @@ const VendorOffers = ({ offer }) => {
     const offerData = Array.isArray(offer) ? offer : [];
 
     const { currentLanguage } = useLanguage(); // Get the selected language from context
-    const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
-    const handleShowLogin = () => {
-        setShowLogin(true);
-    };
-    const hideLogin = () => {
-        setShowLogin(false);
-    };
     const handleLinkClick = (e) => {
-        if (!isAuthenticated()) {
-            e.preventDefault();
-            handleShowLogin(); // Open login form if not authenticated
-        }
+        e.preventDefault();
     };
 
 
@@ -106,7 +94,6 @@ const VendorOffers = ({ offer }) => {
     return (
         offerData.length > 0 &&
         <div className="cards-collections padding-top">
-            <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
 
             {/* ============== START TITLE SECTION ============ */}
             <TitleSection title={title} text={text} />

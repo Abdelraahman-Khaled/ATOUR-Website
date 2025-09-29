@@ -4,8 +4,6 @@ import IconStarRate from "assets/images/collection/IconStarRate";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useState } from "react";
-import { isAuthenticated } from "api/axiosInstance";
-import FormAuth from "Components/Auth/FormAuth/FormAuth";
 import Favicon from "Components/FavIcon/Favicon ";
 import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -61,22 +59,11 @@ const CardCollection = ({
 
   const { currentLanguage } = useLanguage(); // Get the current language
   const navigate = useNavigate();
-  const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
-  const handleShowLogin = () => {
-    setShowLogin(true);
-  };
-
-  const hideLogin = () => {
-    setShowLogin(false);
-  };
+  const { language } = useLanguage();
 
   const handleLinkClick = (e) => {
-    if (!isAuthenticated()) {
-      e.preventDefault();
-      handleShowLogin(); // Open login form if not authenticated
-    } else if (type === "trip") {
+    if (type === "trip") {
       navigate(`/tripsPage/${itemId}`);
-
     } else if (type === "gift") {
       navigate(`/gifts/${itemId}`);
     } else {
@@ -210,10 +197,9 @@ const CardCollection = ({
 
   return (
     <>
-      <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
 
       {/* ============ START CARD COLLECTION ONE =========== */}
-      <div className={`card-collection-one ${discount === null && "border-0 p-0" }`}>
+      <div className={`card-collection-one ${discount === null && "border-0 p-0"}`}>
         {/* =========== START IMAGE COLLECTION =========== */}
         <div className="image-collection overlay-bg">
           <img

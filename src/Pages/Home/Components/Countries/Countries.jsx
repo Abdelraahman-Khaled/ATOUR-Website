@@ -1,8 +1,6 @@
-import FormAuth from 'Components/Auth/FormAuth/FormAuth';
 import TitleSection from 'Components/TitleSection/TitleSection';
 import useTranslation from "Components/Languages/useTranslation";
 import { useState, useEffect } from 'react';
-import { isAuthenticated } from 'api/axiosInstance';
 import { Link } from 'react-router-dom';
 import { useLanguage } from 'Components/Languages/LanguageContext';
 import CountryAPI from 'api/country';
@@ -11,7 +9,6 @@ import SwiperCards from 'Components/Ui/SwiperCards/SwiperCards';
 
 const Countries = () => {
     const { t } = useTranslation(); // Get the translation function
-    const [showLogin, setShowLogin] = useState(false); // Show/Hide AuthForm modal
     const [countries, setCountries] = useState([]);
     const { currentLanguage } = useLanguage()
 
@@ -30,25 +27,8 @@ const Countries = () => {
     const sectionTitle = t('homePage.mostCountries.sectionTitle');
     const sectionText = t('homePage.mostCountries.sectionText');
 
-    const handleShowLogin = () => {
-        setShowLogin(true);
-    };
-
-    const hideLogin = () => {
-        setShowLogin(false);
-    };
-
-    const handleLinkClick = (e) => {
-        if (!isAuthenticated()) {
-            e.preventDefault();
-            handleShowLogin(); // Open login form if not authenticated
-        }
-    };
-
     return (
         <div className="images-card-content padding-top">
-            {/* Auth login */}
-            <FormAuth showModalForm={showLogin} hideModalForm={hideLogin} />
             {/* =========== START SECTION TITLE ========== */}
             <TitleSection title={sectionTitle} text={sectionText} />
             {/* =========== END SECTION TITLE ============ */}
@@ -81,7 +61,7 @@ const Countries = () => {
                     {countries && countries.length > 0 && countries.map((item) => {
                         return (
                             <SwiperSlide key={item.id}>
-                                <Link to={`/country/${item.id}`} onClick={handleLinkClick}>
+                                <Link to={`/country/${item.id}`}>
                                     {/* ============ START CARD IMAGE ONE =========== */}
                                     <div className="card-image-one">
                                         <div className="image-card position-relative overlay-bg">

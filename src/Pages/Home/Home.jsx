@@ -15,8 +15,18 @@ import CardsBooks from "./Components/WhyCardsBooks/CardsBooks";
 import CitiesCard from "./Components/CitiesCard/CitiesCard";
 
 
-
-
+const text = {
+  ar: "لا توجد بيانات متاحة",
+  en: "No data available",
+  fr: "Aucune donnée disponible",
+  de: "Keine Daten verfügbar",
+  es: "No hay datos disponibles",
+  it: "Nessun dato disponibile",
+  ru: "Данные отсутствуют",
+  zh: "无可用数据",
+  ja: "利用可能なデータがありません",
+  ko: "사용 가능한 데이터가 없습니다"
+}
 const Home = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { homeData, loading, error } = useHome(); // Use the HomeContext
@@ -42,7 +52,7 @@ const Home = () => {
 
   // If no data is available yet, show a message
   if (!homeData) {
-    return <div className="text-center">لا توجد بيانات متاحة</div>;
+    return <div className="text-center">{text[currentLanguage]}</div>;
   }
   return (
     <>

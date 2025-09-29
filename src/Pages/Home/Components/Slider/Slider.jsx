@@ -134,7 +134,7 @@ const Slider = () => {
 
             <div className="main-add-place-date main-add-place-date--1">
               <SearchInputLocation
-                setSelectedCity={isAuthenticated() ? setSelectedCity : () => setShowLogin(true)}
+                setSelectedCity={setSelectedCity}
                 searchItems={searchableItems} // Pass searchableItems instead of cities
               />
               <button
