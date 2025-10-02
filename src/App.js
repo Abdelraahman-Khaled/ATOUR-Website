@@ -24,6 +24,7 @@ import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
 import { RatesProvider } from "context/RatesContext";
 import { BookingProvider } from "./context/BookingContext";
 import { SubCategoriesProvider } from "./context/SubCategoriesContext";
+import FooterProvider from "./context/FooterContext";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
@@ -68,7 +69,9 @@ function App() {
                 <BookingProvider>
                   <SubCategoriesProvider>
                     <HomeProvider>
-                      <AppContent />
+                      <FooterProvider>
+                        <AppContent />
+                      </FooterProvider>
                     </HomeProvider>
                   </SubCategoriesProvider>
                 </BookingProvider>

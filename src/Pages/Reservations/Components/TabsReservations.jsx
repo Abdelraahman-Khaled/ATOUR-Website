@@ -21,7 +21,8 @@ const TabsReservations = () => {
     ar: {
       current: "الحالية",
       completed: "المكتملة",
-      ended: "المنتهية",
+      ended: "ملغية",
+      rejected: "مرفوضة",
       experiences: "جَوْلات",
       events: "فعاليات",
       products: "منتجات",
@@ -29,7 +30,8 @@ const TabsReservations = () => {
     en: {
       current: "Current",
       completed: "Completed",
-      ended: "Ended",
+      ended: "Canceled",
+      rejected: "Rejected",
       experiences: "Experiences",
       events: "Events",
       products: "Products",
@@ -37,7 +39,8 @@ const TabsReservations = () => {
     fr: {
       current: "En cours",
       completed: "Terminées",
-      ended: "Expirées",
+      ended: "Annulées",
+      rejected: "Rejetées",
       experiences: "Expériences",
       events: "Événements",
       products: "Produits",
@@ -45,7 +48,8 @@ const TabsReservations = () => {
     de: {
       current: "Aktuell",
       completed: "Abgeschlossen",
-      ended: "Beendet",
+      ended: "Storniert",
+      rejected: "Abgelehnt",
       experiences: "Erlebnisse",
       events: "Veranstaltungen",
       products: "Produkte",
@@ -53,7 +57,8 @@ const TabsReservations = () => {
     es: {
       current: "Actuales",
       completed: "Completadas",
-      ended: "Finalizadas",
+      ended: "Canceladas",
+      rejected: "Rechazadas",
       experiences: "Experiencias",
       events: "Eventos",
       products: "Productos",
@@ -61,7 +66,8 @@ const TabsReservations = () => {
     tr: {
       current: "Güncel",
       completed: "Tamamlandı",
-      ended: "Bitti",
+      ended: "İptal edildi",
+      rejected: "Reddedildi",
       experiences: "Deneyimler",
       events: "Etkinlikler",
       products: "Ürünler",
@@ -69,7 +75,8 @@ const TabsReservations = () => {
     ru: {
       current: "Текущие",
       completed: "Завершённые",
-      ended: "Истекшие",
+      ended: "Отменённые",
+      rejected: "Отклонённые",
       experiences: "Впечатления",
       events: "События",
       products: "Продукты",
@@ -77,7 +84,8 @@ const TabsReservations = () => {
     zh: {
       current: "当前",
       completed: "已完成",
-      ended: "已结束",
+      ended: "已取消",
+      rejected: "已拒绝",
       experiences: "体验",
       events: "活动",
       products: "产品",
@@ -85,7 +93,8 @@ const TabsReservations = () => {
     ko: {
       current: "현재",
       completed: "완료됨",
-      ended: "종료됨",
+      ended: "취소됨",
+      rejected: "거부됨",
       experiences: "체험",
       events: "이벤트",
       products: "제품",
@@ -93,7 +102,8 @@ const TabsReservations = () => {
     pt: {
       current: "Atuais",
       completed: "Concluídas",
-      ended: "Encerradas",
+      ended: "Canceladas",
+      rejected: "Rejeitadas",
       experiences: "Experiências",
       events: "Eventos",
       products: "Produtos",
@@ -101,7 +111,8 @@ const TabsReservations = () => {
     ur: {
       current: "موجودہ",
       completed: "مکمل شدہ",
-      ended: "ختم شدہ",
+      ended: "منسوخ شدہ",
+      rejected: "رد کردہ",
       experiences: "تجربات",
       events: "تقریبات",
       products: "مصنوعات",
@@ -109,7 +120,8 @@ const TabsReservations = () => {
     ja: {
       current: "現在",
       completed: "完了",
-      ended: "終了",
+      ended: "キャンセル",
+      rejected: "拒否",
       experiences: "体験",
       events: "イベント",
       products: "製品",
@@ -121,6 +133,7 @@ const TabsReservations = () => {
     { id: 1, key: "current", active: true },
     { id: 2, key: "completed", active: false },
     { id: 3, key: "ended", active: false },
+    { id: 4, key: "rejected", active: false },
   ]);
 
   const handleTabClick = (id) => {
@@ -136,6 +149,7 @@ const TabsReservations = () => {
   const [curren, setCurrent] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [compleated, setCompleted] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [ended, setEnded] = useState({ gifts: [], effectivenes: [], trips: [] });
+  const [rejected, setRejected] = useState({ gifts: [], effectivenes: [], trips: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState(false);
@@ -150,6 +164,7 @@ const TabsReservations = () => {
           setCurrent(data.data.curren || { gifts: [], effectivenes: [], trips: [] });
           setCompleted(data.data.compleated || { gifts: [], effectivenes: [], trips: [] });
           setEnded(data.data.ended || { gifts: [], effectivenes: [], trips: [] });
+          setRejected(data.data.rejected || { gifts: [], effectivenes: [], trips: [] });
         }
       } catch (err) {
         setError("Failed to load reservation data. Please try again later.");
@@ -175,6 +190,7 @@ const TabsReservations = () => {
     if (tabs_1[0].active) return curren;
     if (tabs_1[1].active) return compleated;
     if (tabs_1[2].active) return ended;
+    if (tabs_1[3].active) return rejected;
     return curren;
   };
 

@@ -151,6 +151,10 @@ html[dir="ltr"]
   font-size: 1.4em; /* Adjust as needed */
   font-weight: bold;
 }
+.offer-right-overlay .offer-discount p{
+  font-size: 1.4em; /* Adjust as needed */
+  font-weight: bold;
+}
 
 .offer-right-overlay .price-num.w-100 {
   font-size: 1em; /* Adjust as needed */

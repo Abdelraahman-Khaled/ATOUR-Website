@@ -8,7 +8,6 @@ import ImageModal from '../../../../../../Components/CustomModal/ImageModal/Imag
 import { useState } from 'react';
 
 
-
 const UserCommentRate = ({ imageUser, userName, timeAdd, comment, rate, images }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,12 +27,13 @@ const UserCommentRate = ({ imageUser, userName, timeAdd, comment, rate, images }
             width="50"
             height="50"
             onError={(e) => {
+              // @ts-ignore
               e.target.src = imageUser_1;
             }}
           />
         </div>
 
-        <div className="info-user">
+        <div className="info-user w-100">
           {/* Dynamic stars */}
           <div className="rate-stars d-flex align-items-center gap-1">
             {stars.map((filled, index) => (
@@ -44,11 +44,10 @@ const UserCommentRate = ({ imageUser, userName, timeAdd, comment, rate, images }
           </div>
 
           {/* User name & time */}
-          <div className="main-user-info d-flex align-items-center gap-1">
-            <h2 className="name-user">{userName}</h2>
+          <div className="main-user-info d-flex align-items-center justify-content-between gap-1 w-100">
+            <h2 className="name-user ">{userName}</h2>
             <p className="time-add">
               {timeAdd}
-              {/* {timeText} */}
             </p>
           </div>
         </div>

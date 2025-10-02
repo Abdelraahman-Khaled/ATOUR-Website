@@ -68,19 +68,7 @@ const CardNews = ({
       <div className="content-info-card-news">
         <div>
           <h2 className="title">{titleNews}</h2>
-          <div className="description d-flex align-items-center gap-2">
-            من : <FontAwesomeIcon icon={faCalendar} />  <DateDisplay from_date={timeAddedNews} />
-          </div>
-          <div className="description d-flex align-items-center gap-2">
-            الي :  <FontAwesomeIcon icon={faCalendar} /> <DateDisplay from_date={endTimeAddedNews} />
-          </div>
-          <p
-            className="description"
-          >
-            {description}
-          </p>
         </div>
-        <span className="description tags">{tags}</span>
       </div>
       {/* ============= END CONTENT INFO CARD NEWS ========== */}
     </Link >

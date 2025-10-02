@@ -45,8 +45,21 @@ const GeneralAPI = {
   },
 
   // About
-  getAbout: async () => {
-    const response = await axiosInstance.get("/about");
+  getAbout: async (lang) => {
+    const response = await axiosInstance.get("/about", {
+      headers: {
+        lang: lang,
+      },
+    });
+    return response.data;
+  },
+  // help
+  getHelp: async (lang) => {
+    const response = await axiosInstance.get("/helping", {
+      headers: {
+        lang: lang,
+      },
+    });
     return response.data;
   },
 
@@ -146,8 +159,12 @@ const GeneralAPI = {
   },
 
   // Ads
-  getAds: async () => {
-    const response = await axiosInstance.get("/ads");
+  getAds: async (lang) => {
+    const response = await axiosInstance.get("/ads", {
+      headers: {
+        lang: lang,
+      },
+    });
     return response.data;
   },
 

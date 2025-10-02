@@ -30,21 +30,53 @@ const TermsConditions = () => {
 
   const text = {
     ar: {
-      termsAndConditions: 'الشروط والأحكام',
       noData: 'لا يوجد بيانات متاحة.',
       loading: 'جاري التحميل...'
     },
     en: {
-      termsAndConditions: 'Terms and Conditions',
       noData: 'No data available.',
       loading: 'Loading...'
     },
+    es: {
+      noData: 'No hay datos disponibles.',
+      loading: 'Cargando...'
+    },
+    fr: {
+      noData: 'Aucune donnée disponible.',
+      loading: 'Chargement...'
+    },
+    de: {
+      noData: 'Keine Daten verfügbar.',
+      loading: 'Laden...'
+    },
+    it: {
+      noData: 'Nessun dato disponibile.',
+      loading: 'Caricamento...'
+    },
+    pt: {
+      noData: 'Nenhum dado disponível.',
+      loading: 'Carregando...'
+    },
+    ru: {
+      noData: 'Данные недоступны.',
+      loading: 'Загрузка...'
+    },
+    zh: {
+      noData: '无可用数据。',
+      loading: '加载中...'
+    },
+    ja: {
+      noData: 'データがありません。',
+      loading: '読み込み中...'
+    },
+    ko: {
+      noData: '사용 가능한 데이터가 없습니다.',
+      loading: '로딩 중...'
+    }
   };
-
   return (
     <div className="terms-container">
       <div className="terms-content">
-        <h1>{text[currentLanguage].termsAndConditions}</h1>
         <div className="terms-section">
           {isLoading ? (
             <p>{text[currentLanguage].loading}</p>

@@ -229,7 +229,7 @@ const CardCollection = ({
 
           <div className="d-flex align-items-center justify-content-between gap-4">
             <h2 className="title">{titleCard}</h2>
-            {booking_count && (
+            {booking_count ? (
               <div className="d-flex align-items-center gap-1 " style={{ minWidth: "max-content", fontSize: "12px" }}>
                 <FontAwesomeIcon icon={faTicket} />
                 <span>
@@ -238,7 +238,7 @@ const CardCollection = ({
                   {times}
                 </span>
               </div>
-            )}
+            ) : null}
           </div>
           {discount && discount < numPriceCard ? (
             <div className="price-info pb-2">

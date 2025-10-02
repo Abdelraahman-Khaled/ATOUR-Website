@@ -30,7 +30,7 @@
   padding: 35px 0 25px 0;
 }
 body.dark-theme .footer .all-footer .footer-one .socials-icons svg path {
-fill: unset;
+  fill: unset;
 }
 
 .footer .all-footer .footer-one .socials-icons .link-social-one:hover {
@@ -103,8 +103,8 @@ fill: unset;
 }
 
 .footer .footer-two-links .info-footer-content .info-contact-one .link-contact {
-  padding-top: 10px;
   display: flex;
+  direction: ltr;
 }
 
 .footer .info-footer-content .info-contact-one {
@@ -138,7 +138,6 @@ fill: unset;
 }
 
 .footer .final-footer .license-number-footer span {
-  
   width: 33%;
   text-align: center;
 }

@@ -52,6 +52,20 @@ const translations = {
     ur: "...درجہ بندیاں لوڈ ہو رہی ہیں",
     ja: "評価を読み込み中...",
   },
+  more:{
+    ar:"أكثر من ",
+    en:"More than ",
+    fr:"Plus de ",
+    de:"Mehr als ",
+    es:"Más de ",
+    tr:"Daha fazla ",
+    ru:"Больше чем ",
+    zh:"更多 ",
+    ko:"더 많이 ",
+    pt:"Mais de ",
+    ur:"بہت سے ",
+    ja:"評価が多い ",
+  }
 };
 
 const RatesComments = ({ modelId, modelType }) => {
@@ -84,7 +98,7 @@ const RatesComments = ({ modelId, modelType }) => {
             <Avatar alt="Remy Sharp" src={image4} className="avatar-1" />
           </AvatarGroup>
           <h2 className="text-title">
-            {currentLanguage === "ar" ? "أكثر من " : "More than "}
+            {translations.more[currentLanguage]}
             {rates?.length || 0}{" "}
             {translations.trust[currentLanguage]}
           </h2>

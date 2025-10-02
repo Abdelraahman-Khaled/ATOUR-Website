@@ -20,8 +20,15 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: var(--green-01-color);
   text-align: center;
+}
+
+.notification-page h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem !important;
+  color: var(--green-01-color);
 }
 
 .notifications-list {
@@ -104,4 +111,9 @@
   .notification-time {
     margin-top: 0.5rem;
   }
+}
+
+.notification-item.unread {
+  background-color: #dceddc; /* Un color de fondo claro para notificaciones no leídas */
+  border-left: 5px solid var(--green-01-color); /* Una barra lateral para resaltarlas */
 }

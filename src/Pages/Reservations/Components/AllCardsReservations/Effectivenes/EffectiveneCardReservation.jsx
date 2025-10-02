@@ -5,6 +5,78 @@ import "../AllCardsReservation.css";
 import UserIcon2 from "assets/Icons/UserIcon2";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
+import paymentStatus from "../paymentStatus";
+import { useState } from "react";
+import ModalAddRates from "Pages/DetailsTripInfoPage/Components/ModalsDetailsTripInfo/ModalAddRates/ModalAddRates";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+const content = {
+    en: {
+        details: "Details",
+        cancel: "Cancel Reservation",
+        addRate: "Add Rating",
+
+    },
+    ar: {
+        details: "التفاصيل",
+        cancel: "إلغاء الحجز",
+        addRate: "إضافة تقييم",
+
+    },
+    fr: {
+        details: "Détails",
+        cancel: "Annuler la réservation",
+        addRate: "Ajouter une évaluation",
+    },
+    de: {
+        details: "Einzelheiten",
+        cancel: "Reservierung stornieren",
+        addRate: "Bewertung hinzufügen",
+    },
+    es: {
+        details: "Detalles",
+        cancel: "Cancelar reserva",
+        addRate: "Agregar calificación",
+    },
+    tr: {
+        details: "Detaylar",
+        cancel: "Rezervasyonu İptal Et",
+        addRate: "Değerlendirme ekle",
+    },
+    ru: {
+        details: "Детали",
+        cancel: "Отменить бронирование",
+        addRate: "Добавить отзыв",
+    },
+    zh: {
+        details: "详情",
+        cancel: "取消预订",
+        addRate: "添加评论",
+    },
+    ko: {
+        details: "세부 정보",
+        cancel: "예약 취소",
+        addRate: "평가 추가",
+    },
+    pt: {
+        details: "Detalhes",
+        cancel: "Cancelar Reserva",
+        addRate: "Adicionar avaliação",
+    },
+    ur: {
+        details: "تفصیلات",
+        cancel: "بکنگ منسوخ کریں",
+        addRate: "درجہ بندی شامل کریں",
+    },
+    ja: {
+        details: "詳細",
+        cancel: "予約をキャンセル",
+        addRate: "評価を追加",
+    },
+};
+
 const EffectiveneCardReservation = ({
     image,
     typeReservation,
@@ -20,6 +92,7 @@ const EffectiveneCardReservation = ({
     buttonCancelReservationFunction,
     description,
     id,
+    status
 }) => {
     const { currentLanguage } = useLanguage(); // Get the current language
     // less description
@@ -31,9 +104,22 @@ const EffectiveneCardReservation = ({
     const navFunction = (id) => {
         navigate(`/eventsPage/${id}`);
     };
+
+    const t = content[currentLanguage] || content.en;
+
+    const [showModalAddRate, setShowModalAddRate] = useState(false);
+    const buttonshowModal = () => setShowModalAddRate(true);
+    const hideModalAddRate = () => setShowModalAddRate(false);
+
     return (
         <div className="card-reservation-one d-flex align-items-center gap-3 flex-wrap flex-lg-nowrap">
             {/* ============ START IMAGE RESERVATION =============== */}
+            <ModalAddRates
+                showModalAddRate={showModalAddRate}
+                hideModalAddRate={hideModalAddRate}
+                modelId={id}
+                modelType={"effectivenes"}
+            />
             <div
                 className="image-reservation position-relative overlay-bg"
                 onClick={() => navFunction(id)}
@@ -44,7 +130,7 @@ const EffectiveneCardReservation = ({
                     loading="lazy"
                     className="w-100 h-100 object-fit-cover"
                 />
-                <div className={`badge-info btn-main`}>{typeReservation}</div>
+                <div className={`badge-info btn-main`}>{paymentStatus[typeReservation]?.[currentLanguage]}</div>
                 <div className="info-text title-country-bg">
                     <IconLocation /> {countryName}
                 </div>
@@ -54,9 +140,7 @@ const EffectiveneCardReservation = ({
             <div className="content-info-card">
                 <div className="info-top-card pb-2 d-flex justify-content-between align-items-center gap-2 flex-wrap">
                     <h2 className="title">{titleCard}</h2>
-                    <p className="price-num">
-                        {priceNum} {currentLanguage === "ar" ? "ريال" : "SAR"}{" "}
-                    </p>
+                    <p className="price-num">  <CurrencyDisplay price={priceNum} /></p>
                 </div>
                 <p className="title">{sliceWords(description)}</p>
 
@@ -84,9 +168,17 @@ const EffectiveneCardReservation = ({
                                 onClick={buttonCancelReservationFunction}
                                 className="btn-main btn-details-main btn-cancel-bg"
                             >
-                {currentLanguage === "ar" ? "إلغاء الحجز" : "Cancel Reservation"}
+                                {currentLanguage === "ar" ? "إلغاء الحجز" : "Cancel Reservation"}
                             </button>
                         )}
+                        {status === 4 ?
+                            <button
+                                onClick={buttonshowModal}
+                                className="add-new-rate btn-main mt-3"
+                            >
+                                <FontAwesomeIcon icon={faPlus} /> {t.addRate}
+                            </button> : null
+                        }
                     </div>
                 </div>
             </div>

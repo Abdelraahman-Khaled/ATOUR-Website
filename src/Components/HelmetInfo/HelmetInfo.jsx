@@ -1,48 +1,32 @@
-
 import { Helmet } from "react-helmet-async";
 
-const HelmetInfo = ({ titlePage }) => {
+const HelmetInfo = ({ titlePage = "Atour - Your Gateway to Saudi Tourism", description = "Discover unique travel experiences, cultural tours, and adventures in Saudi Arabia with Atour.", keywords = "Saudi Arabia, tourism, travel, culture, adventure, tours, Atour", url = "https://atour.sa/", image = "assets/images/logo/logo.svg" }) => {
   return (
     <Helmet>
-      <title>{titlePage}</title>
-      <link rel="shortcut icon" type="image/png" href="/icon/ico.svg" />
+      <title>{titlePage} | Atour</title>
 
-      {/* description */}
-      <meta
-        name="description"
-        content="atour Discription Content info atour  Discription Content info atour Discription Content info"
-      />
+      {/* Meta Basic */}
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords || "السياحة في السعودية, الجولات السياحية السعودية, تجارب ثقافية سعودية, التراث السعودي, السياحة الداخلية السعودية, السياحة الثقافية في السعودية, السياحة الريفية في السعودية, السياحة التراثية السعودية, جولات الرياض السياحية, جولة حافة العالم, سفاري الرمال الذهبية, رحلات السفاري السعودية, مغامرات في السعودية, رحلات البر والبحر في السعودية, جولات الغوص في السعودية, جولات الجزر السعودية, أكلات شعبية سعودية, الأكل الجيزاني, أكلات القصيم التقليدية, السليق الطائفي, الكليجا السعودية, الفروالة السعودية, البن السعودي, الفل السعودي, القط العسيري, الأكلات الشعبية السعودية, الحرف اليدوية السعودية, مشغولات يدوية سعودية, الهدايا التذكارية السعودية, المنتجات التراثية السعودية, القط العسيري اليدوي, الحرف التقليدية في السعودية, التسوق من الحرفيين السعوديين, مهرجانات سعودية, بازار شعبي سعودي, الفعاليات التراثية السعودية, الأسواق الشعبية السعودية, فعاليات ثقافية في السعودية, مهرجانات البازارات السعودية, منصة خدمات سياحية في السعودية, تسجيل مرشد سياحي سعودي, تقديم خدمات سياحية, تسويق تجارب سياحية, تطبيق جولات سياحية سعودية, المتاحف في السعودية, المتاحف التاريخية في الرياض, المتحف الوطني السعودي, متاحف جدة, المتاحف في المدينة المنورة, متحف الفن السعودي, المنتزهات في السعودية, حدائق الرياض العامة, منتزه الملك عبدالله في جدة, منتزهات عسير, منتزهات جازان, أماكن الجذب السياحي في السعودية, مناطق جذب سياحي في الرياض, أماكن سياحية في جدة, السياحة في مكة المكرمة, السياحة في المدينة المنورة, المعالم السياحية في القصيم, المعالم السياحية في عسير, المناطق السياحية في جازان, المعالم الطبيعية في السعودية, الكثبان الرملية في السعودية, الأماكن التراثية في السعودية, مدائن صالح (الحجر) – موقع أثري نبطي تاريخي مدرج في اليونسكو, الدرعية التاريخية – مهد الدولة السعودية الأولى وأحد المواقع التراثية المهمة, جدة التاريخية (البلد) – المدينة القديمة ذات الطابع العمراني المميز, مكة المكرمة – الحرم المكي والمسجد الحرام، وجهة دينية عالمية, المدينة المنورة – المسجد النبوي والمواقع الإسلامية التاريخية, جبل اللوز – أعلى قمة في السعودية ومقصد لمحبي المشي والتسلق, العلا – واحة تاريخية بمناظر طبيعية خلابة وآثار نبطية, جزر فرسان – جزر بحرية خلابة في البحر الأحمر برمال بيضاء ومياه صافية, منتزه الملك عبدالله الوطني – منطقة طبيعية خلابة في شمال غرب المملكة, منتزه عسير الوطني – جبال خضراء ومناخ معتدل، وجهة مثالية للسياحة الطبيعية, جولة حافة العالم (Edge of the World) – موقع صخري شاهق بالقرب من الرياض, الرمال الذهبية (النفود) – مناطق صحراوية مثالية للسفاري والمغامرات, وادي الديسة – وادٍ خلاب في منطقة تبوك به نقوش أثرية, المتحف الوطني السعودي في الرياض – متحف غني بالتاريخ والثقافة السعودية, كورنيش جدة – ممشى ساحلي عالمي مع فعاليات ومطاعم, محمية الملك عبدالعزيز للطيور – محمية طبيعية للطيور والبيئة البرية, منتزه الردف في أبها – منتزه طبيعي به بحيرة صناعية ومناظر جبلية, منتزه جبل السودة – أعلى قمة في منطقة عسير، مع أجواء باردة ومناخ معتدل, جزيرة تاروت – جزيرة تاريخية في المنطقة الشرقية للسعودية, وادي نمر – وادٍ سياحي معروف بالمشي والتخييم في منطقة الطائف"} />
 
-      {/* keywords */}
-      <meta
-        name="keywords"
-        content="atour  KeyWords atour  KeyWords atour  KeyWords"
-      />
-      {/*  <!-- #author --> */}
       <meta name="author" content="atour Website" />
-      {/* <!-- Facebook Meta Tags --> */}
-      <meta property="og:url" content="atour Link Url" />
-      <meta property="og:type" content="atour website" />
-      <meta property="og:title" content="atour Services" />
-      <meta
-        property="og:description"
-        content="atour A concise description of your page content"
-      />
-      <meta property="og:image" content="atour Image" />
 
-      {/* Twitter Meta Tags */}
+      {/* Open Graph (Facebook) */}
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={titlePage} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="atour Domain Link Url" />
-      <meta property="twitter:url" content="atour Url" />
-      <meta name="twitter:title" content="atour" />
-      <meta
-        name="twitter:description"
-        content="atour description of your page content"
-      />
-      <meta name="twitter:image" content="atour  Image" />
+      <meta property="twitter:url" content={url} />
+      <meta name="twitter:title" content={titlePage} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-      {/* LINK URL WEBSITE atour */}
-      <link rel="canonical" href="https://www.example.com/your-page" />
+      {/* Canonical */}
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 };

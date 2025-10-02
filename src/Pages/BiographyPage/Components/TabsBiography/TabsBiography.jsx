@@ -174,6 +174,19 @@ const TabsBiography = ({ biography }) => {
       content: (
         <>
           <ContainerMedia>
+            <TripsContent
+              tripsData={normalizedDataGift}
+              onSelectSubCategory={handleSelectSubCategory}
+              onPriceChange={handlePriceChange}
+              onCountryChange={handleCountryChange}
+              onCityChange={handleCityChange}
+              selectedCountryId={tempFilters.selectedCountryId}
+              selectedCityId={tempFilters.selectedCityId}
+              onCheckboxChange={handleCheckboxChange}
+              checkboxFilters={tempFilters.checkboxFilters}
+              onSubmitFilters={handleSubmitFilters}
+              onClearFilters={handleClearFilters}
+            />
             <OffersCards gifts={normalizedDataGift} />
           </ContainerMedia>
         </>

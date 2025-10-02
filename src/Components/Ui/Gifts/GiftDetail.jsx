@@ -9,6 +9,7 @@ import GiftCardDetails from "./GiftCardDetails/GiftCardDetails";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
 import BreadcrumbsPage from "../BreadcrumbsPage/BreadcrumbsPage";
+import RatesComments from "Pages/DetailsTripInfoPage/Components/AllContentInfoDetailsMiddel/ContentInfoDetailsRight/RatesComments/RatesComments";
 
 const content = {
     notFound: {
@@ -162,6 +163,8 @@ const GiftDetail = () => {
                     {/* =========== START CONTAINER ============ */}
                     <ContainerMedia>
                         <GiftCardDetails gift={gift} />
+                        <RatesComments modelId={gift.id} modelType={"gift"} />
+
                     </ContainerMedia>
                     {/* =========== END CONTAINER ============ */}
                 </div>

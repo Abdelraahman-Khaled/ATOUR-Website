@@ -23,10 +23,13 @@
   margin-bottom: 30px;
 }
 
-.faq-list {
-  text-align: left;
+[dir="rtl"] .faq-list {
+  text-align: right;
 }
+.faq-list{
+  text-align: left;
 
+}
 .faq-item {
   margin-bottom: 15px;
   border: 1px solid #eee;
@@ -94,17 +97,17 @@
   }
 
   .faq-container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 20px; /* Further adjusted for smaller screens */
+    margin-bottom: 12px; /* Further adjusted for smaller screens */
   }
 
   .faq-question {
-    font-size: 15px;
-    padding: 12px 15px;
+    font-size: 13px; /* Further adjusted for smaller screens */
+    padding: 8px 10px; /* Further adjusted for smaller screens */
   }
 
   .faq-answer {
-    font-size: 14px;
-    padding: 12px 15px;
+    font-size: 12px; /* Further adjusted for smaller screens */
+    padding: 8px 10px; /* Further adjusted for smaller screens */
   }
 }

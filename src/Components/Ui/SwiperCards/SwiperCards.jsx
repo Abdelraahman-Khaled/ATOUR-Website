@@ -9,7 +9,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const SwiperCards = ({ children, swiperId }) => {
+const SwiperCards = ({ children, swiperId, slidesPerView = 1 }) => {
     return (
         <div className="all-cards-landmarks all-cards-swiper" data-aos="fade-up">
             <Swiper
@@ -31,7 +31,7 @@ const SwiperCards = ({ children, swiperId }) => {
                 className="mySwiper"
                 breakpoints={{
                     0: {
-                        slidesPerView: 1,
+                        slidesPerView: slidesPerView || 1,
                         slidesPerGroup: 1
                     },
                     480: {

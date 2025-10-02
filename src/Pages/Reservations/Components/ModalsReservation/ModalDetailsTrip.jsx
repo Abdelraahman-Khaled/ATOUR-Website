@@ -24,14 +24,8 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
   const [showModalProviderInformation, setShowModalProviderInformation] =
     useState(false);
 
-  // Dark mode styles for text and SVG elements
-  const darkModeStyles = {
-    color: isDarkMode ? '#000000' : 'inherit',
-    fill: isDarkMode ? '#000000' : 'inherit',
-    stroke: isDarkMode ? '#000000' : 'inherit'
-  };
 
-  console.log(reservation);
+
 
 
   const buttonHide = () => {
@@ -183,10 +177,11 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 timeAdd={`${text[currentLanguage].from}  ${reservation.effectivene.from_time} ${text[currentLanguage].to} ${reservation.effectivene.to_time}`}
                 isTrueButtonDetails={false}
                 buttonDetailsFunction={false}
-                isTrueButtonCancel={true}
+                isTrueButtonCancel={reservation.status === 0 ? true : false}
                 buttonCancelReservationFunction={buttonShowModal}
                 description={reservation.effectivene.description}
                 id={reservation.effectivene_id}
+                status={reservation.status}
               />
             ) : reservation.gift_id ? (
               <GiftCardReservation
@@ -197,11 +192,12 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 textUserInfo={`${reservation.delivery_way === "myself" ? text[currentLanguage].myself : text[currentLanguage].delivery}`}
                 isTrueButtonDetails={false}
                 buttonDetailsFunction={false}
-                isTrueButtonCancel={true}
+                isTrueButtonCancel={reservation.status === 0 ? true : false}
                 buttonCancelReservationFunction={buttonShowModal}
                 description={reservation.gift.description}
                 id={reservation.gift_id}
                 countryName={reservation.gift.city.title}
+                status={reservation.status}
               />
             ) : (
               <CardReservation
@@ -215,9 +211,10 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 timeAdd={reservation.booking_time}
                 isTrueButtonDetails={false}
                 buttonDetailsFunction={false}
-                isTrueButtonCancel={true}
+                isTrueButtonCancel={reservation.status === 0 ? true : false}
                 buttonCancelReservationFunction={buttonShowModal}
                 id={reservation.effectivene_id || reservation.trip_id || reservation.gift_id}
+                status={reservation.status}
               />
             )}
             {/* =============== START INFO PAY CONTENT DETAILS ============ */}

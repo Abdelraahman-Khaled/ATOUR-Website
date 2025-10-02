@@ -5,9 +5,11 @@ import appStore from "../../../../assets/images/apps/appstore.svg";
 import appGoogle from "../../../../assets/images/apps/googleplay.svg";
 import "./BannerHome.css";
 import useTranslation from "Components/Languages/useTranslation";
+import { useFooter } from "context/FooterContext";
 
 const BannerHome = () => {
   const { t } = useTranslation(); // Get the translation function
+  const { footerData } = useFooter(); // Use the FooterContext
 
   return (
     <div className="banner-home padding-top">
@@ -26,7 +28,7 @@ const BannerHome = () => {
                 {/* ============== START APPS LINKS ============= */}
                 <div className="apps-links d-flex align-items-center  gap-3 mt-3">
                   <a
-                    href="https://apps.apple.com/us/app/atour/id6743371891"
+                    href={footerData.footer_app_store}
                     target="_blank"
                     className="link-app-one"
                     rel="noreferrer"
@@ -34,7 +36,7 @@ const BannerHome = () => {
                     <img src={appStore} alt="app store" />
                   </a>
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.app.atour"
+                    href={footerData.footer_google_play}
                     target="_blank"
                     className="link-app-one"
                     rel="noreferrer"

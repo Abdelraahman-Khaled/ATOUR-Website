@@ -14,31 +14,49 @@ import CardsFavEffective from "./Components/CardsFavorite/CardsFavEffective";
 import CardsFavGift from "./Components/CardsFavorite/CardsFavGift";
 import { toast } from "react-toastify";
 
+const translations = {
+  en: { trips: "Experiences", events: "Events", gifts: "Products", favorite: "Favorite" },
+  ar: { trips: "جولة", events: "فعاليات", gifts: "منتجات", favorite: "المفضلة" },
+  fr: { trips: "Expériences", events: "Événements", gifts: "Produits", favorite: "Favoris" },
+  de: { trips: "Erlebnisse", events: "Veranstaltungen", gifts: "Produkte", favorite: "Favorit" },
+  es: { trips: "Experiencias", events: "Eventos", gifts: "Productos", favorite: "Favorito" },
+  tr: { trips: "Deneyimler", events: "Etkinlikler", gifts: "Ürünler", favorite: "Favori" },
+  ru: { trips: "Впечатления", events: "События", gifts: "Продукты", favorite: "Избранное" },
+  zh: { trips: "体验", events: "活动", gifts: "产品", favorite: "收藏夹" },
+  ko: { trips: "체험", events: "이벤트", gifts: "제품", favorite: "즐겨찾기" },
+  pt: { trips: "Experiências", events: "Eventos", gifts: "Produtos", favorite: "Favorito" },
+  ur: { trips: "تجربات", events: "تقریبات", gifts: "مصنوعات", favorite: "پسندیدہ" },
+  ja: { trips: "体験", events: "イベント", gifts: "製品", favorite: "お気に入り" },
+};
+
 const FavoritePage = () => {
-  const { currentLanguage } = useLanguage(); // Get the current language
-  const [favData, setFavData] = useState(null); // State to store home data
-  const [error, setError] = useState(null); // State to handle errors
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const { currentLanguage } = useLanguage();
+  const [favData, setFavData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
 
+  const t = translations[currentLanguage] || translations.en;
+
   const handleRefresh = () => {
-    setRefresh((prev) => !prev); // Toggle refresh state
+    setRefresh((prev) => !prev);
   };
 
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const data = await FavouritesAPI.getFavourites(currentLanguage); // Fetch data from the API
-        setFavData(data.data); // Set the fetched data to state
+        const data = await FavouritesAPI.getFavourites(currentLanguage);
+        setFavData(data.data);
       } catch (err) {
         console.error("Error fetching home data:", err);
         toast.error("Failed to load home data. Please try again later.");
+        setError(err);
       } finally {
-        setLoading(false); // Stop the loading spinner
+        setLoading(false);
       }
     };
 
-    fetchHomeData(); // Call the API on component mount
+    fetchHomeData();
   }, [currentLanguage, refresh]);
 
   if (loading) {
@@ -49,14 +67,15 @@ const FavoritePage = () => {
     );
   }
   if (error) {
-    return null; // No need to display error here, toast will handle it
+    return null;
   }
+
   const tabsData = [
     {
       eventKey: "tab1",
       title: (
         <>
-          <Tree /> {currentLanguage === "ar" ? "رحلات" : "Trips"}
+          <Tree /> {t.trips}
         </>
       ),
       content: <CardsFavorite data={favData.trips} refresh={handleRefresh} />
@@ -65,7 +84,7 @@ const FavoritePage = () => {
       eventKey: "tab2",
       title: (
         <>
-          <Ticket /> {currentLanguage === "ar" ? "فعاليات" : "Effectivenes"}
+          <Ticket /> {t.events}
         </>
       ),
       content: <CardsFavEffective data={favData.effectivenes} refresh={handleRefresh} />
@@ -74,30 +93,25 @@ const FavoritePage = () => {
       eventKey: "tab3",
       title: (
         <>
-          <Gift /> {currentLanguage === "ar" ? "هدايا" : "Gifts"}
+          <Gift /> {t.gifts}
         </>
       ),
       content: <CardsFavGift data={favData.gifts} refresh={handleRefresh} />
     }
   ];
+
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "المفضلة" : "Favorite"} />
-
+      <HelmetInfo titlePage={t.favorite} />
       <div className="favorite-page">
-        <header>
-          <SliderFavorite />
-        </header>
         <main>
           <div className="all-content-favorite padding-80">
-            {/* ========== START CONTAINER =========== */}
             <ContainerMedia>
               <TabsContent
                 tabsData={tabsData}
                 newClassTabsContent={"tabs-favorite"}
               />
             </ContainerMedia>
-            {/* ========== END CONTAINER =========== */}
           </div>
         </main>
       </div>

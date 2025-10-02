@@ -15,6 +15,7 @@ export const HomeProvider = ({ children }) => {
     const [cities, setCities] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [notification_count, setNotificationCount] = useState(0);
     const { currentLanguage } = useLanguage();
     const { currentCurrency } = useCurrency();
 
@@ -28,6 +29,7 @@ export const HomeProvider = ({ children }) => {
         try {
             const response = await HomeAPI.getHomeData(currentLanguage, currentCurrency);
             setHomeData(response.data);
+            setNotificationCount(response.data.notification_count || 0);
             return response.data.data;
         } catch (err) {
             console.error("Error fetching home data:", err);
@@ -76,9 +78,11 @@ export const HomeProvider = ({ children }) => {
             cities,
             loading,
             error,
+            notification_count,
             fetchHomeData,
             fetchSliderData,
-            setHomeData
+            setHomeData,
+            setNotificationCount
         }}>
             {children}
         </HomeContext.Provider>

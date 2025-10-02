@@ -14,11 +14,12 @@ import ContentAPI from "api/contentApi";
 import CountryAPI from "api/country";
 import { isAuthenticated } from "api/axiosInstance";
 import useTranslation from "Components/Languages/useTranslation";
-import Loader from "Components/Auth/Components/Loader/Loader";
 import ThemeToggle from "Components/ThemeToggle/ThemeToggle";
 import { toast } from "react-toastify";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import NotificationIcon from "assets/Icons/NotificationIcon";
+import { useHome } from "context/HomeContext";
 
 const NavbarMenu = () => {
   const { t } = useTranslation(); // Get the translation function
@@ -36,6 +37,7 @@ const NavbarMenu = () => {
   const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef(null);
   const { currentLanguage } = useLanguage()
+  const { notification_count } = useHome();
 
 
   useEffect(() => {
@@ -233,8 +235,17 @@ const NavbarMenu = () => {
               <ThemeToggle />
               {isAuthenticated() ? (
                 <>
-                  <HeartIcon />
                   <Link to="/favoritePage" className="icon-heart-fav icon-border">
+                    <HeartIcon />
+                  </Link>
+                  <Link to="/notification" className="icon-notification icon-border" style={{ position: 'relative' }}>
+                    <NotificationIcon />
+                    {notification_count > 0 && (
+
+                      <span className="badge">
+                        {notification_count}
+                      </span>
+                    )}
                   </Link>
                   <UserDropMenu />
                 </>
@@ -242,6 +253,9 @@ const NavbarMenu = () => {
                 <>
                   <Link to="#" className="icon-heart-fav icon-border" onClick={buttonShowLogin}>
                     <HeartIcon />
+                  </Link>
+                  <Link to="#" className="icon-notification icon-border" onClick={buttonShowLogin} style={{ position: 'relative' }}>
+                    <NotificationIcon />
                   </Link>
                   <button className="btn-main" onClick={buttonShowLogin}>
                     {t('navMenu.login')}
@@ -252,7 +266,7 @@ const NavbarMenu = () => {
             </div>
           </Navbar.Collapse>
         </ContainerMedia>
-      </Navbar>
+      </Navbar >
     </>
   );
 };

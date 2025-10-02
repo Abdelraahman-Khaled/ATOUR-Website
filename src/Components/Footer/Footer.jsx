@@ -15,42 +15,19 @@ import appGoogle from "../../assets/images/apps/googlePlayFooter.svg";
 import PhoneIcon from "assets/images/footerIcons/PhoneIcon";
 import EmailIcon from "assets/images/footerIcons/EmailIcon";
 import WhatsIcon from "assets/images/footerIcons/Whatsapp.Icon";
-import { useEffect, useState } from "react";
-import GeneralAPI from "api/generalApi";
 import { useLanguage } from "Components/Languages/LanguageContext"; // Import language context
-import { toast } from "react-toastify";
 import localizedText from "../../translations/footerTranslations";
+import { useFooter } from "../../context/FooterContext"; // Import the FooterContext
 const Footer = () => {
   const { currentLanguage } = useLanguage(); // Access the current language from context
-  const [footerData, setFooterData] = useState(null);
-
-  // const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      try {
-        const response = await GeneralAPI.getFooterSocial();
-        setFooterData(response.data);
-
-      } catch (err) {
-        console.error("Failed to fetch footer data:", err);
-        toast.error("Unable to fetch footer data. Please try again later.");
-      }
-      // finally {
-      //   setLoading(false);
-      // }
-    };
-    fetchFooterData();
-  }, []);
+  const { footerData, error } = useFooter(); // Use the FooterContext
 
   // if (loading) {
   //   return (
-  //     // <div style={{ margin: "200px 0px" }}>
-  //     //   <Loader />
-  //     // </div>
-  //     <>
-  //     </>);
+  //     <div style={{ margin: "200px 0px" }}>
+  //       <Loader />
+  //     </div>
+  //   );
   // }
 
 
@@ -58,9 +35,7 @@ const Footer = () => {
     return null; // No need to display error here, toast will handle it
   }
 
-  const handleLinkClick = (e) => {
-    // Authentication removed
-  };
+
 
   const text = localizedText[currentLanguage] || localizedText.ar;
 
@@ -201,27 +176,27 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="offers" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="offers" className="nav-link" >
                       {text.offers}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="eventsPage" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="eventsPage" className="nav-link" >
                       {text.events}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="blogsPage" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="blogsPage" className="nav-link" >
                       {text.blog}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="articals" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="articals" className="nav-link" >
                       {text.articles}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="news" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="news" className="nav-link" >
                       {text.news}
                     </Link>
                   </li>
@@ -236,18 +211,28 @@ const Footer = () => {
                 <h2 className="title-footer">{text.helpfulLinks}</h2>
                 <ul className="nav flex-column p-0 m-0">
                   <li className="nav-item">
-                    <Link to="/faq" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="/faq" className="nav-link" >
                       {text.faq}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/termsConditions" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="/aboutUs" className="nav-link" >
+                      {text.aboutUs}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/termsConditions" className="nav-link" >
                       {text.cancelTerms}
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/contactUs" className="nav-link" onClick={handleLinkClick}>
+                    <Link to="/contactUs" className="nav-link" >
                       {text.contactUs}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/help" className="nav-link" >
+                      {text.help}
                     </Link>
                   </li>
                 </ul>
@@ -259,40 +244,38 @@ const Footer = () => {
             <div className="col-12 col-sm-6 col-md-2">
               {/* =========== START FOOTER TWO ========== */}
               <div className="footer-two-links footer-right-contact">
-                <h2 className="title-footer">{text.contactUs}</h2>
+                <h2 className="title-footer">{text.whatsapp}</h2>
                 {/* =========== START INFO FOOTER CONTENT ========== */}
                 <div className="info-footer-content">
                   {/* ========= START INFO CONTACT ONE ========= */}
                   <a
                     href={`tel:${footerData?.phone}`}
-                    className="info-contact-one d-flex gap-3"
+                    className="info-contact-one d-flex gap-3 align-items-center"
                     target="_blank"
                   >
                     <div className="icon-foot-contact">
                       <PhoneIcon />
                     </div>
                     <div className="contact-info">
-                      <h2 className="title-foot">{text.callUs}</h2>
                       <p className="link-contact">{footerData?.phone}</p>
                     </div>
                   </a>
                   <a
                     href={`https://wa.me/${footerData?.whatsapp}`}
-                    className="info-contact-one d-flex gap-3"
+                    className="info-contact-one d-flex gap-3 align-items-center"
                     target="_blank"
                   >
                     <div className="icon-foot-contact">
                       <WhatsIcon />
                     </div>
                     <div className="contact-info">
-                      <h2 className="title-foot">{text.whatsapp}</h2>
                       <p className="link-contact">{footerData?.whatsapp}</p>
                     </div>
                   </a>
                   {/* ========= END INFO CONTACT ONE ========= */}
                   <a
                     href={`https://mail.google.com/mail/?view=cm&fs=1&to=${footerData?.email}&su=Hello`}
-                    className="info-contact-one d-flex gap-3"
+                    className="info-contact-one d-flex gap-3 align-items-center"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -300,7 +283,6 @@ const Footer = () => {
                       <EmailIcon />
                     </div>
                     <div className="contact-info">
-                      <h2 className="title-foot">{text.email}</h2>
                       <p className="link-contact">{footerData?.email}</p>
                     </div>
                   </a>

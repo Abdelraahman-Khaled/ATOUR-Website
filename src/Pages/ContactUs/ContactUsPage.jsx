@@ -3,6 +3,8 @@ import './ContactUsPage.css';
 import GeneralAPI from '../../api/generalApi';
 import { toast } from 'react-toastify';
 import { useLanguage } from 'Components/Languages/LanguageContext';
+import { isAuthenticated } from '../../api/axiosInstance';
+import FormAuth from '../../Components/Auth/FormAuth/FormAuth';
 
 const contactUsTranslations = {
   ar: {
@@ -182,9 +184,14 @@ const ContactUsPage = () => {
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [footerData, setFooterData] = useState(null);
-  const { currentLanguage } = useLanguage()
+  const { currentLanguage } = useLanguage();
+  const [isAuth, setIsAuth] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
+    const authenticated = isAuthenticated();
+    setIsAuth(authenticated);
+    // Removed: if (!authenticated) { setShowAuthModal(true); }
     const fetchFooterData = async () => {
       try {
         const response = await GeneralAPI.getFooterSocial();
@@ -198,6 +205,10 @@ const ContactUsPage = () => {
   }, []);
 
   const handleSubmit = async () => {
+    if (!isAuth) {
+      setShowAuthModal(true);
+      return;
+    }
     if (!title.trim() || !description.trim()) {
       toast.error('Title and description cannot be empty.');
       return;
@@ -251,16 +262,23 @@ const ContactUsPage = () => {
             <span>{footerData?.phone}</span>
           </div>
         </div>
-        <div className="inquiry-section">
+        <div className="inquiry-section mt-3">
           <h3 className="mb-2">{contactUsTranslations[currentLanguage].inquiryTitle}</h3>
           <p className="mb-3">{contactUsTranslations[currentLanguage].inquiryText}</p>
           <input type="text" placeholder={contactUsTranslations[currentLanguage].titlePlaceholder} className="input-field" value={title} onChange={(e) => setTitle(e.target.value)} disabled={loading} />
           <textarea placeholder={contactUsTranslations[currentLanguage].descriptionPlaceholder} className="textarea-field" value={description} onChange={(e) => setDescription(e.target.value)} disabled={loading}></textarea>
-          <button className="send-button" onClick={handleSubmit} disabled={loading}>
-            {loading ? contactUsTranslations[currentLanguage].sending : contactUsTranslations[currentLanguage].send}
+          <button
+            className="send-button"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading
+              ? contactUsTranslations[currentLanguage].sending
+              : contactUsTranslations[currentLanguage].send}
           </button>
         </div>
       </div>
+      <FormAuth showModalForm={showAuthModal} hideModalForm={() => setShowAuthModal(false)} />
     </div>
   );
 };

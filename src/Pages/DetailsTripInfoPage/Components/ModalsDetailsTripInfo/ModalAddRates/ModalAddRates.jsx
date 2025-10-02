@@ -43,7 +43,7 @@ const translations = {
     ja: "あなたの体験を共有してください - コメントを残す",
   },
   addImages: {
-    ar: "أضف صور من تجربتك",
+    ar: "تم إضافة صور من تجربتك",
     en: "Add images from your experience",
     fr: "Ajoutez des images de votre expérience",
     de: "Fügen Sie Bilder aus Ihrer Erfahrung hinzu",
@@ -57,7 +57,7 @@ const translations = {
     ja: "体験の写真を追加",
   },
   send: {
-    ar: "إرسال التعليق",
+    ar: "إرسال التقييم",
     en: "Send Review",
     fr: "Envoyer l'avis",
     de: "Bewertung senden",
@@ -84,6 +84,119 @@ const translations = {
     ur: "بھیجا جا رہا ہے...",
     ja: "送信中...",
   },
+  existsImage: {
+    ar: "هذه الصورة موجودة بالفعل.",
+    en: "This image already exists.",
+    fr: "Cette image existe déjà.",
+    de: "Diese Bilddatei existiert bereits.",
+    es: "Esta imagen ya existe.",
+    tr: "Bu görüntü zaten var.",
+    ru: "Этот файл изображения уже существует.",
+    zh: "此图像文件已存在。",
+    ko: "이 이미지 파일은 이미 존재합니다.",
+    pt: "Esta imagem já existe.",
+    ur: "اسکاوی میں اس صورة موجود ہے.",
+    ja: "この画像ファイルは既に存在します。",
+  },
+  ratingStar: {
+    ar: " يرجى إضافة تقييم النجوم",
+    en: "Please add a rating star.",
+    fr: "Veuillez ajouter une note étoile.",
+    de: "Bitte fügen Sie eine Sternnote hinzu.",
+    es: "Por favor, agregue una calificación estrella.",
+    tr: "Lütfen bir yıldız puanı ekleyin.",
+    ru: "Пожалуйста, добавьте звезду рейтинга.",
+    zh: "请添加一个星号评分。",
+    ko: "별점을 추가하세요.",
+    pt: "Por favor, adicione uma avaliação estrela.",
+    ur: "يرجى إضافة تقييم ستار.",
+    ja: "星を追加してください。",
+  },
+  removeImage: {
+    ar: "تم حذف الصورة",
+    en: "Image removed",
+    fr: "Image supprimée",
+    de: "Bild entfernt",
+    es: "Imagen eliminada",
+    tr: "Görüntü kaldırıldı",
+    ru: "Изображение удалено",
+    zh: "图片已删除",
+    ko: "이미지가 삭제되었습니다",
+    pt: "Imagem removida",
+    ur: "تصویر ہٹا دی گئی",
+    ja: "画像が削除されました",
+  },
+  invalidRates: {
+    ar: "بيانات التقييم غير صحيحة.",
+    en: "Invalid review data.",
+    fr: "Données d'avis invalides.",
+    de: "Ungültige Bewertungsdaten.",
+    es: "Datos de reseña no válidos.",
+    tr: "Geçersiz yorum verisi.",
+    ru: "Неверные данные отзыва.",
+    zh: "无效的评论数据。",
+    ko: "잘못된 리뷰 데이터입니다.",
+    pt: "Dados de avaliação inválidos.",
+    ur: "غلط ریویو ڈیٹا۔",
+    ja: "無効なレビュー データです。",
+  },
+  successSend: {
+    ar: "تم إرسال التقييم بنجاح.",
+    en: "Review submitted successfully.",
+    fr: "Avis envoyé avec succès.",
+    de: "Bewertung erfolgreich gesendet.",
+    es: "Reseña enviada con éxito.",
+    tr: "Yorum başarıyla gönderildi.",
+    ru: "Отзыв успешно отправлен.",
+    zh: "评价提交成功。",
+    ko: "리뷰가 성공적으로 제출되었습니다.",
+    pt: "Avaliação enviada com sucesso.",
+    ur: "ریویو کامیابی سے بھیجا گیا۔",
+    ja: "レビューが正常に送信されました。",
+  },
+  errorSend: {
+    ar: "حدث خطأ أثناء الإرسال.",
+    en: "An error occurred while sending.",
+    fr: "Une erreur s'est produite lors de l'envoi.",
+    de: "Beim Senden ist ein Fehler aufgetreten.",
+    es: "Ocurrió un error al enviar.",
+    tr: "Gönderim sırasında bir hata oluştu.",
+    ru: "Произошла ошибка при отправке.",
+    zh: "发送时出错。",
+    ko: "전송 중 오류가 발생했습니다.",
+    pt: "Ocorreu um erro ao enviar.",
+    ur: "بھیجتے وقت ایک خرابی پیش آئی۔",
+    ja: "送信中にエラーが発生しました。",
+  },
+  thanks: {
+    ar: "نشكرك على مشاركتنا بتجربتك.",
+    en: "Thank you for your feedback.",
+    fr: "Merci pour votre feedback.",
+    de: "Vielen Dank für Ihre Feedback.",
+    es: "Gracias por su retroalimentación.",
+    tr: "Teşekkürler için geri bildiriminiz.",
+    ru: "Спасибо за ваше отзыв.",
+    zh: "感谢您的反馈。",
+    ko: "감사합니다. 피드백을 남겨주세요.",
+    pt: "Obrigado pelo seu feedback.",
+    ur: "کمک کے لیے آپ کا رีวิว بھیجیں۔",
+    ja: "フィードバックをありがとうございます。",
+  },
+  confirm: {
+    ar: "تم",
+    en: "Done",
+    fr: "Fait",
+    de: "Fertig",
+    es: "Hecho",
+    tr: "Tamam",
+    ru: "Готово",
+    zh: "完成",
+    ko: "완료",
+    pt: "Feito",
+    ur: "تم",
+    ja: "完了",
+  }
+
 };
 
 const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType }) => {
@@ -92,7 +205,7 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const { saveRate } = useRates();
-  const { language } = useLanguage(); // 👈 current language
+  const { currentLanguage } = useLanguage(); // 👈 current language
 
   const handleRating = (rate) => setRating(rate);
 
@@ -101,9 +214,9 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
     acceptedFiles.forEach((file) => {
       if (images.every((image) => image.name !== file.name)) {
         newImages.push(file);
-        toast.success(translations.addImages[language] + " ✅");
+        toast.success(translations.addImages[currentLanguage]);
       } else {
-        toast.error("هذه الصورة موجودة بالفعل.");
+        toast.error(translations.existsImage[currentLanguage]);
       }
     });
     setImages([...images, ...newImages]);
@@ -113,7 +226,7 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
-    toast.success("تم حذف الصورة بنجاح.");
+    toast.success(translations.removeImage[currentLanguage]);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -126,11 +239,11 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
 
   const handleSubmit = async () => {
     if (!rating) {
-      toast.error("من فضلك قم بإضافة تقييم النجوم");
+      toast.error(translations.ratingStar[currentLanguage]);
       return;
     }
     if (!modelId || !modelType) {
-      toast.error("معلومات التقييم غير صحيحة");
+      toast.error(translations.invalidRates[currentLanguage]);
       return;
     }
 
@@ -140,12 +253,12 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
       await saveRate(payload);
       setShowsuccessModalSend(true);
       hideModalAddRate();
-      toast.success("تم ارسال التقييم بنجاح.");
+      toast.success(translations.successSend[currentLanguage]);
       setRating(0);
       setComment("");
       setImages([]);
     } catch (err) {
-      toast.error("حدث خطأ أثناء الإرسال");
+      toast.error(translations.errorSend[currentLanguage]);
     } finally {
       setLoading(false);
     }
@@ -157,15 +270,15 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
         showsuccessModalSend={showsuccessModalSend}
         hideSuccessModalSend={hideSuccessModalSend}
         titleModal="✅"
-        titleSend="تم ارسال التقييم"
+        titleSend={translations.successSend[currentLanguage]}
         isTrueText={true}
-        textSend="نشكرك على مشاركتنا بتجربتك."
-        textButton="تم"
+        textSend={translations.thanks[currentLanguage]}
+        textButton={translations.confirm[currentLanguage]}
       />
       <CustomModal
         show={showModalAddRate}
         onHide={hideModalAddRate}
-        title={translations.title[language]}
+        title={translations.title[currentLanguage]}
         newClass="modal-add-rate modal-width-content"
       >
         <div className="all-modal-add-rate">
@@ -176,12 +289,13 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
             </div>
             <div className="form-header mt-3 d-flex flex-column gap-2 w-100">
               <label htmlFor="form-teaxtarea" className="form-label">
-                {translations.labelComment[language]}
+                {translations.labelComment[currentLanguage]}
               </label>
               <textarea
                 className="form-control"
                 rows={5}
                 id="form-teaxtarea"
+                maxLength={300}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
@@ -189,12 +303,12 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
           </div>
 
           <div className="add-image-modal mt-3">
-            <h2 className="title mb-3">{translations.addImages[language]}</h2>
+            <h2 className="title mb-3">{translations.addImages[currentLanguage]}</h2>
             <div className="all-uploaded-image">
               <div className="uploade-image-text" {...getRootProps()}>
                 <input {...getInputProps()} />
                 <p className="content-info-title d-flex justify-content-center align-items-center gap-2">
-                  <FontAwesomeIcon icon={faPlus} /> {translations.addImages[language]}
+                  <FontAwesomeIcon icon={faPlus} /> {translations.addImages[currentLanguage]}
                 </p>
               </div>
               <div className="row g-3 mt-3">
@@ -213,7 +327,7 @@ const ModalAddRates = ({ showModalAddRate, hideModalAddRate, modelId, modelType 
           </div>
 
           <button onClick={handleSubmit} disabled={loading} className="send-content btn-main rounded-5 mt-3">
-            {loading ? translations.sending[language] : translations.send[language]}
+            {loading ? translations.sending[currentLanguage] : translations.send[currentLanguage]}
           </button>
         </div>
       </CustomModal>

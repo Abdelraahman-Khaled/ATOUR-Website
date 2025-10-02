@@ -5,8 +5,10 @@ import GeneralAPI from "../../api/generalApi";
 import "swiper/css";
 import "swiper/css/pagination";
 import Loader from "Components/Auth/Components/Loader/Loader";
+import { useLanguage } from "Components/Languages/LanguageContext";
 
 const AdPopup = () => {
+  const { currentLanguage } = useLanguage()
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(true);
   const [adsData, setAdsData] = useState([]);
@@ -16,7 +18,7 @@ const AdPopup = () => {
     const fetchAds = async () => {
       try {
         setLoading(true);
-        const response = await GeneralAPI.getAds();
+        const response = await GeneralAPI.getAds(currentLanguage);
         setAdsData(response.data);
       } catch (err) {
         setError("Error fetching ads: " + err.message);
@@ -26,7 +28,7 @@ const AdPopup = () => {
     };
 
     fetchAds();
-  }, []);
+  }, [currentLanguage]);
 
   useEffect(() => {
     if (!loading && adsData.length > 0) {

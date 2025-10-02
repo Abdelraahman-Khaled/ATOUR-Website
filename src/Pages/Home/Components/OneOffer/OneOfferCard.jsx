@@ -51,7 +51,7 @@ const OneOfferCard = ({
                         <div className="offer-discount">
                             <span className="offer-text">{amount}</span>
                         </div>
-                        <span className="price-num w-100 mb-2">{titleCard}</span>
+                        <p className="price-num w-100 mb-2">{titleCard}</p>
                         <span className="price-num w-100">{titleDescription}</span>
                     </div>
                 </div>

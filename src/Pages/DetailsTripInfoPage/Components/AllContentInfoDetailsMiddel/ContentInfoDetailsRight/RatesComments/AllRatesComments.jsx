@@ -45,14 +45,13 @@ const AllRatesComments = ({ rates }) => {
   const handlePageChange = ({ selected }) => setCurrentPage(selected);
 
   const offset = currentPage * perPage;
-  const currentPageData = rates.slice(offset, offset + perPage);
+  const currentPageData = rates.reverse().slice(offset, offset + perPage);
 
   return (
     <div className="all-rates-comment-data margin-top-1">
       <div className="row g-3">
         {currentPageData.length > 0 ? (
           currentPageData
-            .reverse()
             .map((item) => (
               <div key={item.id} className="col-12">
                 <UserCommentRate

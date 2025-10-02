@@ -2,11 +2,34 @@ import './NotificationPage.css';
 import { useLanguage } from '../../Components/Languages/LanguageContext';
 import notificationTranslations from '../../translations/notificationTranslations';
 import ContainerMedia from 'Components/ContainerMedia/ContainerMedia';
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useHome } from '../../context/HomeContext';
+import axiosInstance from '../../api/axiosInstance';
+import { getNotifications, markNotificationAsRead } from '../../api/notificationApi';
+import Loader from 'Components/Auth/Components/Loader/Loader';
 
 const NotificationPage = () => {
   const { currentLanguage } = useLanguage();
+  const { setNotificationCount } = useHome();
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [expandedNotifications, setExpandedNotifications] = useState({});
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const data = await getNotifications();
+        setNotifications(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const toggleExpand = (id) => {
     setExpandedNotifications(prev => ({
@@ -15,14 +38,35 @@ const NotificationPage = () => {
     }));
   };
 
-  const notifications = [
-    { id: 1, messageKey: 'yourBookingConfirmed', time: '2 hours ago' },
-    { id: 2, messageKey: 'newOfferAvailable', time: '1 day ago' },
-    { id: 3, messageKey: 'yourReviewPublished', time: '3 days ago' },
-    { id: 4, messageKey: 'longNotificationExample', time: '5 days ago' }, // Add a long notification example
-  ];
+  const markAsRead = async (id) => {
+    try {
+      await markNotificationAsRead(id);
+      setNotifications(prevNotifications =>
+        prevNotifications.map(notif =>
+          notif.id === id ? { ...notif, is_read: 1 } : notif
+        )
+      );
+      setNotificationCount(prevCount => Math.max(0, prevCount - 1));
+    } catch (err) {
+      console.error("Error marking notification as read:", err);
+    }
+  };
+
+  const handleNotificationInteraction = (notification) => {
+    if (notification.is_read === 0) {
+      markAsRead(notification.id);
+    }
+  };
 
   const CHARACTER_LIMIT = 100; // Define character limit for truncation
+
+  if (loading) {
+    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>; // Or a proper loader component
+  }
+
+  if (error) {
+    return <ContainerMedia><p>Error loading notifications: {error.message}</p></ContainerMedia>;
+  }
 
   return (
     <ContainerMedia>
@@ -32,7 +76,7 @@ const NotificationPage = () => {
           <div className="notifications-list">
             {notifications.length > 0 ? (
               notifications.map(notification => {
-                const fullMessage = notificationTranslations[currentLanguage][notification.messageKey];
+                const fullMessage = notificationTranslations[currentLanguage][notification.messageKey] || notification.message;
                 const isExpanded = expandedNotifications[notification.id];
                 const isLong = fullMessage && fullMessage.length > CHARACTER_LIMIT;
                 const displayMessage = isLong && !isExpanded
@@ -40,8 +84,13 @@ const NotificationPage = () => {
                   : fullMessage;
 
                 return (
-                  <div key={notification.id} className="notification-item">
+                  <div
+                    key={notification.id}
+                    className={`notification-item ${notification.is_read === 0 ? 'unread' : ''}`}
+                    onClick={() => handleNotificationInteraction(notification)}
+                  >
                     <div className="notification-content">
+                      <h2 className="notification-title">{notification.title}</h2>
                       <p className="notification-message">{displayMessage}</p>
                       {isLong && (
                         <button
@@ -52,7 +101,7 @@ const NotificationPage = () => {
                         </button>
                       )}
                     </div>
-                    <span className="notification-time">{notification.time}</span>
+                    <span className="notification-time">{new Date(notification.created_at).toLocaleString()}</span>
                   </div>
                 );
               })

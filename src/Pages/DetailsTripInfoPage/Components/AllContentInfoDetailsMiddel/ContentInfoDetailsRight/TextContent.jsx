@@ -2,10 +2,11 @@ import ReadMoreText from "Components/Ui/ReadMoreText/ReadMoreText";
 import WhatsAppIcon from "assets/Icons/WhatsAppIcon";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import WhyBookingAtour from "./WhyBookingAtour";
+import { useFooter } from "context/FooterContext";
 
 const TextContent = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
-
+  const { footerData } = useFooter()
   // Multi-language translations
   const content = {
     whyBook: {
@@ -97,7 +98,7 @@ const TextContent = () => {
   return (
     <div className="all-text-content-info margin-top-1 d-flex flex-column gap-3">
       {/* ============ START TEXT CONTENT ONE =========== */}
-        {/* <WhyBookingAtour /> */}
+      {/* <WhyBookingAtour /> */}
 
       {/* ============ START TEXT CONTENT TWO =========== */}
       <div className="text-content-one pt-3">
@@ -113,7 +114,7 @@ const TextContent = () => {
       <div className="contact-us-content border-top pt-4 d-flex justify-content-between align-items-center gap-2 flex-wrap">
         <h2 className="title">{content.companyRequests[currentLanguage]}</h2>
         <a
-          href="https://wa.me/+966533999909"
+          href={`https://wa.me/${footerData.whatsapp}`}
           target="_blank"
           className="link-whatsapp btn-main"
           rel="noreferrer"

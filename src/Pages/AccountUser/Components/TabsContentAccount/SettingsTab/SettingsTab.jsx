@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BellIcon from "assets/Icons/BellIcon";
+import NotificationIcon from "assets/Icons/NotificationIcon";
 import "./SettingsTab.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";

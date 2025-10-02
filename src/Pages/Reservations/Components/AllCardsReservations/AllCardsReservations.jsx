@@ -109,6 +109,7 @@ const AllCardsReservations = ({ reservation, refresh }) => {
                     isTrueButtonCancel={false}
                     buttonCancelReservationFunction={false}
                     id={item.trip_id}
+                    status={item.status}
                   />
                 </div>
               );

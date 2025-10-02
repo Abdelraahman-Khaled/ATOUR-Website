@@ -78,7 +78,7 @@ html[dir="ltr"] .card-collection-one .image-collection .info-text {
 
 html[dir="ltr"] .card-collection-one .content-info-card .rate-card {
   border-left: none;
-  border-left: 2px solid var(--black-01-color);
+  border-right: 2px solid var(--black-01-color);
   padding-left: 0;
   padding-right: 10px;
 }

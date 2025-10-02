@@ -458,7 +458,6 @@ textarea,
 .form-control {
   padding: 10px 12px !important;
   text-align: right !important;
-  border-color: var(--border-02) !important;
   text-transform: capitalize !important;
   color: var(--dark-01-color) !important;
 }
@@ -606,16 +605,16 @@ body.dark-theme .main-btn-filter:hover {
 }
 
 .btn-cancel-bg {
-  background: rgba(255, 43, 43, 0.1);
-  color: var(--danger-01-color);
+  background: rgba(255, 43, 43, 0.1) !important;
+  color: var(--danger-01-color) !important;
   border: none;
   box-shadow: none;
   transition: all 0.5s;
 }
 
 .btn-cancel-bg:hover {
-  background: var(--danger-01-color);
-  color: var(--white-01-color);
+  background: var(--danger-01-color) !important;
+  color: var(--white-01-color) !important;
 }
 
 /* END BUTTON FILTER SHEARD */
@@ -1113,9 +1112,9 @@ body.dark-theme .nav-pills .nav-link {
   background-color: var(--dark-02-color) !important;
   color: var(--white-01-color) !important;
 }
-body.dark-theme .dakr-not-found{
-color: var(--white-01-color);
-} 
+body.dark-theme .dakr-not-found {
+  color: var(--white-01-color);
+}
 /* ===============================
 END AIRPLAN
 ============================== */

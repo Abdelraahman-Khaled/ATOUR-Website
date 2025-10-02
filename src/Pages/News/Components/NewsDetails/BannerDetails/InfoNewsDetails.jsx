@@ -90,13 +90,18 @@ const InfoNewsDetails = ({ newsDetailsCard }) => {
     newsDetailsCard ? (
       <div className="info-details-news">
         {/* ================== START IMAGE NEWS TOP =========== */}
-        <div className="image-news-top">
+        <div className="image-news-top position-relative">
           <img
             src={newsDetailsCard?.photo}
             alt="newsImage"
-            className="w-100 object-fit-contain"
+            className="w-100 object-fit-cover"
             loading="lazy"
           />
+          <div className="date-overlay position-absolute bottom-0 start-0 bg-dark bg-opacity-75 text-white p-2 m-2 rounded">
+            <div className="description d-flex align-items-center gap-2">
+              <FontAwesomeIcon icon={faCalendar} />  <DateDisplay from_date={newsDetailsCard.start_date} />
+            </div>
+          </div>
         </div>
         {/* ================== START IMAGE NEWS TOP =========== */}
         {/* ================== START CONTENT NEWS DETAILS ============= */}
@@ -104,18 +109,10 @@ const InfoNewsDetails = ({ newsDetailsCard }) => {
           <h2 className="title">
             {newsDetailsCard.title}
           </h2>
-          <p className="description mb-4">
-            {newsDetailsCard.description}
+          <p className="description mb-4" dangerouslySetInnerHTML={{ __html: newsDetailsCard.description }}>
           </p>
 
-          <div className="mb-4">
-            <div className="description d-flex align-items-center gap-2">
-              {text[currentLanguage].from} : <FontAwesomeIcon icon={faCalendar} />  <DateDisplay from_date={newsDetailsCard.start_date} />
-            </div>
-            <div className="description d-flex align-items-center gap-2">
-              {text[currentLanguage].to} :  <FontAwesomeIcon icon={faCalendar} /> <DateDisplay from_date={newsDetailsCard.end_date} />
-            </div>
-          </div>
+
           <span className="description tags">{newsDetailsCard.tags}</span>
         </div>
 
@@ -124,7 +121,9 @@ const InfoNewsDetails = ({ newsDetailsCard }) => {
         <div className="attachment-card">
           <div className=" overflow-hidden border rounded rounded-3">
             <SwiperSlider
-              itemsSlider={newsDetailsCard.attachments}
+              itemsSlider={newsDetailsCard.attachments.map((item) => (
+                item.file
+              ))}
               sliderNewClass={"slider-height slider-details-right  "}
             ></SwiperSlider>
           </div>

@@ -115,12 +115,12 @@ const ProgressBarRates = ({ rates = [] }) => {
                   </div>
                 ))}
               </div>
-              <button
+              {/* <button
                 onClick={buttonshowModal}
                 className="add-new-rate btn-main w-100 mt-3"
               >
                 <FontAwesomeIcon icon={faPlus} /> {translations.addRate[currentLanguage]}
-              </button>
+              </button> */}
             </div>
             {/* ============ END ALL PROGRESS RATES ============== */}
           </div>

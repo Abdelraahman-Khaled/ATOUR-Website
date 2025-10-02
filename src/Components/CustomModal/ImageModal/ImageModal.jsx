@@ -8,7 +8,7 @@ const ImageModal = ({ images, onClose, open }) => {
       show={open}
       onHide={onClose}
       title={""}
-      newClass={""}
+      newClass={"transparent-modal"}
       aria-labelledby="image-modal-title"
       aria-describedby="image-modal-description"
     >

@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
 import "./CitiesCard.css";
 import { Link } from "react-router-dom";
@@ -67,7 +67,7 @@ const CitiesCard = ({ CityData }) => {
       {/* =========== START ALL IMAGES CARD =========== */}
       <div className="all-images-card" data-aos="fade-up">
         {/* ============ START ROW ========== */}
-        <SwiperCards swiperId="cities-card-swiper">
+        <SwiperCards swiperId="cities-card-swiper" slidesPerView={2}>
           {filteredCityData.map((item) => {
             return (
               <SwiperSlide key={item.id}>

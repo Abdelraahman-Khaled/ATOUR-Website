@@ -5,6 +5,13 @@
   overflow: hidden;
 }
 
+@media (max-width: 767px) {
+  .circular-image {
+    height: 160px !important;
+    width: 160px !important;
+  }
+}
+
 .circular-image .image-card-src {
   height: 100% !important;
   width: 100% !important;

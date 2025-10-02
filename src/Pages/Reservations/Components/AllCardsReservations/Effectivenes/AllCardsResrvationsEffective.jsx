@@ -49,8 +49,87 @@ const AllCardsResrvationsEffective = ({ reservation, refresh }) => {
             adults: "Adults",
             from: "From",
             to: "To"
-
         },
+        fr: {
+            noData: "Aucune donnée disponible.",
+            home: "Accueil",
+            children: "Enfants",
+            adults: "Adultes",
+            from: "De",
+            to: "À"
+        },
+        es: {
+            noData: "No hay datos disponibles.",
+            home: "Inicio",
+            children: "Niños",
+            adults: "Adultos",
+            from: "Desde",
+            to: "Hasta"
+        },
+        de: {
+            noData: "Keine Daten verfügbar.",
+            home: "Startseite",
+            children: "Kinder",
+            adults: "Erwachsene",
+            from: "Von",
+            to: "Bis"
+        },
+        tr: {
+            noData: "Mevcut veri yok.",
+            home: "Ana Sayfa",
+            children: "Çocuklar",
+            adults: "Yetişkinler",
+            from: "Den",
+            to: "Kadar"
+        },
+        ru: {
+            noData: "Данные недоступны.",
+            home: "Главная",
+            children: "Дети",
+            adults: "Взрослые",
+            from: "От",
+            to: "До"
+        },
+        zh: {
+            noData: "没有可用数据。",
+            home: "首页",
+            children: "儿童",
+            adults: "成人",
+            from: "从",
+            to: "到"
+        },
+        ko: {
+            noData: "사용 가능한 데이터가 없습니다.",
+            home: "홈",
+            children: "아이들",
+            adults: "성인",
+            from: "부터",
+            to: "까지"
+        },
+        pt: {
+            noData: "Nenhum dado disponível.",
+            home: "Início",
+            children: "Crianças",
+            adults: "Adultos",
+            from: "De",
+            to: "Para"
+        },
+        ur: {
+            noData: "کوئی دستیاب ڈیٹا نہیں۔",
+            home: "ہوم",
+            children: "بچے",
+            adults: "بالغ",
+            from: "سے",
+            to: "تک"
+        },
+        ja: {
+            noData: "利用可能なデータがありません。",
+            home: "ホーム",
+            children: "子供",
+            adults: "大人",
+            from: "から",
+            to: "まで"
+        }
     };
     return (
         <>

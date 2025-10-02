@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from 'Components/Languages/LanguageContext';
-import './AboutUs.css';
+import './Help.css';
 import GeneralAPI from 'api/generalApi';
 const content = {
-  ar: { about: "من نحن" },
-  en: { about: "About Us" },
-  fr: { about: "À propos de nous" },
-  de: { about: "Über uns" },
-  es: { about: "Sobre nosotros" },
-  tr: { about: "Hakkımızda" },
-  ru: { about: "О нас" },
-  zh: { about: "关于我们" },
-  ko: { about: "회사 소개" },
-  pt: { about: "Sobre nós" },
-  ur: { about: "ہمارے بارے میں" },
-  ja: { about: "私たちに関しては" },
+  ar: { about: "المساعدة" },
+  en: { about: "Help" },
+  fr: { about: "Aide" },
+  es: { about: "Ayuda" },
+  de: { about: "Hilfe" },
+  it: { about: "Aiuto" },
+  pt: { about: "Ajuda" },
+  ru: { about: "Помощь" },
+  zh: { about: "帮助" },
+  ja: { about: "ヘルプ" },
+
 };
 
 
-const AboutUs = () => {
+const Help = () => {
   const { currentLanguage } = useLanguage();
   const [aboutUsContent, setAboutUsContent] = useState("");
 
   useEffect(() => {
     const fetchAboutUsContent = async () => {
       try {
-        const response = await GeneralAPI.getAbout(currentLanguage);
+        const response = await GeneralAPI.getHelp(currentLanguage);
         console.log(response.data.content);
         setAboutUsContent(response.data.content)
       } catch (error) {
@@ -46,4 +45,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default Help;

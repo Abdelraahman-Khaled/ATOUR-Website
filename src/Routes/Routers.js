@@ -18,7 +18,6 @@ import NatureDventuresPage from "Pages/NatureDventuresPage/NatureDventuresPage";
 import PayConfirmPage from "../Pages/PayConfirmPage/PayConfirmPage";
 import DetailsTripInfoPage from "Pages/DetailsTripInfoPage/DetailsTripInfoPage";
 import GiftDetail from "Components/Ui/Gifts/GiftDetail";
-import AboutUs from "../Pages/AboutUs/AboutUs";
 import TermsConditions from "../Pages/TermsConditions/TermsConditions";
 import FaqPage from "../Pages/Faq/FaqPage";
 import News from "../Pages/News/News";
@@ -28,6 +27,8 @@ import ContactUsPage from "../Pages/ContactUs/ContactUsPage";
 import Articles from "Pages/Blogs/Articles/Articles";
 import Country from "Pages/Country/Country";
 import ArticalsDetails from "Pages/Blogs/Articles/ArticalsDetails";
+import AboutUs from "Pages/AboutUs/AboutUs";
+import Help from "Pages/Help/Help";
 
 let routers = createBrowserRouter(
   [
@@ -154,6 +155,7 @@ let routers = createBrowserRouter(
         { path: "natureDventuresPage", element: <NatureDventuresPage /> },
         { path: "payConfirmPage", element: <PayConfirmPage /> },
         { path: "aboutUs", element: <AboutUs /> },
+        { path: "help", element: <Help /> },
         { path: "termsConditions", element: <TermsConditions /> },
         { path: "faq", element: <FaqPage /> },
         { path: "rewards", element: <Rewards /> },

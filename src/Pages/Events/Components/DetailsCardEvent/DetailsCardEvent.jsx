@@ -9,6 +9,7 @@ import ContentAPI from "api/contentApi";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
+import RatesComments from "Pages/DetailsTripInfoPage/Components/AllContentInfoDetailsMiddel/ContentInfoDetailsRight/RatesComments/RatesComments";
 
 const text = {
   ar: {
@@ -202,6 +203,7 @@ const DetailsCardEvent = () => {
             {/* =========== START CONTAINER ============ */}
             <ContainerMedia>
               <DetailsCardPage effective={effective} />
+              <RatesComments modelId={effective.id} modelType={"effectivenes"} />
             </ContainerMedia>
             {/* =========== END CONTAINER ============ */}
           </div>
