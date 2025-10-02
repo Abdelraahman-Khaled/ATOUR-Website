@@ -4,12 +4,12 @@ const ContentAPI = {
   // Trips
   getTrips: async (language, currency, params) => {
     const response = await axiosInstance.get("/trips", {
-        headers: {
-          lang: language, // Pass the language in the header
-          currency: currency,
-        },
-        params: params,
-      });
+      headers: {
+        lang: language, // Pass the language in the header
+        currency: currency,
+      },
+      params: params,
+    });
     return response.data;
   },
   getTripById: async (tripId, language, currency) => {
@@ -89,15 +89,15 @@ const ContentAPI = {
     return response.data;
   },
 
-  getCitiesId: async (cityId, language, currency) => {
+  getCitiesId: async (cityId, language, currency, params) => {
     const response = await axiosInstance.get(`/search_by_city/${cityId}`, {
       headers: {
-        lang: language, // Pass the language in the header
+        lang: language,
         currency: currency,
       },
+      params: params, // هنا لازم يكون متحوّل بـ buildParamsFromFilters
     });
     return response.data;
   },
 };
-
 export default ContentAPI;

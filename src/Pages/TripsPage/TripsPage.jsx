@@ -104,7 +104,6 @@ const TripsPage = () => {
       has_offer: 0
     }
   });
-  console.log(tripsData);
 
   // SHOW MODAL SELECT DESTINATION
   const [showModalSelectDestination, setShowModalSelectDestination] = useState(false);
@@ -163,7 +162,10 @@ const TripsPage = () => {
   };
 
   // Submit filters function
-  const handleSubmitFilters = () => {
+  const handleSubmitFilters = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
     setAppliedFilters(tempFilters);
   };
 
@@ -272,6 +274,7 @@ const TripsPage = () => {
                   onSubmitFilters={handleSubmitFilters}
                   onClearFilters={handleClearFilters}
                   loading={loading}
+                  type={"trip"}
                 />
               )}
             </div>

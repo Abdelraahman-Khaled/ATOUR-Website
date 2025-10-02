@@ -21,7 +21,8 @@ const FilterTripsContent = ({
   checkboxFilters,
   onSubmitFilters,
   onClearFilters,
-  loading // Add loading prop
+  loading,// Add loading prop
+  displayCountries = true,
 }) => {
   const { t } = useTranslation();
 
@@ -34,7 +35,6 @@ const FilterTripsContent = ({
 
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
-
   // Fetch countries
   useEffect(() => {
     const fetchCountries = async () => {
@@ -82,12 +82,13 @@ const FilterTripsContent = ({
               {/* </div> */}
               {/* Country Filter */}
               <p className="mb-2"></p>
-              <BootstrapDropdownFilter
+              {displayCountries && <BootstrapDropdownFilter
                 label={t('common.country')}
                 options={countries}
                 onSelect={(country) => onCountryChange(country?.id || null)}
                 selectedValue={selectedCountryId}
               />
+              }
 
               {/* City Filter */}
               {selectedCountryId && (
@@ -107,7 +108,7 @@ const FilterTripsContent = ({
                 buttonLabels={subCategories.map((item) => item.title)}
                 onButtonClick={onSelectSubCategory}
                 subCategories={subCategories}
-            />
+              />
               {/* ============= END FILTER BY TYPE ============== */}
 
               {/* ============= START FILTER CATEGORY ============ */}
@@ -126,7 +127,9 @@ const FilterTripsContent = ({
               <div className="filter-action-buttons d-flex gap-2 mt-3 w-100">
                 <button
                   className="btn-main w-100"
-                  onClick={onSubmitFilters}
+                  onClick={() => {
+                    onSubmitFilters();
+                  }}
                   disabled={loading} // Disable button when loading
                 >
                   {loading ? t('common.applyingFilters') : t('common.applyFilters')} {/* Change text based on loading state */}

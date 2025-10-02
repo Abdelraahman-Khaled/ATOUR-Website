@@ -63,6 +63,10 @@ html[dir="ltr"] .card-collection-one .image-collection .icon-heart {
   color: var(--white-01-color);
   padding: 5px 10px;
   border-radius: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 20px); /* ensure it doesn't overflow the image area */
 }
 
 html[dir="ltr"] .card-collection-one .image-collection .info-text {

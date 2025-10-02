@@ -15,92 +15,71 @@ const content = {
   pt: { from: 'De', to: 'Até' },
   ur: { from: 'سے', to: 'تک' },
   ja: { from: 'から', to: 'まで' }
-}
-
+};
 
 const minDistance = 10;
+const MIN = 10;
+const MAX = 2000;
 
 const PriceFilter = ({ onPriceChange }) => {
-  const [value2, setValue2] = useState([10, 300]);
+  const [value, setValue] = useState([100, 300]);
   const { currentLanguage } = useLanguage();
 
-  const handleChange2 = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
+  const handleSliderChange = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) return;
 
-    let finalValue;
-    if (newValue[1] - newValue[0] < minDistance) {
+    let finalValue = [...newValue];
+    if (finalValue[1] - finalValue[0] < minDistance) {
       if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 500 - minDistance);
-        finalValue = [clamped, clamped + minDistance];
+        finalValue[0] = Math.min(finalValue[0], MAX - minDistance);
+        finalValue[1] = finalValue[0] + minDistance;
       } else {
-        const clamped = Math.max(newValue[1], 100 + minDistance);
-        finalValue = [clamped - minDistance, clamped];
+        finalValue[1] = Math.max(finalValue[1], MIN + minDistance);
+        finalValue[0] = finalValue[1] - minDistance;
       }
-    } else {
-      finalValue = newValue;
     }
-
-    setValue2(finalValue);
-
-    // Call the callback with min and max price
-    if (onPriceChange) {
-      onPriceChange({
-        min_price: finalValue[0],
-        max_price: finalValue[1]
-      });
-    }
+    setValue(finalValue);
+    onPriceChange?.({ min_price: finalValue[0], max_price: finalValue[1] });
   };
 
-  const handleMinInputChange = (event) => {
-    const newMinValue = Number(event.target.value);
-    setValue2((prevValue) => {
-      const clampedMax = Math.max(prevValue[1], newMinValue + minDistance);
-      const newValue = [newMinValue, clampedMax];
-
-      // Call the callback with min and max price
-      if (onPriceChange) {
-        onPriceChange({
-          min_price: newValue[0],
-          max_price: newValue[1]
-        });
-      }
-
-      return newValue;
-    });
+  // 🔑 Let user type freely
+  const handleMinChange = (e) => {
+    const newVal = Number(e.target.value);
+    setValue((prev) => [newVal, prev[1]]);
   };
 
-  const handleMaxInputChange = (event) => {
-    const newMaxValue = Number(event.target.value);
-    setValue2((prevValue) => {
-      const clampedMin = Math.min(prevValue[0], newMaxValue - minDistance);
-      const newValue = [clampedMin, newMaxValue];
+  const handleMaxChange = (e) => {
+    const newVal = Number(e.target.value);
+    setValue((prev) => [prev[0], newVal]);
+  };
 
-      // Call the callback with min and max price
-      if (onPriceChange) {
-        onPriceChange({
-          min_price: newValue[0],
-          max_price: newValue[1]
-        });
+  // 🔑 Validate when leaving the input (blur)
+  const handleBlur = () => {
+    let [minVal, maxVal] = value;
+
+    if (minVal < MIN) minVal = MIN;
+    if (maxVal > MAX) maxVal = MAX;
+    if (maxVal - minVal < minDistance) {
+      if (minVal + minDistance <= MAX) {
+        maxVal = minVal + minDistance;
+      } else {
+        minVal = maxVal - minDistance;
       }
+    }
 
-      return newValue;
-    });
+    setValue([minVal, maxVal]);
+    onPriceChange?.({ min_price: minVal, max_price: maxVal });
   };
 
   return (
-    <div className="price-filter-content">
-
+    <div className="price-filter-content" dir={["ar", "ur"].includes(currentLanguage) ? "rtl" : "ltr"}>
       <Slider
-        getAriaLabel={() => "Minimum distance shift"}
-        value={value2}
-        onChange={handleChange2}
+        value={value}
+        onChange={handleSliderChange}
         valueLabelDisplay="auto"
-        getAriaValueText={(value) => `${value}`}
+        min={MIN}
+        max={MAX}
         disableSwap
-        min={100}
-        max={500}
       />
       <div className="row g-3">
         <div className="col-6">
@@ -110,10 +89,11 @@ const PriceFilter = ({ onPriceChange }) => {
           <input
             id="min-input"
             type="number"
-            value={value2[0]}
-            onChange={handleMinInputChange}
-            min={100}
-            max={500}
+            value={value[0]}
+            onChange={handleMinChange}
+            onBlur={handleBlur}
+            min={MIN}
+            max={MAX}
             className="form-control"
           />
         </div>
@@ -124,10 +104,11 @@ const PriceFilter = ({ onPriceChange }) => {
           <input
             id="max-input"
             type="number"
-            value={value2[1]}
-            onChange={handleMaxInputChange}
-            min={100}
-            max={500}
+            value={value[1]}
+            onChange={handleMaxChange}
+            onBlur={handleBlur}
+            min={MIN}
+            max={MAX}
             className="form-control"
           />
         </div>

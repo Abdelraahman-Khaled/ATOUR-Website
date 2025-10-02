@@ -157,8 +157,8 @@ const Offers = () => {
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const response = await GeneralAPI.getSubCategories();
-        setSubCategories(response.data.gifts);
+        const response = await GeneralAPI.getSubCategories(currentLanguage, "gift");
+        setSubCategories(response.data);
       } catch (error) {
         console.error('Error fetching subcategories:', error);
       }
@@ -228,7 +228,7 @@ const Offers = () => {
   if (error) {
     return null; // No need to display error here, toast will handle it
   }
-  
+
   return (
     <>
       <HelmetInfo titlePage={translates[currentLanguage].products} />

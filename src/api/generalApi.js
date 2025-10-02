@@ -33,8 +33,12 @@ const GeneralAPI = {
   },
 
   // Subcategories
-  getSubCategories: async () => {
-    const response = await axiosInstance.get("/sub_categories");
+  getSubCategories: async (lang, type) => {
+    const response = await axiosInstance.get(`/sub_categories/${type}`, {
+      headers: {
+        lang: lang,
+      },
+    });
     return response.data;
   },
 
@@ -188,6 +192,14 @@ const GeneralAPI = {
     const response = await axiosInstance.get("/header", {
       params: filters,
     });
+    return response.data;
+  },
+
+  // Change Language
+  changeLanguage: async (currentLanguage) => {
+    const response = await axiosInstance.get(
+      `/change-language/${currentLanguage}`
+    );
     return response.data;
   },
 };

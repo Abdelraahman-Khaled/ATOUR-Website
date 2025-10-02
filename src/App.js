@@ -11,8 +11,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "swiper/swiper-bundle.css";
 import "./App.css";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
-import { LanguageProvider } from "Components/Languages/LanguageContext";
-import { CurrencyProvider } from "Components/Currencies/CurrencyContext";
+import {
+  LanguageProvider,
+  useLanguage,
+} from "Components/Languages/LanguageContext";
+import {
+  CurrencyProvider,
+  useCurrency,
+} from "Components/Currencies/CurrencyContext";
 // import air from "./assets/images/airplan/02.png";
 import { useEffect, useState } from "react";
 import { ProfileProvider } from "context/ProfileContext";
@@ -25,11 +31,13 @@ import { RatesProvider } from "context/RatesContext";
 import { BookingProvider } from "./context/BookingContext";
 import { SubCategoriesProvider } from "./context/SubCategoriesContext";
 import FooterProvider from "./context/FooterContext";
+import { BiographyProvider } from "context/BiographyContext";
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
   const { loading } = useHome(); // Use the HomeContext
   const location = window.location.pathname;
+
   const isHomePage = location === "/";
 
   // SHOW LOCATION PAGE TO SHOW ONLY IN HOME PAGE
@@ -70,7 +78,9 @@ function App() {
                   <SubCategoriesProvider>
                     <HomeProvider>
                       <FooterProvider>
-                        <AppContent />
+                        <BiographyProvider>
+                          <AppContent />
+                        </BiographyProvider>
                       </FooterProvider>
                     </HomeProvider>
                   </SubCategoriesProvider>

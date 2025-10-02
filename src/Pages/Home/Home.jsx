@@ -39,7 +39,6 @@ const Home = () => {
   const offerData = homeData?.offers || null;
   const offerVendorData = homeData?.vendor_offers || null;
 
-  console.log(mostVisited);
 
   if (loading) {
     return (
