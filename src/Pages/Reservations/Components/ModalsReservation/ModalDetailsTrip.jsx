@@ -250,7 +250,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                       <div className="content-serv pt-3 d-flex align-items-center  gap-3">
                         <div className="image-serv">
                           <img
-                            src={image_3}
+                            src={reservation.vendor.photo}
                             alt="imageServ"
                             width={"45px"}
                             height={"45px"}
