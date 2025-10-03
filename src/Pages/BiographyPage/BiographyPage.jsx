@@ -168,7 +168,7 @@ const BiographyPage = () => {
 
   return (
     <>
-      <HelmetInfo titlePage={biography?.title} description={biography?.description} />
+      <HelmetInfo titlePage={biography?.title} description={biography?.description} image={biography.image} url={`biographyPage/${biography.id}`} />
 
       <div className="biography-page padding-60">
         <header>

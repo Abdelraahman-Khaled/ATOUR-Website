@@ -185,7 +185,7 @@ const DetailsCardEvent = () => {
 
   return (
     <>
-      <HelmetInfo titlePage={text[currentLanguage].title} />
+      <HelmetInfo titlePage={effective.title} description={effective.description} image={effective.attachments[0]} url={`eventsPage/${id}`} />
       <div className="details-trip-info-page padding-60">
         <header>
           <BreadcrumbsPage

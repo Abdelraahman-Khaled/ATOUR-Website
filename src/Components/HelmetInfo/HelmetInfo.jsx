@@ -1,37 +1,116 @@
+import { useLanguage } from "Components/Languages/LanguageContext";
 import { Helmet } from "react-helmet-async";
 
-const HelmetInfo = ({ titlePage = "Atour - Your Gateway to Saudi Tourism", description = null, keywords = null, url = "https://atour.sa/", image = "assets/images/logo/logo.svg" }) => {
+const HelmetInfo = ({
+  titlePage = "Atour - Your Gateway to Saudi Tourism",
+  description = "Atour منصة سعودية تقدم الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة العربية السعودية.",
+  url = null,
+  image = "https://atour.sa/assets/images/logo.svg",
+}) => {
+  const keywords = `
+  Atour, جولة, منصة جولة, Atour جولة, موقع جولة السياحي
+    السياحة في السعودية, الجولات السياحية السعودية, تجارب ثقافية سعودية, التراث السعودي, السياحة الداخلية السعودية, السياحة الثقافية في السعودية,
+    جولات الرياض السياحية, جولة حافة العالم, رحلات السفاري السعودية, مغامرات في السعودية, جولات الغوص, جولات الجزر السعودية,
+    أكلات شعبية سعودية, الأكل الجيزاني, أكلات القصيم, السليق الطائفي, الكليجا السعودية, البن السعودي, القط العسيري,
+    الحرف اليدوية السعودية, الهدايا التذكارية, المنتجات التراثية السعودية, مشغولات يدوية, التسوق من الحرفيين السعوديين,
+    مهرجانات سعودية, بازار شعبي, الفعاليات التراثية, الأسواق الشعبية, فعاليات ثقافية, مهرجانات البازارات,
+    المتاحف في السعودية, المتحف الوطني, مدائن صالح, الدرعية التاريخية, جدة التاريخية, العلا, جزر فرسان, منتزه عسير الوطني, كورنيش جدة
+  `;
+
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Atour",
+      "alternateName": ["Atour", "atour", "ATOUR", "جولة"],
+      "url": "https://atour.sa/",
+      "logo": "https://atour.sa/assets/images/logo.svg",
+      "sameAs": [
+        "https://www.linkedin.com/company/atour/",
+        "https://x.com/atour_sa",
+        "https://www.instagram.com/atour_sa/",
+        "https://www.snapchat.com/@atour.sa",
+        "https://www.tiktok.com/@atour_sa",
+        "https://apps.apple.com/us/app/atour-%D8%AC%D9%88%D9%84%D8%A9/id6743371891?platform=iphone",
+        "https://play.google.com/store/apps/details?id=com.app.atour"
+      ],
+      "description": "Atour (جولة) هي منصة سعودية رائدة تقدم الجولات السياحية، التجارب الثقافية، الفعاليات والمغامرات في المملكة العربية السعودية والعالم العربي."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://atour.sa/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://atour.sa/search?query={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "SiteNavigationElement", "position": 1, "name": "الجولات", "url": "https://atour.sa/tripsPage" },
+        { "@type": "SiteNavigationElement", "position": 2, "name": "العروض والمنتجات", "url": "https://atour.sa/offers" },
+        { "@type": "SiteNavigationElement", "position": 3, "name": "الفعاليات", "url": "https://atour.sa/eventsPage" },
+        { "@type": "SiteNavigationElement", "position": 4, "name": "اتصل بنا", "url": "https://atour.sa/contactUs" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "SiteNavigationElement", "position": 1, "name": "Trips", "url": "https://atour.sa/tripsPage" },
+        { "@type": "SiteNavigationElement", "position": 2, "name": "Offers & Products", "url": "https://atour.sa/offers" },
+        { "@type": "SiteNavigationElement", "position": 3, "name": "Events", "url": "https://atour.sa/eventsPage" },
+        { "@type": "SiteNavigationElement", "position": 4, "name": "Contact Us", "url": "https://atour.sa/contactUs" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "جولات سياحية في السعودية",
+      "description": "جولات ثقافية، رحلات سفاري، مغامرات صحراوية وتجارب تراثية في المملكة العربية السعودية.",
+      "touristType": ["Adventure", "Culture", "Heritage", "Religious"],
+      "provider": { "@type": "Organization", "name": "Atour", "url": "https://atour.sa/" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://atour.sa/tripsPage",
+        "priceCurrency": "SAR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "هدايا ومنتجات تراثية سعودية",
+      "image": [
+        "https://atour.sa/assets/images/products/gift1.jpg",
+        "https://atour.sa/assets/images/products/gift2.jpg"
+      ],
+      "description": "منتجات وهدايا تراثية سعودية تعكس الثقافة المحلية، مثالية للهدايا التذكارية.",
+      "brand": { "@type": "Organization", "name": "Atour" },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://atour.sa/offers",
+        "priceCurrency": "SAR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ];
+
+  const { currentLanguage } = useLanguage()
   return (
     <Helmet>
-      <title>{titlePage} | Atour</title>
+      <title>{titlePage} | {currentLanguage === 'ar' ? 'جولة' : 'Atour'}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content="Atour Website" />
+      <meta name="application-name" content="Atour" />
+      <meta name="og:site_name" content="Atour | جولة" />
 
-      {/* Meta Basic */}
-      <meta name="description" content={description ? description : `جولة Atour هي منصة سعودية عربية عالمية رائدة في تقديم التجارب السياحية المتنوعة، الجولات الثقافية والتراثية، والفعاليات الترفيهية التي تعكس روح وأصالة العالم العربي، مع تركيز خاص على التراث السعودي الغني والمميز.
-نحن نُتيح للمسافرين والمغامرين من مختلف أنحاء العالم فرصة اكتشاف المملكة العربية السعودية والمنطقة العربية من خلال تجارب أصيلة، مصممة بعناية لتلائم اهتمامات جميع الزوار، سواء كانوا يبحثون عن الترفيه، المغامرة، الثقافة، أو الاسترخاء.
-تشمل خدماتنا:
-الجولات الثقافية والتقليدية التي تُمكّن الزائر من الانغماس في العادات المحلية، الحِرف اليدوية، والأسواق الشعبية.
-زيارات المتاحف والمعارض التي تسلط الضوء على التاريخ، الفن، والحضارة في المملكة والعالم العربي.
-استكشاف المواقع الأثرية التي تعود لآلاف السنين، وتشمل مدائن صالح، الدرعية التاريخية، والعلا، وغيرها من المواقع المُدرجة ضمن التراث العالمي.
-الجولات الدينية لزيارة الأماكن المقدسة والمعالم الإسلامية في مكة المكرمة والمدينة المنورة، ضمن تجربة منظمة وآمنة.
-الجولات التاريخية التي تأخذ الزائر في رحلة عبر العصور، من الممالك القديمة إلى العصر الحديث.
-جولات السفاري في الصحراء، حيث يمكن للزوار الاستمتاع بمغامرات بين الكثبان الرملية، وركوب الجمال، وتجربة الحياة البدوية.
-الرحلات في الرمال الذهبية، التي تتيح التخييم، مشاهدة غروب الشمس، والسهر تحت النجوم في أجواء صحراوية ساحرة.
-جولات الطهي وتذوق المأكولات التقليدية، والتي تقدم تجارب طعام فريدة من نوعها في المنازل أو المطاعم التراثية.
-جولات الضيافة السعودية، حيث يعيش الزائر تجربة الضيافة الأصيلة ويتعرف على القيم والعادات العربية في أجواء ودية.
-جولات الطيران والمغامرات الجوية مثل الطيران الشراعي والطائرات الخفيفة، لعشاق الإثارة والمناظر البانورامية.
-جولات الهايكنج والمشي في الطبيعة وسط الجبال، الأودية، والواحات الخلابة في مختلف مناطق المملكة.
-الجولات البحرية على السواحل السعودية، بما في ذلك جزر البحر الأحمر والشعاب المرجانية.
-الجولات الخاصة وجولات كبار الشخصيات (VIP) بتجارب مصممة خصيصاً تناسب تطلعات الزوار الباحثين عن الخصوصية والرفاهية.
-تهدف منصة Atour إلى توفير تجربة متكاملة، تجمع بين الاكتشاف الثقافي، الراحة، المغامرة، والطابع المحلي الأصيل، مع ضمان أعلى معايير السلامة والجودة. نحن نعمل مع شركاء محليين محترفين لضمان تقديم خدمات عالية القيمة، وتجارب لا تُنسى.
-سواء كنت مسافرًا للترفيه، أو للبحث عن تجربة ثقافية عميقة، أو تخطط لرحلة دينية، فإن جولة Atour توفر لك المسار المثالي لاستكشاف الكنوز السياحية والثقافية في السعودية والعالم العربي.
-احجز تجربتك اليوم وابدأ رحلتك مع Atour، حيث تلتقي المغامرة بالتراث، والضيافة بالتجديد … اكتشف اكثر مع جولة.`} />
-
-      <meta name="keywords" content={keywords ? keywords : "السياحة في السعودية, الجولات السياحية السعودية, تجارب ثقافية سعودية, التراث السعودي, السياحة الداخلية السعودية, السياحة الثقافية في السعودية, السياحة الريفية في السعودية, السياحة التراثية السعودية, جولات الرياض السياحية, جولة حافة العالم, سفاري الرمال الذهبية, رحلات السفاري السعودية, مغامرات في السعودية, رحلات البر والبحر في السعودية, جولات الغوص في السعودية, جولات الجزر السعودية, أكلات شعبية سعودية, الأكل الجيزاني, أكلات القصيم التقليدية, السليق الطائفي, الكليجا السعودية, الفروالة السعودية, البن السعودي, الفل السعودي, القط العسيري, الأكلات الشعبية السعودية, الحرف اليدوية السعودية, مشغولات يدوية سعودية, الهدايا التذكارية السعودية, المنتجات التراثية السعودية, القط العسيري اليدوي, الحرف التقليدية في السعودية, التسوق من الحرفيين السعوديين, مهرجانات سعودية, بازار شعبي سعودي, الفعاليات التراثية السعودية, الأسواق الشعبية السعودية, فعاليات ثقافية في السعودية, مهرجانات البازارات السعودية, منصة خدمات سياحية في السعودية, تسجيل مرشد سياحي سعودي, تقديم خدمات سياحية, تسويق تجارب سياحية, تطبيق جولات سياحية سعودية, المتاحف في السعودية, المتاحف التاريخية في الرياض, المتحف الوطني السعودي, متاحف جدة, المتاحف في المدينة المنورة, متحف الفن السعودي, المنتزهات في السعودية, حدائق الرياض العامة, منتزه الملك عبدالله في جدة, منتزهات عسير, منتزهات جازان, أماكن الجذب السياحي في السعودية, مناطق جذب سياحي في الرياض, أماكن سياحية في جدة, السياحة في مكة المكرمة, السياحة في المدينة المنورة, المعالم السياحية في القصيم, المعالم السياحية في عسير, المناطق السياحية في جازان, المعالم الطبيعية في السعودية, الكثبان الرملية في السعودية, الأماكن التراثية في السعودية, مدائن صالح (الحجر) – موقع أثري نبطي تاريخي مدرج في اليونسكو, الدرعية التاريخية – مهد الدولة السعودية الأولى وأحد المواقع التراثية المهمة, جدة التاريخية (البلد) – المدينة القديمة ذات الطابع العمراني المميز, مكة المكرمة – الحرم المكي والمسجد الحرام، وجهة دينية عالمية, المدينة المنورة – المسجد النبوي والمواقع الإسلامية التاريخية, جبل اللوز – أعلى قمة في السعودية ومقصد لمحبي المشي والتسلق, العلا – واحة تاريخية بمناظر طبيعية خلابة وآثار نبطية, جزر فرسان – جزر بحرية خلابة في البحر الأحمر برمال بيضاء ومياه صافية, منتزه الملك عبدالله الوطني – منطقة طبيعية خلابة في شمال غرب المملكة, منتزه عسير الوطني – جبال خضراء ومناخ معتدل، وجهة مثالية للسياحة الطبيعية, جولة حافة العالم (Edge of the World) – موقع صخري شاهق بالقرب من الرياض, الرمال الذهبية (النفود) – مناطق صحراوية مثالية للسفاري والمغامرات, وادي الديسة – وادٍ خلاب في منطقة تبوك به نقوش أثرية, المتحف الوطني السعودي في الرياض – متحف غني بالتاريخ والثقافة السعودية, كورنيش جدة – ممشى ساحلي عالمي مع فعاليات ومطاعم, محمية الملك عبدالعزيز للطيور – محمية طبيعية للطيور والبيئة البرية, منتزه الردف في أبها – منتزه طبيعي به بحيرة صناعية ومناظر جبلية, منتزه جبل السودة – أعلى قمة في منطقة عسير، مع أجواء باردة ومناخ معتدل, جزيرة تاروت – جزيرة تاريخية في المنطقة الشرقية للسعودية, وادي نمر – وادٍ سياحي معروف بالمشي والتخييم في منطقة الطائف"} />
-
-      <meta name="author" content="atour Website" />
-
-      {/* Open Graph (Facebook) */}
-      <meta property="og:url" content={url} />
+      {/* Open Graph */}
+      <meta property="og:url" content={url ? `https://atour.sa/${url}` : "https://atour.sa/"} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={titlePage} />
       <meta property="og:description" content={description} />
@@ -39,13 +118,20 @@ const HelmetInfo = ({ titlePage = "Atour - Your Gateway to Saudi Tourism", descr
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
+      <meta property="twitter:url" content={url ? `https://atour.sa/${url}` : "https://atour.sa/"} />
       <meta name="twitter:title" content={titlePage} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
 
       {/* Canonical */}
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={url ? `https://atour.sa/${url}` : "https://atour.sa/"} />
+
+      {/* ✅ All Schemas */}
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
     </Helmet>
   );
 };

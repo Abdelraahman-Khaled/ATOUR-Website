@@ -5,6 +5,7 @@ import CardsBlogs from "./Components/CardsBlogs/CardsBlogs";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import content from "../../Components/Languages/translations";
 import { useLanguage } from "Components/Languages/LanguageContext";
+
 const Blogs = () => {
   const { currentLanguage } = useLanguage();
   return (

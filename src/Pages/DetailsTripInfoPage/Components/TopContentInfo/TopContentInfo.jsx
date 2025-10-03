@@ -24,7 +24,6 @@ const translations = {
 
 const TopContentInfo = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  console.log(tripData);
 
   return (
     <div data-aos="fade-left" className="top-content-info-details d-flex justify-content-between gap-2 flex-wrap">

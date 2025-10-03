@@ -143,9 +143,10 @@ const GiftDetail = () => {
         </>;
         ; // Display error message if fetching fails
     }
+
     return (
         <>
-            <HelmetInfo titlePage={content.helmet[currentLanguage]} />
+            <HelmetInfo titlePage={gift.title} description={gift.description} url={"gifts/" + gift.id} image={gift.cover} />
             <div className="details-trip-info-page padding-60">
 
                 <header>

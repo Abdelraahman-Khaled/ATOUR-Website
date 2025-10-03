@@ -27,7 +27,6 @@ const GiftModal = ({ gift }) => {
     const { currentLanguage } = useLanguage();
     const navigate = useNavigate();
     const isRTL = currentLanguage === "ar";
-    console.log("gift", gift);
 
 
 

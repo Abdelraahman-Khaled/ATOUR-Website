@@ -48,7 +48,7 @@ const ArticalsDetails = () => {
     }
     return (
         <>
-            <HelmetInfo titlePage={currentLanguage === "ar" ? "تفاصيل المقالة" : "Article Details"} />
+            <HelmetInfo titlePage={articleDetailsCard.title} description={articleDetailsCard.description} image={articleDetailsCard.photo} url={`articals/${id}`} />
 
             <div className="details-news-card">
                 {/* ========== START SLIDER DETIALS NEWS ============ */}

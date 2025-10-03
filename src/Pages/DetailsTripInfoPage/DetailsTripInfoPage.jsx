@@ -1,6 +1,5 @@
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
 import TopContentInfo from "./Components/TopContentInfo/TopContentInfo";
-import SliderDetailsContent from "./Components/SliderDetailsContent/SliderDetailsContent";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import AllContentInfoDetailsMiddel from "./Components/AllContentInfoDetailsMiddel/AllContentInfoDetailsMiddel";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
@@ -73,9 +72,10 @@ const DetailsTripInfoPage = () => {
       </Link>
     </p>;
   }
+
   return (
     <>
-      <HelmetInfo titlePage={detailsTripTranslations.tourDetails[currentLanguage]} />
+      <HelmetInfo titlePage={tripData.title} description={tripData.description} image={tripData.attachments[0]} url={`tripsPage/${id}`} />
 
       <div className="details-trip-info-page padding-60">
         <header>

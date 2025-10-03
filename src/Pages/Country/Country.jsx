@@ -100,7 +100,6 @@ const Country = () => {
                 const response = await CountryAPI.getCountryCites(currentLanguage, id);
                 const data = response.data;
                 setCountry(data);
-                console.log("country data", data);
             } catch (err) {
                 console.error("Error fetching country data:", err);
                 setError("fetch-error");

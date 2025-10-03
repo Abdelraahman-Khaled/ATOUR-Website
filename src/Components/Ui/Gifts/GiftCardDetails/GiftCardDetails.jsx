@@ -106,7 +106,6 @@ const content = {
 const GiftCardDetails = ({ gift }) => {
     const { currentLanguage } = useLanguage(); // Get the current language
     const [paymentUrl, setPaymentUrl] = useState(null);
-    console.log(gift);
 
     if (!gift) {
         return <>

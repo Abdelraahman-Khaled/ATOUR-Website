@@ -44,7 +44,6 @@ const CardsBlogs = () => {
   if (error) {
     return null; // No need to display error here, toast will handle it
   }
-  console.log(blogData);
 
   return (
     <div className="cards-blog-content padding-80">

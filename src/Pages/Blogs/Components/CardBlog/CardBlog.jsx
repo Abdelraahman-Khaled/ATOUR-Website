@@ -51,39 +51,42 @@ const CardBlog = ({
   };
 
   return (
-    <Link to={routeBlogCard} className="card-blog-one">
-      {/* ============= START IMAGE CARD BLOG ============== */}
-      <div className="image-card-blog position-relative overlay-bg">
-        <img
-          src={imageBlog}
-          alt="img blog"
-          className="image-blog-src "
-        />
-      </div>
-      {/* ============= END IMAGE CARD BLOG ============== */}
-      {/* ============= START CONTENT INFO CARD BLOG ========== */}
-      <div className="content-info-card-blog">
-        <div className="mb-3">
-          <h2 className="title mb-3">{titleBlog}</h2>
-          <p
-            className="description"
-            dangerouslySetInnerHTML={{ __html: truncateDescription(description) }}
-          ></p>
-        </div>
-        <div className="author-info">
+    <>
+
+      <Link to={routeBlogCard} className="card-blog-one">
+        {/* ============= START IMAGE CARD BLOG ============== */}
+        <div className="image-card-blog position-relative overlay-bg">
           <img
-            src={imageUserBlog}
-            alt={nameUserBlog}
-            className="author-image"
+            src={imageBlog}
+            alt="img blog"
+            className="image-blog-src "
           />
-          <div className="author-details ">
-            <h3 className="author-name">{nameUserBlog}</h3>
-            <div className="time-add">{<DateDisplay from_date={timeAddedBlog} />}</div>
+        </div>
+        {/* ============= END IMAGE CARD BLOG ============== */}
+        {/* ============= START CONTENT INFO CARD BLOG ========== */}
+        <div className="content-info-card-blog">
+          <div className="mb-3">
+            <h2 className="title mb-3">{titleBlog}</h2>
+            <p
+              className="description"
+              dangerouslySetInnerHTML={{ __html: truncateDescription(description) }}
+            ></p>
+          </div>
+          <div className="author-info">
+            <img
+              src={imageUserBlog}
+              alt={nameUserBlog}
+              className="author-image"
+            />
+            <div className="author-details ">
+              <h3 className="author-name">{nameUserBlog}</h3>
+              <div className="time-add">{<DateDisplay from_date={timeAddedBlog} />}</div>
+            </div>
           </div>
         </div>
-      </div>
-      {/* ============= END CONTENT INFO CARD BLOG ========== */}
-    </Link>
+        {/* ============= END CONTENT INFO CARD BLOG ========== */}
+      </Link>
+    </>
   );
 };
 

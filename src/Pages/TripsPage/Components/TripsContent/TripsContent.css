@@ -47,13 +47,16 @@
     font-size: 14px;
   }
 }
+.all-filter-info .main-buttons-filter-content {
+  overflow-y: scroll;
+  padding-bottom: 15px;
+  height: 150px;
+}
 
 @media screen and (max-width: 991px) {
   .trips-content--info {
     grid-template-columns: 1fr;
   }
-
-  
 
   .trips-content--info
     .card-favorite-one
@@ -149,6 +152,8 @@
     flex-wrap: nowrap !important;
     overflow-x: auto;
     padding-bottom: 15px;
+    height: auto;
+    overflow-y: auto;
   }
 }
 

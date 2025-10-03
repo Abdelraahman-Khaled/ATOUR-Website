@@ -56,7 +56,12 @@ const Home = () => {
   }
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"} />
+      <HelmetInfo
+        titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+        description={currentLanguage === "ar"
+          ? "منصة آتور السعودية تقدم لك الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة. احجز تجربتك الآن."
+          : "Atour is a Saudi platform offering tours, cultural experiences, desert adventures, heritage, and exclusive events across Saudi Arabia. Book your experience now."}
+      />
       <header>
         <Slider />
       </header>

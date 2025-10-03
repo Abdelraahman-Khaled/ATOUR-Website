@@ -21,8 +21,6 @@ const DetailsBlogCard = () => {
     const fetchTripData = async () => {
       try {
         const response = await GeneralAPI.getBlogDetails(idCardDetailsBlog, currentLanguage); // Replace with your API call
-        console.log(response);
-
         setBlogDetailsCard(response.data); // Store fetched data in state
       } catch (err) {
         console.error("Error fetching trip data:", err);
@@ -49,7 +47,7 @@ const DetailsBlogCard = () => {
   }
   return (
     <>
-      <HelmetInfo titlePage={currentLanguage === "ar" ? "تفاصيل المدونة" : "Blog Details"} />
+      <HelmetInfo titlePage={blogDetailsCard.title} description={blogDetailsCard.description} image={blogDetailsCard.photo} url={`blogsPage/${idCardDetailsBlog}`}/>
 
       <div className="details-blog-card">
         {/* ========== START SLIDER DETIALS BLOG ============ */}
