@@ -146,7 +146,7 @@ const GiftDetail = () => {
 
     return (
         <>
-            <HelmetInfo titlePage={gift.title} description={gift.description} url={"gifts/" + gift.id} image={gift.cover} />
+            <HelmetInfo data={gift} type="product" titlePage={gift.title} description={gift.description} url={"gifts/" + gift.id} image={gift.cover} />
             <div className="details-trip-info-page padding-60">
 
                 <header>

@@ -61,7 +61,7 @@ const AppContent = () => {
         <SplashScreen />
       </HelmetProvider>
       <ScrollToTopButton />
-      {/* <BackgroundAudio /> */}
+      <BackgroundAudio />
     </div>
   );
 };

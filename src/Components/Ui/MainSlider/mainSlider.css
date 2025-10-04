@@ -197,7 +197,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .property-showcase {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: auto;
     gap: 12px;
   }

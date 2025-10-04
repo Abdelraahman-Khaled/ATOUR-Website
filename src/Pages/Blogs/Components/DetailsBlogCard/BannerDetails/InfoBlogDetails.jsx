@@ -19,7 +19,6 @@ const text = {
 const InfoBlogDetails = ({ blogDetailsCard }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
-  console.log(blogDetailsCard);
 
 
   return (

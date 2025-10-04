@@ -11,8 +11,6 @@ function CounterUpDown({
   initialValue,
 }) {
   // const [count, setCount] = useState(minValue);
-  // console.log("minValue", minValue);
-  // console.log("maxValue", maxValue);
   
 
   const handleIncrease = () => {

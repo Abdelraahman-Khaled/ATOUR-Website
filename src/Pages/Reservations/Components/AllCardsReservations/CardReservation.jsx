@@ -30,7 +30,6 @@ const CardReservation = ({
 }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const navigate = useNavigate();
-  console.log(isTrueButtonCancel);
 
   const navFunction = (id) => {
     navigate(`/tripsPage/${id}`);

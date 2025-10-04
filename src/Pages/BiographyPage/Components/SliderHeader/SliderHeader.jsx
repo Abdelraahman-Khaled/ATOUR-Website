@@ -4,7 +4,6 @@ import "./SliderHeader.css";
 
 const SliderHeader = ({ biography }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
-  console.log(biography);
 
   const welcomeTranslations = {
     en: "Welcome to ",

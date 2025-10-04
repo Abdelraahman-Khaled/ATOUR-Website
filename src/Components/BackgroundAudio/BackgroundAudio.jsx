@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import audioFile from '../../assets/audio/ATOUR Full Sonic brand.wav';
+import audioFile from '../../assets/audio/audio.wav';
 import './BackgroundAudio.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
@@ -19,20 +19,20 @@ const BackgroundAudio = () => {
         if (!audioContext.current) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
           audioContext.current = new AudioContext();
-          
+
           // Connect the HTML audio element to the audio context
           if (audioRef.current && audioContext.current) {
             audioSource.current = audioContext.current.createMediaElementSource(audioRef.current);
             const gainNode = audioContext.current.createGain();
             gainNode.gain.value = volume / 100;
-            
+
             audioSource.current.connect(gainNode);
             gainNode.connect(audioContext.current.destination);
-            
+
             // Set audio properties
             audioRef.current.loop = true;
             audioRef.current.volume = volume / 100;
-            
+
             // Play audio
             audioRef.current.play()
               .then(() => {
@@ -51,39 +51,39 @@ const BackgroundAudio = () => {
         console.error('Audio context error:', error);
       }
     };
-    
+
     // Set up event listeners for user interaction
     const userInteractionEvents = ['click', 'touchstart', 'keydown', 'mousedown'];
-    
+
     const handleUserInteraction = () => {
       initAudio();
-      
+
       // Remove event listeners after first interaction
       userInteractionEvents.forEach(event => {
         document.removeEventListener(event, handleUserInteraction);
       });
     };
-    
+
     // Add event listeners
     userInteractionEvents.forEach(event => {
       document.addEventListener(event, handleUserInteraction);
     });
-    
+
     // Try to auto-start (will likely be blocked by browser)
     const attemptAutoplay = () => {
       if (audioRef.current) {
         audioRef.current.volume = volume / 100;
         const playPromise = audioRef.current.play();
-        
+
         if (playPromise !== undefined) {
           playPromise
             .then(() => {
               setIsPlaying(true);
               console.log('Autoplay successful');
-              
+
               // If autoplay works, initialize audio context
               initAudio();
-              
+
               // Remove event listeners since we don't need them anymore
               userInteractionEvents.forEach(event => {
                 document.removeEventListener(event, handleUserInteraction);
@@ -96,24 +96,24 @@ const BackgroundAudio = () => {
         }
       }
     };
-    
+
     // Try autoplay (will likely fail but worth trying)
     attemptAutoplay();
-    
+
     // Cleanup function
     return () => {
       // Clean up event listeners
       userInteractionEvents.forEach(event => {
         document.removeEventListener(event, handleUserInteraction);
       });
-      
+
       // Close audio context
       if (audioContext.current) {
         if (audioContext.current.state !== 'closed') {
           audioContext.current.close().catch(e => console.error('Error closing audio context:', e));
         }
       }
-      
+
       // Pause audio
       if (audioRef.current) {
         audioRef.current.pause();
@@ -141,13 +141,13 @@ const BackgroundAudio = () => {
   };
 
   // Volume is now fixed at 30%
-  
+
   // Volume control removed as requested
 
   return (
     <div className="background-audio-container">
-      <audio 
-        ref={audioRef} 
+      <audio
+        ref={audioRef}
         src={audioFile}
         preload="auto"
         controlsList="nodownload"

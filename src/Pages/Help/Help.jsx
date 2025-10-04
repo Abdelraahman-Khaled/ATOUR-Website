@@ -25,7 +25,6 @@ const Help = () => {
     const fetchAboutUsContent = async () => {
       try {
         const response = await GeneralAPI.getHelp(currentLanguage);
-        console.log(response.data.content);
         setAboutUsContent(response.data.content)
       } catch (error) {
         console.error('Error fetching About Us content:', error);

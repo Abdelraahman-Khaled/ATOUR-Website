@@ -55,7 +55,10 @@ const UserCommentRate = ({ imageUser, userName, timeAdd, comment, rate, images }
 
       {/* Comment text */}
       <div className="content-info">
-        <ReadMoreText newClass="mt-2" text={comment} maxLength={120} />
+        {
+          comment &&
+          <ReadMoreText newClass="mt-2" text={comment} maxLength={120} />
+        }
         {images && images.length > 0 && (
           <div className="comment-images-thumbnail mt-2">
             {images.map((img, index) => (

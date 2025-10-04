@@ -43,7 +43,6 @@ const SimilarTrips = () => {
         return <>
         </>
     }
-    console.log(similarTrips);
 
     return (
         <div className="cards-trips-details margin-top-1">

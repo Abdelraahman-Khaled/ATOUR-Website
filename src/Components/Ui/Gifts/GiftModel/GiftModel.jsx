@@ -151,7 +151,6 @@ const GiftModal = ({ gift }) => {
 
     useEffect(() => {
         if (selectedCountry) {
-            // console.log("Fetching cities for country ID:", selectedCountry);
             const fetchCities = async () => {
                 try {
                     const response = await BookingAPI.getCitiesByCountryId(selectedCountry);
@@ -180,7 +179,6 @@ const GiftModal = ({ gift }) => {
                     // Assuming BookingAPI has a method to get delivery cost
                     const response = await BookingAPI.getDeliveryCost(selectedCity, gift.vendor.id);
                     if (response.success) {
-                        console.log("Delivery Cost:", response.data);
                         setDeliveryCost(response.data.cost); // Assuming the cost is in response.data.cost
                     } else {
                         console.error("Failed to fetch delivery cost:", response.data);
@@ -194,7 +192,6 @@ const GiftModal = ({ gift }) => {
             fetchDeliveryCost();
         }
     }, [selectedCity, gift?.vendor?.id]);
-    console.log(selectedCity);
 
     return (
         <div className={`text-${isRTL ? "right" : "left"} `}>
@@ -300,7 +297,6 @@ const GiftModal = ({ gift }) => {
                                         value={selectedCountry}
                                         onChange={(e) => {
                                             setSelectedCountry(e.target.value);
-                                            // console.log("Selected Country ID:", e.target.value);
                                         }}
                                         required
                                     >

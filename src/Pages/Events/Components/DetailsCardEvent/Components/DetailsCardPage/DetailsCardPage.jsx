@@ -47,8 +47,6 @@ const DetailsCardPage = ({ effective }) => {
     hideModalNumberIndividuals(); // Close the modal after saving
   };
 
-  console.log("Effective data:", effective);
-  console.log("effective.is_group:", effective?.is_group);
 
   return (
     <>

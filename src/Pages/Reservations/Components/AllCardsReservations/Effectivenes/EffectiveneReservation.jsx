@@ -38,7 +38,6 @@ const EffectiveneReservation = ({ reservation }) => {
             adults: "Adults",
         },
     };
-    console.log("eff", reservation);
     return (
         <>
             <ModalDetailsTrip

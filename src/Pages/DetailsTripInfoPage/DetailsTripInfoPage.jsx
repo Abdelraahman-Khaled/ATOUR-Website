@@ -75,7 +75,7 @@ const DetailsTripInfoPage = () => {
 
   return (
     <>
-      <HelmetInfo titlePage={tripData.title} description={tripData.description} image={tripData.attachments[0]} url={`tripsPage/${id}`} />
+      <HelmetInfo type="trip" data={tripData} titlePage={tripData.title} description={tripData.description} url={`tripsPage/${tripData.id}`} image={tripData.attachments?.[0]} />
 
       <div className="details-trip-info-page padding-60">
         <header>

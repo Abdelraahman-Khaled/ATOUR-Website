@@ -6,7 +6,6 @@ import { useEffect } from "react";
 const UserInfo = () => {
   const { profile, loading, isAuthenticated } = useProfile();
   const navigate = useNavigate();
-  console.log(profile);
 
 
   // Redirect to home if not authenticated

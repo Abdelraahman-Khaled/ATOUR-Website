@@ -62,7 +62,6 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
       const response = await GeneralAPI.getTerms(currentLanguage);
       if (response.success) {
         setTermsContent(response.data.content);
-        console.log(response.data.content);
 
       } else {
         setTermsContent(text[currentLanguage].noData);
