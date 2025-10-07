@@ -9,7 +9,7 @@ const content = {
     cityNotSupported: "هذه المدينة غير متاحة لدينا حاليا",
   },
   en: {
-    slogan: "Discover more .. with ATOUR",
+    slogan: "Explore more .. with ATOUR",
     hi: "Hi",
     cityNotAvailable: "This city is not supported yet.",
     cityDetailsNotAvailable: "City details not available",

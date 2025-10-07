@@ -344,7 +344,7 @@ const ChatBot = () => {
             back: 'العودة لقائمة الخدمات'
           },
           en: {
-            prompt: 'Discover the most beautiful tourist tours in Saudi Arabia with specialized local guides 🗺️',
+            prompt: 'Explore the most beautiful tourist tours in Saudi Arabia with specialized local guides 🗺️',
             view: 'View Available Tours',
             back: 'Back to Services'
           },

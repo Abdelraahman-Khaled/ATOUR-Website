@@ -63,7 +63,7 @@ Joulehアプリに今すぐ登録し、観光客や探検家の幅広いコミ�
     },
     mostVisitedDestinations: {
       sectionTitle: {
-        en: "Discover the heart of the most vibrant cities where history meets modernity.",
+        en: "Explore the heart of the most vibrant cities where history meets modernity.",
         ar: "اكتشف قلب المدن الأكثر حيوية وتمازج التاريخ مع الحداثة.",
         fr: "Découvrez le cœur des villes les plus dynamiques où l'histoire rencontre la modernité.",
         de: "Entdecken Sie das Herz der lebendigsten Städte, wo Geschichte auf Moderne trifft.",
@@ -107,7 +107,7 @@ Joulehアプリに今すぐ登録し、観光客や探検家の幅広いコミ�
         ja: "冒険と多様な文化があなたを待つ国々を探検してください。",
       },
       sectionText: {
-        en: "Discover its unique landmarks and enjoy tourism experiences that satisfy your passion and open doors to discovering cultures, traditions, and civilizations.",
+        en: "Explore its unique landmarks and enjoy tourism experiences that satisfy your passion and open doors to discovering cultures, traditions, and civilizations.",
         ar: "اكتشف معالمها المميزة واستمتع بتجارب سياحية تلبي شغفك وتفتح أمامك أبواب لاكتشاف الثقافات والعادات والحضارات.",
         fr: "Découvrez ses sites emblématiques uniques et profitez d'expériences touristiques qui nourrissent votre passion et ouvrent des portes vers la découverte des cultures, traditions et civilisations.",
         de: "Entdecken Sie seine einzigartigen Sehenswürdigkeiten und genießen Sie touristische Erlebnisse, die Ihre Leidenschaft befriedigen und Türen zur Entdeckung von Kulturen, Traditionen und Zivilisationen öffnen.",

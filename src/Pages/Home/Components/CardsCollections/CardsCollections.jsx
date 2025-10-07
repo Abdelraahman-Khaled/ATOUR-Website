@@ -17,7 +17,7 @@ const CardsCollections = ({ data, type }) => {
         },
         en: {
           title: "Exciting Experiences and Tours",
-          text: "Discover the best tours and destinations between authenticity and history, heritage and traditions, nature and city, desert and civilization. With diverse landscapes and cultures, each experience is designed to amaze you. Explore them now!",
+          text: "Explore the best tours and destinations between authenticity and history, heritage and traditions, nature and city, desert and civilization. With diverse landscapes and cultures, each experience is designed to amaze you. Explore them now!",
         },
         fr: {
           title: "Expériences et visites passionnantes",
