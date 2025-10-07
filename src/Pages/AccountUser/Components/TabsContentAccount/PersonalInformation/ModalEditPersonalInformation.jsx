@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useProfile } from "context/ProfileContext";
 import translations from "./translations";
 import ProfileAPI from "api/profileApi";
+import SimpleDatePickerComponent from "Components/Ui/DatePickerComponent/SimpleDatePickerComponent";
 const ModalEditPersonalInformation = ({
   showModalEditInformation,
   hideModalEditInformation,
@@ -22,6 +23,21 @@ const ModalEditPersonalInformation = ({
   const [name, setName] = useState(initialProfile?.name || "");
   const [selectedNationalityId, setSelectedNationalityId] = useState(initialProfile?.nationality_id || null);
   const [phone, setPhone] = useState(initialProfile?.phone || "");
+
+  const parseDate = (dateString) => {
+    if (!dateString) return null;
+    const [year, month, day] = dateString.split('-').map(Number);
+    return { year, month, day };
+  };
+
+  const formatDate = (dateObj) => {
+    if (!dateObj) return "";
+    const { year, month, day } = dateObj;
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+  };
+
+  const [birthdate, setBirthdate] = useState(initialProfile?.birthdate ? parseDate(initialProfile.birthdate) : null);
+  const [gender, setGender] = useState(initialProfile?.gender || "");
   const [nationalities, setNationalities] = useState([])
 
   const fileInputRef = useRef(null);
@@ -43,8 +59,9 @@ const ModalEditPersonalInformation = ({
     setSubmitting(true);
     try {
       const selectedNat = nationalities.find((nat) => nat.id === parseInt(selectedNationalityId));
+      const formattedBirthdate = formatDate(birthdate);
 
-      onSubmitProfileUpdate({
+      const profileUpdateEntities = {
         name: values.name,
         nationality_id: selectedNationalityId, // send id
         image: image !== image_1 ? fileInputRef.current.files[0] : null,
@@ -52,7 +69,13 @@ const ModalEditPersonalInformation = ({
           ? selectedNat.translations?.find((t) => t.locale === currentLanguage)?.name || selectedNat.name
           : initialProfile.nationality, // send readable name
         phone: values.phone,
-      });
+        birthdate: formattedBirthdate,
+        gender: gender,
+      };
+
+      console.log("Profile Update Entities:", profileUpdateEntities);
+
+      onSubmitProfileUpdate(profileUpdateEntities);
 
       toast.success(translations.saveData[currentLanguage]);
       hideModalEditInformation();
@@ -109,7 +132,7 @@ const ModalEditPersonalInformation = ({
 
         <div className="form-edit-content">
           <FormField
-            initialValues={{ name, selectedNationalityId, phone }}
+            initialValues={{ name, selectedNationalityId, phone, birthdate, gender }}
             onSubmit={handleSubmit}
           >
             <div className="row g-3">
@@ -147,7 +170,7 @@ const ModalEditPersonalInformation = ({
                   ))}
                 </select>
               </div>
-              <div className="col-12">
+              <div className="col-6">
                 <InputField
                   label={translations.phone[currentLanguage]}
                   name="phone"
@@ -157,6 +180,33 @@ const ModalEditPersonalInformation = ({
                   success
                   onChange={(e) => setPhone(e.target.value)}
                 />
+              </div>
+
+              <div className="col-6 align-self-end d-flex flex-column">
+                <label className="form-label">
+                  {translations.gender[currentLanguage]}
+                </label>
+                <select
+                  className="form-control m-0"
+                  name="gender"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                >
+                  <option value="male">{translations.male[currentLanguage]}</option>
+                  <option value="female">{translations.female[currentLanguage]}</option>
+                </select>
+              </div>
+              <div className="col-6">
+                <div className="form-group">
+                  <label htmlFor="birthdate">{translations.birthdate[currentLanguage]}</label>
+                  <div className="main-add-place-date main-add-place-date--1 p-0 rounded-1 border mt-2">
+                    <SimpleDatePickerComponent
+                      value={birthdate}
+                      onChange={setBirthdate}
+                      addTextPlaceHolder={translations.enterBirthdate[currentLanguage]}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="d-flex justify-content-end">

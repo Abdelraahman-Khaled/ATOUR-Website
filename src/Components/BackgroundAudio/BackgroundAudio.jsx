@@ -37,7 +37,6 @@ const BackgroundAudio = () => {
             audioRef.current.play()
               .then(() => {
                 setIsPlaying(true);
-                console.log('Audio started successfully');
               })
               .catch(error => {
                 console.error('Error playing audio:', error);
@@ -79,8 +78,6 @@ const BackgroundAudio = () => {
           playPromise
             .then(() => {
               setIsPlaying(true);
-              console.log('Autoplay successful');
-
               // If autoplay works, initialize audio context
               initAudio();
 

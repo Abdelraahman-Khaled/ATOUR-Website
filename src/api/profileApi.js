@@ -9,7 +9,14 @@ const ProfileAPI = {
     const response = await axiosInstance.get("/nationalities");
     return response.data;
   },
-  updateProfile: async (firstName, image, nationality_id, phone) => {
+  updateProfile: async (
+    firstName,
+    image,
+    nationality_id,
+    phone,
+    birthdate,
+    gender
+  ) => {
     try {
       const formData = new FormData();
       formData.append("name", firstName);
@@ -22,7 +29,12 @@ const ProfileAPI = {
       if (image) {
         formData.append("image", image); // Append image file
       }
-
+      if (birthdate) {
+        formData.append("birthdate", birthdate);
+      }
+      if (gender) {
+        formData.append("gender", gender);
+      }
 
       const response = await axiosInstance.post("/update-profile", formData, {
         headers: {

@@ -10,11 +10,11 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useProfile } from "context/ProfileContext";
 import { useNavigate } from "react-router-dom";
-import imgProfile from "../../../../../assets/images/defaultImg/default-profile.jpg"
+import imgProfile from "../../../../../assets/images/defaultImg/default-profile.jpg";
 
 const AccountInformationContent = () => {
-  const { currentLanguage } = useLanguage(); // Get current language
-  const { isAuthenticated } = useProfile(); // Get authentication status
+  const { currentLanguage } = useLanguage();
+  const { isAuthenticated } = useProfile();
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
@@ -26,31 +26,98 @@ const AccountInformationContent = () => {
   const [showModalEditAccount, setShowModalEditAccount] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("+966 555 555 555");
 
-  // Check authentication on component mount
   useEffect(() => {
-    if (!isAuthenticated()) {
-      navigate("/");
-    }
+    if (!isAuthenticated()) navigate("/");
   }, [isAuthenticated, navigate]);
 
   const translations = {
-    accountInfo: { ar: "معلومات الحساب", en: "Account Information" },
-    email: { ar: "البريد الإلكتروني", en: "Email Address" },
-    phone: { ar: "رقم الهاتف", en: "Phone Number" },
-    profilePhoto: { ar: "الصورة الشخصية", en: "Profile Photo" },
+    accountInfo: {
+      en: "Account Information",
+      ar: "معلومات الحساب",
+      fr: "Informations du compte",
+      de: "Kontoinformationen",
+      es: "Información de la cuenta",
+      tr: "Hesap Bilgileri",
+      ru: "Информация о аккаунте",
+      zh: "账户信息",
+      ko: "계정 정보",
+      pt: "Informações da conta",
+      ur: "اکاؤنٹ کی معلومات",
+      ja: "アカウント情報",
+    },
+    email: {
+      en: "Email Address",
+      ar: "البريد الإلكتروني",
+      fr: "Adresse e-mail",
+      de: "E-Mail-Adresse",
+      es: "Dirección de correo electrónico",
+      tr: "E-posta adresi",
+      ru: "Адрес электронной почты",
+      zh: "电子邮件地址",
+      ko: "이메일 주소",
+      pt: "Endereço de e-mail",
+      ur: "ای میل پتہ",
+      ja: "メールアドレス",
+    },
+    phone: {
+      en: "Phone Number",
+      ar: "رقم الهاتف",
+      fr: "Numéro de téléphone",
+      de: "Telefonnummer",
+      es: "Número de teléfono",
+      tr: "Telefon numarası",
+      ru: "Номер телефона",
+      zh: "电话号码",
+      ko: "전화번호",
+      pt: "Número de telefone",
+      ur: "فون نمبر",
+      ja: "電話番号",
+    },
+    profilePhoto: {
+      en: "Profile Photo",
+      ar: "الصورة الشخصية",
+      fr: "Photo de profil",
+      de: "Profilbild",
+      es: "Foto de perfil",
+      tr: "Profil fotoğrafı",
+      ru: "Фото профиля",
+      zh: "个人照片",
+      ko: "프로필 사진",
+      pt: "Foto de perfil",
+      ur: "پروفائل تصویر",
+      ja: "プロフィール写真",
+    },
     loading: {
-      ar: "جارٍ تحميل معلومات الحساب...",
       en: "Loading account information...",
+      ar: "جارٍ تحميل معلومات الحساب...",
+      fr: "Chargement des informations du compte...",
+      de: "Kontoinformationen werden geladen...",
+      es: "Cargando información de la cuenta...",
+      tr: "Hesap bilgileri yükleniyor...",
+      ru: "Загрузка информации об аккаунте...",
+      zh: "正在加载账户信息...",
+      ko: "계정 정보를 불러오는 중...",
+      pt: "Carregando informações da conta...",
+      ur: "اکاؤنٹ کی معلومات لوڈ ہو رہی ہیں...",
+      ja: "アカウント情報を読み込んでいます...",
     },
     fetchError: {
-      ar: "حدث خطأ أثناء تحميل معلومات الحساب.",
       en: "An error occurred while fetching account information.",
+      ar: "حدث خطأ أثناء تحميل معلومات الحساب.",
+      fr: "Une erreur s'est produite lors de la récupération des informations du compte.",
+      de: "Fehler beim Laden der Kontoinformationen.",
+      es: "Se produjo un error al obtener la información de la cuenta.",
+      tr: "Hesap bilgileri alınırken bir hata oluştu.",
+      ru: "Произошла ошибка при получении информации об аккаунте.",
+      zh: "获取账户信息时出错。",
+      ko: "계정 정보를 가져오는 동안 오류가 발생했습니다.",
+      pt: "Ocorreu um erro ao buscar as informações da conta.",
+      ur: "اکاؤنٹ کی معلومات حاصل کرنے میں خرابی پیش آگئی۔",
+      ja: "アカウント情報の取得中にエラーが発生しました。",
     },
   };
 
-  // Fetch account information
   useEffect(() => {
-    // Don't fetch if not authenticated
     if (!isAuthenticated()) {
       setLoading(false);
       return;
@@ -70,9 +137,7 @@ const AccountInformationContent = () => {
         }
       } catch (error) {
         console.error("Error fetching account info:", error);
-        // Check if this is an authentication error
         if (error.response && error.response.status === 401) {
-          // Redirect to home page if unauthorized
           navigate("/");
         } else {
           toast.error(translations.fetchError[currentLanguage]);
@@ -89,16 +154,15 @@ const AccountInformationContent = () => {
     setPhoneNumber(String(value));
   };
 
-  const buttonShowEditModal = () => {
-    setShowModalEditAccount(true);
-  };
-
-  const hideModalEditInfoAccount = () => {
-    setShowModalEditAccount(false);
-  };
+  const buttonShowEditModal = () => setShowModalEditAccount(true);
+  const hideModalEditInfoAccount = () => setShowModalEditAccount(false);
 
   if (loading) {
-    return <div className="loading-text">{translations.loading[currentLanguage]}</div>;
+    return (
+      <div className="loading-text">
+        {translations.loading[currentLanguage]}
+      </div>
+    );
   }
 
   return (
@@ -128,9 +192,7 @@ const AccountInformationContent = () => {
                 readOnly
               />
               <div className="icon-edit-input" onClick={buttonShowEditModal}>
-                <div className="icon-edit-input">
-                  <EditIconUser />
-                </div>
+                <EditIconUser />
               </div>
             </div>
           </div>
@@ -150,13 +212,10 @@ const AccountInformationContent = () => {
                 onPhoneNumberChange={handlePhoneNumberChange}
                 separateDialCode
               />
-              {/* <div className="icon-edit-input">
-                <EditIconUser />
-              </div> */}
             </div>
           </div>
 
-          {/* Profile Photo */}
+          {/* Profile Photo (optional)
           <div className="mb-3">
             <label htmlFor="profilePhoto" className="form-label">
               {translations.profilePhoto[currentLanguage]}
@@ -169,7 +228,7 @@ const AccountInformationContent = () => {
                 style={{ width: "100px", height: "100px", borderRadius: "50%" }}
               />
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </>

@@ -18,8 +18,8 @@ const PersonalInformation = () => {
   const [profile, setProfiles] = useState({
     name: "",
     nationality: "",
-    dateOfBirth: "",
-    userType: "",
+    birthdate: "",
+    gender: "",
     image: "",
     nationality_id: 0, // ✅ store the id
     phone: "",
@@ -28,8 +28,8 @@ const PersonalInformation = () => {
   const validation = Yup.object().shape({
     name: Yup.string(),
     nationality: Yup.string(),
-    dateOfBirth: Yup.string(),
-    userType: Yup.string(),
+    birthdate: Yup.string(),
+    gender: Yup.string(),
     image: Yup.string()
   })
   const [loading, setLoading] = useState(true);
@@ -63,7 +63,7 @@ const PersonalInformation = () => {
         const response = await ProfileAPI.getProfile();
 
         if (response.success && response.data) {
-
+          console.log("API Response Data:", response.data); // Log the API response
           const profileData = response.data;
           const nationality =
             profileData?.nationality?.translations?.find(
@@ -74,8 +74,17 @@ const PersonalInformation = () => {
             name: profileData.name || translations.notAvailable[currentLanguage],
             nationality: nationality || translations.notAvailable[currentLanguage],
             nationality_id: profileData.nationality_id || 0, // ✅ store the id
-            dateOfBirth: profileData.birthdate || translations.notAvailable[currentLanguage],
-            userType: profileData.gender || translations.notAvailable[currentLanguage],
+            birthdate: profileData.birthdate || translations.notAvailable[currentLanguage],
+            gender: profileData.gender || translations.notAvailable[currentLanguage],
+            image: profileData.photo,
+            phone: profileData.phone || translations.notAvailable[currentLanguage],
+          });
+          console.log("Profile state after update:", { // Log the profile state after update
+            name: profileData.name || translations.notAvailable[currentLanguage],
+            nationality: nationality || translations.notAvailable[currentLanguage],
+            nationality_id: profileData.nationality_id || 0,
+            birthdate: profileData.birthdate || translations.notAvailable[currentLanguage],
+            gender: profileData.gender || translations.notAvailable[currentLanguage],
             image: profileData.photo,
             phone: profileData.phone || translations.notAvailable[currentLanguage],
           });
@@ -109,7 +118,9 @@ const PersonalInformation = () => {
         updatedProfile.name,
         updatedProfile.image,
         updatedProfile.nationality_id,
-        updatedProfile.phone
+        updatedProfile.phone,
+        updatedProfile.birthdate,
+        updatedProfile.gender,
       );
 
       if (response.success) {
@@ -121,6 +132,8 @@ const PersonalInformation = () => {
           nationality: updatedProfile.nationality, // ✅ now will have translated name
           nationality_id: updatedProfile.nationality_id,
           phone: updatedProfile.phone,
+          birthdate: updatedProfile.birthdate,
+          gender: updatedProfile.gender,
         }));
 
         // update localstorage data
@@ -129,16 +142,22 @@ const PersonalInformation = () => {
         const updatedUser = {
           ...userData,
           name: updatedProfile.name,
+          birthdate: updatedProfile.birthdate,
+          gender: updatedProfile.gender,
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         setRefresh(prev => !prev);
         toast.success(translations.profileUpdateSuccess[currentLanguage]);
         hideEditInfoButton(); // Close the modal
       } else {
+        console.log("currentLanguage in profileUpdateFailed:", currentLanguage);
+        console.log("translations.profileUpdateFailed:", translations.profileUpdateFailed);
         toast.error(translations.profileUpdateFailed[currentLanguage]);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
+      console.log("currentLanguage in profileUpdateError:", currentLanguage);
+      console.log("translations.profileUpdateError:", translations.profileUpdateError);
       toast.error(translations.profileUpdateError[currentLanguage]);
     }
   };
@@ -203,22 +222,22 @@ const PersonalInformation = () => {
             </div>
             <div className="col-12 col-md-6">
               <InputField
-                label={translations.dateOfBirth[currentLanguage]}
-                name="dateOfBirth"
+                label={translations.birthdate[currentLanguage]}
+                name="birthdate"
                 type="text"
-                placeholder={translations.dateOfBirth[currentLanguage]}
-                value={profile.dateOfBirth}
+                placeholder={translations.birthdate[currentLanguage]}
+                value={profile.birthdate}
                 success
                 readOnly
               />
             </div>
             <div className="col-12 col-md-6">
               <InputField
-                label={translations.userType[currentLanguage]}
-                name="userType"
+                label={translations.gender[currentLanguage]}
+                name="gender"
                 type="text"
-                placeholder={translations.userType[currentLanguage]}
-                value={profile.userType}
+                placeholder={translations.gender[currentLanguage]}
+                value={profile.gender}
                 success
                 readOnly
               />
