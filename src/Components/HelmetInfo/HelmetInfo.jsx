@@ -162,7 +162,7 @@ Museums in Saudi Arabia, National Museum, Madain Saleh, Historic Diriyah, Histor
   const { currentLanguage } = useLanguage()
   return (
     <Helmet>
-      <html lang={currentLanguage} dir={currentLanguage === "ar" ? "rtl" : "ltr"} />
+      <html lang={currentLanguage} />
       <title>{titlePage} | {currentLanguage === 'ar' ? 'جولة' : 'Atour'}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={currentLanguage === "ar" ? keywords : keywordsEn} />
