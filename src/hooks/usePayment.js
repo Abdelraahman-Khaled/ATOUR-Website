@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BookingAPI from "api/bookingApi";
 import { useBooking } from "context/BookingContext";
 
+
 const usePayment = (content, currentLanguage) => {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState(null);

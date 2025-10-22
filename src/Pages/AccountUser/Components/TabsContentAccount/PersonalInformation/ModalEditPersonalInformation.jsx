@@ -37,7 +37,7 @@ const ModalEditPersonalInformation = ({
   };
 
   const [birthdate, setBirthdate] = useState(initialProfile?.birthdate ? parseDate(initialProfile.birthdate) : null);
-  const [gender, setGender] = useState(initialProfile?.gender || "");
+  const [gender, setGender] = useState(initialProfile?.gender || null);
   const [nationalities, setNationalities] = useState([])
 
   const fileInputRef = useRef(null);
@@ -192,6 +192,7 @@ const ModalEditPersonalInformation = ({
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                 >
+                  <option value="">{translations.selectGender[currentLanguage]}</option>
                   <option value="male">{translations.male[currentLanguage]}</option>
                   <option value="female">{translations.female[currentLanguage]}</option>
                 </select>

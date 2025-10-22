@@ -207,6 +207,7 @@ const Offers = () => {
 
         const data = await ContentAPI.getGifts(currentLanguage, currentCurrency, params); // Fetch data from the API
         setGifts(data.data); // Set the fetched data to 
+
       } catch (err) {
         console.error("Error fetching products data:", err);
         toast.error("Failed to load products data. Please try again later.");

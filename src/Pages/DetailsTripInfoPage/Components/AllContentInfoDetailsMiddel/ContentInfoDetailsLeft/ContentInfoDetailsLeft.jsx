@@ -20,7 +20,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
       if (tripData.is_group === 1) {
         setNumberOfPeople(tripData.group_count);
       } else if (tripData.min_people) {
-        setNumberOfPeople(tripData.min_people);
+        setNumberOfPeople(1);
       }
     }
   }, [tripData, setNumberOfPeople]);

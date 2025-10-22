@@ -80,8 +80,6 @@ const ModalNumberIndividuals = ({
   // Select translations based on current language, fallback to English
   const t = translations[currentLanguage] || translations.en;
 
-  const isMaxReached = numberOfPeople >= tripData.max_people;
-
   const handleSave = () => {
     hideModalNumberIndividuals(); // Close the modal after saving
   };
@@ -99,10 +97,9 @@ const ModalNumberIndividuals = ({
           <h2 className="title">{t.adults}</h2>
           <CounterUpDown
             initialValue={numberOfPeople}
-            minValue={tripData.min_people}
-            maxValue={tripData.max_people}
+            minValue={1}
+            maxValue={9999999}
             onChange={setNumberOfPeople}
-            disablePlus={isMaxReached}
           />
         </div>
 

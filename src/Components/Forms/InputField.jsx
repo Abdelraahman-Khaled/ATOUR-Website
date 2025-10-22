@@ -8,7 +8,7 @@ const InputFiled = ({ label, success, ...props }) => {
 
   return (
     <div
-      className={`form-group input-field-info d-flex flex-column gap-1 mt-3 position-relative form-one ${
+      className={`form-group input-field-info d-flex flex-column gap-1 position-relative form-one ${
         meta.touched && meta.error ? "has-error" : ""
       }`}
     >

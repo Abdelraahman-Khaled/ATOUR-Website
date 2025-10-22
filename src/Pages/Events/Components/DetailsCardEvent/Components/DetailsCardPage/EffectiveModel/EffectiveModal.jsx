@@ -173,6 +173,29 @@ const content = {
         ur: "آن لائن",
         ja: "オンライン",
     },
+
+    paymentError: {
+        ar: "حدث خطأ أثناء عملية الدفع. يرجى المحاولة لاحقًا.",
+        en: "An error occurred during the payment process. Please try again later.",
+        fr: "Une erreur s'est produite lors du processus de paiement. Veuillez réessayer plus tard.",
+        es: "Ocurrió un error durante el proceso de pago. Por favor, inténtelo más tarde.",
+        de: "Während des Zahlungsvorgangs ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+        it: "Si è verificato un errore durante il pagamento. Si prega di riprovare più tardi.",
+        pt: "Ocorreu um erro durante o processo de pagamento. Por favor, tente novamente mais tarde.",
+        ru: "Во время оплаты произошла ошибка. Пожалуйста, попробуйте позже.",
+        zh: "支付过程中发生错误。请稍后再试。",
+        ja: "支払い中にエラーが発生しました。後でもう一度お試しください。",
+        ko: "결제 중 오류가 발생했습니다. 나중에 다시 시도해주세요.",
+        tr: "Ödeme sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+        hi: "भुगतान के दौरान कोई त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।",
+        bn: "পেমেন্ট প্রক্রিয়ার সময় একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে চেষ্টা করুন।",
+        ur: "ادائیگی کے دوران ایک خرابی پیش آگئی۔ براہ کرم بعد میں کوشش کریں۔",
+        fa: "در حین پرداخت خطایی رخ داد. لطفاً بعداً دوباره امتحان کنید.",
+        nl: "Er is een fout opgetreden tijdens het betalingsproces. Probeer het later opnieuw.",
+        sv: "Ett fel uppstod under betalningsprocessen. Försök igen senare.",
+        el: "Παρουσιάστηκε σφάλμα κατά τη διαδικασία πληρωμής. Παρακαλώ δοκιμάστε αργότερα.",
+    },
+
 };
 
 

@@ -52,12 +52,13 @@ const ContentAPI = {
   },
 
   // Effectiveness
-  getEffectiveness: async (language, currency) => {
+  getEffectiveness: async (language, currency, params) => {
     const response = await axiosInstance.get("/effectivenes", {
       headers: {
         lang: language, // Pass the language in the header
         currency: currency,
       },
+      params: params,
     });
     return response.data;
   },

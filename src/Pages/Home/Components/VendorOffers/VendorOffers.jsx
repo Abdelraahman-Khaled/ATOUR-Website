@@ -71,16 +71,8 @@ const content = {
 };
 
 const VendorOffers = ({ offer }) => {
-
     const offerData = Array.isArray(offer) ? offer : [];
-
     const { currentLanguage } = useLanguage(); // Get the selected language from context
-    const handleLinkClick = (e) => {
-        e.preventDefault();
-    };
-
-
-
     const { title, text } = content[currentLanguage];
 
     // handling link page
@@ -104,7 +96,7 @@ const VendorOffers = ({ offer }) => {
                 <SwiperCards swiperId="vendor-offers-swiper">
                     {offerData.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <Link to={getLink(item)} onClick={handleLinkClick}>
+                            <Link to={getLink(item)}>
                                 <VendorOfferCard
                                     imageCard={item.photo || backUP}
                                     amount={item.amount}

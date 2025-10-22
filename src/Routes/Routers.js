@@ -29,6 +29,7 @@ import Country from "Pages/Country/Country";
 import ArticalsDetails from "Pages/Blogs/Articles/ArticalsDetails";
 import AboutUs from "Pages/AboutUs/AboutUs";
 import Help from "Pages/Help/Help";
+import EffectivenesPage from "Pages/Effectivenes/EffectivenesPage";
 
 let routers = createBrowserRouter(
   [
@@ -80,7 +81,8 @@ let routers = createBrowserRouter(
             </>
           ),
           children: [
-            { path: "", element: <Events /> },
+            // { path: "", element: <Events /> },
+            { path: "", element: <EffectivenesPage /> },
             { path: ":id", element: <DetailsCardEvent /> },
           ],
         },

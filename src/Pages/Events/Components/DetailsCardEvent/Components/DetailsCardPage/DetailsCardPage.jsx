@@ -32,7 +32,7 @@ const DetailsCardPage = ({ effective }) => {
       if (effective.is_group === 1) {
         setNumberOfPeople(effective.group_count);
       } else if (effective.min_people) {
-        setNumberOfPeople(effective.min_people);
+        setNumberOfPeople(1);
       }
     }
   }, [effective, setNumberOfPeople]);

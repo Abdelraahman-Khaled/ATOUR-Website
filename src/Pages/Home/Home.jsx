@@ -40,6 +40,7 @@ const Home = () => {
   const offerVendorData = homeData?.vendor_offers || null;
 
 
+
   if (loading) {
     return (
       <SplashScreen />
@@ -72,7 +73,7 @@ const Home = () => {
           {mostVisited.length > 0 && <CitiesCard CityData={mostVisited} />}
           {offerData && <OneOffer offer={offerData} />}
           {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
-          {effectivenes.length > 0 && <CardsCollections data={gifts} type={"gift"} />}
+          {gifts.length > 0 && <CardsCollections data={gifts} type={"gift"} />}
           {offerVendorData && <VendorOffers offer={offerVendorData} />}
           {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
           <CardsBooks />

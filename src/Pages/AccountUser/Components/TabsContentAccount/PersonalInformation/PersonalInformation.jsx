@@ -74,8 +74,8 @@ const PersonalInformation = () => {
             name: profileData.name || translations.notAvailable[currentLanguage],
             nationality: nationality || translations.notAvailable[currentLanguage],
             nationality_id: profileData.nationality_id || 0, // ✅ store the id
-            birthdate: profileData.birthdate || translations.notAvailable[currentLanguage],
-            gender: profileData.gender || translations.notAvailable[currentLanguage],
+            birthdate: profileData.birthdate || null,
+            gender: profileData.gender || null,
             image: profileData.photo,
             phone: profileData.phone || translations.notAvailable[currentLanguage],
           });
@@ -184,7 +184,6 @@ const PersonalInformation = () => {
         <FormField
           key={refresh ? "refresh-1" : "refresh-0"}
           initialValues={profile}
-          validationSchema={validation}
           onSubmit={() => { }}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
@@ -226,7 +225,7 @@ const PersonalInformation = () => {
                 name="birthdate"
                 type="text"
                 placeholder={translations.birthdate[currentLanguage]}
-                value={profile.birthdate}
+                value={profile.birthdate || translations.notAvailable[currentLanguage]}
                 success
                 readOnly
               />
@@ -237,7 +236,7 @@ const PersonalInformation = () => {
                 name="gender"
                 type="text"
                 placeholder={translations.gender[currentLanguage]}
-                value={profile.gender}
+                value={profile.gender || translations.notAvailable[currentLanguage]}
                 success
                 readOnly
               />

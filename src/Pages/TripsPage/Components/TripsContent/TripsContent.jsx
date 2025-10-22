@@ -28,7 +28,7 @@ const TripsContent = ({
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const response = await GeneralAPI.getSubCategories(currentLanguage,type);
+        const response = await GeneralAPI.getSubCategories(currentLanguage, type);
         setSubCategories(response.data);
       } catch (error) {
         console.error('Error fetching subcategories:', error);

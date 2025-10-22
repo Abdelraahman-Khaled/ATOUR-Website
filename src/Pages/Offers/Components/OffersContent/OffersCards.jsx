@@ -100,7 +100,7 @@ const OffersCards = ({ gifts }) => {
       </div>
       {/* ============= END ROW =========== */}
       {/* ============ START PAGINATION ============= */}
-      {currentPageData.length > 5 && <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />}
+      {normalizedData.length > perPage && <PaginationPage itemCount={pageCount} onPageChange={handlePageChange} />}
 
       {/* ============ END PAGINATION ============= */}
     </div>

@@ -64,8 +64,8 @@ const getToastMessages = () => ({
   },
   foundEmail: {
     ar: "هذا الحساب موجود بالفعل",
-    en: "This account is already created"
-  }
+    en: "This account is already created",
+  },
 });
 
 const getCurrentLanguage = () => localStorage.getItem("language") || "en";
@@ -84,7 +84,10 @@ const handleError = (error) => {
 const AuthAPI = {
   login: async (username, password) => {
     try {
-      const response = await axiosInstance.post("/login", { username, password });
+      const response = await axiosInstance.post("/login", {
+        username,
+        password,
+      });
       if (response.data.access_token) {
         localStorage.setItem("access_token", response.data.access_token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -109,14 +112,16 @@ const AuthAPI = {
     }
   },
 
-  changePassword: async (currentPassword, newPassword) => {
+  changePassword: async (current_password, password, password_confirmation) => {
     try {
       const response = await axiosInstance.post("/change-password", {
-        current_password: currentPassword,
-        password: newPassword,
-        password_confirmation: newPassword,
+        current_password: current_password,
+        password: password,
+        password_confirmation: password_confirmation,
       });
-      toast.success(getToastMessages().changePasswordSuccess[getCurrentLanguage()]);
+      toast.success(
+        getToastMessages().changePasswordSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
@@ -127,7 +132,9 @@ const AuthAPI = {
   resetPassword: async (username) => {
     try {
       const response = await axiosInstance.post("/reset", { username });
-      toast.success(getToastMessages().resetPasswordSuccess[getCurrentLanguage()]);
+      toast.success(
+        getToastMessages().resetPasswordSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
@@ -137,9 +144,14 @@ const AuthAPI = {
 
   checkCode: async (username, code) => {
     try {
-      const response = await axiosInstance.post("/check-code", { username, code });
+      const response = await axiosInstance.post("/check-code", {
+        username,
+        code,
+      });
       if (response.data.success === true) {
-        toast.success(getToastMessages().verifyCodeSuccess[getCurrentLanguage()])
+        toast.success(
+          getToastMessages().verifyCodeSuccess[getCurrentLanguage()]
+        );
       }
       return response.data;
     } catch (error) {
@@ -155,7 +167,9 @@ const AuthAPI = {
         password: newPassword,
         password_confirmation: newPassword,
       });
-      toast.success(getToastMessages().confirmResetSuccess[getCurrentLanguage()]);
+      toast.success(
+        getToastMessages().confirmResetSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
@@ -171,7 +185,9 @@ const AuthAPI = {
       formData.append("image", image);
 
       const response = await axiosInstance.post("/update-profile", formData);
-      toast.success(getToastMessages().updateProfileSuccess[getCurrentLanguage()]);
+      toast.success(
+        getToastMessages().updateProfileSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
@@ -191,7 +207,7 @@ const AuthAPI = {
       toast.success(getToastMessages().registerSuccess[getCurrentLanguage()]);
       return response.data;
     } catch (error) {
-      toast.error(error.response.data.errors?.phone[0])
+      toast.error(error.response.data.errors?.phone[0]);
       throw error;
     }
   },
@@ -212,8 +228,11 @@ const AuthAPI = {
     try {
       const response = await axiosInstance.post("/verify-otp", { email, code });
       if (response.data.success === true) {
-        toast.success(getToastMessages().verifyOtpSuccess[getCurrentLanguage()])
-      } return response.data;
+        toast.success(
+          getToastMessages().verifyOtpSuccess[getCurrentLanguage()]
+        );
+      }
+      return response.data;
     } catch (error) {
       handleError(error);
       throw error;
@@ -222,8 +241,13 @@ const AuthAPI = {
 
   updateEmail: async (email, code) => {
     try {
-      const response = await axiosInstance.post("/update-email", { email, code });
-      toast.success(getToastMessages().updateEmailSuccess[getCurrentLanguage()]);
+      const response = await axiosInstance.post("/update-email", {
+        email,
+        code,
+      });
+      toast.success(
+        getToastMessages().updateEmailSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
@@ -233,8 +257,13 @@ const AuthAPI = {
 
   updatePhone: async (phone, code) => {
     try {
-      const response = await axiosInstance.post("/update-phone", { phone, code });
-      toast.success(getToastMessages().updatePhoneSuccess[getCurrentLanguage()]);
+      const response = await axiosInstance.post("/update-phone", {
+        phone,
+        code,
+      });
+      toast.success(
+        getToastMessages().updatePhoneSuccess[getCurrentLanguage()]
+      );
       return response.data;
     } catch (error) {
       handleError(error);
