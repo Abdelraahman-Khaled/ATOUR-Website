@@ -56,7 +56,7 @@ const CardsCollections = ({ data, type }) => {
           text: "Otantiklik ve tarih, miras ve gelenekler, doğa ve şehir, çöl ve medeniyet arasında en iyi turları ve destinasyonları keşfedin. Çeşitli manzaralar ve kültürlerle her deneyim sizi etkilemek için tasarlandı. Şimdi keşfedin!",
         },
       }
-      : type === "gifts" ?
+      : type === "effectivene" ?
         {
           ar: {
             title: "فعاليات مختلفة ",
@@ -183,7 +183,7 @@ const CardsCollections = ({ data, type }) => {
                 hasPayLater={item.pay_later}
                 guide_languages={item.guide_languages}
                 booking_count={item.booking_count}
-                discount={item.discount}
+                discount={item.customer_price_before_discount}
               />
             </SwiperSlide>
           ))}

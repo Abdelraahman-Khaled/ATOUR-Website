@@ -19,7 +19,7 @@ const NotificationPage = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const data = await getNotifications();
+        const data = await getNotifications(currentLanguage);
         setNotifications(data);
       } catch (err) {
         setError(err);
@@ -29,7 +29,7 @@ const NotificationPage = () => {
     };
 
     fetchNotifications();
-  }, []);
+  }, [currentLanguage]);
 
   const toggleExpand = (id) => {
     setExpandedNotifications(prev => ({

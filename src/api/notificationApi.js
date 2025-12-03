@@ -1,7 +1,11 @@
 import axiosInstance from './axiosInstance';
 
-export const getNotifications = async () => {
-  const response = await axiosInstance.get('/notifications');
+export const getNotifications = async (language) => {
+  const response = await axiosInstance.get('/notifications', {
+    headers: {
+      lang: language,
+    },
+  });
   return response.data.data;
 };
 

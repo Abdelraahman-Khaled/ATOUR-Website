@@ -96,13 +96,13 @@ const AllCardsReservations = ({ reservation, refresh }) => {
               return (
                 <div key={item.id} className="col-12 col-md-6 col-lg-12">
                   <CardReservation
-                    image={item.trip?.photo || backUP}
+                    image={item.trip?.cover || backUP}
                     typeReservation={item.payment_status}
                     countryName={item.trip?.city.title}
                     titleCard={(item.trip || item.effectivene || item.gift)?.title || "Ended"}
                     priceNum={`${item.customer_total}`}
                     textUserInfo={`  ${item.people_number || 1} ${text[currentLanguage].pepole}`}
-                    dateTime={item.booking_day}
+                    dateTime={item.booking_date}
                     timeAdd={item.booking_time}
                     isTrueButtonDetails={true}
                     buttonDetailsFunction={() => buttonShowDetails(item)} // Pass the selected item

@@ -51,7 +51,6 @@ const BookingAPI = {
     childrenNumber,
     paymentWay,
     time,
-    bookingDay,
     language,
   }) => {
     const response = await axiosInstance.post("/booking-trip", {
@@ -61,7 +60,6 @@ const BookingAPI = {
       children_number: childrenNumber,
       payment_way: paymentWay,
       booking_time: time,
-      booking_day: bookingDay,
       headers: {
         language: language,
       },

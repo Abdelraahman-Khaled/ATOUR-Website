@@ -6,6 +6,7 @@ export const content = {
     showPrograms: "Show available programs",
     freeCancel: "Free cancellation",
     payLater: "Pay later",
+    pleaseLogin: "Please login to continue",
   },
   ar: {
     selectDate: "حدد تاريخ الرحلة",
@@ -14,6 +15,7 @@ export const content = {
     showPrograms: "إظهر البرامج المتاحة",
     freeCancel: "إلغاء الحجز مجانا",
     payLater: "إدفع لاحقا",
+    pleaseLogin: "الرجاء تسجيل الدخول للمتابعة",
   },
   fr: {
     selectDate: "Sélectionnez une date de voyage",
@@ -22,6 +24,7 @@ export const content = {
     showPrograms: "Afficher les programmes disponibles",
     freeCancel: "Annulation gratuite",
     payLater: "Payer plus tard",
+    pleaseLogin: "Veuillez vous connecter pour continuer",
   },
   de: {
     selectDate: "Wählen Sie ein Reisedatum",
@@ -30,6 +33,7 @@ export const content = {
     showPrograms: "Verfügbare Programme anzeigen",
     freeCancel: "Kostenlose Stornierung",
     payLater: "Später bezahlen",
+    pleaseLogin: "Bitte melden Sie sich an, um fortzufahren",
   },
   es: {
     selectDate: "Seleccione una fecha de viaje",
@@ -38,6 +42,7 @@ export const content = {
     showPrograms: "Mostrar programas disponibles",
     freeCancel: "Cancelación gratuita",
     payLater: "Pagar más tarde",
+    pleaseLogin: "Por favor inicie sesión para continuar",
   },
   tr: {
     selectDate: "Seyahat tarihi seçin",
@@ -46,6 +51,7 @@ export const content = {
     showPrograms: "Mevcut programları göster",
     freeCancel: "Ücretsiz iptal",
     payLater: "Sonra öde",
+    pleaseLogin: "Devam etmek için lütfen giriş yapın",
   },
   ru: {
     selectDate: "Выберите дату поездки",
@@ -54,6 +60,7 @@ export const content = {
     showPrograms: "Показать доступные программы",
     freeCancel: "Бесплатная отмена",
     payLater: "Оплатить позже",
+    pleaseLogin: "Пожалуйста, войдите, чтобы продолжить",
   },
   zh: {
     selectDate: "选择旅行日期",
@@ -62,6 +69,7 @@ export const content = {
     showPrograms: "显示可用的行程",
     freeCancel: "免费取消",
     payLater: "稍后付款",
+    pleaseLogin: "请登录以继续",
   },
   ko: {
     selectDate: "여행 날짜를 선택하세요",
@@ -70,6 +78,7 @@ export const content = {
     showPrograms: "이용 가능한 프로그램 보기",
     freeCancel: "무료 취소",
     payLater: "나중에 결제",
+    pleaseLogin: "계속하려면 로그인하세요",
   },
   pt: {
     selectDate: "Selecione uma data da viagem",
@@ -78,6 +87,7 @@ export const content = {
     showPrograms: "Mostrar programas disponíveis",
     freeCancel: "Cancelamento gratuito",
     payLater: "Pagar depois",
+    pleaseLogin: "Por favor, faça login para continuar",
   },
   ur: {
     selectDate: "سفر کی تاریخ منتخب کریں",
@@ -86,6 +96,7 @@ export const content = {
     showPrograms: "دستیاب پروگرام دکھائیں",
     freeCancel: "مفت منسوخی",
     payLater: "بعد میں ادائیگی کریں",
+    pleaseLogin: "جاری رکھنے کے لیے براہ کرم لاگ ان کریں",
   },
   ja: {
     selectDate: "旅行日を選択してください",
@@ -94,5 +105,6 @@ export const content = {
     showPrograms: "利用可能なプログラムを表示",
     freeCancel: "無料キャンセル",
     payLater: "後で支払う",
+    pleaseLogin: "続行するにはログインしてください",
   },
 };

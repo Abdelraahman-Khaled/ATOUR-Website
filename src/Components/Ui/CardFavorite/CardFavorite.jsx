@@ -76,12 +76,12 @@ const CardFavorite = ({
           <h2 className="title">{titleCard}</h2>
           <div className="price-info d-flex align-items-center gap-1">
             {is_group ? " " : cardFavoriteTranslations.startingFrom[currentLanguage]}
-            {discount && NumPriceNew > discount ?
+            {discount && NumPriceNew < discount ?
               <>
-                <span className="price-num"><CurrencyDisplay price={discount} /></span>
+                <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>
                 {" "}
                 {cardFavoriteTranslations.insteadOf[currentLanguage]}
-                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={NumPriceNew} /></span>
+                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={discount} /></span>
               </>
               :
               <span className="price-num"><CurrencyDisplay price={NumPriceNew} /></span>

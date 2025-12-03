@@ -101,17 +101,178 @@ const translations = {
     ur: "اکاؤنٹ کی معلومات حاصل کرنے میں خرابی پیش آگئی۔",
     ja: "アカウント情報の取得中にエラーが発生しました。",
   },
-  title: { ar: "امان الحساب", en: "Account security" },
-  password: { ar: "كلمة السر", en: "Password" },
-  choosePassword: { ar: "اختار كلمة سر قوية عشان تحمي حسابك. ", en: "Choose a strong password to keep your account safe." },
-  makePassword: { ar: "تغير كلمة السر", en: "Make a password" },
-  google: { ar: "  تسجيل بجوجل", en: "Log in with Google" },
-  googleAccount: { ar: "إنت رابط حساب جوجل بـ Deal وبتستخدمه في تسجيل الدخول. إنت داخل بحساب hoss12345@gmail.com الخاص بك مع كلمة السر التي قمت بإعطاءها عند إنشاء حسابك. الرجاء تأكيد رقم هاتفك للمتابعة.", en: "You are linked to a Google account with Deal and you can log in with it. You are logged in to hoss12345@gmail.com account with the password you provided when you created your account. Please confirm your phone number to proceed." },
-  cancelGoogle: { ar: "الغي ربط الحساب", en: "Cancel" },
-  deleteAccount: { ar: "مسح الحساب", en: "Delete account" },
-  deleteDetails: { ar: "لو حذفت حسابك، كل بياناتك هتتمسح ومش هتقدر تسترجعها تاني. لو متأكد، دوس على امسح حسابي.", en: "If you delete your account, all your data will be deleted and you will not be able to recover it. If you are sure, click Delete Account." },
-  deleteBtn: { ar: "امسح حسابي ", en: "Delete account" },
+  title: {
+    en: "Account Security",
+    ar: "أمان الحساب",
+    fr: "Sécurité du compte",
+    de: "Kontosicherheit",
+    es: "Seguridad de la cuenta",
+    tr: "Hesap Güvenliği",
+    ru: "Безопасность аккаунта",
+    zh: "账户安全",
+    ko: "계정 보안",
+    pt: "Segurança da conta",
+    ur: "اکاؤنٹ کی حفاظت",
+    ja: "アカウントのセキュリティ",
+  },
+  password: {
+    en: "Password",
+    ar: "كلمة السر",
+    fr: "Mot de passe",
+    de: "Passwort",
+    es: "Contraseña",
+    tr: "Şifre",
+    ru: "Пароль",
+    zh: "密码",
+    ko: "비밀번호",
+    pt: "Senha",
+    ur: "پاس ورڈ",
+    ja: "パスワード",
+  },
+  choosePassword: {
+    en: "Choose a strong password to keep your account safe.",
+    ar: "اختار كلمة سر قوية عشان تحمي حسابك.",
+    fr: "Choisissez un mot de passe fort pour sécuriser votre compte.",
+    de: "Wählen Sie ein starkes Passwort, um Ihr Konto zu schützen.",
+    es: "Elige una contraseña segura para mantener tu cuenta protegida.",
+    tr: "Hesabınızı güvende tutmak için güçlü bir şifre seçin.",
+    ru: "Выберите надежный пароль, чтобы защитить свою учетную запись.",
+    zh: "选择一个强密码以确保您的账户安全。",
+    ko: "계정을 안전하게 유지하려면 강력한 비밀번호를 선택하세요.",
+    pt: "Escolha uma senha forte para manter sua conta segura.",
+    ur: "اپنے اکاؤنٹ کو محفوظ رکھنے کے لیے ایک مضبوط پاس ورڈ منتخب کریں۔",
+    ja: "アカウントを安全に保つために強力なパスワードを選択してください。",
+  },
+  makePassword: {
+    en: "Change Password",
+    ar: "تغير كلمة السر",
+    fr: "Changer le mot de passe",
+    de: "Passwort ändern",
+    es: "Cambiar la contraseña",
+    tr: "Şifreyi değiştir",
+    ru: "Изменить пароль",
+    zh: "更改密码",
+    ko: "비밀번호 변경",
+    pt: "Alterar senha",
+    ur: "پاس ورڈ تبدیل کریں",
+    ja: "パスワードを変更",
+  },
+    currentPassword: {
+      en: "Current Password",
+      ar: "الرقم السري الحالي",
+      fr: "Mot de passe actuel",
+      de: "Aktuelles Passwort",
+      es: "Contraseña actual",
+      tr: "Mevcut şifre",
+      ru: "Текущий пароль",
+      zh: "当前密码",
+      ko: "현재 비밀번호",
+      pt: "Senha atual",
+      ur: "موجودہ پاس ورڈ",
+      ja: "現在のパスワード",
+    },
+    newPassword: {
+      en: "New Password",
+      ar: "الرقم السري الجديد",
+      fr: "Nouveau mot de passe",
+      de: "Neues Passwort",
+      es: "Nueva contraseña",
+      tr: "Yeni şifre",
+      ru: "Новый пароль",
+      zh: "新密码",
+      ko: "새 비밀번호",
+      pt: "Nova senha",
+      ur: "نیا پاس ورڈ",
+      ja: "新しいパスワード",
+    },
+    confirmNewPassword: {
+      en: "Confirm New Password",
+      ar: "تأكيد الرقم السري الجديد",
+      fr: "Confirmer le nouveau mot de passe",
+      de: "Neues Passwort bestätigen",
+      es: "Confirmar nueva contraseña",
+      tr: "Yeni şifreyi onayla",
+      ru: "Подтвердите новый пароль",
+      zh: "确认新密码",
+      ko: "새 비밀번호 확인",
+      pt: "Confirmar nova senha",
+      ur: "نیا پاس ورڈ کی تصدیق کریں",
+      ja: "新しいパスワードを確認",
+    },
+    changingPassword: {
+      en: "Changing Password...",
+      ar: "جاري تغيير كلمة المرور...",
+      fr: "Changement du mot de passe...",
+      de: "Passwort wird geändert...",
+      es: "Cambiando la contraseña...",
+      tr: "Şifre değiştiriliyor...",
+      ru: "Изменение пароля...",
+      zh: "正在更改密码...",
+      ko: "비밀번호 변경 중...",
+      pt: "Alterando senha...",
+      ur: "پاس ورڈ تبدیل کیا جا رہا ہے...",
+      ja: "パスワードを変更しています...",
+    },
+    changePasswordBtn: {
+      en: "Change Password",
+      ar: "تغيير كلمة السر",
+      fr: "Changer le mot de passe",
+      de: "Passwort ändern",
+      es: "Cambiar la contraseña",
+      tr: "Şifreyi değiştir",
+      ru: "Изменить пароль",
+      zh: "更改密码",
+      ko: "비밀번호 변경",
+      pt: "Alterar senha",
+      ur: "پاس ورڈ تبدیل کریں",
+      ja: "パスワードを変更",
+    },
 };
+const validationMessages = {
+  required: {
+    en: "This field is required",
+    ar: "هذا الحقل مطلوب",
+    fr: "Ce champ est requis",
+    de: "Dieses Feld ist erforderlich",
+    es: "Este campo es obligatorio",
+    tr: "Bu alan gereklidir",
+    ru: "Это поле обязательно для заполнения",
+    zh: "此字段为必填项",
+    ko: "이 필드는 필수입니다",
+    pt: "Este campo é obrigatório",
+    ur: "یہ خانہ ضروری ہے",
+    ja: "このフィールドは必須です",
+  },
+  shortPassword: {
+    en: "Password is too short",
+    ar: "كلمة السر قصيرة",
+    fr: "Le mot de passe est trop court",
+    de: "Das Passwort ist zu kurz",
+    es: "La contraseña es demasiado corta",
+    tr: "Şifre çok kısa",
+    ru: "Пароль слишком короткий",
+    zh: "密码太短",
+    ko: "비밀번호가 너무 짧습니다",
+    pt: "A senha é muito curta",
+    ur: "پاس ورڈ بہت چھوٹا ہے",
+    ja: "パスワードが短すぎます",
+  },
+  mismatch: {
+    en: "Passwords do not match",
+    ar: "كلمة السر غير متطابقة",
+    fr: "Les mots de passe ne correspondent pas",
+    de: "Passwörter stimmen nicht überein",
+    es: "Las contraseñas no coinciden",
+    tr: "Şifreler eşleşmiyor",
+    ru: "Пароли не совпадают",
+    zh: "密码不匹配",
+    ko: "비밀번호가 일치하지 않습니다",
+    pt: "As senhas não correspondem",
+    ur: "پاس ورڈز مماثل نہیں ہیں",
+    ja: "パスワードが一致しません",
+  },
+};
+
 
 const AccountInformationContent = () => {
   const { currentLanguage } = useLanguage();
@@ -163,7 +324,6 @@ const AccountInformationContent = () => {
       } catch (error) {
         console.error("Error fetching account info:", error);
         if (error.response && error.response.status === 401) {
-          navigate("/");
         } else {
           toast.error(translations.fetchError[currentLanguage]);
         }
@@ -186,7 +346,11 @@ const AccountInformationContent = () => {
   const handleChangePassword = async (values) => {
     setIsLoading(true);
     try {
-      const response = await AuthAPI.changePassword(values);
+      const response = await AuthAPI.changePassword(
+        values.current_password,
+        values.password,
+        values.password_confirmation
+      );
     } catch (error) {
       console.error("Error changing password:", error);
     } finally {
@@ -194,14 +358,15 @@ const AccountInformationContent = () => {
     }
   }
 
-  const validationSchema = Yup.object({
-    current_password: Yup.string().required("هذا الحقل مطلوب"),
+const validationSchema = () =>
+  Yup.object({
+    current_password: Yup.string().required(validationMessages.required[currentLanguage]),
     password: Yup.string()
-      .min(6, "كلمة السر قصيرة")
-      .required("هذا الحقل مطلوب"),
+      .min(6, validationMessages.shortPassword[currentLanguage])
+      .required(validationMessages.required[currentLanguage]),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password")], "كلمة السر غير متطابقة")
-      .required("هذا الحقل مطلوب"),
+      .oneOf([Yup.ref("password")], validationMessages.mismatch[currentLanguage])
+      .required(validationMessages.required[currentLanguage]),
   });
 
   if (loading) {
@@ -219,7 +384,7 @@ const AccountInformationContent = () => {
         hideModalEditInfoAccount={hideModalEditInfoAccount}
         initialValue={profileData.email}
       />
-      <div className="account-information-content">
+      <div className="account-information-content ">
         <h2 className="title title-info-top-account pb-3">
           {translations.accountInfo[currentLanguage]}
         </h2>
@@ -245,7 +410,7 @@ const AccountInformationContent = () => {
           </div>
 
           {/* Phone Number Field */}
-          <div className="mb-3 form-input-one-control">
+          {/* <div className="mb-3 form-input-one-control">
             <label htmlFor="phoneControlInput1" className="form-label">
               {translations.phone[currentLanguage]}
             </label>
@@ -260,7 +425,7 @@ const AccountInformationContent = () => {
                 separateDialCode
               />
             </div>
-          </div>
+          </div> */}
 
 
 
@@ -281,7 +446,7 @@ const AccountInformationContent = () => {
         </form>
         {!password ? (
           <>
-            <div className="personal-information-content border-account-user p-4 row m-0 justify-content-between align-items-center space-2">
+            <div className="personal-information-content border rounded-2 d-flex gap-2 p-4 row m-0 justify-content-between align-items-center space-2">
               <div className="col-9">
                 <p className="b-5 pb-1">{translations.password[currentLanguage]}</p>
                 <p className="b-12 text-gray">{translations.choosePassword[currentLanguage]}</p>
@@ -309,7 +474,7 @@ const AccountInformationContent = () => {
 
                 <div className="w-100 d-flex flex-column justify-content-between flex-wrap gap-1">
                   <label className="b-11 me-3 pb-2" style={{ minWidth: "150px" }}>
-                    الرقم السري الحالي <span>*</span>
+                    {translations.currentPassword[currentLanguage]} <span className="error">*</span>
                   </label>
                   <InputFiled
                     name="current_password"
@@ -321,7 +486,7 @@ const AccountInformationContent = () => {
 
                 <div className="w-100 d-flex flex-column justify-content-between flex-wrap gap-1">
                   <label className="b-11 me-3 pb-2" style={{ minWidth: "150px" }}>
-                    الرقم السري الجديد <span>*</span>
+                    {translations.newPassword[currentLanguage]} <span className="error">*</span>
                   </label>
                   <InputFiled
                     name="password"
@@ -333,7 +498,7 @@ const AccountInformationContent = () => {
 
                 <div className="w-100 d-flex flex-column justify-content-between flex-wrap gap-1 mb-3">
                   <label className="b-11 me-3" style={{ minWidth: "150px" }}>
-                    تأكيد الرقم السري الجديد <span>*</span>
+                    {translations.confirmNewPassword[currentLanguage]} <span className="error">*</span>
                   </label>
                   <InputFiled
                     name="password_confirmation"
@@ -351,10 +516,10 @@ const AccountInformationContent = () => {
                   {isLoading ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2 text-white" role="status" />
-                      {currentLanguage === "ar" ? "جاري تغيير كلمة المرور..." : "Changing Password..."}
+                      {translations.changingPassword[currentLanguage]}
                     </>
                   ) : (
-                    "تغيير كلمة السر"
+                    translations.changePasswordBtn[currentLanguage]
                   )}
                 </button>
               </div>

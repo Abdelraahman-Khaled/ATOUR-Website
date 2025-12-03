@@ -170,7 +170,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 typeReservation={reservation.payment_status}
                 countryName={reservation.effectivene.city.title}
                 titleCard={(reservation.trip || reservation.effectivene || reservation.gift)?.title || "Ended"}
-                priceNum={`${reservation.total}`}
+                priceNum={`${reservation.customer_total}`}
                 textUserInfo={`${reservation.people_number} `}
                 dateTime={reservation.effectivene.from_date}
                 timeAdd={`${text[currentLanguage].from}  ${reservation.effectivene.from_time} ${text[currentLanguage].to} ${reservation.effectivene.to_time}`}
@@ -187,7 +187,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 image={reservation.photo || reservation.gift?.photo || image}
                 typeReservation={reservation.payment_status}
                 titleCard={(reservation.trip || reservation.effectivene || reservation.gift)?.title || "Ended"}
-                priceNum={`${reservation.total}`}
+                priceNum={`${reservation.customer_total}`}
                 textUserInfo={`${reservation.delivery_way === "myself" ? text[currentLanguage].myself : text[currentLanguage].delivery}`}
                 isTrueButtonDetails={false}
                 buttonDetailsFunction={false}
@@ -204,9 +204,9 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                 typeReservation={reservation.payment_status}
                 countryName={reservation.trip.city.title}
                 titleCard={(reservation.trip || reservation.effectivene || reservation.gift)?.title || text[currentLanguage].temporaryTrip}
-                priceNum={reservation.total}
+                priceNum={reservation.customer_total}
                 textUserInfo={`${reservation.people_number} ${text[currentLanguage].pepole}`}
-                dateTime={reservation.booking_day}
+                dateTime={reservation.booking_date}
                 timeAdd={reservation.booking_time}
                 isTrueButtonDetails={false}
                 buttonDetailsFunction={false}
@@ -238,7 +238,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                         </div>
                         <div className="details-one-1 d-flex align-items-center justify-content-between gap-2 flex-wrap">
                           <h2 className="text">{text[currentLanguage].total}</h2>
-                          <p className="num-pay">{reservation.total} {text[currentLanguage].riyal}</p>
+                          <p className="num-pay">{reservation.customer_total} {text[currentLanguage].riyal}</p>
                         </div>
                       </div>
                     </div>
@@ -249,7 +249,7 @@ const ModalDetailsTrip = ({ showDetailsModal, hideDetailsModal, reservation, cur
                       <div className="content-serv pt-3 d-flex align-items-center  gap-3">
                         <div className="image-serv">
                           <img
-                            src={reservation.vendor.photo}
+                            src={reservation.vendor.image}
                             alt="imageServ"
                             width={"45px"}
                             height={"45px"}

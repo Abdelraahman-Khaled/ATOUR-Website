@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faCoins, faLocation, faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faCoins, faGift, faGifts, faLocation, faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
 import { ClockIcon } from "@mui/x-date-pickers";
 import UserIcon2 from "assets/Icons/UserIcon2";
 import './BoxOneContent.css'
@@ -225,11 +225,11 @@ const BoxOneContent = ({ tripData }) => {
                 <div className="info-right--1 d-flex align-items-center gap-2">
                   <FontAwesomeIcon icon={faCoins} />
                 </div>
-                {tripData.discount && tripData.discount < tripData.customer_price ?
+                {tripData.discount && tripData.customer_price_before_discount > tripData.customer_price ?
                   <p className="text d-flex gap-1">
-                    <CurrencyDisplay price={tripData.discount} />
+                    <CurrencyDisplay price={tripData.customer_price} />
                     {boxTranslations.instedOf[currentLanguage]}
-                    <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={tripData.customer_price} /></span>
+                    <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={tripData.customer_price_before_discount} /></span>
                   </p>
                   :
                   <CurrencyDisplay price={tripData.customer_price} />
@@ -243,6 +243,19 @@ const BoxOneContent = ({ tripData }) => {
                 </div>
                 <p className="text d-flex gap-1">
                   {tripData.booking_count}
+                </p>
+              </div>
+              :
+              null
+            }
+            {tripData?.quantity >= 0  ?
+              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                <div className="info-right--1 d-flex align-items-center gap-2">
+                  <FontAwesomeIcon icon={faGift} />
+                </div>
+                <p className="text d-flex gap-1">
+               <span> {boxTranslations.availableStock[currentLanguage]} </span>
+                ({tripData.quantity}) 
                 </p>
               </div>
               :

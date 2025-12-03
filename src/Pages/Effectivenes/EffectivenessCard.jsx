@@ -91,7 +91,7 @@ const EffectivenessCard = ({ effectivenessData = [] }) => {
                                         numMonth={dayNumber}
                                         titleDay={dayName}
                                         image={item.image}
-                                        nameCountry={item.city !== undefined ? item.city.country_name : currentLanguage === "ar" ? "السعودية" : "Saudi Arabia"}
+                                        nameCountry={item.city !== undefined ? item.city.title : currentLanguage === "ar" ? "السعودية" : "Saudi Arabia"}
                                         titleCard={item.title}
                                         numPrice={<CurrencyDisplay price={item.customer_price} />}
                                         textContent={""}

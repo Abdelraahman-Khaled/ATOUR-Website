@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 
 
-const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
+const CardsContentTrips = ({ buttonActiveMap, activeMap,type, tripsData = [] }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
   const [currentPage_2, setCurrentPage_2] = useState(0);
@@ -73,12 +73,12 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                 <>
                   {/* ========== START COL =========== */}
                   <div className="col-12 col-sm-6 col-xl-12" key={item.id}>
-                    <Link to={`/tripsPage/${item.id}`}>
+                    <Link to={type === "trip" ? `/tripsPage/${item.id}` : type === "gift" ? `/gifts/${item.id}` : type === "effectiveness" ? `/eventsPage/${item.id}` : "#"}>
                       <CardFavorite
                         newClassCard={"card-offer-one"}
                         idCard={item.id}
                         image={item.image}
-                        textLocation={item.start_point}
+                        textLocation={item.city.title}
                         titleCard={item.title} // Dynamic title
                         NumPriceNew={`${item.customer_price}`}
                         isTrueNumTwo={false}
@@ -94,10 +94,10 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap, tripsData = [] }) => {
                         isNewPage={true}
                         wishListCard={wishList_2}
                         addToWishList={addToWishList}
-                        type={"trip"}
+                        type={type}
                         bookingCount={item.booking_count}
                         is_group={item.is_group}
-                        discount={item.discount}
+                        discount={item.customer_price_before_discount}
                       />
                     </Link>
                   </div>

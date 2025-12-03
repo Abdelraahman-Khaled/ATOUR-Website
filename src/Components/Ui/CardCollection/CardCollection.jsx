@@ -240,12 +240,12 @@ const CardCollection = ({
               </div>
             ) : null}
           </div>
-          {discount && discount < numPriceCard ? (
+          {discount && discount > numPriceCard ? (
             <div className="price-info pb-2">
               <span className="price-num ">
-                <CurrencyDisplay price={discount} />
+                <CurrencyDisplay price={numPriceCard} />
                 {"  "}  {instedOF}
-                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={numPriceCard} /></span>
+                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={discount} /></span>
                 <span>{is_group ? forGroup : perPersonText}</span>
               </span>
             </div>

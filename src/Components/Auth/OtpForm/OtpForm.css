@@ -18,10 +18,14 @@
   border-radius: 50%;
   margin: 0 auto 15px auto;
 }
+body.dark-them .otp-form-modal .icon-email{
+    background: var(--dark-green-01-color);
+
+}
 
 .otp-form-modal .info-header-otp :is(.title, .text, .timer-down-otp) {
   font-weight: 500;
-  color: var(--dark-01-color);
+  color: var(--dark-01-color) !important;
   text-align: center;
 }
 
@@ -36,7 +40,7 @@
 }
 
 .otp-form-modal .timer-otp {
-  color: #b70707;
+  color: #b70707 !important;
 }
 
 .otp-form-modal .all-input-otp {

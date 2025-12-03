@@ -150,10 +150,21 @@ const TabsBiography = ({
       ),
       content: (
         <ContainerMedia>
-          <AllCardsEvents
-            currentLanguage={currentLanguage}
-            eventsData={normalizedDataEff}
-            className="p-0"
+          <TripsContent
+            tripsData={normalizedDataEff}
+            onSelectSubCategory={onSelectSubCategory}
+            onPriceChange={onPriceChange}
+            onCountryChange={onCountryChange}
+            onCityChange={onCityChange}
+            selectedCountryId={selectedCountryId}
+            selectedCityId={selectedCityId}
+            onCheckboxChange={onCheckboxChange}
+            checkboxFilters={checkboxFilters}
+            onSubmitFilters={onSubmitFilters}
+            onClearFilters={onClearFilters}
+            displayCountries={false}
+            loading={loading}
+            type={"effectiveness"}
           />
         </ContainerMedia>
       ),

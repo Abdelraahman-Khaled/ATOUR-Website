@@ -134,7 +134,7 @@ const AllCardsResrvationsGift = ({ reservation, refresh }) => {
                             return (
                                 <div key={item.id} className="col-12 col-md-6 col-lg-12">
                                     <GiftCardReservation
-                                        image={item.photo || item.gift?.photo || backUP}
+                                        image={item.photo || item.gift?.cover || backUP}
                                         typeReservation={item.payment_status}
                                         titleCard={(item.trip || item.effectivene || item.gift)?.title || "Product"}
                                         priceNum={`${item.total}`}

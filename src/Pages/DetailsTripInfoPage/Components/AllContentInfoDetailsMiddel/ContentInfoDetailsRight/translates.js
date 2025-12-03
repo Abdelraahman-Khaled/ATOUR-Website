@@ -154,5 +154,19 @@ const boxTranslations = {
     ur: "اعلی درجہ بندی",
     ja: "最高評価",
   },
+  availableStock: {
+    ar: "المتبقي",
+    en: "Available stock",
+    fr: "Stock disponible",
+    de: "Verfügbare Stückzahl",
+    es: "Stock disponible",
+    tr: "Mevcut stok",
+    ru: "Доступное количество",
+    zh: "可用库存",
+    ko: "사용 가능한 재고",
+    pt: "Estoque disponível",
+    ur: "متبقي استوک",
+    ja: "利用可能な在庫",
+  },
 };
 export default boxTranslations;

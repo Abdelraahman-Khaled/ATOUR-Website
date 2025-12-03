@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import otpContent from "../otpContent";
 
-const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) => {
+const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone  }) => {
   const [otpTimer, setOTPTimer] = useState(60);
   const [otp, setOtp] = useState("");
   const inputRefs = useRef([]);
@@ -16,6 +16,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
 
   const { currentLanguage } = useLanguage(); // Get current language
   const content = otpContent;
+console.log(otp);
 
   useEffect(() => {
     if (showOtpForm) {
@@ -133,7 +134,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone }) 
         <div className="info-header-otp mt-3">
           <h2 className="title">{content.title[currentLanguage]}</h2>
           <p className="text">
-            {content.description[currentLanguage]} <span>{emailOrPhone}</span>
+            {content.description[currentLanguage]} {emailOrPhone}
           </p>
           {timerRunning ? (
             <div className="timer-down-otp">

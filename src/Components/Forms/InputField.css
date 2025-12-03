@@ -1,0 +1,15 @@
+.password-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  color: #888;
+}
+
+.password-toggle-btn:hover {
+  color: #333;
+}
+[dir="ltr"] .end-0 {
+  right: 0 !important;
+  left: unset !important;
+}

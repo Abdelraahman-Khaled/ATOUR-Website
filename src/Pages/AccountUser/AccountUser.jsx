@@ -1,15 +1,10 @@
 import "./AccountUser.css";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
-import InformationIcon from "assets/images/AccountUser/InformationIcon";
-import SettingsIcon from "assets/images/AccountUser/SettingsIcon";
-import UserIcon from "assets/images/AccountUser/UserIcon";
-import PayIcon from "assets/images/IconsBooks/PayIcon";
 import { useEffect, useState } from "react";
 import UserInfo from "./Components/UserInfo";
 import LogOutIcon from "assets/images/AccountUser/LogOutIcon";
 import PersonalInformation from "./Components/TabsContentAccount/PersonalInformation/PersonalInformation";
 import AccountInformationContent from "./Components/TabsContentAccount/AccountInformationContent/AccountInformationContent";
-import PayInformationTab from "./Components/TabsContentAccount/PayInformationTab/PayInformationTab";
 import SettingsTab from "./Components/TabsContentAccount/SettingsTab/SettingsTab";
 import { Link } from "react-router-dom";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";

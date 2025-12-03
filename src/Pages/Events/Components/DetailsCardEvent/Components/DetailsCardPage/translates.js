@@ -7,6 +7,8 @@ const detailsCardPageText = {
     bookingsCount: "عدد الحجوزات حتى الآن",
     freeCancelation: "متاح إلغاء الحجز مجانا",
     bookNowPayLater: "إحجز الآن إدفع لاحقا",
+    pleaseLogin: "يرجى تسجيل الدخول أولاً",
+    book: "احجز الآن",
   },
   en: {
     numberOfPeople: "Number of people",
@@ -16,6 +18,8 @@ const detailsCardPageText = {
     bookingsCount: "Number of bookings so far",
     freeCancelation: "Free cancellation is available",
     bookNowPayLater: "Book now, pay later",
+    pleaseLogin: "Please login to continue",
+    book: "Book Now",
   },
   fr: {
     numberOfPeople: "Nombre de personnes",
@@ -25,6 +29,8 @@ const detailsCardPageText = {
     bookingsCount: "Nombre de réservations jusqu'à présent",
     freeCancelation: "Annulation gratuite disponible",
     bookNowPayLater: "Réservez maintenant, payez plus tard",
+    pleaseLogin: "Veuillez vous connecter pour continuer",
+    book: "Réserver maintenant",
   },
   de: {
     numberOfPeople: "Anzahl der Personen",
@@ -34,6 +40,8 @@ const detailsCardPageText = {
     bookingsCount: "Anzahl der bisherigen Buchungen",
     freeCancelation: "Kostenlose Stornierung möglich",
     bookNowPayLater: "Jetzt buchen, später bezahlen",
+    pleaseLogin: "Bitte melden Sie sich an, um fortzufahren",
+    book: "Jetzt buchen",
   },
   es: {
     numberOfPeople: "Número de personas",
@@ -43,6 +51,8 @@ const detailsCardPageText = {
     bookingsCount: "Número de reservas hasta ahora",
     freeCancelation: "Cancelación gratuita disponible",
     bookNowPayLater: "Reserva ahora, paga después",
+    pleaseLogin: "Por favor inicie sesión para continuar",
+    book: "Reservar ahora",
   },
   tr: {
     numberOfPeople: "Kişi sayısı",
@@ -52,6 +62,8 @@ const detailsCardPageText = {
     bookingsCount: "Şu ana kadar rezervasyon sayısı",
     freeCancelation: "Ücretsiz iptal mevcut",
     bookNowPayLater: "Şimdi rezervasyon yap, sonra öde",
+    pleaseLogin: "Devam etmek için lütfen giriş yapın",
+    book: "Şimdi Rezerv Et",
   },
   ru: {
     numberOfPeople: "Количество человек",
@@ -61,6 +73,8 @@ const detailsCardPageText = {
     bookingsCount: "Количество бронирований на данный момент",
     freeCancelation: "Доступна бесплатная отмена",
     bookNowPayLater: "Забронируй сейчас, плати позже",
+    pleaseLogin: "Пожалуйста, войдите, чтобы продолжить",
+    book: "Забронировать сейчас",
   },
   zh: {
     numberOfPeople: "人数",
@@ -70,6 +84,8 @@ const detailsCardPageText = {
     bookingsCount: "到目前为止的预订数量",
     freeCancelation: "可免费取消",
     bookNowPayLater: "现在预订，稍后付款",
+    pleaseLogin: "请登录以继续",
+    book: "立即预订",
   },
   ko: {
     numberOfPeople: "인원 수",
@@ -79,6 +95,8 @@ const detailsCardPageText = {
     bookingsCount: "현재까지 예약 수",
     freeCancelation: "무료 취소 가능",
     bookNowPayLater: "지금 예약하고 나중에 결제",
+    pleaseLogin: "계속하려면 로그인하세요",
+    book: "지금 예약",
   },
   pt: {
     numberOfPeople: "Número de pessoas",
@@ -88,6 +106,8 @@ const detailsCardPageText = {
     bookingsCount: "Número de reservas até agora",
     freeCancelation: "Cancelamento gratuito disponível",
     bookNowPayLater: "Reserve agora, pague depois",
+    pleaseLogin: "Por favor, faça login para continuar",
+    book: "Reservar agora",
   },
   ur: {
     numberOfPeople: "افراد کی تعداد",
@@ -97,6 +117,8 @@ const detailsCardPageText = {
     bookingsCount: "اب تک کی بکنگز کی تعداد",
     freeCancelation: "مفت منسوخی دستیاب ہے",
     bookNowPayLater: "ابھی بک کریں، بعد میں ادا کریں",
+    pleaseLogin: "جاری رکھنے کے لیے براہ کرم لاگ ان کریں",
+    book: "ابھی بک کریں",
   },
   ja: {
     numberOfPeople: "人数",
@@ -106,6 +128,9 @@ const detailsCardPageText = {
     bookingsCount: "これまでの予約数",
     freeCancelation: "無料キャンセル可能",
     bookNowPayLater: "今すぐ予約、後で支払い",
+    pleaseLogin: "続行するにはログインしてください",
+    book: "今すぐ予約",
   },
 };
+
 export default detailsCardPageText;

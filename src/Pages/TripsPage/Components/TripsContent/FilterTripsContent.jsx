@@ -23,15 +23,22 @@ const FilterTripsContent = ({
   onClearFilters,
   loading,// Add loading prop
   displayCountries = true,
+  hasOffer = true,
 }) => {
   const { t } = useTranslation();
 
   // Create translated checkbox labels
-  const checkboxLabels = [
+  let checkboxLabels = []
+  {hasOffer ?
+   checkboxLabels = [
     t('common.highestRating'),
     t('common.offers'),
     t('common.mostBooked')
-  ];
+  ]:
+   checkboxLabels = [
+    t('common.highestRating'),
+    t('common.mostBooked')
+  ]}
 
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);

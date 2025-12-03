@@ -4,6 +4,7 @@ import FilterTripsContent from "./FilterTripsContent";
 import "./TripsContent.css";
 import GeneralAPI from "api/generalApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
+import EffectivenessCard from "Pages/Effectivenes/EffectivenessCard";
 
 const TripsContent = ({
   tripsData,
@@ -19,19 +20,21 @@ const TripsContent = ({
   onClearFilters,
   loading = false,
   displayCountries = true,
-  type
+  type,
 }) => {
-
   const [subCategories, setSubCategories] = useState([]);
-  const { currentLanguage } = useLanguage()
+  const { currentLanguage } = useLanguage();
   // getting categories
   useEffect(() => {
     const fetchSubCategories = async () => {
       try {
-        const response = await GeneralAPI.getSubCategories(currentLanguage, type);
+        const response = await GeneralAPI.getSubCategories(
+          currentLanguage,
+          type
+        );
         setSubCategories(response.data);
       } catch (error) {
-        console.error('Error fetching subcategories:', error);
+        console.error("Error fetching subcategories:", error);
       }
     };
 
@@ -59,8 +62,18 @@ const TripsContent = ({
         onClearFilters={onClearFilters}
         loading={loading}
         displayCountries={displayCountries}
+        hasOffer ={type === "effectiveness" ? false : true}
       />
-      <CardsContentTrips tripsData={tripsData} buttonActiveMap={buttonActiveMap} activeMap={activeMap} />
+      {type === "effectiveness" ? (
+        <EffectivenessCard effectivenessData={tripsData} />
+      ) : (
+        <CardsContentTrips
+          tripsData={tripsData}
+          buttonActiveMap={buttonActiveMap}
+          activeMap={activeMap}
+          type={type}
+        />
+      )}
     </div>
   );
 };

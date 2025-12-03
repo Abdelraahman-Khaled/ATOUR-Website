@@ -41,11 +41,11 @@ const AllRatesComments = ({ rates }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 5;
 
-  const pageCount = Math.ceil(rates.length / perPage);
+  const pageCount = Math.ceil((Array.isArray(rates) ? rates.length : 0) / perPage);
   const handlePageChange = ({ selected }) => setCurrentPage(selected);
 
   const offset = currentPage * perPage;
-  const currentPageData = rates.reverse().slice(offset, offset + perPage);
+  const currentPageData = Array.isArray(rates) ? [...rates].reverse().slice(offset, offset + perPage) : [];
 
   return (
     <div className="all-rates-comment-data margin-top-1">

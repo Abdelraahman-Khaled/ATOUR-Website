@@ -7,7 +7,6 @@ import FavoritePage from "Pages/FavoritePage/FavoritePage";
 import NotificationPage from "../Pages/NotificationPage/NotificationPage";
 import Blogs from "Pages/Blogs/Blogs";
 import DetailsBlogCard from "Pages/Blogs/Components/DetailsBlogCard/DetailsBlogCard";
-import Events from "Pages/Events/Events";
 import DetailsCardEvent from "Pages/Events/Components/DetailsCardEvent/DetailsCardEvent";
 import Offers from "../Pages/Offers/Offers";
 import AccountUser from "../Pages/AccountUser/AccountUser";

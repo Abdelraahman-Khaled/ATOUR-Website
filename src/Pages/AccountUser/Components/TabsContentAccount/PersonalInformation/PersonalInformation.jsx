@@ -9,6 +9,7 @@ import { useProfile } from "context/ProfileContext";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import translations from "./translations";
+import Loader from "Components/Auth/Components/Loader/Loader";
 const PersonalInformation = () => {
   const { setProfile, isAuthenticated } = useProfile();
   const navigate = useNavigate();
@@ -63,7 +64,6 @@ const PersonalInformation = () => {
         const response = await ProfileAPI.getProfile();
 
         if (response.success && response.data) {
-          console.log("API Response Data:", response.data); // Log the API response
           const profileData = response.data;
           const nationality =
             profileData?.nationality?.translations?.find(
@@ -79,15 +79,6 @@ const PersonalInformation = () => {
             image: profileData.photo,
             phone: profileData.phone || translations.notAvailable[currentLanguage],
           });
-          console.log("Profile state after update:", { // Log the profile state after update
-            name: profileData.name || translations.notAvailable[currentLanguage],
-            nationality: nationality || translations.notAvailable[currentLanguage],
-            nationality_id: profileData.nationality_id || 0,
-            birthdate: profileData.birthdate || translations.notAvailable[currentLanguage],
-            gender: profileData.gender || translations.notAvailable[currentLanguage],
-            image: profileData.photo,
-            phone: profileData.phone || translations.notAvailable[currentLanguage],
-          });
           setProfile(profileData); // Update the context with the fetched profile
 
         } else {
@@ -98,7 +89,6 @@ const PersonalInformation = () => {
         // Check if this is an authentication error
         if (error.response && error.response.status === 401) {
           // Redirect to home page if unauthorized
-          navigate("/");
         } else {
           toast.error(translations.fetchError[currentLanguage]);
         }
@@ -150,19 +140,15 @@ const PersonalInformation = () => {
         toast.success(translations.profileUpdateSuccess[currentLanguage]);
         hideEditInfoButton(); // Close the modal
       } else {
-        console.log("currentLanguage in profileUpdateFailed:", currentLanguage);
-        console.log("translations.profileUpdateFailed:", translations.profileUpdateFailed);
         toast.error(translations.profileUpdateFailed[currentLanguage]);
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      console.log("currentLanguage in profileUpdateError:", currentLanguage);
-      console.log("translations.profileUpdateError:", translations.profileUpdateError);
       toast.error(translations.profileUpdateError[currentLanguage]);
     }
   };
-  if (loading) {
-    return <div className="loading-text">{translations.fetchError[currentLanguage]}</div>;
+   if (loading) {
+    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>; 
   }
 
   return (

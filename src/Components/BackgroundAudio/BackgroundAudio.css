@@ -41,7 +41,9 @@ html[dir="rtl"] .background-audio-container {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
-
+body.dark-theme .audio-control-btn {
+  background-color: var(--green-dark-01-color);
+}
 .audio-control-btn:hover {
   transform: scale(1.1);
   background-color: #d29439;

@@ -10,10 +10,13 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import { useBooking } from "context/BookingContext";
 import { useEffect } from "react";
 import { content } from "./trasnslates"
+import { toast } from "react-toastify";
+import { isAuthenticated } from "api/axiosInstance";
 
 const ContentInfoDetailsLeft = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { selectedDate, setSelectedDate, numberOfPeople, setNumberOfPeople } = useBooking();
+   
 
   useEffect(() => {
     if (tripData) {
@@ -103,7 +106,13 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
           )}
 
           {/* Show Available Programs Button */}
-          <button className="btn-main w-100" onClick={buttonShowModal}>
+          <button className="btn-main w-100" onClick={() => {
+            if (isAuthenticated()) {
+              buttonShowModal();
+            } else {
+              toast.error(content[currentLanguage].pleaseLogin);
+            }
+          }}>
             {content[currentLanguage].showPrograms}
           </button>
 

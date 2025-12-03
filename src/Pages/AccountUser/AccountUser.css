@@ -237,3 +237,23 @@ html[dir="ltr"] .main-date-picker--1 .input-date-content .icon-date-add {
 .main-date-picker--1 .input-date-content {
   border-top: none !important;
 }
+
+body.dark-theme .rate-star-icon{
+    color: var(--warning-01-color) !important;
+}
+body.dark-theme .chatbot-button svg path {
+  fill: unset;
+}
+
+body.dark-theme .account-user-content .nav-pills .nav-link.active{
+  background-color: var(--green-dark-01-color) !important;
+}
+body.dark-theme .account-user-content .nav-pills .nav-link{
+  margin: 5px 0px;
+}
+body.dark-theme .account-user-content .title-info-top-account {
+  color: var(--dark-01-color) !important
+}
+ body.dark-theme .account-user-content label{
+    color: var(--dark-01-color);
+ }

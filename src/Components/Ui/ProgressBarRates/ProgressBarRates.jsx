@@ -41,7 +41,7 @@ const ProgressBarRates = ({ rates = [] }) => {
   const { currentLanguage } = useLanguage()
   const { id } = useParams();
   // Convert rates to numbers
-  const numericRates = rates.map(r => Number(r.rate));
+  const numericRates = Array.isArray(rates) ? rates.map(r => Number(r.rate)) : [];
   const total = numericRates.length;
 
   // Calculate average and distribution

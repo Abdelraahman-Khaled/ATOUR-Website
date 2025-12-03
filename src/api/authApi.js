@@ -114,10 +114,14 @@ const AuthAPI = {
 
   changePassword: async (current_password, password, password_confirmation) => {
     try {
-      const response = await axiosInstance.post("/change-password", {
-        current_password: current_password,
-        password: password,
-        password_confirmation: password_confirmation,
+      const formData = new FormData();
+      formData.append("current_password", current_password);
+      formData.append("password", password);
+      formData.append("password_confirmation", password_confirmation);
+      const response = await axiosInstance.post("/change-password", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       toast.success(
         getToastMessages().changePasswordSuccess[getCurrentLanguage()]

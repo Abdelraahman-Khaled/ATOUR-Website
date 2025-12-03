@@ -11,6 +11,7 @@ const CardsFavEffective = ({ data, refresh }) => {
     //     const updatedCards = cards.filter((card) => card.id !== idToRemove);
     //     setCards(updatedCards);
     // };
+    
     const navFunction = (id) => {
         navigate(`/eventsPage/${id}`)
     }
@@ -32,7 +33,7 @@ const CardsFavEffective = ({ data, refresh }) => {
                                             image={item.cover}
                                             textLocation={item.city.title + " .  " + item.city.country_name}
                                             titleCard={item.title}
-                                            NumPriceNew={`${item.price}`}
+                                            NumPriceNew={`${item.customer_price}`}
                                             isTrueNumTwo={false}
                                             numInfoDangerOld={false}
                                             rateNum={item.total_rates}
@@ -48,6 +49,7 @@ const CardsFavEffective = ({ data, refresh }) => {
                                             addToWishList={false}
                                             type={"effectivene"}
                                             refresh={refresh}
+                                            discount={item.customer_price_before_discount}
                                         />
                                     </div>
                                     {/* ========== END COL =========== */}

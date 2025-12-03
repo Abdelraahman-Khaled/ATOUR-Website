@@ -16,16 +16,21 @@ import BoxOneContent from "Pages/DetailsTripInfoPage/Components/AllContentInfoDe
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTicket, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Ticket from "assets/images/IconsHeader/Ticket";
-import translations from './translates'
+import translations from "./translates";
 import MainSlider from "Components/Ui/MainSlider/MainSlider";
 import ShareButton from "Components/ShareButton/ShareButton";
 import Favicon from "Components/FavIcon/Favicon ";
+import { isAuthenticated } from "api/axiosInstance";
+import { toast } from "react-toastify";
 
 const DetailsCardPage = ({ effective }) => {
   const { currentLanguage } = useLanguage();
-  const [showModalNumberIndividuals, setShowModalNumberIndividuals] = useState(false);
-  const { selectedDate, setSelectedDate, numberOfPeople, setNumberOfPeople } = useBooking();
-  const showModalNumberIndividualsButton = () => setShowModalNumberIndividuals(true);
+  const [showModalNumberIndividuals, setShowModalNumberIndividuals] =
+    useState(false);
+  const { selectedDate, setSelectedDate, numberOfPeople, setNumberOfPeople } =
+    useBooking();
+  const showModalNumberIndividualsButton = () =>
+    setShowModalNumberIndividuals(true);
 
   useEffect(() => {
     if (effective) {
@@ -37,8 +42,6 @@ const DetailsCardPage = ({ effective }) => {
     }
   }, [effective, setNumberOfPeople]);
 
-
-
   const hideModalNumberIndividuals = () => {
     setShowModalNumberIndividuals(false);
   };
@@ -46,7 +49,6 @@ const DetailsCardPage = ({ effective }) => {
     setNumberOfPeople(adults);
     hideModalNumberIndividuals(); // Close the modal after saving
   };
-
 
   return (
     <>
@@ -69,7 +71,11 @@ const DetailsCardPage = ({ effective }) => {
                 <ShareButton
                   url={window.location.href}
                   title={effective.title}
-                  text={currentLanguage === "ar" ? "شارك هذه الرحلة" : "Share this trip"}
+                  text={
+                    currentLanguage === "ar"
+                      ? "شارك هذه الرحلة"
+                      : "Share this trip"
+                  }
                 />
                 <div className="favicon-cover">
                   <Favicon
@@ -88,7 +94,10 @@ const DetailsCardPage = ({ effective }) => {
           ></SwiperSlider> */}
         <MainSlider images={effective.attachments} />
 
-        <div className="all-content-info-details-right d-flex align-items-start gap-2 my-4 flex-column flex-lg-row" data-aos="fade-left">
+        <div
+          className="all-content-info-details-right d-flex align-items-start gap-2 my-4 flex-column flex-lg-row"
+          data-aos="fade-left"
+        >
           <div className="col-12 col-lg-8">
             <BoxOneContent tripData={effective} />
           </div>
@@ -111,10 +120,21 @@ const DetailsCardPage = ({ effective }) => {
                 </div>
               </div>
             )}
-            <EffectiveModal
-              effectiveId={effective.id}
-              isDirectBooking={effective.pay_later <= 0}
-            />
+            {isAuthenticated() ? (
+              <EffectiveModal
+                effectiveId={effective.id}
+                isDirectBooking={effective.pay_later <= 0}
+              />
+            ) : (
+              <button
+                className="btn-main w-100"
+                onClick={() => {
+                  toast.error(translations[currentLanguage].pleaseLogin);
+                }}
+              >
+                {translations[currentLanguage].book}
+              </button>
+            )}
             <div className="end-info-detials">
               <div className="detials-info-one d-flex align-items-center gap-2">
                 <div className="icon-check icon-check-link">
@@ -155,20 +175,11 @@ const DetailsCardPage = ({ effective }) => {
           {/* buy button */}
 
           <div className="location-content-info pt-4 w-100">
-
             <MapLocationInfo tripData={effective} />
           </div>
         </div>
         {/* location */}
-
       </div>
-
-
-
-
-
-
-
     </>
   );
 };

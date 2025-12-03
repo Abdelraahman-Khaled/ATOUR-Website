@@ -298,6 +298,7 @@ const EffectivenesPage = () => {
                     onClearFilters={handleClearFilters}
                     loading={loading}
                     displayCountries={true}
+                    hasOffer={false}
                   />
 
                   {/* cards fav */}

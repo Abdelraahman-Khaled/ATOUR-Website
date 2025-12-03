@@ -26,6 +26,7 @@ const DetailsTripInfoPage = () => {
       try {
         const response = await ContentAPI.getTripById(id, currentLanguage, currentCurrency); // Replace with your API call
         setTripData(response.data); // Store fetched data in state
+        
       } catch (err) {
         console.error("Error fetching trip data:", err);
         setError("Failed to load trip data. Please try again later.");

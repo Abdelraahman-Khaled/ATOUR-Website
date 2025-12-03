@@ -249,7 +249,7 @@ const EffectiveModal = ({ effectiveId, isDirectBooking = false }) => {
                     {isLoading ? content.booking[currentLanguage] : content.book[currentLanguage]}
                 </button>
             ) : (
-                <button onClick={handleOpenModal} className="btn-main">
+                <button onClick={handleOpenModal} className="btn-main w-100">
                     {content.book[currentLanguage]}
                 </button>
             )}

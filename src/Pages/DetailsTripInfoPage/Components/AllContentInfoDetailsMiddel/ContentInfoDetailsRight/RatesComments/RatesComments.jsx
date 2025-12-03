@@ -71,7 +71,7 @@ const translations = {
 const RatesComments = ({ modelId, modelType }) => {
   const { rates, fetchRates, loading } = useRates();
   const { currentLanguage } = useLanguage();
-
+  
   useEffect(() => {
     if (modelId && modelType) {
       fetchRates(modelId, modelType);
@@ -84,12 +84,12 @@ const RatesComments = ({ modelId, modelType }) => {
       <div className="top-rates-content">
         <h2 className="title">
           {translations.title[currentLanguage]}{" "}
-          <span className="num-rates">({rates?.length || 0})</span>
+          <span className="num-rates">({rates?.statistics?.total_ratings || 0})</span>
         </h2>
         <div className="main-info-avatar mt-2 d-flex align-items-center gap-4 flex-wrap">
           <AvatarGroup
             renderSurplus={(surplus) => <span>{surplus.toString()[0]}K+</span>}
-            total={rates?.length || 0}
+            total={(rates?.statistics?.total_ratings || 0)}
             className="all-avatar"
           >
             <Avatar alt="Remy Sharp" src={image1} className="avatar-1" />
@@ -99,7 +99,7 @@ const RatesComments = ({ modelId, modelType }) => {
           </AvatarGroup>
           <h2 className="text-title">
             {translations.more[currentLanguage]}
-            {rates?.length || 0}{" "}
+            {(rates?.statistics?.total_ratings || 0)|| 0}{" "}
             {translations.trust[currentLanguage]}
           </h2>
         </div>
@@ -110,8 +110,8 @@ const RatesComments = ({ modelId, modelType }) => {
         <p>{translations.loading[currentLanguage]}</p>
       ) : (
         <>
-          <ProgressBarRates rates={rates} />
-          <AllRatesComments rates={rates} />
+          <ProgressBarRates rates={rates.ratings} />
+          <AllRatesComments rates={rates.ratings} />
         </>
       )}
     </div>

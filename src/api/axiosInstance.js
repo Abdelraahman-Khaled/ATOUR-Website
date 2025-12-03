@@ -89,9 +89,7 @@ axiosInstance.interceptors.response.use(
         // Only clear token and redirect for non-auth routes
         if (!isAuthRoute) {
           localStorage.removeItem("access_token");
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 2000); // Wait 2 seconds before redirecting
+      
         }
         break;
 

@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import ProfileAPI from "api/profileApi";
 
-const ProfileContext = createContext();
+const ProfileContext = createContext(null);
 
 // Check if user is authenticated
 const isAuthenticated = () => {
