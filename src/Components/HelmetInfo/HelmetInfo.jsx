@@ -3,7 +3,9 @@ import { Helmet } from "react-helmet-async";
 
 const HelmetInfo = ({
   titlePage = "Atour - Your Gateway to Saudi Tourism",
+  titlePageAr = "جولة - بوابتك للسياحة السعودية",
   description = "Atour منصة سعودية تقدم الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة العربية السعودية.",
+  descriptionAr = "Atour منصة سعودية تقدم الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة العربية السعودية.",
   url = null,
   image = "https://atour.sa/assets/images/logo.svg",
   type = "home", // "trip" | "product" | "event" | "home"
@@ -34,7 +36,7 @@ Museums in Saudi Arabia, National Museum, Madain Saleh, Historic Diriyah, Histor
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Atour",
-      "alternateName": ["Atour", "جولة", "ATOUR"],
+      "alternateName": ["جولة", "Atour", "منصة جولة", "Atour Saudi Tours"],
       "url": "https://atour.sa/",
       "logo": "https://atour.sa/assets/images/logo.svg",
       "sameAs": [
@@ -46,6 +48,8 @@ Museums in Saudi Arabia, National Museum, Madain Saleh, Historic Diriyah, Histor
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "name": "Atour",
+      "alternateName": ["جولة", "Atour", "منصة جولة", "Atour Saudi Tours"],
       "url": "https://atour.sa/",
       "potentialAction": {
         "@type": "SearchAction",
@@ -160,24 +164,28 @@ Museums in Saudi Arabia, National Museum, Madain Saleh, Historic Diriyah, Histor
     : baseSchemas;
 
   const { currentLanguage } = useLanguage()
+  const pageTitle = currentLanguage === "ar" ? titlePageAr : titlePage;
+  const pageDescription = currentLanguage === "ar" ? descriptionAr : description;
+
   return (
     <Helmet>
       <html lang={currentLanguage} />
-      <title>{titlePage} | {currentLanguage === 'ar' ? 'جولة' : 'Atour'}</title>
-      <meta name="description" content={description} />
+      <title>{pageTitle} | {currentLanguage === 'ar' ? 'جولة' : 'Atour'}</title>
+      <meta name="description" content={pageDescription} />
       <meta name="keywords" content={currentLanguage === "ar" ? keywords : keywordsEn} />
+      <meta property="og:site_name" content={currentLanguage === "ar" ? "جولة" : "Atour"} />
 
       {/* OG */}
       <meta property="og:url" content={url ? `https://atour.sa/${url}` : "https://atour.sa/"} />
       <meta property="og:type" content={type === "product" ? "product" : type === "event" ? "event" : "website"} />
-      <meta property="og:title" content={titlePage} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
       <meta property="og:image" content={image} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={titlePage} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={image} />
 
       {/* Canonical */}
