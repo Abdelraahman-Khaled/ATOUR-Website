@@ -5,7 +5,6 @@ import "./AccountInfo.css";
 import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
 import ModalEditInfoAccount from "./ModalEditInfoAccount";
-import ProfileAPI from "api/profileApi";
 import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useProfile } from "context/ProfileContext";
@@ -157,76 +156,76 @@ const translations = {
     ur: "پاس ورڈ تبدیل کریں",
     ja: "パスワードを変更",
   },
-    currentPassword: {
-      en: "Current Password",
-      ar: "الرقم السري الحالي",
-      fr: "Mot de passe actuel",
-      de: "Aktuelles Passwort",
-      es: "Contraseña actual",
-      tr: "Mevcut şifre",
-      ru: "Текущий пароль",
-      zh: "当前密码",
-      ko: "현재 비밀번호",
-      pt: "Senha atual",
-      ur: "موجودہ پاس ورڈ",
-      ja: "現在のパスワード",
-    },
-    newPassword: {
-      en: "New Password",
-      ar: "الرقم السري الجديد",
-      fr: "Nouveau mot de passe",
-      de: "Neues Passwort",
-      es: "Nueva contraseña",
-      tr: "Yeni şifre",
-      ru: "Новый пароль",
-      zh: "新密码",
-      ko: "새 비밀번호",
-      pt: "Nova senha",
-      ur: "نیا پاس ورڈ",
-      ja: "新しいパスワード",
-    },
-    confirmNewPassword: {
-      en: "Confirm New Password",
-      ar: "تأكيد الرقم السري الجديد",
-      fr: "Confirmer le nouveau mot de passe",
-      de: "Neues Passwort bestätigen",
-      es: "Confirmar nueva contraseña",
-      tr: "Yeni şifreyi onayla",
-      ru: "Подтвердите новый пароль",
-      zh: "确认新密码",
-      ko: "새 비밀번호 확인",
-      pt: "Confirmar nova senha",
-      ur: "نیا پاس ورڈ کی تصدیق کریں",
-      ja: "新しいパスワードを確認",
-    },
-    changingPassword: {
-      en: "Changing Password...",
-      ar: "جاري تغيير كلمة المرور...",
-      fr: "Changement du mot de passe...",
-      de: "Passwort wird geändert...",
-      es: "Cambiando la contraseña...",
-      tr: "Şifre değiştiriliyor...",
-      ru: "Изменение пароля...",
-      zh: "正在更改密码...",
-      ko: "비밀번호 변경 중...",
-      pt: "Alterando senha...",
-      ur: "پاس ورڈ تبدیل کیا جا رہا ہے...",
-      ja: "パスワードを変更しています...",
-    },
-    changePasswordBtn: {
-      en: "Change Password",
-      ar: "تغيير كلمة السر",
-      fr: "Changer le mot de passe",
-      de: "Passwort ändern",
-      es: "Cambiar la contraseña",
-      tr: "Şifreyi değiştir",
-      ru: "Изменить пароль",
-      zh: "更改密码",
-      ko: "비밀번호 변경",
-      pt: "Alterar senha",
-      ur: "پاس ورڈ تبدیل کریں",
-      ja: "パスワードを変更",
-    },
+  currentPassword: {
+    en: "Current Password",
+    ar: "الرقم السري الحالي",
+    fr: "Mot de passe actuel",
+    de: "Aktuelles Passwort",
+    es: "Contraseña actual",
+    tr: "Mevcut şifre",
+    ru: "Текущий пароль",
+    zh: "当前密码",
+    ko: "현재 비밀번호",
+    pt: "Senha atual",
+    ur: "موجودہ پاس ورڈ",
+    ja: "現在のパスワード",
+  },
+  newPassword: {
+    en: "New Password",
+    ar: "الرقم السري الجديد",
+    fr: "Nouveau mot de passe",
+    de: "Neues Passwort",
+    es: "Nueva contraseña",
+    tr: "Yeni şifre",
+    ru: "Новый пароль",
+    zh: "新密码",
+    ko: "새 비밀번호",
+    pt: "Nova senha",
+    ur: "نیا پاس ورڈ",
+    ja: "新しいパスワード",
+  },
+  confirmNewPassword: {
+    en: "Confirm New Password",
+    ar: "تأكيد الرقم السري الجديد",
+    fr: "Confirmer le nouveau mot de passe",
+    de: "Neues Passwort bestätigen",
+    es: "Confirmar nueva contraseña",
+    tr: "Yeni şifreyi onayla",
+    ru: "Подтвердите новый пароль",
+    zh: "确认新密码",
+    ko: "새 비밀번호 확인",
+    pt: "Confirmar nova senha",
+    ur: "نیا پاس ورڈ کی تصدیق کریں",
+    ja: "新しいパスワードを確認",
+  },
+  changingPassword: {
+    en: "Changing Password...",
+    ar: "جاري تغيير كلمة المرور...",
+    fr: "Changement du mot de passe...",
+    de: "Passwort wird geändert...",
+    es: "Cambiando la contraseña...",
+    tr: "Şifre değiştiriliyor...",
+    ru: "Изменение пароля...",
+    zh: "正在更改密码...",
+    ko: "비밀번호 변경 중...",
+    pt: "Alterando senha...",
+    ur: "پاس ورڈ تبدیل کیا جا رہا ہے...",
+    ja: "パスワードを変更しています...",
+  },
+  changePasswordBtn: {
+    en: "Change Password",
+    ar: "تغيير كلمة السر",
+    fr: "Changer le mot de passe",
+    de: "Passwort ändern",
+    es: "Cambiar la contraseña",
+    tr: "Şifreyi değiştir",
+    ru: "Изменить пароль",
+    zh: "更改密码",
+    ko: "비밀번호 변경",
+    pt: "Alterar senha",
+    ur: "پاس ورڈ تبدیل کریں",
+    ja: "パスワードを変更",
+  },
 };
 const validationMessages = {
   required: {
@@ -276,7 +275,7 @@ const validationMessages = {
 
 const AccountInformationContent = () => {
   const { currentLanguage } = useLanguage();
-  const { isAuthenticated } = useProfile();
+  const { profile, isAuthenticated } = useProfile();
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState({
@@ -298,42 +297,15 @@ const AccountInformationContent = () => {
   };
 
   useEffect(() => {
-    if (!isAuthenticated()) navigate("/");
-  }, [isAuthenticated, navigate]);
-
-
-
-  useEffect(() => {
-    if (!isAuthenticated()) {
+    if (profile) {
+      setProfileData({
+        email: profile.email || "name@example.com",
+        phone: profile.phone || "+966 555 555 555",
+        image: profile.photo || "",
+      });
       setLoading(false);
-      return;
     }
-
-    const fetchAccountInfo = async () => {
-      try {
-        const response = await ProfileAPI.getProfile();
-        if (response.success && response.data) {
-          setProfileData({
-            email: response.data.email || "name@example.com",
-            phone: response.data.phone || "+966 555 555 555",
-            image: response.data.photo || "",
-          });
-        } else {
-          toast.error(translations.fetchError[currentLanguage]);
-        }
-      } catch (error) {
-        console.error("Error fetching account info:", error);
-        if (error.response && error.response.status === 401) {
-        } else {
-          toast.error(translations.fetchError[currentLanguage]);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAccountInfo();
-  }, [currentLanguage, isAuthenticated, navigate]);
+  }, [profile]);
 
   const handlePhoneNumberChange = (isValid, value) => {
     setPhoneNumber(String(value));
@@ -358,16 +330,16 @@ const AccountInformationContent = () => {
     }
   }
 
-const validationSchema = () =>
-  Yup.object({
-    current_password: Yup.string().required(validationMessages.required[currentLanguage]),
-    password: Yup.string()
-      .min(6, validationMessages.shortPassword[currentLanguage])
-      .required(validationMessages.required[currentLanguage]),
-    password_confirmation: Yup.string()
-      .oneOf([Yup.ref("password")], validationMessages.mismatch[currentLanguage])
-      .required(validationMessages.required[currentLanguage]),
-  });
+  const validationSchema = () =>
+    Yup.object({
+      current_password: Yup.string().required(validationMessages.required[currentLanguage]),
+      password: Yup.string()
+        .min(6, validationMessages.shortPassword[currentLanguage])
+        .required(validationMessages.required[currentLanguage]),
+      password_confirmation: Yup.string()
+        .oneOf([Yup.ref("password")], validationMessages.mismatch[currentLanguage])
+        .required(validationMessages.required[currentLanguage]),
+    });
 
   if (loading) {
     return (

@@ -1,3 +1,4 @@
+import "./Loader.css";
 const Loader = () => {
     return (
         <div className="loader d-flex  justify-content-center  align-items-center ">

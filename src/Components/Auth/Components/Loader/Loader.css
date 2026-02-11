@@ -1,0 +1,41 @@
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 2.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+  fill: var(--warning-01-color);
+}
+body.dark-theme .cal-loader__plane {
+  fill: var(--warning-01-color);
+}
+.cal-loader__path {
+  stroke: var(--green-01-color);
+  animation: 2.4s ease-in-out infinite loader-path;
+}
+body.dark-theme .cal-loader__path {
+  stroke: var(--green-dark-01-color) !important;
+  fill: unset;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+}

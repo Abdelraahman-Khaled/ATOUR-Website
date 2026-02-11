@@ -1,5 +1,4 @@
 import AosAnimation from "./Components/AosAnimation/AosAnimation";
-import SplashScreen from "./Components/SplashScreen/SplashScreen";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 import routers from "./Routes/Routers";
@@ -13,25 +12,25 @@ import "./App.css";
 import ToastContainerApp from "Components/ToastContainerApp/ToastContainerApp";
 import {
   LanguageProvider,
-  useLanguage,
 } from "Components/Languages/LanguageContext";
 import {
   CurrencyProvider,
-  useCurrency,
 } from "Components/Currencies/CurrencyContext";
 // import air from "./assets/images/airplan/02.png";
 import { useEffect, useState } from "react";
 import { ProfileProvider } from "context/ProfileContext";
 import { HomeProvider, useHome } from "context/HomeContext";
 import { ThemeProvider } from "context/ThemeContext";
-import ChatBot from "./Components/ChatBot/ChatBot";
-import AdPopup from "./Components/AdPopup/AdPopup";
-import BackgroundAudio from "./Components/BackgroundAudio/BackgroundAudio";
+// import AdPopup from "./Components/AdPopup/AdPopup";
+import WhatsAppButton from "./Components/WhatsAppButton/WhatsAppButton";
 import { RatesProvider } from "context/RatesContext";
 import { BookingProvider } from "./context/BookingContext";
 import { SubCategoriesProvider } from "./context/SubCategoriesContext";
 import FooterProvider from "./context/FooterContext";
 import { BiographyProvider } from "context/BiographyContext";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 // AppContent component to use hooks that depend on providers
 const AppContent = () => {
@@ -51,46 +50,47 @@ const AppContent = () => {
     <div className={`App`}>
       {/* <WindowLoader /> */}
       <ToastContainerApp />
-      {loading === false && <AdPopup />}
+      {/* {loading === false && <AdPopup />} */}
       {/* <div className={`air-plan  ${isHomePage ? "show" : "hidden"}`}>
       <div className="airPlan-dot" />
         <img src={air} className="object-fit-cover" alt="airplan" />
     </div> */}
       <HelmetProvider>
         <RouterProvider router={routers} />
-        <SplashScreen />
       </HelmetProvider>
       <ScrollToTopButton />
-      <BackgroundAudio />
+      <WhatsAppButton />
     </div>
   );
 };
 
 function App() {
   return (
-    <ThemeProvider>
-      <AosAnimation>
-        <LanguageProvider>
-          <CurrencyProvider>
-            <ProfileProvider>
-              <RatesProvider>
-                <BookingProvider>
-                  <SubCategoriesProvider>
-                    <HomeProvider>
-                      <FooterProvider>
-                        <BiographyProvider>
-                          <AppContent />
-                        </BiographyProvider>
-                      </FooterProvider>
-                    </HomeProvider>
-                  </SubCategoriesProvider>
-                </BookingProvider>
-              </RatesProvider>
-            </ProfileProvider>
-          </CurrencyProvider>
-        </LanguageProvider>
-      </AosAnimation>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <AosAnimation>
+          <LanguageProvider>
+            <CurrencyProvider>
+              <ProfileProvider>
+                <RatesProvider>
+                  <BookingProvider>
+                    <SubCategoriesProvider>
+                      <HomeProvider>
+                        <FooterProvider>
+                          <BiographyProvider>
+                            <AppContent />
+                          </BiographyProvider>
+                        </FooterProvider>
+                      </HomeProvider>
+                    </SubCategoriesProvider>
+                  </BookingProvider>
+                </RatesProvider>
+              </ProfileProvider>
+            </CurrencyProvider>
+          </LanguageProvider>
+        </AosAnimation>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

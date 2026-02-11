@@ -41,45 +41,42 @@ const Home = () => {
 
 
 
-  if (loading) {
-    return (
-      <SplashScreen />
-    );
-  }
-
   if (error) {
     return <div>{error}</div>; // Display error message if fetching fails
   }
 
-  // If no data is available yet, show a message
-  if (!homeData) {
-    return <div className="text-center">{text[currentLanguage]}</div>;
-  }
   return (
     <>
-      <HelmetInfo
-        titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
-        description={currentLanguage === "ar"
-          ? "منصة آتور السعودية تقدم لك الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة. احجز تجربتك الآن."
-          : "Atour is a Saudi platform offering tours, cultural experiences, desert adventures, heritage, and exclusive events across Saudi Arabia. Book your experience now."}
-      />
-      <header>
-        <Slider />
-      </header>
-      <main>
-        <ContainerMedia>
-          <HeaderCard />
-          <Countries />
-          {mostVisited.length > 0 && <CitiesCard CityData={mostVisited} />}
-          {offerData && <OneOffer offer={offerData} />}
-          {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
-          {gifts.length > 0 && <CardsCollections data={gifts} type={"gift"} />}
-          {offerVendorData && <VendorOffers offer={offerVendorData} />}
-          {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
-          <CardsBooks />
-          <BannerHome />
-        </ContainerMedia>
-      </main>
+      <SplashScreen />
+      {homeData ? (
+        <>
+          <HelmetInfo
+            titlePage={currentLanguage === "ar" ? "الصفحة الرئيسية" : "Home"}
+            description={currentLanguage === "ar"
+              ? "منصة آتور السعودية تقدم لك الجولات السياحية، التجارب الثقافية، المغامرات الصحراوية، التراث، والفعاليات المميزة في المملكة. احجز تجربتك الآن."
+              : "Atour is a Saudi platform offering tours, cultural experiences, desert adventures, heritage, and exclusive events across Saudi Arabia. Book your experience now."}
+          />
+          <header>
+            <Slider />
+          </header>
+          <main>
+            <ContainerMedia>
+              <HeaderCard />
+              <Countries />
+              {mostVisited.length > 0 && <CitiesCard CityData={mostVisited} />}
+              {offerData && <OneOffer offer={offerData} />}
+              {experince.length > 0 && <CardsCollections data={experince} type={"trip"} />}
+              {gifts.length > 0 && <CardsCollections data={gifts} type={"gift"} />}
+              {offerVendorData && <VendorOffers offer={offerVendorData} />}
+              {effectivenes.length > 0 && <CardsCollections data={effectivenes} type={"effectivene"} />}
+              <CardsBooks />
+              <BannerHome />
+            </ContainerMedia>
+          </main>
+        </>
+      ) : (
+        !loading && <div className="text-center">{text[currentLanguage]}</div>
+      )}
     </>
   );
 };

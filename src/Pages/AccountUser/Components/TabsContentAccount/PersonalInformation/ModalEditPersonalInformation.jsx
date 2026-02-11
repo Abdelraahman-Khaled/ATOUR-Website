@@ -16,6 +16,7 @@ const ModalEditPersonalInformation = ({
   initialProfile,
   currentLanguage, // Inject current language
   setRefresh, // Function to trigger refresh
+  validationSchema, // Inject validation schema
 }) => {
 
 
@@ -133,6 +134,7 @@ const ModalEditPersonalInformation = ({
         <div className="form-edit-content">
           <FormField
             initialValues={{ name, selectedNationalityId, phone, birthdate, gender }}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             <div className="row g-3">

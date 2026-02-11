@@ -3,9 +3,9 @@ import TopContentInfo from "./Components/TopContentInfo/TopContentInfo";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import AllContentInfoDetailsMiddel from "./Components/AllContentInfoDetailsMiddel/AllContentInfoDetailsMiddel";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
-import { useEffect, useState } from "react";
-import ContentAPI from "api/contentApi";
 import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
@@ -13,30 +13,26 @@ import { detailsTripTranslations } from "./translation";
 import MainSlider from "Components/Ui/MainSlider/MainSlider";
 
 const DetailsTripInfoPage = () => {
-  const [tripData, setTripData] = useState(null); // State to store fetched data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
   const { currentLanguage } = useLanguage(); // Get the current language
   const { currentCurrency } = useCurrency();
-
   const { id } = useParams();
-  // Fetch data on component mount
-  useEffect(() => {
-    const fetchTripData = async () => {
-      try {
-        const response = await ContentAPI.getTripById(id, currentLanguage, currentCurrency); // Replace with your API call
-        setTripData(response.data); // Store fetched data in state
-        
-      } catch (err) {
-        console.error("Error fetching trip data:", err);
-        setError("Failed to load trip data. Please try again later.");
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
-
-    fetchTripData();
-  }, [id, currentLanguage, currentCurrency]);
+  // Fetch data using React Query
+  const {
+    data: tripData,
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['tripDetails', id, currentLanguage, currentCurrency],
+    queryFn: async () => {
+      const response = await ContentAPI.getTripById(id, currentLanguage, currentCurrency);
+      if (!response.data) throw new Error("Trip not found");
+      return response.data;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
 
   // Display loading state
   if (loading) {

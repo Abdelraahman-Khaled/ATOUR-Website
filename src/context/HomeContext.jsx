@@ -1,88 +1,72 @@
 // HomeContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 import HomeAPI from "api/homeApi";
 import GeneralAPI from "api/generalApi";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import { toast } from "react-toastify";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
+import { useQuery } from "@tanstack/react-query";
 
 const HomeContext = createContext(null);
 
 export const HomeProvider = ({ children }) => {
-    const [homeData, setHomeData] = useState(null);
-    const [sliders, setSliders] = useState([]);
-    const [cities, setCities] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [notification_count, setNotificationCount] = useState(0);
     const { currentLanguage } = useLanguage();
     const { currentCurrency } = useCurrency();
 
-    const fetchHomeData = async (forceRefresh = false) => {
-        // Check if we already have data and no force refresh is requested
-        if (homeData && !forceRefresh) {
-            return homeData;
-        }
-
-        setLoading(true);
-        try {
+    // Fetch Home Data
+    const {
+        data: homeData,
+        isPending: homeLoading,
+        error: homeError,
+        refetch: refetchHome
+    } = useQuery({
+        queryKey: ['homeData', currentLanguage, currentCurrency],
+        queryFn: async () => {
             const response = await HomeAPI.getHomeData(currentLanguage, currentCurrency);
-            setHomeData(response.data);
-            setNotificationCount(response.data.notification_count || 0);
-            return response.data.data;
-        } catch (err) {
-            console.error("Error fetching home data:", err);
-            toast.error("Failed to load home data.");
-            return null;
-        } finally {
-            setLoading(false);
-        }
-    };
+            return response.data;
+        },
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 30, // 30 minutes
+        refetchOnWindowFocus: false,
+    });
 
-    const fetchSliderData = async (forceRefresh = false) => {
-        // Check if we already have data and no force refresh is requested
-        if (sliders.length > 0 && cities.length > 0 && !forceRefresh) {
-            return { sliders, cities };
-        }
-
-        try {
-            const sliderRes = await GeneralAPI.getSliders(currentLanguage);
-            const citiesRes = await ContentAPI.getCities(currentLanguage);
-
-            setSliders(sliderRes.data || []);
-            setCities(citiesRes.data || []);
-
+    // Fetch Sliders & Cities
+    const {
+        data: sliderAndCities,
+        isPending: sliderLoading,
+        refetch: refetchSlider
+    } = useQuery({
+        queryKey: ['sliderData', currentLanguage],
+        queryFn: async () => {
+            const [sliderRes, citiesRes] = await Promise.all([
+                GeneralAPI.getSliders(currentLanguage),
+                ContentAPI.getCities(currentLanguage)
+            ]);
             return {
                 sliders: sliderRes.data || [],
                 cities: citiesRes.data || []
             };
-        } catch (err) {
-            console.error("Error fetching sliders or cities:", err);
-            toast.error("Failed to fetch slider data. Please try again later.");
-            return { sliders: [], cities: [] };
-        }
-    };
+        },
+        staleTime: 1000 * 60 * 10, // 10 minutes
+        gcTime: 1000 * 60 * 30, // 30 minutes
+        refetchOnWindowFocus: false,
+    });
 
-    // Fetch data when language changes
-    useEffect(() => {
-        fetchHomeData(true);
-        fetchSliderData(true);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentLanguage, currentCurrency]);
+    const loading = homeLoading || sliderLoading;
+    const error = homeError ? "Failed to load home data." : null;
+    const notification_count = homeData?.notification_count || 0;
 
     return (
         <HomeContext.Provider value={{
-            homeData,
-            sliders,
-            cities,
+            homeData: homeData, // useQuery returns the data structure directly
+            sliders: sliderAndCities?.sliders || [],
+            cities: sliderAndCities?.cities || [],
             loading,
             error,
             notification_count,
-            fetchHomeData,
-            fetchSliderData,
-            setHomeData,
-            setNotificationCount
+            fetchHomeData: refetchHome,
+            fetchSliderData: refetchSlider,
+            // setHomeData and setNotificationCount are removed as react-query manages cache
         }}>
             {children}
         </HomeContext.Provider>

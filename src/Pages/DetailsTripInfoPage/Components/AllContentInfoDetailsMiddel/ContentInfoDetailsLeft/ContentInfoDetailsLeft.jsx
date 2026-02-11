@@ -12,11 +12,12 @@ import { useEffect } from "react";
 import { content } from "./trasnslates"
 import { toast } from "react-toastify";
 import { isAuthenticated } from "api/axiosInstance";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 
 const ContentInfoDetailsLeft = ({ tripData }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { selectedDate, setSelectedDate, numberOfPeople, setNumberOfPeople } = useBooking();
-   
+
 
   useEffect(() => {
     if (tripData) {
@@ -51,16 +52,29 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
     hideModalNumberIndividuals(); // Close the modal after saving
   };
 
+  // State for auth modal
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Helper to check auth and show modal if needed
+  const handleRestrictedAction = (action) => {
+    if (isAuthenticated()) {
+      action();
+    } else {
+      toast.error(content[currentLanguage].pleaseLogin);
+      setShowAuthModal(true);
+    }
+  };
+
   return (
     <>
+      <FormAuth showModalForm={showAuthModal} hideModalForm={() => setShowAuthModal(false)} />
+
       {/* Modals */}
       <ModalAvailableExcursionPrograms
         showModalAvailable={showModalAvailable}
         hideModalAvailable={hideModalAvailable}
         tripData={tripData}
-        // initialAdults={adultsCount} // Pass initial values
         initialChildren={childrenCount}
-      // selectedDay={selectedDay}
       />
       {tripData.is_group !== 1 && (
         <ModalNumberIndividuals
@@ -74,21 +88,32 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
 
       {/* Main Content */}
       <div className="content-info-details-left-trip" data-aos="fade-right">
-        {/* <h2 className="title">حدد التاريخ المناسب لك</h2> */}
         <div className="all-box-content-left">
           {/* Date Picker */}
 
-          <div className="main-add-place-date main-add-place-date--1 mb-3">
+          <div
+            className="main-add-place-date main-add-place-date--1 mb-3"
+            onClickCapture={(e) => {
+              if (!isAuthenticated()) {
+                e.preventDefault();
+                e.stopPropagation();
+                toast.error(content[currentLanguage].pleaseLogin);
+                setShowAuthModal(true);
+              }
+            }}
+          >
             <DatePickerComponent
               selectedDay={selectedDate}
               setSelectedDay={setSelectedDate}
-              addTextPlaceHolder={content[currentLanguage].selectDate} />
+              addTextPlaceHolder={content[currentLanguage].selectDate}
+              disabled={!isAuthenticated()} // Pass disabled prop if supported, or rely on capture
+            />
           </div>
 
           {/* Number of Individuals Box */}
           {tripData.is_group === 0 && (
             <div
-              onClick={showModalNumberIndividualsButton}
+              onClick={() => handleRestrictedAction(showModalNumberIndividualsButton)}
               className="box-one-content cursor-pointer-event mb-3 d-flex justify-content-between align-items-center gap-2 flex-wrap"
             >
               <div className="info-box-right">
@@ -106,13 +131,7 @@ const ContentInfoDetailsLeft = ({ tripData }) => {
           )}
 
           {/* Show Available Programs Button */}
-          <button className="btn-main w-100" onClick={() => {
-            if (isAuthenticated()) {
-              buttonShowModal();
-            } else {
-              toast.error(content[currentLanguage].pleaseLogin);
-            }
-          }}>
+          <button className="btn-main w-100" onClick={() => handleRestrictedAction(buttonShowModal)}>
             {content[currentLanguage].showPrograms}
           </button>
 

@@ -1,7 +1,8 @@
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
 // import "./BiographyPage.css";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Link, useParams } from "react-router-dom";
 import Loader from "Components/Auth/Components/Loader/Loader";
@@ -13,15 +14,30 @@ import PaginationPage from "Components/Pagination/Pagination";
 
 const Country = () => {
     const { id } = useParams(); // Extract the `id` from the URL
-    const [country, setCountry] = useState(null); // State to store country data
-    const [loading, setLoading] = useState(true); // State to manage loading
-    const [error, setError] = useState(null); // State to handle errors
     const { currentLanguage } = useLanguage(); // Get the current language
+
+    // Fetch country data using React Query
+    const {
+        data: country,
+        isPending: loading,
+        error
+    } = useQuery({
+        queryKey: ['countryData', id, currentLanguage],
+        queryFn: async () => {
+            const response = await CountryAPI.getCountryCites(currentLanguage, id);
+            if (!response.data) throw new Error("Country not found");
+            return response.data;
+        },
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 30, // 30 minutes
+        refetchOnWindowFocus: false,
+        retry: false,
+    });
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(0);
     const perPage = 24; // NUMBER OF PAGE ITEMS
-    const pageCount = Math.ceil(country?.length / perPage);
+    const pageCount = Math.ceil((country?.length || 0) / perPage);
     const offset = currentPage * perPage;
     const currentPageData = country?.slice(offset, offset + perPage);
 
@@ -93,24 +109,6 @@ const Country = () => {
         },
     };
 
-    // Fetch country data
-    useEffect(() => {
-        const fetchCountryDetails = async () => {
-            try {
-                const response = await CountryAPI.getCountryCites(currentLanguage, id);
-                const data = response.data;
-                setCountry(data);
-            } catch (err) {
-                console.error("Error fetching country data:", err);
-                setError("fetch-error");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCountryDetails();
-    }, [id, currentLanguage]);
-
     // Loading state
     if (loading) {
         return (
@@ -173,6 +171,7 @@ const Country = () => {
                                             type={null}
                                             showFavIcon={false}
                                             discount={null}
+                                            is_group={false}
                                         />
                                     </Link>
                                 </div>

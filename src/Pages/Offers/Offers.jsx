@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SliderOffers from "./Components/SliderOffers/SliderOffers";
+import { useQuery } from "@tanstack/react-query";
 import OffersContent from "./Components/OffersContent/OffersContent";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import "./Offers.css"
@@ -7,10 +7,7 @@ import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import ContentAPI from "api/contentApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import Loader from "Components/Auth/Components/Loader/Loader";
-import { toast } from "react-toastify";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
-import FilterByCategory from "Components/Ui/FilterCards/Components/FilterByCategory";
-import FilterCards from "Components/Ui/FilterCards/FilterCards";
 import FilterTripsContent from "Pages/TripsPage/Components/TripsContent/FilterTripsContent";
 import GeneralAPI from "api/generalApi";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
@@ -60,9 +57,6 @@ const Offers = () => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const { currentCurrency } = useCurrency()
   // fetching states
-  const [gifts, setGifts] = useState([]); // State to store home data
-  const [loading, setLoading] = useState(false); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
   const [selectedSubCategoryIds, setSelectedSubCategoryIds] = useState([]);
 
   // Applied filters (used for API calls)
@@ -167,56 +161,56 @@ const Offers = () => {
     fetchSubCategories();
   }, []);
 
-  // Fetching Data
-  useEffect(() => {
-    const fetchGiftsData = async () => {
-      try {
-        const params = {};
-        if (appliedFilters.selectedSubCategoryIds.length > 0) {
-          appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
-            params[`sub_category_id[${index}]`] = id;
-          });
-        }
-
-        // Add price filter parameters
-        if (appliedFilters.priceFilter.min_price !== null) {
-          params.min_price = appliedFilters.priceFilter.min_price;
-        }
-        if (appliedFilters.priceFilter.max_price !== null) {
-          params.max_price = appliedFilters.priceFilter.max_price;
-        }
-
-        // Add country and city filter parameters
-        if (appliedFilters.selectedCountryId !== null) {
-          params.country_id = appliedFilters.selectedCountryId;
-        }
-        if (appliedFilters.selectedCityId !== null) {
-          params.city_id = appliedFilters.selectedCityId;
-        }
-
-        // Add checkbox filter parameters
-        if (appliedFilters.checkboxFilters.max_rate === 1) {
-          params.max_rate = 1;
-        }
-        if (appliedFilters.checkboxFilters.max_booked === 1) {
-          params.max_booked = 1;
-        }
-        if (appliedFilters.checkboxFilters.has_offer === 1) {
-          params.has_offer = 1;
-        }
-
-        const data = await ContentAPI.getGifts(currentLanguage, currentCurrency, params); // Fetch data from the API
-        setGifts(data.data); // Set the fetched data to 
-
-      } catch (err) {
-        console.error("Error fetching products data:", err);
-        toast.error("Failed to load products data. Please try again later.");
-      } finally {
-        setLoading(false); // Stop the loading spinner
+  // Fetching Data using React Query
+  const {
+    data: gifts = [],
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['giftsData', currentLanguage, currentCurrency, appliedFilters],
+    queryFn: async () => {
+      const params = {};
+      if (appliedFilters.selectedSubCategoryIds.length > 0) {
+        appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
+          params[`sub_category_id[${index}]`] = id;
+        });
       }
-    };
-    fetchGiftsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency, appliedFilters]);
+
+      // Add price filter parameters
+      if (appliedFilters.priceFilter.min_price !== null) {
+        params.min_price = appliedFilters.priceFilter.min_price;
+      }
+      if (appliedFilters.priceFilter.max_price !== null) {
+        params.max_price = appliedFilters.priceFilter.max_price;
+      }
+
+      // Add country and city filter parameters
+      if (appliedFilters.selectedCountryId !== null) {
+        params.country_id = appliedFilters.selectedCountryId;
+      }
+      if (appliedFilters.selectedCityId !== null) {
+        params.city_id = appliedFilters.selectedCityId;
+      }
+
+      // Add checkbox filter parameters
+      if (appliedFilters.checkboxFilters.max_rate === 1) {
+        params.max_rate = 1;
+      }
+      if (appliedFilters.checkboxFilters.max_booked === 1) {
+        params.max_booked = 1;
+      }
+      if (appliedFilters.checkboxFilters.has_offer === 1) {
+        params.has_offer = 1;
+      }
+
+      const data = await ContentAPI.getGifts(currentLanguage, currentCurrency, params);
+      return data.data;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData) => previousData,
+  });
 
   if (loading) {
     return (
@@ -261,6 +255,7 @@ const Offers = () => {
                 checkboxFilters={tempFilters.checkboxFilters}
                 onSubmitFilters={handleSubmitFilters}
                 onClearFilters={handleClearFilters}
+                loading={loading}
               />
               <OffersContent gifts={gifts} />
             </div>

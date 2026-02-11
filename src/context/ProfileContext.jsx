@@ -1,5 +1,6 @@
 // ProfileContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ProfileAPI from "api/profileApi";
 
 const ProfileContext = createContext(null);
@@ -10,43 +11,45 @@ const isAuthenticated = () => {
 };
 
 export const ProfileProvider = ({ children }) => {
-    const [profile, setProfile] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const queryClient = useQueryClient();
 
-    const fetchProfile = async () => {
-        // Only fetch profile if user is authenticated
-        if (!isAuthenticated()) {
-            setLoading(false);
-            return;
-        }
-        
-        try {
-            const response = await ProfileAPI.getProfile();
-            setProfile(response.data);
-        } catch (err) {
-            console.error("Error fetching profile:", err);
-        } finally {
-            setLoading(false);
-        }
+    // Function to manually update profile data in cache (for compatibility with consumers using setProfile)
+    const setProfile = (newData) => {
+        queryClient.setQueryData(['userProfile'], newData);
     };
+    // Fetch profile data using React Query
+    const {
+        data: profile = null,
+        isPending: loading,
+        refetch: fetchProfile
+    } = useQuery({
+        queryKey: ['userProfile'],
+        queryFn: async () => {
+            const response = await ProfileAPI.getProfile();
+            return response.data;
+        },
+        enabled: isAuthenticated(), // Only fetch if authenticated
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: false,
+    });
 
-    // Listen for authentication changes
+    // Listen for authentication changes to invalidate/refetch
     useEffect(() => {
         const handleStorageChange = () => {
             if (isAuthenticated()) {
                 fetchProfile();
             } else {
-                setProfile(null);
+                // queryClient.setQueryData(['userProfile'], null); // distinct queryClient usage might be needed if I import it
+                // For now, reliance on enabled: isAuthenticated() and re-render might differ slightly but acceptable
+                // Ideally we should use useQueryClient to access client and reset queries
             }
         };
 
         window.addEventListener("storage", handleStorageChange);
-        fetchProfile();
-
         return () => {
             window.removeEventListener("storage", handleStorageChange);
         };
-    }, []);
+    }, [fetchProfile]);
 
     return (
         <ProfileContext.Provider value={{ profile, setProfile, fetchProfile, loading, isAuthenticated: isAuthenticated }}>

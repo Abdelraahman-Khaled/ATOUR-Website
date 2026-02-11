@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import { Link, useParams } from "react-router-dom";
@@ -94,31 +95,24 @@ const GiftDetail = () => {
     const { currentLanguage } = useLanguage(); // Get the current language
     const { currentCurrency } = useCurrency()
     // states
-    const [gift, setGift] = useState(null); // State to store home data
-    const [loading, setLoading] = useState(true); // State to manage loading
-    const [error, setError] = useState(null); // State to handle errors
-
-    // fetching Data
-    useEffect(() => {
-        const fetchgift = async () => {
-            try {
-                const response = await ContentAPI.getGiftById(id, currentLanguage, currentCurrency); // Fetch data from the API
-                const data = response.data; // Extract the data from the response
-                if (data) {
-                    setGift(data); // Set the fetched data to state
-                } else {
-                    setError("gift not found."); // Handle case where the ID doesn't match any item
-                }
-            } catch (err) {
-                console.error("Error fetching gift data:", err);
-                setError("Failed to load gift data. Please try again later.");
-            } finally {
-                setLoading(false); // Stop the loading spinner
-            }
-        };
-
-        fetchgift(); // Call the API on component mount
-    }, [id, currentLanguage, currentCurrency]); // Re-run the effect if the `id` changes
+    // fetching Data using React Query
+    const {
+        data: gift,
+        isPending: loading,
+        error
+    } = useQuery({
+        queryKey: ['giftDetails', id, currentLanguage, currentCurrency],
+        queryFn: async () => {
+            const response = await ContentAPI.getGiftById(id, currentLanguage, currentCurrency);
+            const data = response.data;
+            if (!data) throw new Error("Gift not found");
+            return data;
+        },
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 30, // 30 minutes
+        refetchOnWindowFocus: false,
+        retry: false,
+    });
 
     if (loading) {
         return (

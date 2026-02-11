@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Avatar, AvatarGroup } from "@mui/material";
 import image1 from "../../../../../../assets/images/users/01.png";
 import image2 from "../../../../../../assets/images/users/02.png";
@@ -6,7 +5,8 @@ import image3 from "../../../../../../assets/images/users/03.png";
 import image4 from "../../../../../../assets/images/users/04.png";
 import ProgressBarRates from "Components/Ui/ProgressBarRates/ProgressBarRates";
 import AllRatesComments from "./AllRatesComments";
-import { useRates } from "context/RatesContext";
+import { useQuery } from "@tanstack/react-query";
+import RatesAPI from "api/ratesApi";
 import { useLanguage } from "Components/Languages/LanguageContext";
 
 const translations = {
@@ -52,31 +52,37 @@ const translations = {
     ur: "...درجہ بندیاں لوڈ ہو رہی ہیں",
     ja: "評価を読み込み中...",
   },
-  more:{
-    ar:"أكثر من ",
-    en:"More than ",
-    fr:"Plus de ",
-    de:"Mehr als ",
-    es:"Más de ",
-    tr:"Daha fazla ",
-    ru:"Больше чем ",
-    zh:"更多 ",
-    ko:"더 많이 ",
-    pt:"Mais de ",
-    ur:"بہت سے ",
-    ja:"評価が多い ",
+  more: {
+    ar: "أكثر من ",
+    en: "More than ",
+    fr: "Plus de ",
+    de: "Mehr als ",
+    es: "Más de ",
+    tr: "Daha fazla ",
+    ru: "Больше чем ",
+    zh: "更多 ",
+    ko: "더 많이 ",
+    pt: "Mais de ",
+    ur: "بہت سے ",
+    ja: "評価が多い ",
   }
 };
 
 const RatesComments = ({ modelId, modelType }) => {
-  const { rates, fetchRates, loading } = useRates();
   const { currentLanguage } = useLanguage();
-  
-  useEffect(() => {
-    if (modelId && modelType) {
-      fetchRates(modelId, modelType);
-    }
-  }, [modelId, modelType, fetchRates]);
+  // Fetch rates using React Query
+  const {
+    data: rates = [],
+    isPending: loading
+  } = useQuery({
+    queryKey: ['rates', modelId, modelType],
+    queryFn: async () => {
+      const response = await RatesAPI.getRates(modelId, modelType);
+      return response.data;
+    },
+    enabled: !!modelId && !!modelType, // Only run if IDs are present
+    staleTime: 1000 * 60 * 5,
+  });
 
   return (
     <div className="all-rates-comments margin-top-1 border-top pt-3">
@@ -99,7 +105,7 @@ const RatesComments = ({ modelId, modelType }) => {
           </AvatarGroup>
           <h2 className="text-title">
             {translations.more[currentLanguage]}
-            {(rates?.statistics?.total_ratings || 0)|| 0}{" "}
+            {(rates?.statistics?.total_ratings || 0) || 0}{" "}
             {translations.trust[currentLanguage]}
           </h2>
         </div>

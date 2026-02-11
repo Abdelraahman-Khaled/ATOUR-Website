@@ -1,19 +1,20 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import ContentAPI from "api/contentApi";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
 import TabsBiography from "./Components/TabsBiography/TabsBiography";
 import HelmetInfo from "Components/HelmetInfo/HelmetInfo";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
-import { BiographyContext } from "context/BiographyContext";
 import biographyContent from "./translates";
 import "./BiographyPage.css";
 
 const BiographyPage = () => {
   const { id } = useParams();
-  const { biography, error, fetchBiography, loading } = useContext(BiographyContext);
   const { currentLanguage } = useLanguage();
+  const { currentCurrency } = useCurrency();
 
   const t = biographyContent[currentLanguage] || biographyContent.en;
 
@@ -129,14 +130,29 @@ const BiographyPage = () => {
 
     return params;
   };
-  useEffect(() => {
-    if (id) {
+  // Fetch data using React Query
+  const {
+    data: biography,
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['biographyData', id, currentLanguage, currentCurrency, appliedFilters],
+    queryFn: async () => {
       const params = buildParamsFromFilters(appliedFilters);
-      fetchBiography(id, params);
-    }
-  }, [id, appliedFilters, fetchBiography]);
+      const response = await ContentAPI.getCitiesId(id, currentLanguage, currentCurrency, params);
 
-  if (!biography) {
+      const data = response?.data?.data || response?.data || null;
+      if (!data) throw new Error(t.biographyNotFound || "Biography not found");
+
+      return data;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+
+  if (loading) {
     return (
       <div style={{ margin: "200px 0px" }}>
         <Loader />
@@ -147,18 +163,7 @@ const BiographyPage = () => {
   if (error) {
     return (
       <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
-        {error}
-        <Link to="/" className="fs-6 fw-medium text-danger text-decoration-underline px-2">
-          {t.home}
-        </Link>
-      </p>
-    );
-  }
-
-  if (biography === null) {
-    return (
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
-        {t.cityDetailsNotAvailable}
+        {error.message || t.failedToLoad}
         <Link to="/" className="fs-6 fw-medium text-danger text-decoration-underline px-2">
           {t.home}
         </Link>
@@ -181,6 +186,7 @@ const BiographyPage = () => {
         </header>
         <main>
           <TabsBiography
+            biography={biography}
             onSelectSubCategory={handleSelectSubCategory}
             onPriceChange={handlePriceChange}
             onCountryChange={handleCountryChange}

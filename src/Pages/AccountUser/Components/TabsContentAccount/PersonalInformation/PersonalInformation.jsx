@@ -11,12 +11,12 @@ import * as Yup from "yup";
 import translations from "./translations";
 import Loader from "Components/Auth/Components/Loader/Loader";
 const PersonalInformation = () => {
-  const { setProfile, isAuthenticated } = useProfile();
+  const { profile, setProfile, isAuthenticated } = useProfile();
   const navigate = useNavigate();
 
   const { currentLanguage } = useLanguage(); // Get the current language
   const [refresh, setRefresh] = useState(false); // State to trigger refresh
-  const [profile, setProfiles] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     nationality: "",
     birthdate: "",
@@ -51,54 +51,26 @@ const PersonalInformation = () => {
     setShowEditModal(false);
   };
 
-  // Fetch profile data
+  // Sync profile data from context to local state
   useEffect(() => {
-    // Don't fetch if not authenticated
-    if (!isAuthenticated()) {
+    if (profile) {
+      const nationality =
+        profile?.nationality?.translations?.find(
+          (item) => item.locale === currentLanguage
+        )?.name || translations.notAvailable[currentLanguage];
+
+      setFormData({
+        name: profile.name || translations.notAvailable[currentLanguage],
+        nationality: nationality || translations.notAvailable[currentLanguage],
+        nationality_id: profile.nationality_id || 0,
+        birthdate: profile.birthdate || null,
+        gender: profile.gender || null,
+        image: profile.photo,
+        phone: profile.phone || translations.notAvailable[currentLanguage],
+      });
       setLoading(false);
-      return;
     }
-
-    const fetchProfile = async () => {
-      try {
-        const response = await ProfileAPI.getProfile();
-
-        if (response.success && response.data) {
-          const profileData = response.data;
-          const nationality =
-            profileData?.nationality?.translations?.find(
-              (item) => item.locale === currentLanguage
-            )?.name || translations.notAvailable[currentLanguage];
-
-          setProfiles({
-            name: profileData.name || translations.notAvailable[currentLanguage],
-            nationality: nationality || translations.notAvailable[currentLanguage],
-            nationality_id: profileData.nationality_id || 0, // ✅ store the id
-            birthdate: profileData.birthdate || null,
-            gender: profileData.gender || null,
-            image: profileData.photo,
-            phone: profileData.phone || translations.notAvailable[currentLanguage],
-          });
-          setProfile(profileData); // Update the context with the fetched profile
-
-        } else {
-          toast.error(translations.fetchError[currentLanguage]);
-        }
-      } catch (error) {
-        console.error("Error fetching profile data:", error);
-        // Check if this is an authentication error
-        if (error.response && error.response.status === 401) {
-          // Redirect to home page if unauthorized
-        } else {
-          toast.error(translations.fetchError[currentLanguage]);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
-  }, [currentLanguage, refresh, isAuthenticated, navigate]);
+  }, [profile, currentLanguage]);
 
   // Handle profile update
   const handleProfileUpdate = async (updatedProfile) => {
@@ -115,7 +87,7 @@ const PersonalInformation = () => {
 
       if (response.success) {
         // Update the profile state with the new data
-        setProfiles((prev) => ({
+        setFormData((prev) => ({
           ...prev,
           name: updatedProfile.name,
           image: updatedProfile.image,
@@ -136,7 +108,10 @@ const PersonalInformation = () => {
           gender: updatedProfile.gender,
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
-        setRefresh(prev => !prev);
+
+        // Update profile in context (which updates cache)
+        setProfile({ ...profile, ...updatedProfile });
+
         toast.success(translations.profileUpdateSuccess[currentLanguage]);
         hideEditInfoButton(); // Close the modal
       } else {
@@ -147,20 +122,21 @@ const PersonalInformation = () => {
       toast.error(translations.profileUpdateError[currentLanguage]);
     }
   };
-   if (loading) {
-    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>; 
+  if (loading) {
+    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>;
   }
 
   return (
     <>
       <ModalEditPersonalInformation
-        key={profile.name + refresh}   // أو أي مفتاح unique يتغير مع البيانات
+        key={formData.name + refresh}   // أو أي مفتاح unique يتغير مع البيانات
         showModalEditInformation={showEditModal}
         hideModalEditInformation={hideEditInfoButton}
         onSubmitProfileUpdate={handleProfileUpdate} // Pass the update handler
-        initialProfile={profile}
+        initialProfile={formData}
         currentLanguage={currentLanguage} // Pass language
         setRefresh={setRefresh} // Pass setRefresh to trigger refresh
+        validationSchema={validation} // Pass validation schema to fix lint error
       />
       <div className="personal-information-content">
         <h2 className="title title-info-top-account pb-1">
@@ -169,7 +145,8 @@ const PersonalInformation = () => {
 
         <FormField
           key={refresh ? "refresh-1" : "refresh-0"}
-          initialValues={profile}
+          initialValues={formData}
+          validationSchema={validation}
           onSubmit={() => { }}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
@@ -178,7 +155,7 @@ const PersonalInformation = () => {
                 name="name"
                 type="text"
                 placeholder={translations.name[currentLanguage]}
-                value={profile.name}
+                value={formData.name}
                 success
                 readOnly
               />
@@ -189,7 +166,7 @@ const PersonalInformation = () => {
                 name="nationality"
                 type="text"
                 placeholder={translations.nationality[currentLanguage]}
-                value={profile.nationality}
+                value={formData.nationality}
                 success
                 readOnly
               />
@@ -200,7 +177,7 @@ const PersonalInformation = () => {
                 name="phone"
                 type="text"
                 placeholder={translations.phone[currentLanguage]}
-                value={profile.phone}
+                value={formData.phone}
                 success
                 readOnly
               />
@@ -211,7 +188,7 @@ const PersonalInformation = () => {
                 name="birthdate"
                 type="text"
                 placeholder={translations.birthdate[currentLanguage]}
-                value={profile.birthdate || translations.notAvailable[currentLanguage]}
+                value={formData.birthdate || translations.notAvailable[currentLanguage]}
                 success
                 readOnly
               />
@@ -222,7 +199,7 @@ const PersonalInformation = () => {
                 name="gender"
                 type="text"
                 placeholder={translations.gender[currentLanguage]}
-                value={profile.gender || translations.notAvailable[currentLanguage]}
+                value={formData.gender || translations.notAvailable[currentLanguage]}
                 success
                 readOnly
               />

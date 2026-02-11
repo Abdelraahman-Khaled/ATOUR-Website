@@ -6,10 +6,12 @@ import "./DatePickerComponent.css";
 import { useParams } from "react-router-dom";
 import BookingAPI from "api/bookingApi";
 
-const DatePickerComponent = ({ addTextPlaceHolder, setSelectedDay, selectedDay }) => {
+const DatePickerComponent = ({ addTextPlaceHolder, setSelectedDay, selectedDay, disabled }) => {
   const [error, setError] = useState(null);
   const [dates, setDates] = useState([]);
   const { id } = useParams();
+
+  // ... (keep useEffect and other logic same, just updating the return and props)
 
   useEffect(() => {
     const fetchTripCalendar = async () => {
@@ -51,7 +53,10 @@ const DatePickerComponent = ({ addTextPlaceHolder, setSelectedDay, selectedDay }
 
   return (
     <>
-      <div className="input-date-content">
+      <div
+        className={`input-date-content ${disabled ? 'disabled-date-picker' : ''}`}
+        style={disabled ? { pointerEvents: 'none', opacity: 0.7 } : {}}
+      >
         <DatePicker
           value={selectedDay}
           onChange={handleDateChange}

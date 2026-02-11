@@ -13,10 +13,10 @@ const contactUsTranslations = {
     inquiryTitle: "لديك مشكلة أو إستفسار؟",
     inquiryText: "يمكنك إرسال تذكرة وسنقوم بالتواصل معك في أقرب وقت",
     titlePlaceholder: "العنوان",
-    descriptionPlaceholder: "وصف",
+    descriptionPlaceholder: "الرسالة",
     send: "إرسال",
     sending: "جاري الإرسال...",
-    toastEmpty: "العنوان والوصف لا يمكن أن يكونا فارغين.",
+    toastEmpty: "العنوان والرسالة لا يمكن أن يكونا فارغين.",
     toastSuccess: "تم إرسال التذكرة بنجاح!",
     toastFail: "فشل في إرسال التذكرة.",
     toastFooterFail: "غير قادر على جلب بيانات التذييل. حاول مرة أخرى لاحقًا.",
@@ -27,10 +27,10 @@ const contactUsTranslations = {
     inquiryTitle: "Do you have a problem or inquiry?",
     inquiryText: "You can send a ticket and we will contact you as soon as possible",
     titlePlaceholder: "Title",
-    descriptionPlaceholder: "Description",
+    descriptionPlaceholder: "Message",
     send: "Send",
     sending: "Sending...",
-    toastEmpty: "Title and description cannot be empty.",
+    toastEmpty: "Title and message cannot be empty.",
     toastSuccess: "Ticket sent successfully!",
     toastFail: "Failed to send ticket.",
     toastFooterFail: "Unable to fetch footer data. Please try again later.",
@@ -41,10 +41,10 @@ const contactUsTranslations = {
     inquiryTitle: "Vous avez un problème ou une question ?",
     inquiryText: "Vous pouvez envoyer un ticket et nous vous contacterons dès que possible",
     titlePlaceholder: "Titre",
-    descriptionPlaceholder: "Description",
+    descriptionPlaceholder: "Message",
     send: "Envoyer",
     sending: "Envoi...",
-    toastEmpty: "Le titre et la description ne peuvent pas être vides.",
+    toastEmpty: "Le titre et le message ne peuvent pas être vides.",
     toastSuccess: "Ticket envoyé avec succès !",
     toastFail: "Échec de l'envoi du ticket.",
     toastFooterFail: "Impossible de récupérer les données du pied de page. Veuillez réessayer plus tard.",
@@ -55,10 +55,10 @@ const contactUsTranslations = {
     inquiryTitle: "Haben Sie ein Problem oder eine Anfrage?",
     inquiryText: "Sie können ein Ticket senden und wir werden Sie so schnell wie möglich kontaktieren",
     titlePlaceholder: "Titel",
-    descriptionPlaceholder: "Beschreibung",
+    descriptionPlaceholder: "Nachricht",
     send: "Senden",
     sending: "Wird gesendet...",
-    toastEmpty: "Titel und Beschreibung dürfen nicht leer sein.",
+    toastEmpty: "Titel und Nachricht dürfen nicht leer sein.",
     toastSuccess: "Ticket erfolgreich gesendet!",
     toastFail: "Fehler beim Senden des Tickets.",
     toastFooterFail: "Fußzeilendaten konnten nicht abgerufen werden. Bitte versuchen Sie es später erneut.",
@@ -69,10 +69,10 @@ const contactUsTranslations = {
     inquiryTitle: "¿Tienes un problema o consulta?",
     inquiryText: "Puedes enviar un ticket y nos pondremos en contacto contigo lo antes posible",
     titlePlaceholder: "Título",
-    descriptionPlaceholder: "Descripción",
+    descriptionPlaceholder: "Mensaje",
     send: "Enviar",
     sending: "Enviando...",
-    toastEmpty: "El título y la descripción no pueden estar vacíos.",
+    toastEmpty: "El título y el mensaje no pueden estar vacíos.",
     toastSuccess: "¡Ticket enviado con éxito!",
     toastFail: "Error al enviar el ticket.",
     toastFooterFail: "No se pueden obtener los datos del pie de página. Inténtelo de nuevo más tarde.",
@@ -83,10 +83,10 @@ const contactUsTranslations = {
     inquiryTitle: "Bir sorununuz veya sorunuz mu var?",
     inquiryText: "Bir bilet gönderebilirsiniz, en kısa sürede sizinle iletişime geçeceğiz",
     titlePlaceholder: "Başlık",
-    descriptionPlaceholder: "Açıklama",
+    descriptionPlaceholder: "Mesaj",
     send: "Gönder",
     sending: "Gönderiliyor...",
-    toastEmpty: "Başlık ve açıklama boş olamaz.",
+    toastEmpty: "Başlık ve mesaj boş olamaz.",
     toastSuccess: "Bilet başarıyla gönderildi!",
     toastFail: "Bilet gönderilemedi.",
     toastFooterFail: "Altbilgi verileri alınamadı. Lütfen daha sonra tekrar deneyin.",
@@ -97,10 +97,10 @@ const contactUsTranslations = {
     inquiryTitle: "У вас есть проблема или вопрос?",
     inquiryText: "Вы можете отправить заявку, и мы свяжемся с вами как можно скорее",
     titlePlaceholder: "Заголовок",
-    descriptionPlaceholder: "Описание",
+    descriptionPlaceholder: "Сообщение",
     send: "Отправить",
     sending: "Отправка...",
-    toastEmpty: "Заголовок и описание не могут быть пустыми.",
+    toastEmpty: "Заголовок и сообщение не могут быть пустыми.",
     toastSuccess: "Заявка успешно отправлена!",
     toastFail: "Не удалось отправить заявку.",
     toastFooterFail: "Не удалось получить данные подвала. Пожалуйста, попробуйте позже.",
@@ -111,10 +111,10 @@ const contactUsTranslations = {
     inquiryTitle: "您有问题或疑问吗？",
     inquiryText: "您可以提交工单，我们会尽快与您联系",
     titlePlaceholder: "标题",
-    descriptionPlaceholder: "描述",
+    descriptionPlaceholder: "消息",
     send: "发送",
     sending: "发送中...",
-    toastEmpty: "标题和描述不能为空。",
+    toastEmpty: "标题和消息不能为空。",
     toastSuccess: "工单提交成功！",
     toastFail: "工单提交失败。",
     toastFooterFail: "无法获取页脚数据。请稍后再试。",
@@ -125,10 +125,10 @@ const contactUsTranslations = {
     inquiryTitle: "문제나 문의사항이 있습니까?",
     inquiryText: "티켓을 보내주시면 가능한 한 빨리 연락드리겠습니다",
     titlePlaceholder: "제목",
-    descriptionPlaceholder: "설명",
+    descriptionPlaceholder: "메시지",
     send: "보내기",
     sending: "전송 중...",
-    toastEmpty: "제목과 설명은 비워둘 수 없습니다.",
+    toastEmpty: "제목과 메시지는 비워둘 수 없습니다.",
     toastSuccess: "티켓이 성공적으로 전송되었습니다!",
     toastFail: "티켓 전송에 실패했습니다.",
     toastFooterFail: "푸터 데이터를 가져올 수 없습니다. 나중에 다시 시도해주세요.",
@@ -139,10 +139,10 @@ const contactUsTranslations = {
     inquiryTitle: "Você tem um problema ou dúvida?",
     inquiryText: "Você pode enviar um ticket e entraremos em contato o mais rápido possível",
     titlePlaceholder: "Título",
-    descriptionPlaceholder: "Descrição",
+    descriptionPlaceholder: "Mensagem",
     send: "Enviar",
     sending: "Enviando...",
-    toastEmpty: "O título e a descrição não podem estar vazios.",
+    toastEmpty: "O título e a mensagem não podem estar vazios.",
     toastSuccess: "Ticket enviado com sucesso!",
     toastFail: "Falha ao enviar o ticket.",
     toastFooterFail: "Não foi possível buscar os dados do rodapé. Por favor, tente novamente mais tarde.",
@@ -153,10 +153,10 @@ const contactUsTranslations = {
     inquiryTitle: "کیا آپ کو کوئی مسئلہ یا استفسار ہے؟",
     inquiryText: "آپ ٹکٹ بھیج سکتے ہیں اور ہم جلد از جلد آپ سے رابطہ کریں گے",
     titlePlaceholder: "عنوان",
-    descriptionPlaceholder: "تفصیل",
+    descriptionPlaceholder: "پیغام",
     send: "بھیجیں",
     sending: "بھیجا جا رہا ہے...",
-    toastEmpty: "عنوان اور تفصیل خالی نہیں ہو سکتے۔",
+    toastEmpty: "عنوان اور پیغام خالی نہیں ہو سکتے۔",
     toastSuccess: "ٹکٹ کامیابی سے بھیج دیا گیا!",
     toastFail: "ٹکٹ بھیجنے میں ناکام رہا۔",
     toastFooterFail: "فوٹر ڈیٹا حاصل نہیں کیا جا سکا۔ براہ کرم بعد میں دوبارہ کوشش کریں۔",
@@ -167,10 +167,10 @@ const contactUsTranslations = {
     inquiryTitle: "問題やお問い合わせがありますか？",
     inquiryText: "チケットを送信していただければ、できるだけ早くご連絡いたします",
     titlePlaceholder: "タイトル",
-    descriptionPlaceholder: "説明",
+    descriptionPlaceholder: "メッセージ",
     send: "送信",
     sending: "送信中...",
-    toastEmpty: "タイトルと説明を空にすることはできません。",
+    toastEmpty: "タイトルとメッセージを空にすることはできません。",
     toastSuccess: "チケットが正常に送信されました！",
     toastFail: "チケットの送信に失敗しました。",
     toastFooterFail: "フッターデータを取得できません。後でもう一度お試しください。",
@@ -253,14 +253,22 @@ const ContactUsPage = () => {
           )}
         </div>
         <div className="contact-info">
-          <div className="contact-card">
+          <a
+            href={`mailto:${footerData?.email}`}
+            className="contact-card"
+            style={{ textDecoration: 'none' }}
+          >
             <i className="fas fa-envelope"></i>
             <span>{footerData?.email}</span>
-          </div>
-          <div className="contact-card">
+          </a>
+          <a
+            href={`tel:${footerData?.phone}`}
+            className="contact-card"
+            style={{ textDecoration: 'none' }}
+          >
             <i className="fas fa-phone"></i>
             <span>{footerData?.phone}</span>
-          </div>
+          </a>
         </div>
         <div className="inquiry-section mt-3">
           <h3 className="mb-2">{contactUsTranslations[currentLanguage].inquiryTitle}</h3>

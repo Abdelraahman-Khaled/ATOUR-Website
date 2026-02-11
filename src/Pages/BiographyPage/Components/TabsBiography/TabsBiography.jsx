@@ -8,8 +8,7 @@ import TripsContent from "Pages/TripsPage/Components/TripsContent/TripsContent";
 import AllCardsEvents from "Pages/Events/Components/AllCardsEvents/AllCardsEvents";
 import OffersCards from "Pages/Offers/Components/OffersContent/OffersCards";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import { useContext, useEffect, useState } from "react";
-import { BiographyContext } from "../../../../context/BiographyContext";
+import { useState, useEffect } from "react";
 import Loader from "Components/Auth/Components/Loader/Loader";
 
 const tabsTranslations = {
@@ -87,10 +86,10 @@ const TabsBiography = ({
   checkboxFilters,
   onSubmitFilters,
   onClearFilters,
-  loading
+  loading,
+  biography
 }) => {
   const { currentLanguage } = useLanguage();
-  const { biography } = useContext(BiographyContext);
   const [activeTab, setActiveTab] = useState(false); // 👈 tab state
   // كل مرة يغير التاب نعمل reset
   useEffect(() => {

@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "../Components/Languages/LanguageContext";
 import GeneralAPI from "api/generalApi";
 
@@ -10,27 +11,22 @@ export const useFooter = () => useContext(FooterContext);
 
 export const FooterProvider = ({ children }) => {
   const { currentLanguage } = useLanguage();
-  const [footerData, setFooterData] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      setLoading(true);
-      try {
-        const response = await GeneralAPI.getFooterSocial();
-        setFooterData(response.data);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching footer data:", err);
-        setError("Failed to load footer data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFooterData();
-  }, [currentLanguage]);
+  // Fetch footer data using React Query
+  const {
+    data: footerData = "",
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['footerData', currentLanguage],
+    queryFn: async () => {
+      const response = await GeneralAPI.getFooterSocial();
+      return response.data;
+    },
+    staleTime: 1000 * 60 * 60, // 1 hour (footer data rarely changes)
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    refetchOnWindowFocus: false,
+    retry: 2,
+  });
 
 
 

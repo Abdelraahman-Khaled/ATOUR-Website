@@ -1,5 +1,6 @@
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import TripsContent from "./Components/TripsContent/TripsContent";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import ModalSelectDestination from "Components/Ui/ModalSelectDestination/ModalSelectDestination";
@@ -77,8 +78,6 @@ const text = {
 const TripsPage = () => {
   const { currentLanguage } = useLanguage(); // Access current language
   const { currentCurrency } = useCurrency();
-  const [tripsData, setTripsData] = useState([]); // State to store home data
-  const [loading, setLoading] = useState(true); // State to manage loading
   // Applied filters (used for API calls)
   const [appliedFilters, setAppliedFilters] = useState({
     selectedSubCategoryIds: [],
@@ -186,55 +185,56 @@ const TripsPage = () => {
     setAppliedFilters(clearedFilters);
   };
 
-  // feching the Data
-  useEffect(() => {
-    const fetchTripsData = async () => {
-      try {
-        const params = {};
-        if (appliedFilters.selectedSubCategoryIds.length > 0) {
-          appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
-            params[`sub_category_id[${index}]`] = id;
-          });
-        }
-
-        // Add price filter parameters
-        if (appliedFilters.priceFilter.min_price !== null) {
-          params.min_price = appliedFilters.priceFilter.min_price;
-        }
-        if (appliedFilters.priceFilter.max_price !== null) {
-          params.max_price = appliedFilters.priceFilter.max_price;
-        }
-
-        // Add country and city filter parameters
-        if (appliedFilters.selectedCountryId !== null) {
-          params.country_id = appliedFilters.selectedCountryId;
-        }
-        if (appliedFilters.selectedCityId !== null) {
-          params.city_id = appliedFilters.selectedCityId;
-        }
-
-        // Add checkbox filter parameters
-        if (appliedFilters.checkboxFilters.max_rate === 1) {
-          params.max_rate = 1;
-        }
-        if (appliedFilters.checkboxFilters.max_booked === 1) {
-          params.max_booked = 1;
-        }
-        if (appliedFilters.checkboxFilters.has_offer === 1) {
-          params.has_offer = 1;
-        }
-
-        const data = await ContentAPI.getTrips(currentLanguage, currentCurrency, params); // Fetch data from the API
-        const normalizedData = normalizeData(data.data); // Normalize the data
-
-        setTripsData(normalizedData); // Set the fetched data to state
-      } catch (err) {
-      } finally {
-        setLoading(false); // Stop the loading spinner
+  // Fetch Trips Data using React Query
+  const {
+    data: tripsData = [],
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['tripsData', currentLanguage, currentCurrency, appliedFilters],
+    queryFn: async () => {
+      const params = {};
+      if (appliedFilters.selectedSubCategoryIds.length > 0) {
+        appliedFilters.selectedSubCategoryIds.forEach((id, index) => {
+          params[`sub_category_id[${index}]`] = id;
+        });
       }
-    };
-    fetchTripsData(); // Call the API on component mount
-  }, [currentLanguage, currentCurrency, appliedFilters]);
+
+      // Add price filter parameters
+      if (appliedFilters.priceFilter.min_price !== null) {
+        params.min_price = appliedFilters.priceFilter.min_price;
+      }
+      if (appliedFilters.priceFilter.max_price !== null) {
+        params.max_price = appliedFilters.priceFilter.max_price;
+      }
+
+      // Add country and city filter parameters
+      if (appliedFilters.selectedCountryId !== null) {
+        params.country_id = appliedFilters.selectedCountryId;
+      }
+      if (appliedFilters.selectedCityId !== null) {
+        params.city_id = appliedFilters.selectedCityId;
+      }
+
+      // Add checkbox filter parameters
+      if (appliedFilters.checkboxFilters.max_rate === 1) {
+        params.max_rate = 1;
+      }
+      if (appliedFilters.checkboxFilters.max_booked === 1) {
+        params.max_booked = 1;
+      }
+      if (appliedFilters.checkboxFilters.has_offer === 1) {
+        params.has_offer = 1;
+      }
+
+      const data = await ContentAPI.getTrips(currentLanguage, currentCurrency, params);
+      return normalizeData(data.data);
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData) => previousData, // Keep showing previous data while fetching new filters
+  });
 
   return (
     <>

@@ -113,7 +113,7 @@
 }
 
 .send-button {
-  background-color: var(--green-01-color); /* Green color from the image */
+  background-color: #148035; /* Green color from the image */
   color: white;
   padding: 15px 30px;
   border: none;
@@ -213,4 +213,52 @@
     padding: 12px 20px;
     font-size: 16px;
   }
+}
+
+body.dark-theme .contact-card i,
+body.dark-theme .contact-card span {
+  color: var(--green-dark-01-color) !important;
+}
+
+/* Dark Theme Overrides */
+body.dark-theme .contact-us-page {
+  background-color: var(--dark-02-color);
+}
+
+body.dark-theme .content-section {
+  background-color: var(--dark-01-color);
+  box-shadow: 0 0px 10px rgba(255, 255, 255, 0.05);
+  border: 1px solid #148035;
+  border-radius: 10px;
+}
+
+body.dark-theme .welcome-message h2,
+body.dark-theme .inquiry-section h3 {
+  color: var(--white-01-color);
+}
+
+body.dark-theme .welcome-message p,
+body.dark-theme .inquiry-section p {
+  color: var(--gray-01-color);
+}
+
+body.dark-theme .contact-card {
+  background-color: var(--dark-02-color);
+}
+
+body.dark-theme .input-field,
+body.dark-theme .textarea-field {
+  background-color: var(--dark-02-color);
+  border-color: var(--gray-02-color);
+  color: var(--white-01-color);
+}
+
+body.dark-theme .input-field::placeholder,
+body.dark-theme .textarea-field::placeholder {
+  color: var(--gray-01-color);
+}
+
+body.dark-theme .icon-circle {
+  background-color: var(--green-dark-01-color);
+  color: var(--white-01-color);
 }

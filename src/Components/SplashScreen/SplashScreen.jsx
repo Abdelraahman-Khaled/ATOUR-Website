@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHome } from '../../context/HomeContext';
-import WindowLoader from '../WindowLoader/WindowLoader';
 
 const SplashScreen = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -15,13 +14,13 @@ const SplashScreen = () => {
         // Add fade-out animation before hiding
         const splashElement = document.querySelector(".splash-overlay");
         if (splashElement) {
-          splashElement.style.animation = "fadeOutSplash 0.8s forwards";
+          splashElement.style.animation = "fadeOutSplash 0.4s forwards";
 
           setTimeout(() => {
             setShowSplash(false);
-          }, 800); // Match the animation duration
+          }, 400); // Match the animation duration
         }
-      }, 500); // Small delay after loading completes
+      }, 100); // Reduced delay after loading completes
 
       return () => clearTimeout(timer);
     }
@@ -50,7 +49,7 @@ const SplashScreen = () => {
   return (
     <div className="splash-overlay">
       <div className="splash-logo">
-        <img src="/icon/ico.svg" alt="Logo" className='splash-logo'/>
+        <img src="/icon/ico.svg" alt="Logo" className='splash-logo' />
       </div>
     </div>
   );

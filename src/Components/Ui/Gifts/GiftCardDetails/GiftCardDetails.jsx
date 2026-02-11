@@ -21,6 +21,7 @@ import ShareButton from "Components/ShareButton/ShareButton";
 import Favicon from "Components/FavIcon/Favicon ";
 import { isAuthenticated } from "api/axiosInstance";
 import { toast } from "react-toastify";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 
 const content = {
   notFound: {
@@ -143,6 +144,7 @@ const content = {
 const GiftCardDetails = ({ gift }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
   const [paymentUrl, setPaymentUrl] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   if (!gift) {
     return (
@@ -164,6 +166,7 @@ const GiftCardDetails = ({ gift }) => {
   }
   return (
     <>
+      <FormAuth showModalForm={showAuthModal} hideModalForm={() => setShowAuthModal(false)} />
       {/* Payment Modal */}
       {paymentUrl && (
         <CustomModal
@@ -224,6 +227,7 @@ const GiftCardDetails = ({ gift }) => {
                   className="btn-main w-100"
                   onClick={() => {
                     toast.error(content.pleaseLogin[currentLanguage]);
+                    setShowAuthModal(true);
                   }}
                 >
                   {content.book[currentLanguage]}

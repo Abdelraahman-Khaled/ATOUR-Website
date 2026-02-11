@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import SliderEventCardDetails from "./Components/SliderEventCardDetails/SliderEventCardDetails";
 import DetailsCardPage from "./Components/DetailsCardPage/DetailsCardPage";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
@@ -120,31 +121,23 @@ const DetailsCardEvent = () => {
   // language
   const { currentLanguage } = useLanguage(); // Get the current language
   // states
-  const [effective, setEffective] = useState(null); // State to store home data
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [error, setError] = useState(null); // State to handle errors
-
-  // fetching Data
-  useEffect(() => {
-    const fetchEffective = async () => {
-      try {
-        const response = await ContentAPI.getEffectivenessById(id, currentLanguage, currentCurrency); // Fetch data from the API
-        const data = response.data; // Extract the data from the response
-        if (data) {
-          setEffective(data); // Set the fetched data to state
-        } else {
-          setError("Effective not found."); // Handle case where the ID doesn't match any item
-        }
-      } catch (err) {
-        console.error("Error fetching effective data:", err);
-        setError("Failed to load effective data. Please try again later.");
-      } finally {
-        setLoading(false); // Stop the loading spinner
-      }
-    };
-
-    fetchEffective(); // Call the API on component mount
-  }, [id, currentLanguage, currentCurrency]); // Re-run the effect if the `id` changes
+  // fetching Data using React Query
+  const {
+    data: effective,
+    isPending: loading,
+    error
+  } = useQuery({
+    queryKey: ['eventDetails', id, currentLanguage, currentCurrency],
+    queryFn: async () => {
+      const response = await ContentAPI.getEffectivenessById(id, currentLanguage, currentCurrency);
+      if (!response.data) throw new Error("Effective not found");
+      return response.data;
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    retry: false, // Don't retry if not found
+  });
 
   if (loading) {
     return (

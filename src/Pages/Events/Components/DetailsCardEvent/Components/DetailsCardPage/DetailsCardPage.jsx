@@ -22,11 +22,13 @@ import ShareButton from "Components/ShareButton/ShareButton";
 import Favicon from "Components/FavIcon/Favicon ";
 import { isAuthenticated } from "api/axiosInstance";
 import { toast } from "react-toastify";
+import FormAuth from "Components/Auth/FormAuth/FormAuth";
 
 const DetailsCardPage = ({ effective }) => {
   const { currentLanguage } = useLanguage();
   const [showModalNumberIndividuals, setShowModalNumberIndividuals] =
     useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const { selectedDate, setSelectedDate, numberOfPeople, setNumberOfPeople } =
     useBooking();
   const showModalNumberIndividualsButton = () =>
@@ -53,6 +55,7 @@ const DetailsCardPage = ({ effective }) => {
   return (
     <>
       <div className="details-card-page">
+        <FormAuth showModalForm={showAuthModal} hideModalForm={() => setShowAuthModal(false)} />
         <ModalNumberIndividuals
           showModalNumberIndividuals={showModalNumberIndividuals}
           hideModalNumberIndividuals={hideModalNumberIndividuals}
@@ -130,6 +133,7 @@ const DetailsCardPage = ({ effective }) => {
                 className="btn-main w-100"
                 onClick={() => {
                   toast.error(translations[currentLanguage].pleaseLogin);
+                  setShowAuthModal(true);
                 }}
               >
                 {translations[currentLanguage].book}
