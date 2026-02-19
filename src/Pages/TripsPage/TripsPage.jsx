@@ -10,6 +10,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import { Link } from "react-router-dom";
 import Loader from "Components/Auth/Components/Loader/Loader";
 import { useCurrency } from "Components/Currencies/CurrencyContext";
+import TripsPageSkeleton from "./Components/TripsPageSkeleton/TripsPageSkeleton";
 
 
 const text = {
@@ -257,9 +258,7 @@ const TripsPage = () => {
           <ContainerMedia>
             <div className="mt-4">
               {loading ? (
-                <div style={{ margin: "200px 0px" }}>
-                  <Loader />
-                </div>
+                <TripsPageSkeleton />
               ) : (
                 <TripsContent
                   tripsData={tripsData}

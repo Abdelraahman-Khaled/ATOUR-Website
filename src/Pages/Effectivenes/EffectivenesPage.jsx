@@ -10,6 +10,7 @@ import { useCurrency } from "Components/Currencies/CurrencyContext";
 import FilterTripsContent from "Pages/TripsPage/Components/TripsContent/FilterTripsContent";
 import GeneralAPI from "api/generalApi";
 import EffectivenessCard from "./EffectivenessCard";
+import { EventsPageSkeleton } from "Pages/TripsPage/Components/TripsPageSkeleton/TripsPageSkeleton";
 
 
 const text = {
@@ -247,7 +248,7 @@ const EffectivenesPage = () => {
 
         const data = await ContentAPI.getEffectiveness(currentLanguage, currentCurrency, params); // Fetch data from the API
         const normalizedData = normalizeData(data.data); // Normalize the data
-
+        console.log(normalizedData);
         setEffectivenessData(normalizedData); // Set the fetched data to state
       } catch (err) {
       } finally {
@@ -278,9 +279,7 @@ const EffectivenesPage = () => {
           <ContainerMedia>
             <div className="mt-4">
               {loading ? (
-                <div style={{ margin: "200px 0px" }}>
-                  <Loader />
-                </div>
+                <EventsPageSkeleton />
               ) : (
                 <div className="trips-content--info">
                   <FilterTripsContent

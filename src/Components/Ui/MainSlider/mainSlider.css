@@ -195,6 +195,7 @@
 }
 
 /* Responsive Design */
+/* Responsive Design */
 @media (max-width: 768px) {
   .property-showcase {
     flex-direction: column-reverse;
@@ -205,16 +206,22 @@
   .thumbnail-gallery {
     flex-direction: row;
     width: 100%;
-    height: 80px;
+    height: auto;
     overflow-x: auto;
     gap: 8px;
-    padding: 0 4px;
+    padding: 4px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .thumbnail-wrapper {
+    flex: 0 0 80px;
+    height: 80px;
+    scroll-snap-align: start;
   }
 
   .thumbnail-item {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .main-image-container {
@@ -233,6 +240,10 @@
   .location-overlay {
     right: 12px;
   }
+
+  .embla-thumbs__slide {
+    flex: 0 0 30%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -240,8 +251,8 @@
     gap: 8px;
   }
 
-  .thumbnail-item {
-    width: 70px;
+  .thumbnail-wrapper {
+    flex: 0 0 70px;
     height: 70px;
   }
 
@@ -325,10 +336,12 @@
   min-width: 0;
   padding-left: var(--thumbs-slide-spacing);
   position: relative;
+  height: 100%;
 }
 .embla-thumbs__slide img {
   width: 100%;
   border-radius: 8px;
+  height: 100%;
 }
 
 .embla-thumbs__slide__number {
@@ -376,13 +389,6 @@
   flex-wrap: wrap;
 }
 
-/* @media */
-
-@media (max-width: 768px) {
-  .embla-thumbs__slide {
-    flex: 0 0 30%;
-  }
-}
 @media screen and (max-width: 992px) {
   .embla {
     flex-direction: column;
@@ -401,66 +407,132 @@
     justify-content: center;
   }
 }
-.images-modal .modal-dialog {
-  max-width: 90vw !important;
-  margin: 0 auto !important;
+.lightbox-modal .modal-dialog {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  height: 100% !important;
 }
 
-.images-modal .modal-content {
-  width: 100%;
-  min-height: 90vh;
-  height: 90vh;
+.lightbox-modal .modal-content {
+  background-color: #000;
+  height: 100vh;
+  border: none;
+  border-radius: 0;
+}
+
+.lightbox-modal .modal-header {
+  border-bottom: none;
+  background-color: #000;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+.lightbox-modal .modal-title {
+  display: none; /* Hide title for cleaner look, or keep if user wants */
+}
+
+.lightbox-modal .btn-close-icon {
+  color: #fff !important;
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Adjust based on RTL/LTR */
+  z-index: 100;
+}
+
+.lightbox-modal .btn-close-icon:hover {
+  opacity: 1;
+}
+
+.lightbox-modal .btn-close-icon svg {
+  color: #000; /* Icon color */
+  font-size: 16px;
+}
+
+.lightbox-modal .modal-body {
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.images-modal .modal-body {
-  overflow-y: scroll;
-  /* Custom scrollbar styles */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: green transparent; /* For Firefox */
+.lightbox-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.images-modal .modal-body::-webkit-scrollbar {
-  width: 8px;
+.main-swiper {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
-.images-modal .modal-body::-webkit-scrollbar-track {
-  background: transparent;
+.main-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
 }
 
-.images-modal .modal-body::-webkit-scrollbar-thumb {
-  background-color: green;
-  border-radius: 10px;
-  border: 2px solid transparent;
-}
- {
-  flex-direction: row;
-  flex-wrap: wrap;
+.main-swiper .swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-/* @media */
-
-@media (max-width: 768px) {
-  .embla-thumbs__slide {
-    flex: 0 0 30%;
-  }
+/* Custom Navigation Arrows */
+.main-swiper .swiper-button-next,
+.main-swiper .swiper-button-prev {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
 }
-@media screen and (max-width: 992px) {
-  .embla {
-    flex-direction: column;
-  }
-  .embla__viewport {
-    width: 100%;
-  }
-  .embla__slide__img {
-    width: 100%;
-  }
-  .embla-thumbs {
-    width: 100%;
-  }
-  .embla-thumbs__container {
-    flex-direction: row;
-    justify-content: center;
-  }
+
+.main-swiper .swiper-button-next:after,
+.main-swiper .swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.thumbs-swiper {
+  width: 100%;
+  height: 100px;
+  flex-shrink: 0;
+  padding: 10px 0;
+  background: #000;
+}
+
+.thumbs-swiper .swiper-slide {
+  opacity: 0.4;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.thumbs-swiper .swiper-slide-thumb-active {
+  opacity: 1;
+  border: 2px solid #fff;
+}
+
+.thumbs-swiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

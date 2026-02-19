@@ -5,3 +5,9 @@
   height: auto;
   border-radius: 8px;
 }
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .image-login {
+    width: 50%;
+  }
+}

@@ -260,7 +260,9 @@ html {
   text-align: center;
   text-transform: none;
   transform: translateZ(0);
-  transition: all 0.2s, box-shadow 0.08s ease-in;
+  transition:
+    all 0.2s,
+    box-shadow 0.08s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -343,7 +345,7 @@ body.dark-theme .btn-main {
 .swiper-rtl .swiper-button-prev:hover,
 .swiper-rtl .swiper-button-next:hover {
   color: var(--white-01-color);
-  background: var(--danger-01-color);
+  background: var(--green-01-color);
 }
 
 .swiper-rtl .swiper-button-prev {
@@ -365,9 +367,9 @@ body.dark-theme .btn-main {
   content: "\f177";
 }
 
-.swiper-button-next::before {
+/* .swiper-button-next::before {
   content: "\f178";
-}
+} */
 
 @media screen and (max-width: 767px) {
   .swiper-rtl .swiper-button-next {

@@ -1,19 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './mainSlider.css';
 import CustomModal from '../../CustomModal/CustomModal';
 import { Thumb } from './EmblaCarouselThumbsButton';
 import CameraICon from 'assets/Icons/CameraIcon';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+// import required modules
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 const MainSlider = ({
     images = [],
     className = ''
 }) => {
+
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const [startY, setStartY] = useState(0);
     const [scrollTop, setScrollTop] = useState(0);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const thumbnailRef = useRef(null);
+    const mainSwiperRef = useRef(null);
 
     // Default images if none provided
     const defaultImages = [
@@ -29,6 +41,13 @@ const MainSlider = ({
     const handleThumbnailClick = (index) => {
         setSelectedImageIndex(index);
     };
+
+    // Update swiper when modal opens
+    useEffect(() => {
+        if (showModal && mainSwiperRef.current && mainSwiperRef.current.swiper) {
+            mainSwiperRef.current.swiper.slideTo(selectedImageIndex, 0);
+        }
+    }, [showModal, selectedImageIndex]);
 
     // Drag scroll handlers
     const handleMouseDown = (e) => {
@@ -106,9 +125,6 @@ const MainSlider = ({
                                 selected={index === selectedImageIndex}
                                 onClick={() => handleThumbnailClick(index)}
                                 imgSrc={image}
-                                images={displayImages}
-                                setShowModal={setShowModal}
-                                showModal={showModal}
                             />
                             {isLastThumbnail && (
                                 <div className="camera-icon-overlay-thumbnail">
@@ -145,34 +161,66 @@ const MainSlider = ({
                 </div>
             </div>
 
-            {/* Custom Modal for All Images */}
+            {/* Custom Modal for Lightbox */}
             <CustomModal
                 show={showModal}
-                onHide={() => setShowModal(false)}
-                title={"Images"}
-                newClass={"images-modal"}
+                onHide={() => {
+                    setShowModal(false);
+                    setThumbsSwiper(null);
+                }}
+                title={"الصور"}
+                newClass={"images-modal lightbox-modal"}
             >
-                <div className='d-flex flex-wrap flex-row justify-content-between w-100'>
-                    {
-                        displayImages?.map((src, index) => (
-                            <div
-                                key={index}
-                                className='col-md-6 col-lg-4 col-12 rounded-1 p-2'
-                                onClick={() => {
-                                    setSelectedImageIndex(index);
-                                    setShowModal(false);
-                                }}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <img
-                                    src={src}
-                                    alt={`Property image ${index + 1}`}
-                                    className='w-100 h-100 rounded-2'
-                                    style={{ objectFit: 'cover', height: '200px' }}
-                                />
-                            </div>
-                        ))
-                    }
+                <div className="lightbox-container">
+                    {/* Main Swiper */}
+                    <Swiper
+                        ref={mainSwiperRef}
+                        style={{
+                            '--swiper-navigation-color': '#fff',
+                            '--swiper-pagination-color': '#fff',
+                        }}
+                        spaceBetween={10}
+                        navigation={true}
+                        thumbs={{ swiper: thumbsSwiper }}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="main-swiper"
+                        onSlideChange={(swiper) => setSelectedImageIndex(swiper.activeIndex)}
+                        initialSlide={selectedImageIndex}
+                    >
+                        {displayImages.map((src, index) => (
+                            <SwiperSlide key={index}>
+                                <img src={src} alt={`Slide ${index}`} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+
+                    {/* Thumbs Swiper */}
+                    <Swiper
+                        onSwiper={setThumbsSwiper}
+                        spaceBetween={10}
+                        slidesPerView={4}
+                        freeMode={true}
+                        watchSlidesProgress={true}
+                        modules={[FreeMode, Navigation, Thumbs]}
+                        className="thumbs-swiper"
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 4,
+                            },
+                            768: {
+                                slidesPerView: 6,
+                            },
+                            1024: {
+                                slidesPerView: 8,
+                            },
+                        }}
+                    >
+                        {displayImages.map((src, index) => (
+                            <SwiperSlide key={index}>
+                                <img src={src} alt={`Thumbnail ${index}`} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </CustomModal>
         </div>

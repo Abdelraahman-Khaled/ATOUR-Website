@@ -11,6 +11,7 @@ import { useCurrency } from "Components/Currencies/CurrencyContext";
 import FilterTripsContent from "Pages/TripsPage/Components/TripsContent/FilterTripsContent";
 import GeneralAPI from "api/generalApi";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
+import TripsPageSkeleton from "Pages/TripsPage/Components/TripsPageSkeleton/TripsPageSkeleton";
 const translates = {
   en: {
     products: "Products",
@@ -212,13 +213,8 @@ const Offers = () => {
     placeholderData: (previousData) => previousData,
   });
 
-  if (loading) {
-    return (
-      <div style={{ margin: "200px 0px" }}>
-        <Loader />
-      </div>
-    );
-  }
+
+
 
   if (error) {
     return null; // No need to display error here, toast will handle it
@@ -241,24 +237,28 @@ const Offers = () => {
         <main>
           {/* ============== START CONTAINER ============== */}
           <ContainerMedia>
-            <div className="trips-content--info">
-              <FilterTripsContent
-                activeMap={false}
-                subCategories={subCategories}
-                onSelectSubCategory={handleSelectSubCategory}
-                onPriceChange={handlePriceChange}
-                onCountryChange={handleCountryChange}
-                onCityChange={handleCityChange}
-                selectedCountryId={tempFilters.selectedCountryId}
-                selectedCityId={tempFilters.selectedCityId}
-                onCheckboxChange={handleCheckboxChange}
-                checkboxFilters={tempFilters.checkboxFilters}
-                onSubmitFilters={handleSubmitFilters}
-                onClearFilters={handleClearFilters}
-                loading={loading}
-              />
-              <OffersContent gifts={gifts} />
-            </div>
+            {loading ? (
+              <TripsPageSkeleton />
+            ) : (
+              <div className="trips-content--info">
+                <FilterTripsContent
+                  activeMap={false}
+                  subCategories={subCategories}
+                  onSelectSubCategory={handleSelectSubCategory}
+                  onPriceChange={handlePriceChange}
+                  onCountryChange={handleCountryChange}
+                  onCityChange={handleCityChange}
+                  selectedCountryId={tempFilters.selectedCountryId}
+                  selectedCityId={tempFilters.selectedCityId}
+                  onCheckboxChange={handleCheckboxChange}
+                  checkboxFilters={tempFilters.checkboxFilters}
+                  onSubmitFilters={handleSubmitFilters}
+                  onClearFilters={handleClearFilters}
+                  loading={loading}
+                />
+                <OffersContent gifts={gifts} />
+              </div>
+            )}
           </ContainerMedia>
           {/* ============== END CONTAINER ============== */}
         </main>

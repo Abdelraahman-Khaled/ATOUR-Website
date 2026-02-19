@@ -1,10 +1,10 @@
-.main-add-place-date--1 .input-date-content .DatePicker{
+.main-add-place-date--1 .input-date-content .DatePicker {
   width: 100%;
 }
 .main-add-place-date--1 .input-date-content .DatePicker input {
   background: transparent !important;
   width: 100% !important;
-  padding-right: 42px !important;
+  padding-right: 60px !important;
   font-size: 15px;
 }
 

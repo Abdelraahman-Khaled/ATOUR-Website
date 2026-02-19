@@ -1,10 +1,8 @@
 import BoxOneContent from "./BoxOneContent";
 import "./ContentInfoRight.css";
 import MapContentBox from "./MapContentBox";
-import PicturesPreviousTrips from "./PicturesPreviousTrips";
 import RatesComments from "./RatesComments/RatesComments";
 import SimilarTrips from "./SimilarTrips";
-import SliderDetailsContentRight from "./SliderDetailsContentRight";
 import TextContent from "./TextContent";
 import TripRequirement from "./TripRequirement";
 import WhyBookingTrip from "./WhyBookingTrip";

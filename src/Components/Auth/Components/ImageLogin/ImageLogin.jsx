@@ -9,7 +9,7 @@ const adImages = [
 
 const ImageLogin = () => {
   return (
-    <div className="image-login">
+    <div className="image-login mx-auto ">
       <AdSwiper adImages={adImages} />
     </div>
   );

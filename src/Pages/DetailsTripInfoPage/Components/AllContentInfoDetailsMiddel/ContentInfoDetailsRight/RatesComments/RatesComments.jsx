@@ -83,44 +83,46 @@ const RatesComments = ({ modelId, modelType }) => {
     enabled: !!modelId && !!modelType, // Only run if IDs are present
     staleTime: 1000 * 60 * 5,
   });
-
+  console.log(rates?.ratings?.length);
   return (
-    <div className="all-rates-comments margin-top-1 border-top pt-3">
-      {/* =========== START TOP RATES CONTENT ============= */}
-      <div className="top-rates-content">
-        <h2 className="title">
-          {translations.title[currentLanguage]}{" "}
-          <span className="num-rates">({rates?.statistics?.total_ratings || 0})</span>
-        </h2>
-        <div className="main-info-avatar mt-2 d-flex align-items-center gap-4 flex-wrap">
-          <AvatarGroup
-            renderSurplus={(surplus) => <span>{surplus.toString()[0]}K+</span>}
-            total={(rates?.statistics?.total_ratings || 0)}
-            className="all-avatar"
-          >
-            <Avatar alt="Remy Sharp" src={image1} className="avatar-1" />
-            <Avatar alt="Remy Sharp" src={image2} className="avatar-1" />
-            <Avatar alt="Remy Sharp" src={image3} className="avatar-1" />
-            <Avatar alt="Remy Sharp" src={image4} className="avatar-1" />
-          </AvatarGroup>
-          <h2 className="text-title">
-            {translations.more[currentLanguage]}
-            {(rates?.statistics?.total_ratings || 0) || 0}{" "}
-            {translations.trust[currentLanguage]}
+    rates?.ratings?.length > 0 ? (
+      <div className="all-rates-comments margin-top-1 border-top pt-3">
+        {/* =========== START TOP RATES CONTENT ============= */}
+        <div className="top-rates-content">
+          <h2 className="title">
+            {translations.title[currentLanguage]}{" "}
+            <span className="num-rates">({rates?.statistics?.total_ratings || 0})</span>
           </h2>
+          <div className="main-info-avatar mt-2 d-flex align-items-center gap-4 flex-wrap">
+            <AvatarGroup
+              renderSurplus={(surplus) => <span>{surplus.toString()[0]}K+</span>}
+              total={(rates?.statistics?.total_ratings || 0)}
+              className="all-avatar"
+            >
+              <Avatar alt="Remy Sharp" src={image1} className="avatar-1" />
+              <Avatar alt="Remy Sharp" src={image2} className="avatar-1" />
+              <Avatar alt="Remy Sharp" src={image3} className="avatar-1" />
+              <Avatar alt="Remy Sharp" src={image4} className="avatar-1" />
+            </AvatarGroup>
+            <h2 className="text-title">
+              {translations.more[currentLanguage]}
+              {(rates?.statistics?.total_ratings || 0) || 0}{" "}
+              {translations.trust[currentLanguage]}
+            </h2>
+          </div>
         </div>
-      </div>
-      {/* =========== END TOP RATES CONTENT ============= */}
+        {/* =========== END TOP RATES CONTENT ============= */}
 
-      {loading ? (
-        <p>{translations.loading[currentLanguage]}</p>
-      ) : (
-        <>
-          <ProgressBarRates rates={rates.ratings} />
-          <AllRatesComments rates={rates.ratings} />
-        </>
-      )}
-    </div>
+        {loading ? (
+          <p>{translations.loading[currentLanguage]}</p>
+        ) : (
+          <>
+            <ProgressBarRates rates={rates.ratings} />
+            <AllRatesComments rates={rates.ratings} />
+          </>
+        )}
+      </div>
+    ) : null
   );
 };
 

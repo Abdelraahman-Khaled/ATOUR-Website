@@ -46,6 +46,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
     emailOrPhoneNumber: "",
     password: "",
   };
+console.log(initialValues);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -72,7 +73,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
     <div>
       <div className="info-login-content">
         <div className="row g-4 g-md-3">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-xl-6">
             <HeaderLogin titleTop={content.title[currentLanguage]} />
             {forgotPasswordOpen ? (
               <ForgotPasswordForm onClose={() => setForgotPasswordOpen(false)} />
@@ -124,7 +125,7 @@ const Login = ({ buttonLogin, hideModalForm, setOtpFormOpen }) => {
             </div>
             <EndLoginInfo />
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-xl-6">
             <ImageLogin />
           </div>
         </div>
