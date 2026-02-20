@@ -65,7 +65,7 @@ const AllRatesComments = ({ rates }) => {
               </div>
             ))
         ) : (
-          <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
+          <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center">
             {translations.noComments[currentLanguage]}{" "}
             <Link
               to="/"

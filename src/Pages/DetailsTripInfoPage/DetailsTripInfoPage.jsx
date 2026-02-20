@@ -46,7 +46,7 @@ const DetailsTripInfoPage = () => {
 
   // Display error state
   if (error) {
-    return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+    return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
       {detailsTripTranslations.tourDetailsNotAvailable[currentLanguage]}
       <Link
         to="/"
@@ -59,7 +59,7 @@ const DetailsTripInfoPage = () => {
 
   // Display if no data is available
   if (!tripData) {
-    return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
+    return <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center " style={{ height: "350px" }}>
       {detailsTripTranslations.tourDetailsNotAvailable[currentLanguage]}
       <Link
         to="/"

@@ -49,7 +49,7 @@ const CardsFavorite = ({ data, refresh }) => {
             })
           ) : (
             <>
-              <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found text-black">
+              <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center text-black vh-100 align-content-center">
                 {currentLanguage === "ar" ? "لا يوجد منتجات فى المفضلة ." : "There are no products in the favorites."}
                 <Link
                   to="/"

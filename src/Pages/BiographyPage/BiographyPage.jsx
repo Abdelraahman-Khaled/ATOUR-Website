@@ -162,7 +162,7 @@ const BiographyPage = () => {
 
   if (error) {
     return (
-      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+      <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
         {error.message || t.failedToLoad}
         <Link to="/" className="fs-6 fw-medium text-danger text-decoration-underline px-2">
           {t.home}

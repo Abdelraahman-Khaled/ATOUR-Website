@@ -7,7 +7,17 @@ const SplashScreen = () => {
 
   // Keep splash screen visible until loading is complete
   useEffect(() => {
-    // Only hide splash when loading is complete
+    // Show splash screen when loading starts
+    if (loading) {
+      setShowSplash(true);
+      const splashElement = document.querySelector(".splash-overlay");
+      if (splashElement) {
+        splashElement.style.animation = "none"; // Reset animation
+        splashElement.style.opacity = "1";
+      }
+    }
+
+    // Hide splash screen when loading is complete
     if (!loading && showSplash) {
       // Wait a bit after loading completes to ensure everything is ready
       const timer = setTimeout(() => {

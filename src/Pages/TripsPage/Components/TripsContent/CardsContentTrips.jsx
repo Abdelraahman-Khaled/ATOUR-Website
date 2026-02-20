@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 
 
-const CardsContentTrips = ({ buttonActiveMap, activeMap,type, tripsData = [] }) => {
+const CardsContentTrips = ({ buttonActiveMap, activeMap, type, tripsData = [] }) => {
 
   const { currentLanguage } = useLanguage(); // Get the current language
   const [currentPage_2, setCurrentPage_2] = useState(0);
@@ -107,7 +107,7 @@ const CardsContentTrips = ({ buttonActiveMap, activeMap,type, tripsData = [] }) 
             })
           ) : (
             <>
-              <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
+              <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center">
                 {currentLanguage === "ar" ? " لا يوجد جَوْلات  جديدة." : "There are no new experiences."}
                 <Link
                   to="/"

@@ -121,7 +121,7 @@ const Country = () => {
     // Error state
     if (error) {
         return (
-            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
                 {content[currentLanguage].cityNotAvailable}
                 <Link to="/" className="fs-6 fw-medium text-danger text-decoration-underline px-2">
                     {content[currentLanguage].home}
@@ -133,7 +133,7 @@ const Country = () => {
     // No data state
     if (!country) {
         return (
-            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
+            <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center" style={{ height: "350px" }}>
                 {content[currentLanguage].cityDetailsNotAvailable}
                 <Link to="/" className="fs-6 fw-medium text-danger text-decoration-underline px-2">
                     {content[currentLanguage].home}

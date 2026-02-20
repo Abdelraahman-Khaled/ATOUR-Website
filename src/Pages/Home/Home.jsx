@@ -25,7 +25,8 @@ const text = {
   ru: "Данные отсутствуют",
   zh: "无可用数据",
   ja: "利用可能なデータがありません",
-  ko: "사용 가능한 데이터가 없습니다"
+  ko: "사용 가능한 데이터가 없습니다",
+  tr: "Kullanılabilir veri yok"
 }
 const Home = () => {
   const { currentLanguage } = useLanguage(); // Get the current language

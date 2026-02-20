@@ -82,7 +82,7 @@ const EffectivenessCard = ({ effectivenessData = [] }) => {
                             return (
                                 <div
                                     key={item.id}
-                                    className={`col-12 col-sm-6 col-lg-12`}
+                                    className={`col-12 col-sm-6 col-xl-12`}
                                 >
                                     <CardEvent
                                         id={item.id}
@@ -104,7 +104,7 @@ const EffectivenessCard = ({ effectivenessData = [] }) => {
                             );
                         })
                     ) : (
-                        <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
+                        <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center">
                             {text[currentLanguage].noData}{" "}
                             <Link
                                 to="/"

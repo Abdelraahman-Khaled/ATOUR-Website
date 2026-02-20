@@ -8,8 +8,8 @@
 }
 
 .card-event-one .image-collection img {
-  height: 140px !important;
-  width: 230px !important;
+  height: 160px !important;
+  width: 240.5px !important;
 }
 
 .card-event-one .right-card-event {
@@ -72,7 +72,7 @@ body.dark-theme .card-event-one .right-card-event span {
   }
 
   .card-event-one .right-card-event {
-    width: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
     gap: 3px;

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useLanguage } from "Components/Languages/LanguageContext";
 import otpContent from "../otpContent";
 
-const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone  }) => {
+const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone, verifyApiCall }) => {
   const [otpTimer, setOTPTimer] = useState(60);
   const [otp, setOtp] = useState("");
   const inputRefs = useRef([]);
@@ -16,7 +16,7 @@ const OtpForm = ({ showOtpForm, hideOtpForm, successSendButton, emailOrPhone  })
 
   const { currentLanguage } = useLanguage(); // Get current language
   const content = otpContent;
-console.log(otp);
+  console.log(otp);
 
   useEffect(() => {
     if (showOtpForm) {
@@ -89,7 +89,13 @@ console.log(otp);
       return;
     }
     try {
-      const response = await AuthAPI.verifyOtp(emailOrPhone, otp);
+      let response;
+      if (verifyApiCall) {
+        response = await verifyApiCall(emailOrPhone, otp);
+      } else {
+        response = await AuthAPI.verifyOtp(emailOrPhone, otp);
+      }
+
       if (response.success === true) { // Ensure API response indicates success
         successSendButton(); // Only proceed if OTP is correct
       } else {

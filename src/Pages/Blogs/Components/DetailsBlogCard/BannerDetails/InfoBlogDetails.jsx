@@ -75,7 +75,7 @@ const InfoBlogDetails = ({ blogDetailsCard }) => {
     )
       :
       (
-        <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found">
+        <p className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center">
           {text[currentLanguage].noData}{" "}
           <Link
             to="/"

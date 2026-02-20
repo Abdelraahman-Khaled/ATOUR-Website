@@ -304,8 +304,10 @@ const AccountInformationContent = () => {
         image: profile.photo || "",
       });
       setLoading(false);
+    } else {
+      setLoading(true);
     }
-  }, [profile]);
+  }, [profile, currentLanguage]);
 
   const handlePhoneNumberChange = (isValid, value) => {
     setPhoneNumber(String(value));
@@ -318,11 +320,15 @@ const AccountInformationContent = () => {
   const handleChangePassword = async (values) => {
     setIsLoading(true);
     try {
-      const response = await AuthAPI.changePassword(
+      await AuthAPI.changePassword(
         values.current_password,
         values.password,
         values.password_confirmation
       );
+      // Logout and redirect
+      await AuthAPI.logout();
+      window.dispatchEvent(new Event("storage")); // Trigger storage event to update auth state
+      navigate("/"); // Redirect to home or login
     } catch (error) {
       console.error("Error changing password:", error);
     } finally {

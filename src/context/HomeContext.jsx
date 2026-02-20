@@ -10,13 +10,14 @@ import { useQuery } from "@tanstack/react-query";
 const HomeContext = createContext(null);
 
 export const HomeProvider = ({ children }) => {
-    const { currentLanguage } = useLanguage();
+    const { currentLanguage, isChangingLanguage } = useLanguage();
     const { currentCurrency } = useCurrency();
 
     // Fetch Home Data
     const {
         data: homeData,
         isPending: homeLoading,
+        isRefetching: isRefetchingHome,
         error: homeError,
         refetch: refetchHome
     } = useQuery({
@@ -34,6 +35,7 @@ export const HomeProvider = ({ children }) => {
     const {
         data: sliderAndCities,
         isPending: sliderLoading,
+        isRefetching: isRefetchingSlider,
         refetch: refetchSlider
     } = useQuery({
         queryKey: ['sliderData', currentLanguage],
@@ -52,7 +54,7 @@ export const HomeProvider = ({ children }) => {
         refetchOnWindowFocus: false,
     });
 
-    const loading = homeLoading || sliderLoading;
+    const loading = homeLoading || sliderLoading || isRefetchingHome || isRefetchingSlider || isChangingLanguage;
     const error = homeError ? "Failed to load home data." : null;
     const notification_count = homeData?.notification_count || 0;
 

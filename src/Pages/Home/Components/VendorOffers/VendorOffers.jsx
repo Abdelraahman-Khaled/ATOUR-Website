@@ -38,6 +38,12 @@ const content = {
         addToFavorites: "Zu Favoriten hinzugefügt.",
         removeFromFavorites: "Aus Favoriten entfernt.",
     },
+    tr: {
+        title: "Satıcı Teklifleri",
+        text: "Sınırlı bir süre için indirimler ve özel deneyimler – ne bekliyorsunuz?",
+        addToFavorites: "Favorilere eklendi.",
+        removeFromFavorites: "Favorilerden kaldırıldı.",
+    },
     it: {
         title: "Offerte dei fornitori",
         text: "Sconti ed esperienze esclusive per tempo limitato – cosa aspetti?",
@@ -68,6 +74,13 @@ const content = {
         addToFavorites: "お気に入りに追加しました。",
         removeFromFavorites: "お気に入りから削除しました。",
     },
+    ko: {
+        title: "벤더 오퍼",
+        text: "기간 한정 할인 및 특별 체험 – 무엇을 기다리고 있나요?",
+        addToFavorites: "즐겨찾기에 추가되었습니다.",
+        removeFromFavorites: "즐겨찾기에서 삭제되었습니다.",
+    },
+  
 };
 
 const VendorOffers = ({ offer }) => {

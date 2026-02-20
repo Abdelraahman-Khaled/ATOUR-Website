@@ -150,7 +150,7 @@ const GiftCardDetails = ({ gift }) => {
     return (
       <>
         <p
-          className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found d-flex align-items-center justify-content-center "
+          className="text-section-api fs-6 fw-medium text-center pt-5 dakr-not-found vh-100 align-content-center d-flex align-items-center justify-content-center "
           style={{ height: "350px" }}
         >
           {content.notFound[currentLanguage]}

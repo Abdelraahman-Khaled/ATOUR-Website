@@ -28,6 +28,7 @@ export const LanguageProvider = ({ children }) => {
     : "ar";
 
   const [currentLanguage, setCurrentLanguage] = useState(defaultLanguage);
+  const [isChangingLanguage, setIsChangingLanguage] = useState(false);
 
   useEffect(() => {
     //  SAVE LANGUAGE TO LOCAL STORAGE
@@ -37,9 +38,12 @@ export const LanguageProvider = ({ children }) => {
     const updateLanguageOnBackend = async () => {
       if (isAuthenticated()) {
         try {
+          setIsChangingLanguage(true);
           await GeneralAPI.changeLanguage(currentLanguage);
         } catch (error) {
           console.error("Failed to update language on backend:", error);
+        } finally {
+          setIsChangingLanguage(false);
         }
       }
     };
@@ -60,7 +64,9 @@ export const LanguageProvider = ({ children }) => {
   }, [direction, currentLanguage]);
 
   return (
-    <LanguageContext.Provider value={{ currentLanguage, setCurrentLanguage }}>
+    <LanguageContext.Provider
+      value={{ currentLanguage, setCurrentLanguage, isChangingLanguage }}
+    >
       {children}
     </LanguageContext.Provider>
   );

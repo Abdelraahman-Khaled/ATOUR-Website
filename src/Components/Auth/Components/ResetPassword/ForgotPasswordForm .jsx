@@ -14,6 +14,8 @@ const ForgotPasswordForm = ({ onClose }) => {
     const [username, setUsername] = useState("");
     const [showOtpForm, setShowOtpForm] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const content = forgotPasswordContent;
 
     const validationSchemaStep1 = Yup.object().shape({
@@ -44,12 +46,15 @@ const ForgotPasswordForm = ({ onClose }) => {
     });
 
     const handleStep1Submit = async (values) => {
+        setLoading(true);
         try {
             await AuthAPI.resetPassword(values.username);
             setUsername(values.username);
             setShowOtpForm(true); // Show OTP form
         } catch (error) {
             console.error("Error sending OTP:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -84,8 +89,8 @@ const ForgotPasswordForm = ({ onClose }) => {
                                 placeholder={content.emailOrPhonePlaceholder[currentLanguage]}
                                 success
                             />
-                            <button type="submit" className="btn-main btn-submit w-100 mt-3">
-                                {content.submitButton[currentLanguage]}
+                            <button type="submit" className="btn-main btn-submit w-100 mt-3" disabled={loading}>
+                                {loading ? content.loading[currentLanguage] : content.submitButton[currentLanguage]}
                             </button>
                         </FormField>
                     )}
@@ -123,6 +128,7 @@ const ForgotPasswordForm = ({ onClose }) => {
                     hideOtpForm={() => setShowOtpForm(false)}
                     successSendButton={handleOtpSuccess}
                     emailOrPhone={username}
+                    verifyApiCall={AuthAPI.checkCode}
                 />
             )}
         </div>
