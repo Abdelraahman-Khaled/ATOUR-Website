@@ -24,6 +24,11 @@
   text-align: center;
 }
 
+[dir="ltr"] .card-event-one .right-card-event {
+  right: unset;
+  left: 20px;
+}
+
 .card-event-one .right-card-event .title-month {
   font-size: 12px;
   display: block;

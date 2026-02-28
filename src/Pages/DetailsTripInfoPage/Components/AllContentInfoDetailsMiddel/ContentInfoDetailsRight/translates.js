@@ -168,5 +168,19 @@ const boxTranslations = {
     ur: "متبقي استوک",
     ja: "利用可能な在庫",
   },
+  licenseNumber: {
+    ar: "رقم الترخيص",
+    en: "License number",
+    fr: "Numéro de licence",
+    de: "Lizenznummer",
+    es: "Número de licencia",
+    tr: "Lisans numarası",
+    ru: "Номер лицензии",
+    zh: "许可证号",
+    ko: "라이선스 번호",
+    pt: "Número de licença",
+    ur: "لائسنس نمبر",
+    ja: "ライセンス番号",
+  },
 };
 export default boxTranslations;

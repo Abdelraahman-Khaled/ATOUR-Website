@@ -4,9 +4,17 @@ import notificationTranslations from '../../translations/notificationTranslation
 import ContainerMedia from 'Components/ContainerMedia/ContainerMedia';
 import { useState, useEffect } from 'react';
 import { useHome } from '../../context/HomeContext';
-import axiosInstance from '../../api/axiosInstance';
 import { getNotifications, markNotificationAsRead } from '../../api/notificationApi';
-import Loader from 'Components/Auth/Components/Loader/Loader';
+const NotificationSkeleton = () => (
+  <div className="notification-item skeleton-item" style={{ pointerEvents: 'none' }}>
+    <div className="notification-content">
+      <div className="skeleton-line skeleton-title" />
+      <div className="skeleton-line skeleton-msg-long" />
+      <div className="skeleton-line skeleton-msg-short" />
+    </div>
+    <div className="skeleton-line skeleton-time" />
+  </div>
+);
 
 const NotificationPage = () => {
   const { currentLanguage } = useLanguage();
@@ -61,7 +69,19 @@ const NotificationPage = () => {
   const CHARACTER_LIMIT = 100; // Define character limit for truncation
 
   if (loading) {
-    return <div style={{ margin: "200px 0px" }}>  <Loader /> </div>; // Or a proper loader component
+    return (
+      <ContainerMedia>
+        <div className="notification-page-container">
+          <div className="notification-page">
+            <div className="notifications-list">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <NotificationSkeleton key={i} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </ContainerMedia>
+    );
   }
 
   if (error) {

@@ -50,6 +50,7 @@ const languageFlags = {
 
 
 const BoxOneContent = ({ tripData }) => {
+  console.log(tripData)
 
   const { currentLanguage } = useLanguage(); // Get the current language
   // SHOW MODAL DETAILS
@@ -81,6 +82,7 @@ const BoxOneContent = ({ tripData }) => {
               </div>
               <div className="info-details-company">
                 <h2 className="title">{tripData.vendor.name}</h2>
+                <span className="text pt-2">{boxTranslations.licenseNumber[currentLanguage]} : {tripData.document_number}</span>
                 {/* Rates */}
                 <div className="d-flex flex-wrap gap-3 mt-1">
                   {tripData.total_rates > 0 &&
@@ -180,7 +182,7 @@ const BoxOneContent = ({ tripData }) => {
               <p className="text">{tripData.program_time || tripData.from_time} {tripData.program_time_unit}</p>
             </div>
           }
-          {tripData.from_time && 
+          {tripData.from_time &&
             <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
               <div className="info-right--1 d-flex align-items-center gap-2">
                 <ClockIcon />
@@ -203,125 +205,125 @@ const BoxOneContent = ({ tripData }) => {
               <div className="info-right--1 d-flex align-items-center gap-2">
                 <UserIcon2 />
               </div>
-                <p className="text d-flex flex-column gap-1">
-                  {tripData.group_count > 0 ?
-                    <div>
-                      <GroupOrIndividual isGroup={true} />
-                      {" "}
-                      ({tripData.group_count})
-                    </div>
-                    :
-                    <>
-                      {tripData.min_people && <span>{boxTranslations.minBooking[currentLanguage]} ({tripData.min_people}) <GroupOrIndividual /></span>}
-                      {tripData.max_people && <span>{boxTranslations.maxBooking[currentLanguage]} ({tripData.max_people}) <GroupOrIndividual /></span>}
-                    </>
-                  }
-                </p>
+              <p className="text d-flex flex-column gap-1">
+                {tripData.group_count > 0 ?
+                  <div>
+                    <GroupOrIndividual isGroup={true} />
+                    {" "}
+                    ({tripData.group_count})
+                  </div>
+                  :
+                  <>
+                    {tripData.min_people && <span>{boxTranslations.minBooking[currentLanguage]} ({tripData.min_people}) <GroupOrIndividual /></span>}
+                    {tripData.max_people && <span>{boxTranslations.maxBooking[currentLanguage]} ({tripData.max_people}) <GroupOrIndividual /></span>}
+                  </>
+                }
+              </p>
             </div>
           }
-          </div>
-            {(tripData.discount || tripData.customer_price) &&
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <div className="info-right--1 d-flex align-items-center gap-2">
-                  <FontAwesomeIcon icon={faCoins} />
-                </div>
-                {tripData.discount && tripData.customer_price_before_discount > tripData.customer_price ?
-                  <p className="text d-flex gap-1">
-                    <CurrencyDisplay price={tripData.customer_price} />
-                    {boxTranslations.instedOf[currentLanguage]}
-                    <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={tripData.customer_price_before_discount} /></span>
-                  </p>
-                  :
-                  <CurrencyDisplay price={tripData.customer_price} />
-                }
-              </div>
-            }
-            {tripData?.booking_count ?
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <div className="info-right--1 d-flex align-items-center gap-2">
-                  <FontAwesomeIcon icon={faTicket} />
-                </div>
-                <p className="text d-flex gap-1">
-                  {tripData.booking_count}
-                </p>
-              </div>
+        </div>
+        {(tripData.discount || tripData.customer_price) &&
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <div className="info-right--1 d-flex align-items-center gap-2">
+              <FontAwesomeIcon icon={faCoins} />
+            </div>
+            {tripData.discount && tripData.customer_price_before_discount > tripData.customer_price ?
+              <p className="text d-flex gap-1">
+                <CurrencyDisplay price={tripData.customer_price} />
+                {boxTranslations.instedOf[currentLanguage]}
+                <span className="text-danger text-decoration-line-through fw-bold"> <CurrencyDisplay price={tripData.customer_price_before_discount} /></span>
+              </p>
               :
-              null
-            }
-            {tripData?.quantity >= 0  ?
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <div className="info-right--1 d-flex align-items-center gap-2">
-                  <FontAwesomeIcon icon={faGift} />
-                </div>
-                <p className="text d-flex gap-1">
-               <span> {boxTranslations.availableStock[currentLanguage]} </span>
-                ({tripData.quantity}) 
-                </p>
-              </div>
-              :
-              null
-            }
-            {tripData?.from_date || tripData?.from_time ?
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <div className="info-right--1 d-flex align-items-center gap-2">
-                  <DateIcon2 />
-                </div>
-                <p className="text d-flex gap-1">
-                  <div className="date-content-info ">
-                    {tripData.from_date && (
-                      <div className="date-one d-flex align-items-center gap-2">
-                        <DateDisplay from_date={tripData.from_date} />
-                      </div>
-                    )}
-                    {tripData.from_time > 0 && (
-                      <div className="date-one pt-2 d-flex align-items-center gap-2">
-                        <ClockIcon2 />
-                        {tripData.from_time.slice(0, -3)}
-                      </div>
-                    )}
-                  </div>              </p>
-              </div>
-              :
-              null
-            }
-
-
-            {tripData.guide_languages &&
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <>
-                  <div className="info-right--1 d-flex align-items-center gap-2">
-                    <UserIcon2 />
-                    <p className="text">{boxTranslations.guideLanguages[currentLanguage] || "guide languages"}</p>
-                  </div>
-                  <p className="text d-flex flex-wrap gap-2">
-                    {tripData.guide_languages.map((lang) => (
-                      <span key={lang} className="me-2 d-flex align-items-center">
-                        <img
-                          src={languageFlags[lang]}
-                          alt={lang}
-                          style={{ width: "24px", height: "16px" }}
-                        />
-                      </span>
-                    ))}
-                  </p>
-                </>
-              </div>
-            }
-            {tripData.location &&
-              <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
-                <>
-                  <div className="info-right--1 d-flex align-items-center gap-2">
-                    <FontAwesomeIcon icon={faLocation} />
-                  </div>
-                  <p className="text d-flex flex-wrap gap-2">
-                    {tripData.location}
-                  </p>
-                </>
-              </div>
+              <CurrencyDisplay price={tripData.customer_price} />
             }
           </div>
+        }
+        {tripData?.booking_count ?
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <div className="info-right--1 d-flex align-items-center gap-2">
+              <FontAwesomeIcon icon={faTicket} />
+            </div>
+            <p className="text d-flex gap-1">
+              {tripData.booking_count}
+            </p>
+          </div>
+          :
+          null
+        }
+        {tripData?.quantity >= 0 ?
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <div className="info-right--1 d-flex align-items-center gap-2">
+              <FontAwesomeIcon icon={faGift} />
+            </div>
+            <p className="text d-flex gap-1">
+              <span> {boxTranslations.availableStock[currentLanguage]} </span>
+              ({tripData.quantity})
+            </p>
+          </div>
+          :
+          null
+        }
+        {tripData?.from_date || tripData?.from_time ?
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <div className="info-right--1 d-flex align-items-center gap-2">
+              <DateIcon2 />
+            </div>
+            <p className="text d-flex gap-1">
+              <div className="date-content-info ">
+                {tripData.from_date && (
+                  <div className="date-one d-flex align-items-center gap-2">
+                    <DateDisplay from_date={tripData.from_date} />
+                  </div>
+                )}
+                {tripData.from_time > 0 && (
+                  <div className="date-one pt-2 d-flex align-items-center gap-2">
+                    <ClockIcon2 />
+                    {tripData.from_time.slice(0, -3)}
+                  </div>
+                )}
+              </div>              </p>
+          </div>
+          :
+          null
+        }
+
+
+        {tripData.guide_languages &&
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <>
+              <div className="info-right--1 d-flex align-items-center gap-2">
+                <UserIcon2 />
+                <p className="text">{boxTranslations.guideLanguages[currentLanguage] || "guide languages"}</p>
+              </div>
+              <p className="text d-flex flex-wrap gap-2">
+                {tripData.guide_languages.map((lang) => (
+                  <span key={lang} className="me-2 d-flex align-items-center">
+                    <img
+                      src={languageFlags[lang]}
+                      alt={lang}
+                      style={{ width: "24px", height: "16px" }}
+                    />
+                  </span>
+                ))}
+              </p>
+            </>
+          </div>
+        }
+        {tripData.location &&
+          <div className="content-box-one--1 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+            <>
+              <div className="info-right--1 d-flex align-items-center gap-2">
+                <FontAwesomeIcon icon={faLocation} />
+              </div>
+              <p className="text d-flex flex-wrap gap-2">
+                {tripData.location}
+              </p>
+            </>
+          </div>
+        }
+      </div>
     </>
 
   );
 }
-  export default BoxOneContent;
+export default BoxOneContent;

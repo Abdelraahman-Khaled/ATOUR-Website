@@ -121,3 +121,51 @@ body.dark-theme .notification-page h2 {
   background-color: #dceddc; /* Un color de fondo claro para notificaciones no leídas */
   border-left: 5px solid var(--green-01-color); /* Una barra lateral para resaltarlas */
 }
+
+/* ===== Skeleton loader ===== */
+@keyframes shimmer {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+
+.skeleton-item {
+  cursor: default;
+}
+
+.skeleton-line {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeleton-title {
+  height: 14px;
+  width: 45%;
+  margin-bottom: 12px;
+}
+.skeleton-msg-long {
+  height: 12px;
+  width: 90%;
+  margin-bottom: 8px;
+}
+.skeleton-msg-short {
+  height: 12px;
+  width: 65%;
+}
+.skeleton-time {
+  height: 12px;
+  width: 80px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+body.dark-theme .skeleton-line {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
