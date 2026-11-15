@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCoins, faGift, faGifts, faLocation, faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
-import { ClockIcon } from "@mui/x-date-pickers";
+import ClockIcon from "assets/Icons/ClockIcon";
 import UserIcon2 from "assets/Icons/UserIcon2";
 import './BoxOneContent.css'
 import { Avatar, AvatarGroup } from "@mui/material";

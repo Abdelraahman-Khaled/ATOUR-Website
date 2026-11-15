@@ -1,6 +1,5 @@
 // Translations for static text across the application
 
-import { common } from "@mui/material/colors";
 
 const translations = {
   // Home page components

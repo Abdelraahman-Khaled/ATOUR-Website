@@ -4,7 +4,7 @@ import "./ModalsDetailsTripInfo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ReadMoreText from "Components/Ui/ReadMoreText/ReadMoreText";
-import { ClockIcon } from "@mui/x-date-pickers";
+import ClockIcon from "assets/Icons/ClockIcon";
 import LoaderSvg from "assets/Icons/LoaderSvg";
 import BookingAPI from "api/bookingApi";
 import { toast } from "react-toastify";

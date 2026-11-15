@@ -2,7 +2,7 @@ import IconLocation from "assets/images/collection/IconLocation";
 import "./CardEvent.css";
 import { Link } from "react-router-dom";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import packupImg from "../../../../assets/images/blogs/01.png"
+import packupImg from "../../../../assets/images/blogs/01.webp"
 import Favicon from "Components/FavIcon/Favicon ";
 import eventTranslations from "./translates";
 

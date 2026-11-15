@@ -1,6 +1,6 @@
 
 import CardBlog from "../CardBlog/CardBlog";
-import imageBlog from "../../../../assets/images/blogs/01.png";
+import imageBlog from "../../../../assets/images/blogs/01.webp";
 import img_1 from "../../../../assets/images/users/01.png";
 import { useEffect, useState, useContext } from "react";
 import GeneralAPI from "api/generalApi";

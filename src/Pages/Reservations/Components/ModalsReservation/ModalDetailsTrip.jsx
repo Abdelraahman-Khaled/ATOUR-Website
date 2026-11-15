@@ -1,8 +1,8 @@
 import CustomModal from "Components/CustomModal/CustomModal";
 import "./ModalsReservation.css";
 import CardReservation from "../AllCardsReservations/CardReservation";
-import image from "../../../../assets/images/slider/01.png";
-import image_3 from "../../../../assets/images/slider/01.png";
+import image from "../../../../assets/images/slider/01.webp";
+import image_3 from "../../../../assets/images/slider/01.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import InterrogativeIcon from "assets/Icons/InterrogativeIcon";

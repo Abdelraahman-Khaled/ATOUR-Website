@@ -1,6 +1,6 @@
 import React from "react";
 import TitleSection from "Components/TitleSection/TitleSection";
-import imageBannerHome from "../../../../assets/images/bannerHome/01.png";
+import imageBannerHome from "../../../../assets/images/bannerHome/01.webp";
 import appStore from "../../../../assets/images/apps/appstore.svg";
 import appGoogle from "../../../../assets/images/apps/googleplay.svg";
 import "./BannerHome.css";

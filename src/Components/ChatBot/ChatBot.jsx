@@ -3,7 +3,7 @@ import { useLanguage } from 'Components/Languages/LanguageContext';
 import { useProfile } from 'context/ProfileContext';
 import { Link } from 'react-router-dom';
 import './ChatBot.css';
-import lailaAvatar from '../../assets/images/chatbot/lilia-avatar.png';
+import lailaAvatar from '../../assets/images/chatbot/lilia-avatar.webp';
 import userPlaceholder from '../../assets/images/users/user.png';
 
 const ChatBot = () => {

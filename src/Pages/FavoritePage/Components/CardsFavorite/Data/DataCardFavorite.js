@@ -1,7 +1,7 @@
 import image_1 from "../../../../../assets/images/collection/01.png";
-import image_2 from "../../../../../assets/images/collection/02.png";
-import image_3 from "../../../../../assets/images/collection/03.png";
-import image_4 from "../../../../../assets/images/collection/04.png";
+import image_2 from "../../../../../assets/images/collection/02.webp";
+import image_3 from "../../../../../assets/images/collection/03.webp";
+import image_4 from "../../../../../assets/images/collection/04.webp";
 
 export const cardsFavoriteData = [
   {

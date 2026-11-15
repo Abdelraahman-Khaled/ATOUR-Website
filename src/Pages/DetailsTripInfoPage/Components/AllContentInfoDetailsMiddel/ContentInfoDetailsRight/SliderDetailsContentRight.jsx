@@ -1,7 +1,7 @@
 import SwiperSlider from "Components/Ui/SwiperSlider/SwiperSlider";
-import imageBanner1 from "../../../../../assets/images/slider/01.png";
-import imageBanner2 from "../../../../../assets/images/slider/02.png";
-import imageBanner3 from "../../../../../assets/images/slider/03.png";
+import imageBanner1 from "../../../../../assets/images/slider/01.webp";
+import imageBanner2 from "../../../../../assets/images/slider/02.webp";
+import imageBanner3 from "../../../../../assets/images/slider/03.webp";
 
 const SliderDetailsContentRight = ({ tripData }) => {
   // Default slider images

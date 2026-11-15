@@ -1,7 +1,7 @@
 import UserIcon2 from "assets/Icons/UserIcon2";
-import image from "../../../../assets/images/slider/01.png";
+import image from "../../../../assets/images/slider/01.webp";
 import DateIcon from "assets/Icons/DateIcon";
-import { ClockIcon } from "@mui/x-date-pickers";
+import ClockIcon from "assets/Icons/ClockIcon";
 import EditIconUser from "assets/images/AccountUser/EditIconUser";
 import "./DetailsPaymentInfo.css"
 const ProductDetailsPay = () => {

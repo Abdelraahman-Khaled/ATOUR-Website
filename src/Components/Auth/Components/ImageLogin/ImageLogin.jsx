@@ -1,11 +1,10 @@
 import AdSwiper from "../../../AdPopup/AdSwiper";
 import "./ImageLogin.css"
+import ad1 from "../../../../assets/images/popupAds/ads(1).webp";
+import ad2 from "../../../../assets/images/popupAds/ads(2).webp";
+import ad3 from "../../../../assets/images/popupAds/ads(3).webp";
 
-const adImages = [
-  require("../../../../assets/images/popupAds/ads(1).png"),
-  require("../../../../assets/images/popupAds/ads(2).png"),
-  require("../../../../assets/images/popupAds/ads(3).png"),
-];
+const adImages = [ad1, ad2, ad3];
 
 const ImageLogin = () => {
   return (

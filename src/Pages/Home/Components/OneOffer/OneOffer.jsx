@@ -3,7 +3,7 @@ import TitleSection from "Components/TitleSection/TitleSection";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import OneOfferCard from "./OneOfferCard";
-import backUP from "../../../../assets/images/slider/01.png";
+import backUP from "../../../../assets/images/slider/01.webp";
 import SwiperCards from "Components/Ui/SwiperCards/SwiperCards";
 import { SwiperSlide } from "swiper/react";
 

@@ -1,6 +1,6 @@
 import { useLanguage } from "Components/Languages/LanguageContext";
 import { Link } from "react-router-dom";
-import img from "../../../../../assets/images/blogs/01.png";
+import img from "../../../../../assets/images/blogs/01.webp";
 import imgUser from "../../../../../assets/images/users/01.png";
 import "./BannerDetails.css";
 import TimeGapCalculator from "./calculateTimeGap";

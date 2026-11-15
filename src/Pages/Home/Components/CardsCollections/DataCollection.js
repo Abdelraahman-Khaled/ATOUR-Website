@@ -1,7 +1,7 @@
 import imageCard_1 from "../../../../assets/images/collection/01.png";
-import imageCard_2 from "../../../../assets/images/collection/02.png";
-import imageCard_3 from "../../../../assets/images/collection/03.png";
-import imageCard_4 from "../../../../assets/images/collection/04.png";
+import imageCard_2 from "../../../../assets/images/collection/02.webp";
+import imageCard_3 from "../../../../assets/images/collection/03.webp";
+import imageCard_4 from "../../../../assets/images/collection/04.webp";
 
 export const cardCollection = [
   {

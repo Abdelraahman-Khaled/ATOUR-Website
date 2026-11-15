@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import image from "../../../../assets/images/slider/01.png";
+import image from "../../../../assets/images/slider/01.webp";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "./NewRates.css";
 import video from "../../../../assets/images/videos/01.mp4";

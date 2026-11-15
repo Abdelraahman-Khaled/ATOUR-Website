@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import CardCollection from "Components/Ui/CardCollection/CardCollection";
 import { toast } from "react-toastify";
 import imageCard_1 from "../../../../../../assets/images/collection/01.png";
-import imageCard_2 from "../../../../../../assets/images/collection/02.png";
-import imageCard_3 from "../../../../../../assets/images/collection/03.png";
+import imageCard_2 from "../../../../../../assets/images/collection/02.webp";
+import imageCard_3 from "../../../../../../assets/images/collection/03.webp";
 const AllCardsTripsDetails = () => {
   const dataCollection = [
     {

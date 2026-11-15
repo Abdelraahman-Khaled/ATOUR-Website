@@ -1,6 +1,6 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import img from "../../../../../assets/images/slider/01.png";
+import img from "../../../../../assets/images/slider/01.webp";
 import ContactIcon from "assets/Icons/ContactIcon";
 import EmailIcon from "assets/Icons/EmailIcon";
 import PhoneIcon from "assets/Icons/PhoneIcon";

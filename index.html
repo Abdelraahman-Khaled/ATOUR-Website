@@ -11,7 +11,7 @@
       content="0wq-YAfSe7A0ECz-2o_zPZeD9wdDe986p1qcCNApi8s"
     />
 
-    <link rel="icon" href="%PUBLIC_URL%/assets/images/favicon.svg" />
+    <link rel="icon" href="/assets/images/favicon.svg" />
     <title>Atour - جولة</title>
 
     <!-- Google Analytics -->
@@ -26,6 +26,28 @@
       }
       gtag("js", new Date());
       gtag("config", "G-0D8K75RFY5");
+    </script>
+
+    <!--
+      Marketing pixels below: their stubs (ym, ttq, snaptr, fbq, twq) are defined
+      immediately so every event is queued, but the vendor scripts themselves are
+      only downloaded after the page has loaded, so they don't compete with the site.
+    -->
+    <script>
+      window.__deferScript = function (el) {
+        function inject() {
+          document.head.appendChild(el);
+        }
+        function schedule() {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(inject, { timeout: 2000 });
+          } else {
+            setTimeout(inject, 1);
+          }
+        }
+        if (document.readyState === "complete") schedule();
+        else window.addEventListener("load", schedule);
+      };
     </script>
 
     <!-- Yandex.Metrika -->
@@ -43,10 +65,9 @@
           }
         }
         (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
           (k.async = 1),
           (k.src = r),
-          a.parentNode.insertBefore(k, a);
+          window.__deferScript(k);
       })(
         window,
         document,
@@ -63,16 +84,7 @@
         trackLinks: true,
       });
     </script>
-    <noscript>
-      <div>
-        <img
-          src="https://mc.yandex.ru/watch/105282166"
-          style="position: absolute; left: -9999px"
-          alt=""
-        />
-      </div>
-    </noscript>
-    <!-- /Yandex.Metrika -->
+    <!-- /Yandex.Metrika (noscript pixel is in <body>) -->
 
     <!-- Google Tag Manager (Head) -->
     <script>
@@ -142,8 +154,7 @@
           n.type = "text/javascript";
           n.async = !0;
           n.src = r + "?sdkid=" + e + "&lib=" + t;
-          e = d.getElementsByTagName("script")[0];
-          e.parentNode.insertBefore(n, e);
+          window.__deferScript(n);
         };
         ttq.load("D4B6I8BC77UCD4LDTHU0");
         ttq.page();
@@ -165,8 +176,7 @@
         var r = t.createElement(s);
         r.async = !0;
         r.src = n;
-        var u = t.getElementsByTagName(s)[0];
-        u.parentNode.insertBefore(r, u);
+        window.__deferScript(r);
       })(window, document, "https://sc-static.net/scevent.min.js");
 
       snaptr("init", "4d8c5a3c-e74a-4353-9acf-c576d38fdf79", {});
@@ -191,8 +201,7 @@
         t = b.createElement(e);
         t.async = !0;
         t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
+        window.__deferScript(t);
       })(
         window,
         document,
@@ -203,15 +212,6 @@
       fbq("init", "4026604444255971");
       fbq("track", "PageView");
     </script>
-
-    <noscript>
-      <img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=4026604444255971&ev=PageView&noscript=1"
-      />
-    </noscript>
 
     <!-- X conversion tracking base code -->
     <script>
@@ -226,8 +226,7 @@
           (u = t.createElement(n)),
           (u.async = !0),
           (u.src = "https://static.ads-twitter.com/uwt.js"),
-          (a = t.getElementsByTagName(n)[0]),
-          a.parentNode.insertBefore(u, a));
+          window.__deferScript(u));
       })(window, document, "script");
       twq("config", "qrhes");
     </script>
@@ -248,8 +247,25 @@
     </noscript>
     <!-- End Google Tag Manager (Body) -->
 
-    <div id="root"></div>
+    <!-- noscript pixels (moved from <head>: <img>/<div> aren't allowed in a head <noscript>) -->
+    <noscript>
+      <div>
+        <img
+          src="https://mc.yandex.ru/watch/105282166"
+          style="position: absolute; left: -9999px"
+          alt=""
+        />
+      </div>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=4026604444255971&ev=PageView&noscript=1"
+      />
+    </noscript>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+
   </body>
 </html>

@@ -1,6 +1,6 @@
 import { useLanguage } from "Components/Languages/LanguageContext";
 import BreadcrumbsPage from "Components/Ui/BreadcrumbsPage/BreadcrumbsPage";
-import imageBanner1 from "../../../../../assets/images/slider/01.png";
+import imageBanner1 from "../../../../../assets/images/slider/01.webp";
 const BannerDetails = ({ img }) => {
   const { currentLanguage } = useLanguage(); // Get the current language
 

@@ -1,4 +1,4 @@
-import image from "../../../../../assets/images/slider/01.png";
+import image from "../../../../../assets/images/slider/01.webp";
 const PicturesPreviousTrips = () => {
   return (
     <div className="pictures-perv-trip margin-top-1">

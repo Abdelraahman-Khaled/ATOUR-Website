@@ -1,3 +1,5 @@
+// Bootstrap Tab plugin powers the data-bs-toggle="pill" tabs below
+import "bootstrap/js/dist/tab";
 import "./AccountUser.css";
 import ContainerMedia from "Components/ContainerMedia/ContainerMedia";
 import { useEffect, useState } from "react";

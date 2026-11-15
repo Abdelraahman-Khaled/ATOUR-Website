@@ -1,3 +1,5 @@
+// Bootstrap Tab plugin powers the data-bs-toggle="pill" tabs below
+import "bootstrap/js/dist/tab";
 import TabsContent from "Components/Ui/TabsContent/TabsContent";
 import Tree from "assets/images/IconsHeader/Tree";
 import AllCardsReservations from "./AllCardsReservations/AllCardsReservations";

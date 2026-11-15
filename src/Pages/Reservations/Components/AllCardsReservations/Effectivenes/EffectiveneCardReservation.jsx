@@ -1,6 +1,6 @@
 import IconLocation from "assets/images/collection/IconLocation";
 import DateIcon from "assets/Icons/DateIcon";
-import { ClockIcon } from "@mui/x-date-pickers";
+import ClockIcon from "assets/Icons/ClockIcon";
 import "../AllCardsReservation.css";
 import UserIcon2 from "assets/Icons/UserIcon2";
 import { useLanguage } from "Components/Languages/LanguageContext";

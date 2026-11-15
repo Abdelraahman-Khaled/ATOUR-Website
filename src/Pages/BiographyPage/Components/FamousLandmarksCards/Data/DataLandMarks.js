@@ -1,7 +1,7 @@
 import image_1 from "../../../../../assets/images/famousLandmarks/01.png";
-import image_2 from "../../../../../assets/images/famousLandmarks/02.png";
+import image_2 from "../../../../../assets/images/famousLandmarks/02.webp";
 import image_3 from "../../../../../assets/images/famousLandmarks/03.png";
-import image_4 from "../../../../../assets/images/famousLandmarks/04.png";
+import image_4 from "../../../../../assets/images/famousLandmarks/04.webp";
 
 export const dataLandMarks = [
   { id: 0, image: image_1, title: "المسجد النبوي" },

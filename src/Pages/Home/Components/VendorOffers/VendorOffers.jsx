@@ -2,7 +2,7 @@ import { useLanguage } from "Components/Languages/LanguageContext";
 import TitleSection from "Components/TitleSection/TitleSection";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import backUP from "../../../../assets/images/slider/01.png";
+import backUP from "../../../../assets/images/slider/01.webp";
 import VendorOfferCard from "./VendorOfferCard";
 import SwiperCards from "Components/Ui/SwiperCards/SwiperCards";
 import { SwiperSlide } from "swiper/react";

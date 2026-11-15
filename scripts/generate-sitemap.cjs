@@ -35,13 +35,16 @@ const createUrlEntry = (url, changefreq = "weekly", priority = "0.8") => {
 };
 
 // Fetch data from API
+let failedRequests = 0;
 const fetchData = async (endpoint, lang = "en") => {
   try {
     const response = await axios.get(`${API_BASE_URL}${endpoint}`, {
       headers: { lang },
+      timeout: 15000,
     });
     return response.data;
   } catch (error) {
+    failedRequests++;
     console.error(`Error fetching ${endpoint}:`, error.message);
     return [];
   }
@@ -141,6 +144,13 @@ const generateSitemap = async () => {
 
   // Write to file
   const outputPath = path.resolve(__dirname, "../public/sitemap.xml");
+  // Runs before the build: never replace a good sitemap with a partial one
+  if (failedRequests > 0 && fs.existsSync(outputPath)) {
+    console.warn(
+      `${failedRequests} request(s) failed - keeping the existing sitemap.xml`,
+    );
+    return;
+  }
   fs.writeFileSync(outputPath, sitemapContent);
   console.log(`Sitemap generated successfully at ${outputPath}`);
 };

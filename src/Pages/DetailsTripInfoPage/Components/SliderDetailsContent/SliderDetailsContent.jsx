@@ -4,7 +4,7 @@ import { Navigation, Thumbs } from "swiper/modules";
 
 import "swiper/css/navigation";
 import "swiper/css";
-import src from "../../../../assets/images/slider/01.png";
+import src from "../../../../assets/images/slider/01.webp";
 import "./SliderDetailsContent.css";
 const SliderDetailsContent = ({ tripData }) => {
   const backupImgs = [src]

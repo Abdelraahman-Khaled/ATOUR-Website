@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ModalDetailsTrip from "../../ModalsReservation/ModalDetailsTrip";
 import { useState } from "react";
 import { useLanguage } from "Components/Languages/LanguageContext";
-import backUP from "../../../../../assets/images/slider/01.png";
+import backUP from "../../../../../assets/images/slider/01.webp";
 import PaginationPage from "Components/Pagination/Pagination";
 import GiftCardReservation from "./GiftCardReservation";
 
