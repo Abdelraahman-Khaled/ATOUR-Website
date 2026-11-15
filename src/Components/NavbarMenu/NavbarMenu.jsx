@@ -24,6 +24,13 @@ import { useHome } from "context/HomeContext";
 const NavbarMenu = () => {
   const { t } = useTranslation(); // Get the translation function
   const [isMenuFixed, setMenuFixed] = useState(false);
+  // Re-render when the auth token changes (signup/login dispatch a "storage" event).
+  const [, setAuthVersion] = useState(0);
+  useEffect(() => {
+    const onAuthChange = () => setAuthVersion((v) => v + 1);
+    window.addEventListener("storage", onAuthChange);
+    return () => window.removeEventListener("storage", onAuthChange);
+  }, []);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]); // Reintroduce cities state
   const [searchableItems, setSearchableItems] = useState([]); // New state for combined data

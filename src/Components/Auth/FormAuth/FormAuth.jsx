@@ -32,7 +32,7 @@ const FormAuth = ({ showModalForm, hideModalForm }) => {
   // Open OTP form with email or phone
   const handleRegisterSubmit = (emailOrPhone) => {
     setEmailOrPhone(emailOrPhone); // Save email/phone
-    setOtpFormOpen(true); // Open OTP form
+    setIsFinalDestiny(true); // No email code: open the account details form directly
   };
 
   // Transition to success modal
@@ -78,8 +78,8 @@ const FormAuth = ({ showModalForm, hideModalForm }) => {
         showFinalForm={isFinalDestiny}
         hideFinalForm={hideFinalForm} // Navigate back to OTP if needed
         onFormSubmit={() => {
-          setIsFinalDestiny(false); // Open success modal
-          setIsLogin(true);
+          setIsFinalDestiny(false); // Registered and signed in (token stored by AuthAPI.register)
+          setIsLogin(false);
         }} // Transition to Login on successful submission
         goToLogin={() => setIsLogin(true)} // Directly navigate to Login
         emailOrPhone={emailOrPhone}

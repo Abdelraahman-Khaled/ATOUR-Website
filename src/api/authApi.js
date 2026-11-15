@@ -208,10 +208,17 @@ const AuthAPI = {
         password,
         password_confirmation: password,
       });
+      // The backend signs the new user in right away (same shape as /login).
+      if (response.data.access_token) {
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        window.dispatchEvent(new Event("storage"));
+      }
       toast.success(getToastMessages().registerSuccess[getCurrentLanguage()]);
       return response.data;
     } catch (error) {
-      toast.error(error.response.data.errors?.phone[0]);
+      const phoneError = error.response?.data?.errors?.phone?.[0];
+      if (phoneError) toast.error(phoneError);
       throw error;
     }
   },

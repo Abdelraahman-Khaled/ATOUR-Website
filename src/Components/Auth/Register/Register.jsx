@@ -42,7 +42,7 @@ const Register = ({ buttonLogin, hideModalForm, onRegisterSubmit }) => {
   const handleRegisterSubmit = async (values, { resetForm }) => {
     try {
       setLoading(true);
-      await AuthAPI.sendOtp(values.emailRegOrPhoneNumber); // Send OTP
+      // Simple signup: no email verification code, go straight to the account details form.
       onRegisterSubmit(values.emailRegOrPhoneNumber); // Pass email/phone to parent
       hideModalForm(); // Close Register modal
       resetForm();
