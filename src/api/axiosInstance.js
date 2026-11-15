@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { installAtourBridge } from "./atourBridge.js";
 
 const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
 
@@ -9,6 +10,9 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// OTP proofs + booking idempotency keys required by ATOUR-Backend
+installAtourBridge(axiosInstance);
 
 // Check if user is authenticated
 export const isAuthenticated = () => {

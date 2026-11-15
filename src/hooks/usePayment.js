@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import BookingAPI from "api/bookingApi";
 import { useBooking } from "context/BookingContext";
+import { ONLINE_PAYMENT_ENABLED, DEFAULT_PAYMENT_WAY } from "utils/payments";
 
 
 const usePayment = (content, currentLanguage) => {
@@ -11,7 +12,7 @@ const usePayment = (content, currentLanguage) => {
   const navigate = useNavigate();
   const { numberOfPeople } = useBooking();
 
-  const initiatePayment = async (effectiveneId, paymentWay = "online") => {
+  const initiatePayment = async (effectiveneId, paymentWay = DEFAULT_PAYMENT_WAY) => {
     setIsLoading(true);
     try {
       const response = await BookingAPI.bookEffectivene({

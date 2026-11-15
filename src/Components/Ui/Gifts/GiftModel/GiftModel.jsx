@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import content from "./translates"
 import translations from "Components/Languages/translations";
+import { ONLINE_PAYMENT_ENABLED, DEFAULT_PAYMENT_WAY } from "utils/payments";
 
 const GiftModal = ({ gift }) => {
     const iframeRef = useRef(null);
@@ -18,7 +19,7 @@ const GiftModal = ({ gift }) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [paymentUrl, setPaymentUrl] = useState(null);
-    const [paymentWay, setPaymentWay] = useState("online");
+    const [paymentWay, setPaymentWay] = useState(DEFAULT_PAYMENT_WAY);
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState("");
     const [cities, setCities] = useState([]);
@@ -352,7 +353,7 @@ const GiftModal = ({ gift }) => {
                                     checked={paymentWay === "cash"}
                                     onChange={(e) => setPaymentWay(e.target.value)}
                                 />
-                                <Form.Check
+                                {ONLINE_PAYMENT_ENABLED && (<Form.Check
                                     className="d-flex gap-2 my-2"
                                     type="radio"
                                     label={content.online[currentLanguage]}
@@ -360,7 +361,7 @@ const GiftModal = ({ gift }) => {
                                     value="online"
                                     checked={paymentWay === "online"}
                                     onChange={(e) => setPaymentWay(e.target.value)}
-                                />
+                                />)}
                             </Form.Group>
                         )}
 

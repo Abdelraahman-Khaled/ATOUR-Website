@@ -13,6 +13,7 @@ import { Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBooking } from "context/BookingContext";
 import CurrencyDisplay from "Components/CurrencyDisplay/CurrencyDisplay";
+import { ONLINE_PAYMENT_ENABLED, DEFAULT_PAYMENT_WAY } from "utils/payments";
 
 const  translate = {
 selectTimeAndDateFirst: {
@@ -45,7 +46,7 @@ const ModalAvailableExcursionPrograms = ({
   const [isLoading, setIsLoading] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [paymentWay, setPaymentWay] = useState("online");
+  const [paymentWay, setPaymentWay] = useState(DEFAULT_PAYMENT_WAY);
   const { currentLanguage } = useLanguage();
   const { selectedDate, numberOfPeople } = useBooking();
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
@@ -552,6 +553,7 @@ const ModalAvailableExcursionPrograms = ({
                 checked={paymentWay === "cash"}
                 onChange={(e) => setPaymentWay(e.target.value)}
               />
+              {ONLINE_PAYMENT_ENABLED && (
               <Form.Check
                 className="d-flex gap-2 my-2"
                 type="radio"
@@ -561,6 +563,7 @@ const ModalAvailableExcursionPrograms = ({
                 checked={paymentWay === "online"}
                 onChange={(e) => setPaymentWay(e.target.value)}
               />
+              )}
             </Form.Group>
           )}
 

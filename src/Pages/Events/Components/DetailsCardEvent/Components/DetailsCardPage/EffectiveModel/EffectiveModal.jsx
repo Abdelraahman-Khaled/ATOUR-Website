@@ -3,6 +3,7 @@ import { useLanguage } from 'Components/Languages/LanguageContext';
 import { useState } from 'react';
 import { Form } from "react-bootstrap";
 import usePayment from 'hooks/usePayment';
+import { ONLINE_PAYMENT_ENABLED, DEFAULT_PAYMENT_WAY } from "utils/payments";
 
 const content = {
     orderDetails: {
@@ -216,7 +217,7 @@ const EffectiveModal = ({ effectiveId, isDirectBooking = false }) => {
     };
 
     const handleDirectBooking = async () => {
-        await initiatePayment(effectiveId, "online");
+        await initiatePayment(effectiveId, DEFAULT_PAYMENT_WAY);
     };
 
     return (
@@ -273,7 +274,7 @@ const EffectiveModal = ({ effectiveId, isDirectBooking = false }) => {
                             checked={paymentMethod === "cash"}
                             onChange={(e) => setPaymentMethod(e.target.value)}
                         />
-                        <Form.Check
+                        {ONLINE_PAYMENT_ENABLED && (<Form.Check
                             className="d-flex gap-2 mt-2"
                             type="radio"
                             label={content.online[currentLanguage]}
@@ -281,7 +282,7 @@ const EffectiveModal = ({ effectiveId, isDirectBooking = false }) => {
                             value="online"
                             checked={paymentMethod === "online"}
                             onChange={(e) => setPaymentMethod(e.target.value)}
-                        />
+                        />)}
                     </Form.Group>
                     <button
                         type="submit"
