@@ -2,7 +2,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { installAtourBridge } from "./atourBridge.js";
 
-const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+// ATOUR-Backend serves every route under /api/v1 - add it if the env value leaves it out
+const API_BASE_URL = (() => {
+  const base = String(import.meta.env.REACT_APP_API_BASE_URL || "")
+    .trim()
+    .replace(/\/+$/, "");
+  return base.endsWith("/api/v1") ? base : `${base}/api/v1`;
+})();
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
